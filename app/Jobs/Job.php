@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace contenidoAudiovisual\Jobs;
 
 use Illuminate\Bus\Queueable;
 

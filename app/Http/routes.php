@@ -10,11 +10,17 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+//Route::get('/','FrontController@index');
+Route::get('contacto','FrontController@contacto');
+Route::get('reviews','FrontController@reviews');
+
 
 Route::group(['middleware' => 'web'], function () {
 	Route::auth();
 	Route::get('/', function () {
-		return view('welcome');
+		return view('index');
 	});
 	Route::get('/home', 'HomeController@index');
+	Route::resource('cpanel','CpanelController');
+	Route::resource('upload','MovieController');
 });

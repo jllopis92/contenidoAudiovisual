@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace contenidoAudiovisual\Http\Controllers;
 
-use App\Http\Requests;
+use contenidoAudiovisual\Http\Requests;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

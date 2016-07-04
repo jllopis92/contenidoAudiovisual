@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace contenidoAudiovisual\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;

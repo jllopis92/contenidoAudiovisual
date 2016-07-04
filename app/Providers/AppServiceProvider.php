@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace contenidoAudiovisual\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
