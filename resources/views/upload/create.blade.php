@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<H3 style="margin-top: 0">Subir Video</H3>
+
 {!! Form::open(['route' =>'upload.store', 'method'=>'POST', 'files'=> true ]) !!}
-        
 
 <div class = "form-group">
     {!! Form::label('usuario_id', 'Usuario:') !!}

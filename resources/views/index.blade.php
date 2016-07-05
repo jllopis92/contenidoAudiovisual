@@ -1,17 +1,79 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
 
-                <div class="panel-body">
-                    Your Application's Landing Page.
-                </div>
-            </div>
+<div class="right-content">
+
+<link href="css/style.css" rel="stylesheet" type="text/css" /> 
+    <div class="content-grids">
+    <H3>Nuevos: </H3>
+        <div class="content-grid">
+            <a href="singlepage.html"><img src="images/gridallbum1.jpg" title="allbum-name" /></a>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+            <a class="button" href="singlepage.html">Watch now</a>
+        </div>
+        <div class="content-grid">
+            <a href="singlepage.html"><img src="images/gridallbum2.jpg" title="allbum-name" /></a>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+            <a class="button" href="singlepage.html">Watch now</a>
+        </div>
+        <div class="content-grid">
+            <a href="singlepage.html"><img src="images/gridallbum2.jpg" title="allbum-name" /></a>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+            <a class="button" href="singlepage.html">Watch now</a>
+        </div>
+        <div class="content-grid last-grid">
+            <a href="singlepage.html"><img src="images/gridallbum2.jpg" title="allbum-name" /></a>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+            <a class="button" href="singlepage.html">Watch now</a>
+        </div>
+        <H3>Mas Vistos: </H3>
+        <div class="content-grid">
+            <a href="singlepage.html"><img src="images/gridallbum1.jpg" title="allbum-name" /></a>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+            <a class="button" href="singlepage.html">Watch now</a>
+        </div>
+        <div class="content-grid">
+            <a href="singlepage.html"><img src="images/gridallbum2.jpg" title="allbum-name" /></a>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+            <a class="button" href="singlepage.html">Watch now</a>
+        </div>
+        <div class="content-grid">
+            <a href="singlepage.html"><img src="images/gridallbum2.jpg" title="allbum-name" /></a>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+            <a class="button" href="singlepage.html">Watch now</a>
+        </div>
+        <div class="content-grid last-grid">
+            <a href="singlepage.html"><img src="images/gridallbum2.jpg" title="allbum-name" /></a>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+            <a class="button" href="singlepage.html">Watch now</a>
         </div>
     </div>
+
 </div>
+
 @endsection
+
+{{--<div class="review-content"> 
+<div class="reviews-section">
+        <h3 class="head">Movie Reviews</h3>
+        <div class="col-md-9 reviews-grids">
+            @foreach($movies as $movie)
+            <div class="review">
+                <div class="movie-pic">
+
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="files/{{$movie->imageRef}}" alt="" /></a>
+                </div>
+                <div class="review-info"> --}}
+                    {{--{!!link_to_route('pelicula.play', $movie->name, $parameters = $movie->id, $attributes = ['class'=>'span'])!!}--}}
+                    {{--link_to_route('route.name', $title = null, $parameters = array(), $attributes = array());--}}
+                    {{-- <a class="span" href="{{ action("MovieController@show", array($movie->id)) }}"> <i>{{$movie->name}}</i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+</div> --}}

@@ -14,7 +14,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-
+    {!!Html::style('css/sb-admin-2.css')!!}
+    {!!Html::style('css/bootstrap.min.css')!!}
+    {!!Html::style('css/metisMenu.min.css')!!}
+    {!!Html::style('css/font-awesome.min.css')!!}
     <style>
         body {
             font-family: 'Lato';
@@ -26,7 +29,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
         <div class="container">
             <div class="navbar-header">
 
@@ -39,7 +42,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand">
                     Laravel
                 </a>
             </div>
@@ -47,7 +50,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Inicio</a></li>
+                    <li><a href="{{ url('/') }}">Inicio</a></li>
                 </ul>
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cine_tv') }}">Cine TV</a></li>
@@ -79,12 +82,44 @@
             </div>
         </div>
     </nav>
+    
+    <div id="wrapper">
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    
+                    <li>
+                            <form>
+                            <input  type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search..';}" style="margin: 10px;"/>
+                                <input type="submit" value="">
+                            </form>
+                        </li>
+                    <li>
+                        <a href="#"><i class="fa fa-child fa-fw"></i> Genero<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#"><i class='fa fa-plus fa-fw'></i> Agregar</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class='fa fa-list-ol fa-fw'></i> Generos</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-    @yield('content')
+        <div id="page-wrapper" style="min-height: 178px; margin-left: 0px;">
+            @yield('content')
+        </div>
+
+    </div>
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    {!!Html::script('js/metisMenu.min.js')!!}
+    {!!Html::script('js/sb-admin-2.js')!!}
 
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>

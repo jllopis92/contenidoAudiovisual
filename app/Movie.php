@@ -26,7 +26,7 @@ class Movie extends Model
     }
     public static function Movies(){
         return DB::table('movies')
-            ->join('subject','subject.id','=','movies.asignatura_id')
+            ->join('subjects','subjects.id','=','movies.asignatura_id')
             ->select('movies.*')
             ->get();
     }

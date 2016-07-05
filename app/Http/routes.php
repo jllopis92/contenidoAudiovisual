@@ -11,16 +11,18 @@
 |
 */
 //Route::get('/','FrontController@index');
-Route::get('contacto','FrontController@contacto');
-Route::get('reviews','FrontController@reviews');
+/*Route::get('contacto','FrontController@contacto');
+Route::get('reviews','FrontController@reviews');*/
+
+Route::get('/', 'HomeController@index');
 
 
 Route::group(['middleware' => 'web'], function () {
 	Route::auth();
-	Route::get('/', function () {
+	/*Route::get('/', function () {
 		return view('index');
-	});
-	Route::get('/home', 'HomeController@index');
+	});*/
+	
 	Route::resource('cpanel','CpanelController');
 	Route::resource('upload','MovieController');
 });

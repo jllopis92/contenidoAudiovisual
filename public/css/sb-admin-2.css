@@ -26,6 +26,11 @@ body {
         border-left: 1px solid #e7e7e7;
     }
 }
+.navbar-static-top  {
+    border: 1px solid transparent;
+    min-height: 50px;
+    position: relative;
+}
 
 .navbar-top-links {
     margin-right: 0;
@@ -132,7 +137,6 @@ body {
         z-index: 1;
         position: absolute;
         width: 250px;
-        margin-top: 51px;
     }
 
     .navbar-top-links .dropdown-messages,

@@ -1,6 +1,4 @@
 @extends('layouts.app')
-{{-- <?php $message=Session::get('message')?> --}}
-{{-- @include('alerts.success'); --}}
 	@section('content')
 	<table class="table">
 		<thead>

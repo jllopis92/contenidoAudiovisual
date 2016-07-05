@@ -4,7 +4,7 @@
 <script type="text/javascript" src="js/city_state.js"></script>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2" style="margin-left: 0">
             <div class="panel panel-default">
                 <div class="panel-heading">Registro de Usuario</div>
                 <div class="panel-body">
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div class="form-group" style="display: none;">
-                        
+
                             <div class="col-md-6">
                                 <input id="tipo" type="text" class="form-control" name="tipo" value="externo">
                             </div>
