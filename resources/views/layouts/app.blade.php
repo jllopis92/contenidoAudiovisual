@@ -90,7 +90,7 @@
                     
                     <li>
                             <form>
-                            <input  type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search..';}" style="margin: 10px;"/>
+                            <input  type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
                                 <input type="submit" value="">
                             </form>
                         </li>
@@ -109,7 +109,7 @@
             </div>
         </div>
 
-        <div id="page-wrapper" style="min-height: 178px; margin-left: 0px;">
+        <div id="page-wrapper">
             @yield('content')
         </div>
 
