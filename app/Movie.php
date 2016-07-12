@@ -5,6 +5,8 @@ namespace contenidoAudiovisual;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use DB;
+use contenidoAudiovisual\CustomVideo;
+use FFMpeg;
 
 class Movie extends Model
 {
@@ -20,14 +22,60 @@ class Movie extends Model
     }
     public function setUrlAttribute($url){
 
-        $this->attributes['url'] = Carbon::now()->second.$url->getClientOriginalName();
-         $name = Carbon::now()->second.$url->getClientOriginalName();
+        $this->attributes['url'] = 'old/'.Carbon::now()->second.$url->getClientOriginalName();
+        $name = Carbon::now()->second.$url->getClientOriginalName();
         \Storage::disk('local')->put($name, \File::get($url));
+
+        $file = pathinfo($name,PATHINFO_FILENAME); 
+        $extension = pathinfo($name,PATHINFO_EXTENSION);
+
+        $ffmpeg = \FFMpeg\FFMpeg::create([
+            'ffmpeg.binaries'  => '/Applications/MAMP/htdocs/FFmpeg/ffmpeg',
+            'ffprobe.binaries' => '/Applications/MAMP/htdocs/FFmpeg/ffprobe',
+            'timeout'          => 0, // The timeout for the underlying process
+            'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
+
+        ]);
+        $video = $ffmpeg->open($url);
+        //$format = new CustomVideo();
+        $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
+        $format->on('progress', function ($video, $format, $percentage) {
+            echo "$percentage % transcoded";
+        });
+        $format
+        -> setKiloBitrate(1000)
+        -> setAudioChannels(2)
+        -> setAudioKiloBitrate(256);
+
+        $video
+        ->save($format, 'files/convert/'.$file.'.mp4');
+
+        $this->attributes['url'] = $file.'.mp4';
+        /*->save(new FFMpeg\Format\Video\X264(), 'export-x264.mp4')
+    ->save(new FFMpeg\Format\Video\WMV(), 'export-wmv.wmv')
+    ->save(new FFMpeg\Format\Video\WebM(), 'export-webm.webm');*/
+
+//audio
+/*        $ffmpeg = FFMpeg\FFMpeg::create();
+        $audio = $ffmpeg->open('track.mp3');
+
+        $format = new FFMpeg\Format\Audio\Flac();
+        $format->on('progress', function ($audio, $format, $percentage) {
+            echo "$percentage % transcoded";
+        });
+
+        $format
+        -> setAudioChannels(2)
+        -> setAudioKiloBitrate(256);
+
+        $audio->save($format, 'track.flac');*/
+
     }
+    
     public static function Movies(){
         return DB::table('movies')
-            ->join('subjects','subjects.id','=','movies.asignatura_id')
-            ->select('movies.*')
-            ->get();
+        ->join('subjects','subjects.id','=','movies.asignatura_id')
+        ->select('movies.*')
+        ->get();
     }
 }

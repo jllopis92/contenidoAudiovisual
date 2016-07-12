@@ -55,10 +55,18 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cine_tv') }}">Cine TV</a></li>
                 </ul>
+                {{-- @if (Auth::user()->tipo != "profesor")
+                    <script type="text/javascript">
+                        window.location = "/";//here double curly bracket
+                    </script>
+                @endif --}}
                 @if (!Auth::guest())
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/upload') }}">Subir Video</a></li>
-                </ul>
+                    @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno"))
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/upload') }}">Subir Video</a></li>
+                        </ul>
+                    @endif
+                
                 @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -69,7 +77,7 @@
                     @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->email }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -89,10 +97,21 @@
                 <ul class="nav" id="side-menu">
                     
                     <li>
-                            <form>
+                    {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
+                        
+                        
+                            <input  type="text" name="search" value="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
+                                <input type="submit" value="" >
+                            {!! Form::close() !!}
+
+
+                            {{-- {!! Form::text('search', null, ['class'=> 'form-control', 'placeholder' => 'Buscar...']) !!}
+                            {!! Form::submit('',['class' =>'btn btn-primary']) !!}
+                            {!! Form::close() !!} --}}
+                            {{-- <form>
                             <input  type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
-                                <input type="submit" value="">
-                            </form>
+                                <input type="submit" value="" >
+                            </form> --}}
                         </li>
                     <li>
                         <a href="#"><i class="fa fa-child fa-fw"></i> Genero<span class="fa arrow"></span></a>

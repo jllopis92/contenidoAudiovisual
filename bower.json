@@ -1,0 +1,23 @@
+{
+  "name": "contenidoAudiovisual",
+  "description": "",
+  "main": "",
+  "authors": [
+    "topin <topin@efexi.cl>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/jllopis92/contenidoAudiovisual",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~3.1.0"
+  }
+}

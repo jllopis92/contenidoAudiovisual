@@ -25,4 +25,6 @@ Route::group(['middleware' => 'web'], function () {
 	
 	Route::resource('cpanel','CpanelController');
 	Route::resource('upload','MovieController');
+	Route::get('search','MovieController@search');
+
 });

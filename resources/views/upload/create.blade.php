@@ -1,13 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+@if (Auth::guest())
+<script type="text/javascript">
+    window.location = "/";//here double curly bracket
+</script>
+@else
+    @if ((Auth::user()->tipo != "profesor") && (Auth::user()->tipo != "alumno"))
+
+    <script type="text/javascript">
+        window.location = "/";//here double curly bracket
+    </script>
+    @endif
+@endif
 <H3 style="margin-top: 0">Subir Video</H3>
 
 {!! Form::open(['route' =>'upload.store', 'method'=>'POST', 'files'=> true ]) !!}
 
-<div class = "form-group">
-    {!! Form::label('usuario_id', 'Usuario:') !!}
-    {!! Form::select('usuario_id', $user) !!}
+<div class = "form-group" style ="display: none;">
+    {!! Form::label('usuario_id', 'usuario_id:') !!}
+    {!! Form::text('usuario_id', Auth::user()->id) !!}
 </div>
 <div class = "form-group">
     {!! Form::label('asignatura_id', 'Asignatura:') !!}

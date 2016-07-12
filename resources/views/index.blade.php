@@ -10,7 +10,7 @@
     <? $key = 0?>
     @foreach($movies as $movie)
     <? ++$key ?>
-    @if ($key == 4)
+    @if ($key % 4 == 0)
     <div class="content-grid last-grid">
         @else
         <div class="content-grid">
