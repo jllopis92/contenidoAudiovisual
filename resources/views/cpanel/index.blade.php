@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.panelprofesor')
 	@section('content')
 	<table class="table">
 		<thead>
 			<th>Fecha Nacimiento</th>
 			<th>Nombre</th>
-			<th>Correo</th>
+			<th>Correo Electrónico</th>
 			<th>País</th>
 			<th>Ciudad</th>
 			<th>Sector</th>
@@ -25,6 +25,4 @@
 		@endforeach
 	</table>
 	{!!$users->render()!!}
-
-
 @endsection

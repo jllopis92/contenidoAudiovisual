@@ -21,6 +21,10 @@
     {!! Form::label('usuario_id', 'usuario_id:') !!}
     {!! Form::text('usuario_id', Auth::user()->id) !!}
 </div>
+<div class = "form-group" style ="display: none;">
+    {!! Form::label('state', 'State:') !!}
+    {!! Form::text('state', 0) !!}
+</div>
 <div class = "form-group">
     {!! Form::label('asignatura_id', 'Asignatura:') !!}
     {!! Form::select('asignatura_id', $subject) !!}
@@ -53,7 +57,14 @@
     {!! Form::label('production_year', 'Año de Produccion:') !!}
     {!! Form::text('production_year', null, ['class'=> 'form-control', 'placeholder' => 'Ingresa el año de produccion']) !!}
 </div>
-
+<div class = "form-group">
+    {!! Form::label('category', 'Categoría:') !!}
+    {!!Form::select('category', Config::get('enums.category_types'))!!}
+</div>
+<div class = "form-group">
+    {!! Form::label('shooting_format', 'Formato de Rodaje:') !!}
+    {!!Form::select('shooting_format', Config::get('enums.shooting_format_types'))!!}
+</div>
 <div class = "form-group">
     {!! Form::label('direction', 'Dirección:') !!}
     {!! Form::text('direction', null, ['class'=> 'form-control', 'placeholder' => 'Ingresa al director de la pelicula']) !!}

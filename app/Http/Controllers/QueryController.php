@@ -2,7 +2,8 @@
 
 namespace contenidoAudiovisual\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+use contenidoAudiovisual\Movie;
 
 use contenidoAudiovisual\Http\Requests;
 
@@ -84,6 +85,17 @@ class QueryController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function search(Request $request){
+        // Gets the query string from our form submission 
+        $query = Request::input('search');
+
+        $movies = Movie::where('name','like','%'.$query.'%')
+        ->orderBy('name')
+        ->paginate(20);
+ 
+        // returns a view and passes the view the list of articles and the original query.
+        return view('search', compact('movies', 'query'));
     }
 
 }

@@ -24,7 +24,8 @@ Route::group(['middleware' => 'web'], function () {
 	});*/
 	
 	Route::resource('cpanel','CpanelController');
+	Route::get('editmovie','CpanelController@showmovie');
 	Route::resource('upload','MovieController');
-	Route::get('search','MovieController@search');
-
+	Route::get('search','QueryController@search');
+	Route::get('cine_tv','CineTvController@index');
 });

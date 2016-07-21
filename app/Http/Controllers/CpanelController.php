@@ -20,6 +20,17 @@ class CpanelController extends Controller
         //$users = User::onlyTrashed()->paginate(4);
         return view ('cpanel.index', compact('users'));
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showmovie()
+    {
+        $movies = Movie::paginate(4);
+        return view ('cpanel.movieupdate',compact('movies'));
+    }
 
     /**
      * Show the form for creating a new resource.

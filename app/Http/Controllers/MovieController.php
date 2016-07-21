@@ -3,11 +3,10 @@
 namespace contenidoAudiovisual\Http\Controllers;
 
 use DB;
-use Request;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\User;
 use contenidoAudiovisual\Subject;
-use contenidoAudiovisual\Http\Requests;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -99,7 +98,7 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request){
+    /*public function search(Request $request){
         // Gets the query string from our form submission 
         $query = Request::input('search');
 
@@ -109,5 +108,5 @@ class MovieController extends Controller
  
         // returns a view and passes the view the list of articles and the original query.
         return view('search', compact('movies', 'query'));
-    }
+    }*/
 }
