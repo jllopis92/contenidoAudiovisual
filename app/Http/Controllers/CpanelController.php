@@ -31,6 +31,12 @@ class CpanelController extends Controller
         $movies = Movie::paginate(4);
         return view ('cpanel.movieupdate',compact('movies'));
     }
+    public function approvemovie()
+    {
+        $movies = Movie::paginate(4);
+        $users = User::all();
+        return view ('cpanel.movieapprove',compact('movies','users'));
+    }
 
     /**
      * Show the form for creating a new resource.

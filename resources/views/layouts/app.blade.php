@@ -66,7 +66,6 @@
                             <li><a href="{{ url('/upload') }}">Subir Video</a></li>
                         </ul>
                     @endif
-                
                 @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -102,28 +101,18 @@
                         
                             <input  type="text" name="search" value="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
                                 <input type="submit" value="" >
-                            {!! Form::close() !!}
-
-
-                            {{-- {!! Form::text('search', null, ['class'=> 'form-control', 'placeholder' => 'Buscar...']) !!}
-                            {!! Form::submit('',['class' =>'btn btn-primary']) !!}
-                            {!! Form::close() !!} --}}
-                            {{-- <form>
-                            <input  type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
-                                <input type="submit" value="" >
-                            </form> --}}
+                    {!! Form::close() !!}
                         </li>
                     <li>
-                        <a href="#"><i class="fa fa-child fa-fw"></i> Genero<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#"><i class='fa fa-plus fa-fw'></i> Agregar</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class='fa fa-list-ol fa-fw'></i> Generos</a>
-                            </li>
-                        </ul>
+                        <a> Busqueda por Filtro</a>
                     </li>
+                    
+                    {{-- <li>
+                    {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search']) !!}
+                        {!! Form::radio('name', 'value') !!}
+                         {!!Form::submit('Actualizar',['class'=>'btn btn-primary'])!!}
+                    {!!Form::close()!!}
+                    </li> --}}
                 </ul>
             </div>
         </div>

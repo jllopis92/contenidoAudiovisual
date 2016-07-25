@@ -66,7 +66,6 @@
                             <li><a href="{{ url('/upload') }}">Subir Video</a></li>
                         </ul>
                     @endif
-                
                 @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -90,71 +89,14 @@
             </div>
         </div>
     </nav>
-
-    @if (!Auth::guest())
+    
     <div id="wrapper">
-        @if (Auth::user()->tipo == "profesor")
-              
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <li>
-                                <a href="{{ url('/cpanel') }}"> Administrar Usuarios</a>
-                            </li>
 
-                            <li>
-                                <a href="#"><i class="fa fa-child fa-fw"></i> Administrar Videos<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="{!! url('editmovie')!!}"><i class='fa fa-plus fa-fw'></i>Editar Videos</a>
-                                    </li>
-                                    <li>
-                                        <a href="{!! url('approvemovie')!!}"><i class='fa fa-list-ol fa-fw'></i>Aprovar Videos</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li>
-                            {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-        @else
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        
-                        <li>
-                        {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
-                            
-                            
-                                <input  type="text" name="search" value="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
-                                    <input type="submit" value="" >
-                                {!! Form::close() !!}
-                            </li>
-                        <li>
-                            <a href="#"><i class="fa fa-child fa-fw"></i> Genero<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#"><i class='fa fa-plus fa-fw'></i> Agregar</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class='fa fa-list-ol fa-fw'></i> Generos</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        @endif
         <div id="page-wrapper">
-                @yield('content')
+            @yield('content')
         </div>
-    </div>  
-    @endif       
-        
+
+    </div>
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>

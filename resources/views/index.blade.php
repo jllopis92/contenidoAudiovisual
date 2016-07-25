@@ -9,7 +9,7 @@
     <H3 style="margin-top: 0px;">Nuevos: </H3>
     <? $key = 0?>
     @foreach($movies as $movie)
-    <? ++$key ?>
+    <? ++$key?>
     @if ($key % 4 == 0)
     <div class="content-grid last-grid">
         @else

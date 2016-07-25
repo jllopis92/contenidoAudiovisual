@@ -18,14 +18,8 @@
 		<td>{{$movie->language}}</td>
 		<td>{{$movie->category}}</td>
 		<td>{{$movie->shooting_format}}</td>
-		@if ($movie->state == 0 )
-		<td>{!! link_to_route('cpanel.edit', $title = 'Aprobar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary'])!!}
+		<td>{!! link_to_route('cpanel.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary'])!!}
 		</td>
-		@else
-		<td>
-		{!! link_to_route('cpanel.edit', $title = 'Reprobar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-danger'])!!}
-		</td>
-		@endif
 	</tbody>
 	@endforeach
 </table>
