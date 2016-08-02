@@ -6,6 +6,8 @@ use DB;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\User;
 use contenidoAudiovisual\Subject;
+use contenidoAudiovisual\Subtitle;
+use contenidoAudiovisual\Trailer;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -44,8 +46,62 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        Movie::create($request->all());
-        return "listo";
+        $movie = Movie::create([
+            'usuario_id' => $request['usuario_id'],
+            'asignatura_id' => $request['asignatura_id'],
+            'name' => $request['name'],
+            'visit' => $request['visit'],
+            'language' => $request['language'],
+            'creation_date' => $request['creation_date'],
+            'description' => $request['description'],
+            'imageRef' => $request['imageRef'],
+            'url' => $request['url'],
+            'state' => $request['state'],
+            'production_year' => $request['production_year'],
+            'category' => $request['category'],
+            'shooting_format' => $request['shooting_format'],
+            'direction' => $request['direction'],
+            'direction_assistant' => $request['direction_assistant'],
+            'casting' => $request['casting'],
+            'continuista' => $request['continuista'],
+            'script' => $request['script'],
+            'production' => $request['production'],
+            'production_assistant' => $request['production_assistant'],
+            'photografic_direction' => $request['photografic_direction'],
+            'camara' => $request['camara'],
+            'camara_assistant' => $request['camara_assistant'],
+            'art_direction' => $request['art_direction'],
+            'mounting' => $request['mounting'],
+            'image_postproduction' => $request['image_postproduction'],
+            'sound_postproduction' => $request['sound_postproduction'],
+            'catering' => $request['catering'],
+            'music' => $request['music'],
+            'actors' => $request['actors'],
+        ]);
+        $movieId = $movie->id;
+
+        if($request['subtitle'] != null){
+            $sub = Subtitle::create([
+                'video_id' => $movieId,
+                'url' => $request['subtitle'],
+                ]);
+            }
+        if($request['trailer'] != null){
+            $trailer = Trailer::create([
+                'video_id' => $movieId,
+                'url' => $request['trailer'],
+                ]);
+            if($request['trailer_subtitle'] != null){
+                $trailerId = $trailer->id;
+
+                $subTrailer = Subtitle::create([
+                    'trailer_id' => $trailerId,
+                    'url' => $request['trailer_subtitle'],
+                    ]);
+            }
+        }
+
+        return "OK";
     }
 
     /**

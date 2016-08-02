@@ -3,6 +3,7 @@
 namespace contenidoAudiovisual\Http\Controllers;
 
 use Request;
+use DB;
 use contenidoAudiovisual\Movie;
 
 use contenidoAudiovisual\Http\Requests;
@@ -85,6 +86,44 @@ class QueryController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function filter(){
+        // Sets the parameters from the get request to the variables.
+        //First filter
+        $largometraje = Request::input('largometraje');
+        $cortometraje = Request::input('cortometraje');
+        $animacion = Request::input('animacion');
+        $documental = Request::input('documental');
+
+        //Second filter
+        $fourK = Request::input('4K');
+        $twoK = Request::input('2K');
+        $hd = Request::get('HD');
+        $miniDv = Request::get('MiniDV');
+        $sixteenMm = Request::input('16mm');
+        $thirtyFiveMm = Request::input('35mm');
+
+
+        $movies = DB::table('movies')
+            ->where('state', '=', 1)
+            ->where(function ($query) use ($largometraje, $cortometraje, $animacion, $documental, $fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
+                $query->where(function ($query) use ($largometraje, $cortometraje, $animacion, $documental) {
+                    $query->where('category', '=', $largometraje)
+                        ->orwhere('category', '=', $cortometraje)
+                        ->orWhere('category', '=', $animacion)
+                        ->orWhere('category', '=', $documental);
+                    })
+                    ->Where(function ($query2) use ($fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
+                    $query2->where('shooting_format', '=', $fourK)
+                        ->orwhere('shooting_format', '=', $twoK)
+                        ->orWhere('shooting_format', '=', $hd)
+                        ->orWhere('shooting_format', '=', $miniDv)
+                        ->orWhere('shooting_format', '=', $sixteenMm)
+                        ->orWhere('shooting_format', '=', $thirtyFiveMm);
+                        });
+            })
+            ->get();
+        return view('search', compact('movies'));
     }
     public function search(Request $request){
         // Gets the query string from our form submission 

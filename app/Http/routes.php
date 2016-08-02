@@ -23,6 +23,7 @@ Route::get('/', 'HomeController@index');
 	Route::get('approvemovie','CpanelController@approvemovie');
 	Route::resource('upload','MovieController');
 	Route::get('search','QueryController@search');
+	Route::get('filter','QueryController@filter');
 	Route::get('cine_tv','CineTvController@index');
 
 Route::group(['middleware' => 'web'], function () {

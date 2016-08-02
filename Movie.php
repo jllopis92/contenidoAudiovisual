@@ -12,7 +12,7 @@ class Movie extends Model
 {
     protected $table = "movies";
 
-    protected $fillable = ['usuario_id','asignatura_id','name','language','creation_date','description','imageRef','url','state','production_year','category','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors'];
+    protected $fillable = ['usuario_id','asignatura_id','name','language','creation_date','description','imageRef','url','production_year','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors'];
 
     public function setImageRefAttribute($imageRef){
 
@@ -30,8 +30,8 @@ class Movie extends Model
         $extension = pathinfo($name,PATHINFO_EXTENSION);
 
         $ffmpeg = \FFMpeg\FFMpeg::create([
-            'ffmpeg.binaries'  => '/Applications/MAMP/htdocs/FFmpeg/ffmpeg',
-            'ffprobe.binaries' => '/Applications/MAMP/htdocs/FFmpeg/ffprobe',
+            'ffmpeg.binaries'  => '/usr/bin/ffmpeg.exe',
+            'ffprobe.binaries' => '/usr/bin/ffprobe.exe',
             'timeout'          => 0, // The timeout for the underlying process
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
 
@@ -49,24 +49,8 @@ class Movie extends Model
 
         $video
         ->save($format, 'files/convert/'.$file.'.mp4');
+
         $this->attributes['url'] = $file.'.mp4';
-
-        $ffmpeg_path = '/Applications/MAMP/htdocs/FFmpeg/ffmpeg'; //Path to your FFMPEG
-        $video_path = 'files/convert/'.$file.'.mp4'; // Path to your Video
- 
-        $command = $ffmpeg_path . ' -i "' . $video_path . '" -vstats 2>&1';
- 
-        $output = shell_exec($command);
-        $regex_duration = "/Duration: ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}).([0-9]{1,2})/";
-        if (preg_match($regex_duration, $output, $regs)) {
-            $hours = $regs [1] ? $regs [1] : null;
-            $mins = $regs [2] ? $regs [2] : null;
-            $secs = $regs [3] ? $regs [3] : null;
-        }
-         
-        $video_Length = $hours . ":" . $mins . ":" . $secs;
-
-        $this->attributes['duration'] = $video_Length;
         /*->save(new FFMpeg\Format\Video\X264(), 'export-x264.mp4')
     ->save(new FFMpeg\Format\Video\WMV(), 'export-wmv.wmv')
     ->save(new FFMpeg\Format\Video\WebM(), 'export-webm.webm');*/
