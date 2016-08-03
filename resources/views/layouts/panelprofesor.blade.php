@@ -109,7 +109,7 @@
                                         <a href="{!! url('editmovie')!!}"><i class='fa fa-plus fa-fw'></i>Editar Videos</a>
                                     </li>
                                     <li>
-                                        <a href="{!! url('approvemovie')!!}"><i class='fa fa-list-ol fa-fw'></i>Aprovar Videos</a>
+                                        <a href="{!! url('approvemovie')!!}"><i class='fa fa-list-ol fa-fw'></i>Aprobar Videos</a>
                                     </li>
                                 </ul>
                             </li>

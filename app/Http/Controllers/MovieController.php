@@ -9,6 +9,8 @@ use contenidoAudiovisual\Subject;
 use contenidoAudiovisual\Subtitle;
 use contenidoAudiovisual\Trailer;
 use Illuminate\Http\Request;
+use Redirect;
+use Session;
 
 class MovieController extends Controller
 {
@@ -100,7 +102,6 @@ class MovieController extends Controller
                     ]);
             }
         }
-
         return "OK";
     }
 
@@ -112,7 +113,7 @@ class MovieController extends Controller
      */
     public function show($id){
         $movies = Movie::find($id);
-        return view ('play.borrar',['movie'=>$movies]);
+        return view ('play.show',['movie'=>$movies]);
     }
 
     /**
@@ -123,9 +124,9 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $movie = Movie::find($id);
+        return view('cpanel.editMovie',['movie'=>$movie]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -135,7 +136,31 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $movie = Movie::find($id);
+        $movie->fill($request->all());
+        $movie->save();
+        Session::flash('message','Video Actualizado Correctamente');
+        return Redirect::to('/cpanel');
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function approveMovie(Request $request)
+    {
+        $id = $request['video_id'];
+        $movie = Movie::find($id);
+        $movie->fill([
+            'state' => $request['state'],
+            ]);
+        $movie->save();
+        $users = User::paginate(4);
+        return view ('cpanel.index', compact('users'));
     }
 
     /**
@@ -148,21 +173,4 @@ class MovieController extends Controller
     {
         //
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    /*public function search(Request $request){
-        // Gets the query string from our form submission 
-        $query = Request::input('search');
-
-        $movies = Movie::where('name','like','%'.$query.'%')
-        ->orderBy('name')
-        ->paginate(20);
- 
-        // returns a view and passes the view the list of articles and the original query.
-        return view('search', compact('movies', 'query'));
-    }*/
 }

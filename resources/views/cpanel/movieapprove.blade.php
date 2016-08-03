@@ -20,8 +20,35 @@
 	            @endif
 	        @endforeach
 		</td>
-		<td style="vertical-align: middle;">{!! link_to_route('cpanel.edit', $title = 'Aprobar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary'])!!}
-		{!! link_to_route('cpanel.edit', $title = 'Reprobar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-danger'])!!}
+		<td style="vertical-align: middle;">
+
+			{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
+
+			<div class = "form-group" style ="display: none;">
+			    {!! Form::label('video_id', 'video_id:') !!}
+			    {!! Form::text('video_id', $movie->id) !!}
+			</div>
+			<div class = "form-group" style ="display: none;">
+			    {!! Form::label('state', 'State:') !!}
+			    {!! Form::text('state', 1) !!}
+			</div>
+			{!! Form::submit('Aprobar',['class' =>'btn btn-primary']) !!}
+    		{!! Form::close() !!}
+
+			{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
+
+			<div class = "form-group" style ="display: none;">
+			    {!! Form::label('video_id', 'video_id:') !!}
+			    {!! Form::text('video_id', $movie->id) !!}
+			</div>
+			<div class = "form-group" style ="display: none;">
+			    {!! Form::label('state', 'State:') !!}
+			    {!! Form::text('state', 0) !!}
+			</div>
+			{!! Form::submit('Reprobar',['class' =>'btn btn-danger']) !!}
+    		{!! Form::close() !!}
+		{{-- {!! link_to_route('approve', $title = 'Aprobar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary'])!!} --}}
+		{{-- {!! link_to_route('cpanel.edit', $title = 'Reprobar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-danger'])!!} --}}
 		</td>
 	</tbody>
 	@endforeach

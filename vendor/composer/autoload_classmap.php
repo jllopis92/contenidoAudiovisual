@@ -2767,6 +2767,7 @@ return array(
     'contenidoAudiovisual\\Genre' => $baseDir . '/app/Genre.php',
     'contenidoAudiovisual\\Http\\Controllers\\Auth\\AuthController' => $baseDir . '/app/Http/Controllers/Auth/AuthController.php',
     'contenidoAudiovisual\\Http\\Controllers\\Auth\\PasswordController' => $baseDir . '/app/Http/Controllers/Auth/PasswordController.php',
+    'contenidoAudiovisual\\Http\\Controllers\\CineTvController' => $baseDir . '/app/Http/Controllers/CineTvController.php',
     'contenidoAudiovisual\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'contenidoAudiovisual\\Http\\Controllers\\CpanelController' => $baseDir . '/app/Http/Controllers/CpanelController.php',
     'contenidoAudiovisual\\Http\\Controllers\\GenreController' => $baseDir . '/app/Http/Controllers/GenreController.php',

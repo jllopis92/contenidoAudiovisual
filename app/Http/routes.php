@@ -22,6 +22,7 @@ Route::get('/', 'HomeController@index');
 	Route::get('editmovie','CpanelController@showmovie');
 	Route::get('approvemovie','CpanelController@approvemovie');
 	Route::resource('upload','MovieController');
+	Route::post('approve','MovieController@approveMovie');
 	Route::get('search','QueryController@search');
 	Route::get('filter','QueryController@filter');
 	Route::get('cine_tv','CineTvController@index');

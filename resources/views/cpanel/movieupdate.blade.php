@@ -18,7 +18,7 @@
 		<td>{{$movie->language}}</td>
 		<td>{{$movie->category}}</td>
 		<td>{{$movie->shooting_format}}</td>
-		<td>{!! link_to_route('cpanel.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary'])!!}
+		<td>{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary'])!!}
 		</td>
 	</tbody>
 	@endforeach

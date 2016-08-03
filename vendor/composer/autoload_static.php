@@ -3069,6 +3069,7 @@ class ComposerStaticInit3cc464111f851a707b2eaba756707ec1
         'contenidoAudiovisual\\Genre' => __DIR__ . '/../..' . '/app/Genre.php',
         'contenidoAudiovisual\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthController.php',
         'contenidoAudiovisual\\Http\\Controllers\\Auth\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PasswordController.php',
+        'contenidoAudiovisual\\Http\\Controllers\\CineTvController' => __DIR__ . '/../..' . '/app/Http/Controllers/CineTvController.php',
         'contenidoAudiovisual\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'contenidoAudiovisual\\Http\\Controllers\\CpanelController' => __DIR__ . '/../..' . '/app/Http/Controllers/CpanelController.php',
         'contenidoAudiovisual\\Http\\Controllers\\GenreController' => __DIR__ . '/../..' . '/app/Http/Controllers/GenreController.php',
