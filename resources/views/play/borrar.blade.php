@@ -27,11 +27,17 @@
     <script src="../js/videojs.ass.js"></script> --}}
   </head>
 
+  
+
+
   <body>
-    <video id="player">
-      <source src="/files/convert/{{$movie->url}}" type="video/mp4">
-    </video>
-    </script>
+    <video  width="640" height="480" id="video" controls preload="metadata">  
+  <source src="54Warcraft.2016.HC.HDRip.XViD.AC3-ETRG_dash.mpd">
+     <source type="video/mp4" src="/files/convert/5825_Curso_de_Laravel_5.1.mp4" >   
+     <track src="/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa" label="Espanol" kind="subtitles" srclang="es" default >
+    <track src="/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa" label="English" kind="subtitles" srclang="en" default >
+
+</video>
   </body>
 </html>
 

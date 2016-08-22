@@ -4,6 +4,7 @@ namespace contenidoAudiovisual\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
 use contenidoAudiovisual\User;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\Subject;
@@ -33,9 +34,24 @@ class CpanelController extends Controller
     }
     public function approvemovie()
     {
-        $movies = Movie::paginate(4);
+
+        $aproves = DB::table('movies')
+        ->where('state', '=', 1)
+        ->paginate(6);
+        $reproves = DB::table('movies')
+        ->where('state', '=', 0)
+        ->paginate(6);
+        $waits = DB::table('movies')
+        ->where('state', '=', 3)
+        ->paginate(6);
+        $observations = DB::table('movies')
+        ->where('state', '=', 2)
+        ->paginate(6);
+
+        
+        //$movies = Movie::paginate(4);
         $users = User::all();
-        return view ('cpanel.movieapprove',compact('movies','users'));
+        return view ('cpanel.movieapprove',compact('aproves','reproves','waits','observations','users'));
     }
 
     /**

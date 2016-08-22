@@ -123,13 +123,15 @@ class QueryController extends Controller
                         });
             })
             ->get();
-        return view('search', compact('movies'));
+        return view('search', compact('movies', 'query', 'query2'));
     }
     public function search(Request $request){
         // Gets the query string from our form submission 
         $query = Request::input('search');
 
-        $movies = Movie::where('name','like','%'.$query.'%')
+        $movies = DB::table('movies')
+        ->where('state', '=', 1)
+        ->where('name','like','%'.$query.'%')
         ->orderBy('name')
         ->paginate(20);
  

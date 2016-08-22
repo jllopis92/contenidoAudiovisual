@@ -15,7 +15,7 @@
 @endif
 <H3 style="margin-top: 0">Subir Video</H3>
 
-{!! Form::open(['route' =>'upload.store', 'method'=>'POST', 'files'=> true ]) !!}
+{!! Form::open(['id' => 'newVideo', 'route' =>'upload.store', 'method'=>'POST', 'files'=> true ]) !!}
 
 <div class = "form-group" style ="display: none;">
     {!! Form::label('usuario_id', 'usuario_id:') !!}
@@ -24,7 +24,11 @@
 
 <div class = "form-group" style ="display: none;">
     {!! Form::label('state', 'State:') !!}
-    {!! Form::text('state', 0) !!}
+    @if (Auth::user()->tipo == "alumno")
+        {!! Form::text('state', 3) !!}
+    @else
+        {!! Form::text('state', 1) !!}
+    @endif
 </div>
 
 <div class = "form-group">
@@ -35,11 +39,6 @@
 <div class = "form-group">
     {!! Form::label('description', 'Descripcion:') !!}
     {!! Form::textarea('description', null, ['class'=> 'form-control']) !!}
-</div>
-
-<div class = "form-group">
-    {!! Form::label('category', 'Categoría:') !!}
-    {!!Form::select('category', Config::get('enums.category_types'))!!}
 </div>
 
 <div class = "form-group">
@@ -78,8 +77,18 @@
 </div>
 
 <div class = "form-group">
-    {!! Form::label('category', 'Categoría:') !!}
-    {!!Form::select('category', Config::get('enums.category_types'))!!}
+    {!! Form::label('category', 'Categoria:') !!}
+</div>
+<div class = "form-group">
+    {!! Form::radio('category', 'largometraje') !!} Largometraje
+    {!! Form::radio('category', 'mediometraje') !!} Mediometraje
+    {!! Form::radio('category', 'cortometraje') !!} Cortometraje
+</div>
+<div class = "form-group">
+    {!! Form::radio('category2', 'experimental') !!} Experimental
+    {!! Form::radio('category2', 'ficcion') !!} Ficción
+    {!! Form::radio('category2', 'animacion') !!} Animación
+    {!! Form::radio('category2', 'documental') !!} Documental
 </div>
 
 <div class = "form-group">

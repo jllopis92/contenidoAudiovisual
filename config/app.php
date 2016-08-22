@@ -156,7 +156,6 @@ return [
         contenidoAudiovisual\Providers\EventServiceProvider::class,
         contenidoAudiovisual\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
     ],
 
     /*

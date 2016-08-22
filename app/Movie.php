@@ -12,7 +12,7 @@ class Movie extends Model
 {
     protected $table = "movies";
 
-    protected $fillable = ['usuario_id','asignatura_id','name','language','creation_date','description','imageRef','url','state','production_year','category','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors'];
+    protected $fillable = ['usuario_id','asignatura_id','name','language','creation_date','description','imageRef','url','state','production_year','category','category2','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors'];
 
     public function setImageRefAttribute($imageRef){
 
@@ -48,11 +48,11 @@ class Movie extends Model
         -> setAudioKiloBitrate(256);
 
         $video
-        ->save($format, 'files/convert/'.$file.'.mp4');
+        ->save($format, 'files/convert/videos'.$file.'.mp4');
         $this->attributes['url'] = $file.'.mp4';
 
         $ffmpeg_path = '/Applications/MAMP/htdocs/FFmpeg/ffmpeg'; //Path to your FFMPEG
-        $video_path = 'files/convert/'.$file.'.mp4'; // Path to your Video
+        $video_path = 'files/convert/videos/'.$file.'.mp4'; // Path to your Video
  
         $command = $ffmpeg_path . ' -i "' . $video_path . '" -vstats 2>&1';
  

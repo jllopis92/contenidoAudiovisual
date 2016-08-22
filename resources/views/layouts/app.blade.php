@@ -18,6 +18,9 @@
     {!!Html::style('css/bootstrap.min.css')!!}
     {!!Html::style('css/metisMenu.min.css')!!}
     {!!Html::style('css/font-awesome.min.css')!!}
+
+    @yield('page-style-files')
+    
     <style>
         body {
             font-family: 'Lato';
@@ -62,8 +65,15 @@
                 </ul>
                 @endif
                 @endif
+
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
+                            <input  type="text" name="search" value="Buscar" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
+                            {{-- <input type="submit" value="" > --}}
+                        {!! Form::close() !!}
+                    </li>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>
@@ -89,15 +99,6 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-
-                    <li>
-                        {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
-                        
-                        
-                        <input  type="text" name="search" value="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
-                        <input type="submit" value="" >
-                        {!! Form::close() !!}
-                    </li>
                     <li>
                         <a> Busqueda por Filtro</a>
                     </li>
@@ -127,11 +128,12 @@
                             <label>
                                 <input type="checkbox" name="animacion" value="animacion"> Animación
                             </label>
+                        </div>
                             <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="documental" value="documental"> Documental
                             </label>
-                        </div>
+                        
                         </div>
                 </div>
                 </ul>
@@ -194,8 +196,12 @@
             <!-- JavaScripts -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
             {!!Html::script('js/metisMenu.min.js')!!}
             {!!Html::script('js/sb-admin-2.js')!!}
+
+            @yield('page-js-files')
+            @yield('page-js-script')
 
             {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
         </body>

@@ -15,6 +15,11 @@ use Session;
 class MovieController extends Controller
 {
     /**
+     * Define your validation rules in a property in 
+     * the controller to reuse the rules.
+     */
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -25,6 +30,7 @@ class MovieController extends Controller
 
         $subject = Subject::lists('name', 'id');
         $user = User::lists('name', 'id');
+
         return view('upload.create', compact('subject','user'));
     }
 
@@ -48,6 +54,12 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        /*$validator = Validator::make($request->all(), [$this->validationRules]);
+
+        if ($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }*/
+
         $movie = Movie::create([
             'usuario_id' => $request['usuario_id'],
             'asignatura_id' => $request['asignatura_id'],
@@ -61,6 +73,7 @@ class MovieController extends Controller
             'state' => $request['state'],
             'production_year' => $request['production_year'],
             'category' => $request['category'],
+            'category2' => $request['category2'],
             'shooting_format' => $request['shooting_format'],
             'direction' => $request['direction'],
             'direction_assistant' => $request['direction_assistant'],
@@ -101,7 +114,7 @@ class MovieController extends Controller
                     'url' => $request['trailer_subtitle'],
                     ]);
             }
-        }
+        }        
         return "OK";
     }
 
@@ -112,8 +125,11 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id){
-        $movies = Movie::find($id);
-        return view ('play.show',['movie'=>$movies]);
+        $movie = Movie::find($id);
+        $movies = Movie::where('state', 1)->take(6)->get();
+        $trailers = Trailer::all();
+        return view ('play.show',compact('movie','trailers','movies'));
+        //return view ('play.show',['movie'=>$movies],['trailer'=>$trailers]);
     }
 
     /**
@@ -159,8 +175,9 @@ class MovieController extends Controller
             'state' => $request['state'],
             ]);
         $movie->save();
-        $users = User::paginate(4);
-        return view ('cpanel.index', compact('users'));
+        $movies = Movie::paginate(4);
+        $users = User::all();
+        return view ('cpanel.movieapprove', compact('movies','users'));
     }
 
     /**

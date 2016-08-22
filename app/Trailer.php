@@ -41,11 +41,11 @@ class Trailer extends Model
         -> setAudioKiloBitrate(256);
 
         $video
-        ->save($format, 'files/trailers/'.$file.'.mp4');
+        ->save($format, 'files/convert/trailers/'.$file.'.mp4');
         $this->attributes['url'] = $file.'.mp4';
 
         $ffmpeg_path = '/Applications/MAMP/htdocs/FFmpeg/ffmpeg'; //Path to your FFMPEG
-        $video_path = 'files/trailers/'.$file.'.mp4'; // Path to your Video
+        $video_path = 'files/convert/trailers/'.$file.'.mp4'; // Path to your Video
  
         $command = $ffmpeg_path . ' -i "' . $video_path . '" -vstats 2>&1';
  
