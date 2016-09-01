@@ -32,7 +32,8 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
+    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; position: fixed;
+  z-index: 100;">
         <div class="container">
             <div class="navbar-header">
 
@@ -96,7 +97,7 @@
     </nav>
     
     <div id="wrapper">
-        <div class="navbar-default sidebar" role="navigation">
+        <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>

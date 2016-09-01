@@ -34,6 +34,32 @@
             @endif
             <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="files/{{$movie->imageRef}}" title="allbum-name" style="width: 220px; height: 220px;"/></a>
             <h3 href="{{ action("MovieController@show", array($movie->id)) }}" style="margin-top: 0px; margin-bottom: 0px;">{{$movie->name}}</h3>
+            @if(is_null($movie->rating))
+                    <img src="img/rating/3_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/>
+                @elseif ($movie->rating <= 0.4)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/0_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 1.0 && $movie->rating >= 0.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/0_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 1.5 && $movie->rating >= 1.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/1_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 2.0 && $movie->rating >= 1.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/1_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 2.5 && $movie->rating >= 2.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/2_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 3.0 && $movie->rating >= 2.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/2_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 3.5 && $movie->rating >= 3.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/3_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 4.0 && $movie->rating >= 3.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/3_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 4.5 && $movie->rating >= 4.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/4_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 5.0 && $movie->rating >= 4.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/4_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating >= 5.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @endif
+
             <a class="button" href="{{ action("MovieController@show", array($movie->id)) }}">Ver Ahora</a>
         </div>
         @endforeach
@@ -81,6 +107,46 @@
                 <a class="button" href="{{ action("MovieController@show", array($movie->id)) }}">Ver Ahora</a>
             </div>
             @endforeach
+
+    <H3>Mejor Evaluados</H3>
+    @foreach($bestMovies as $key=>$movie)
+
+    @if ($key % 4 == 0)
+    <div class="content-grid last-grid">
+        @else
+        <div class="content-grid">
+            @endif
+            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="files/{{$movie->imageRef}}" title="allbum-name" style="width: 220px; height: 220px;"/></a>
+            <h3 href="{{ action("MovieController@show", array($movie->id)) }}" style="margin-top: 0px; margin-bottom: 0px;">{{$movie->name}}</h3>
+            @if(is_null($movie->rating))
+                    <img src="img/rating/3_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/>
+                @elseif ($movie->rating <= 0.4)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/0_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 1.0 && $movie->rating >= 0.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/0_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 1.5 && $movie->rating >= 1.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/1_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 2.0 && $movie->rating >= 1.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/1_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 2.5 && $movie->rating >= 2.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/2_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 3.0 && $movie->rating >= 2.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/2_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 3.5 && $movie->rating >= 3.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/3_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 4.0 && $movie->rating >= 3.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/3_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 4.5 && $movie->rating >= 4.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/4_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating < 5.0 && $movie->rating >= 4.5)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/4_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @elseif ($movie->rating >= 5.0)
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                @endif
+            
+            <a class="button" href="{{ action("MovieController@show", array($movie->id)) }}">Ver Ahora</a>
+        </div>
+        @endforeach
 
         </div>
         @endsection

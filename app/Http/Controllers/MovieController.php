@@ -11,6 +11,7 @@ use contenidoAudiovisual\Trailer;
 use Illuminate\Http\Request;
 use Redirect;
 use Session;
+use JsValidator;
 
 class MovieController extends Controller
 {
@@ -18,6 +19,11 @@ class MovieController extends Controller
      * Define your validation rules in a property in 
      * the controller to reuse the rules.
      */
+    protected $validationRules=[
+                'name' => 'required|unique|max:255',
+                'description' => 'required',
+    ];
+
 
     /**
      * Display a listing of the resource.
@@ -140,8 +146,9 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
+        $validator = JsValidator::make($this->validationRules);
         $movie = Movie::find($id);
-        return view('cpanel.editMovie',['movie'=>$movie]);
+        return view('cpanel.editMovie',['validator' => $validator, 'movie'=>$movie]);
     }
     /**
      * Update the specified resource in storage.

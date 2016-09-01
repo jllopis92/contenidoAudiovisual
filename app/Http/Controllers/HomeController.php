@@ -27,7 +27,8 @@ class HomeController extends Controller
     {
         $newMovies = Movie::where('state', 1)->orderBy('created_at', 'desc')->take(4)->get();
         $visitMovies = Movie::where('state', 1)->orderBy('visit', 'desc')->take(4)->get();
-        return view ('index',compact('newMovies','visitMovies'));
+        $bestMovies = Movie::where('state', 1)->orderBy('rating', 'desc')->take(4)->get();
+        return view ('index',compact('newMovies','visitMovies','bestMovies'));
         //return view('index');
     }
 }

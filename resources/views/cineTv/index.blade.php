@@ -25,7 +25,7 @@
     }
 </style>
 <div>
-    <video data-dashjs-player autoplay src="http://localhost:8080" controls>
+    <video data-dashjs-player autoplay src="http://192.168.0.17:8080" controls>
     </video>
     </div>
 
@@ -94,6 +94,6 @@
 <script src="assets/vendor/videogular-poster/vg-poster.js"></script>
 <script src="assets/vendor/videogular-buffering/vg-buffering.js"></script>
 <script src="assets/vendor/videogular-dash/vg-dash.js"></script>
-<script src="js/main.js"></script> --}}
-<script src="assets/vendor/dashjs/dist/dash.all.min.js"></script>
+<script src="js/main.js"></script> 
+<script src="assets/vendor/dashjs/dist/dash.all.min.js"></script>--}}
 @stop
