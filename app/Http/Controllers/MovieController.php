@@ -8,6 +8,7 @@ use contenidoAudiovisual\User;
 use contenidoAudiovisual\Subject;
 use contenidoAudiovisual\Subtitle;
 use contenidoAudiovisual\Trailer;
+use contenidoAudiovisual\Notification;
 use Illuminate\Http\Request;
 use Redirect;
 use Session;
@@ -15,16 +16,6 @@ use JsValidator;
 
 class MovieController extends Controller
 {
-    /**
-     * Define your validation rules in a property in 
-     * the controller to reuse the rules.
-     */
-    protected $validationRules=[
-                'name' => 'required|unique|max:255',
-                'description' => 'required',
-    ];
-
-
     /**
      * Display a listing of the resource.
      *
@@ -60,6 +51,17 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        /*$file = Input::file('imageRef');
+        $image = \Image::make(\Input::file('imageRef'));*/
+        //$path = "/files/"//ruta a fotos
+
+        //$image->save($path.$file->getClientOriginalName());
+        //$image->resize(200, 200);
+        //$image->save($path.$file->getClientOriginalName());
+        // create instance
+        
+
+
         /*$validator = Validator::make($request->all(), [$this->validationRules]);
 
         if ($validator->fails()){
@@ -101,6 +103,17 @@ class MovieController extends Controller
         ]);
         $movieId = $movie->id;
 
+        $users = User::all();
+        if ($users){
+           foreach($users as $user){
+                if($user->tipo == "profesor"){
+                    $notif = Notification::create([
+                        'movie_id' => $movieId,
+                        'send_to' => $user->id,
+                    ]);
+                }
+           }
+        }
         if($request['subtitle'] != null){
             $sub = Subtitle::create([
                 'video_id' => $movieId,
@@ -146,9 +159,8 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
-        $validator = JsValidator::make($this->validationRules);
         $movie = Movie::find($id);
-        return view('cpanel.editMovie',['validator' => $validator, 'movie'=>$movie]);
+        return view('cpanel.editMovie',['movie'=>$movie]);
     }
     /**
      * Update the specified resource in storage.

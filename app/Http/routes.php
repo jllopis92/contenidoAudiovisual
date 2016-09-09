@@ -23,9 +23,13 @@ Route::get('/', 'HomeController@index');
 	Route::get('approvemovie','CpanelController@approvemovie');
 	Route::resource('upload','MovieController');
 	Route::post('approve','MovieController@approveMovie');
+	Route::get('createplaylist','PlaylistController@index');
+	Route::get('deleteplaylist','PlaylistController@delete');
+	Route::resource('playlist','PlaylistController');
 	Route::get('search','QueryController@search');
 	Route::get('filter','QueryController@filter');
-	Route::get('cine_tv','CineTvController@index');
+	Route::resource('cine_tv','CineTvController');
+	Route::get('playplaylist','CineTvController@show');
 
 Route::group(['middleware' => 'web'], function () {
 	Route::auth();

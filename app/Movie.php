@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use DB;
 use contenidoAudiovisual\CustomVideo;
 use FFMpeg;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Movie extends Model
 {
@@ -19,6 +20,10 @@ class Movie extends Model
         $this->attributes['imageRef'] = Carbon::now()->second.$imageRef->getClientOriginalName();
         $name = Carbon::now()->second.$imageRef->getClientOriginalName(); 
         \Storage::disk('local')->put($name, \File::get($imageRef));
+
+        $img = Image::make('files/'.$name)->resize(200, 400);
+        $img->save();
+        echo "resize";
     }
     public function setUrlAttribute($url){
 
@@ -48,7 +53,7 @@ class Movie extends Model
         -> setAudioKiloBitrate(256);
 
         $video
-        ->save($format, 'files/convert/videos'.$file.'.mp4');
+        ->save($format, 'files/convert/videos/'.$file.'.mp4');
         $this->attributes['url'] = $file.'.mp4';
 
         $ffmpeg_path = '/Applications/MAMP/htdocs/FFmpeg/ffmpeg'; //Path to your FFMPEG
@@ -58,15 +63,15 @@ class Movie extends Model
  
         $output = shell_exec($command);
         $regex_duration = "/Duration: ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}).([0-9]{1,2})/";
+        $hours = 0;
         if (preg_match($regex_duration, $output, $regs)) {
             $hours = $regs [1] ? $regs [1] : null;
             $mins = $regs [2] ? $regs [2] : null;
             $secs = $regs [3] ? $regs [3] : null;
+            $video_Length = $hours . ":" . $mins . ":" . $secs;
+            $this->attributes['duration'] = $video_Length;
         }
-         
-        $video_Length = $hours . ":" . $mins . ":" . $secs;
-
-        $this->attributes['duration'] = $video_Length;
+        
         /*->save(new FFMpeg\Format\Video\X264(), 'export-x264.mp4')
     ->save(new FFMpeg\Format\Video\WMV(), 'export-wmv.wmv')
     ->save(new FFMpeg\Format\Video\WebM(), 'export-webm.webm');*/

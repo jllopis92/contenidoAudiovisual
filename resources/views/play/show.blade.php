@@ -68,7 +68,7 @@
   {{--  --}}
   @foreach($trailers as $trailer)
   @if ($trailer->video_id == $movie->id)
-  <h3>{{$movie->name}}</h3>
+  <h3 style="margin-top:0px">{{$movie->name}}</h3>
   @endif
   @endforeach
 
@@ -94,9 +94,6 @@
         });
       </script>
 
-{{-- <label for="input-1" class="control-label">Rate This</label>
-<input id="input-1" name="input-1" class="rating-loading"> --}}
-<script src="../js/ca-pub-2074772727795809.js" type="text/javascript" async=""></script><script src="../js/analytics.js" async=""></script>
 @if (!Auth::guest())
 <div id="dv1">
 
@@ -158,7 +155,46 @@
 
 @endif
 <H4>Videos recomendados</H4>
-<ul class="slider1">
+<div class="flexslider">
+      <ul class="slides">
+      <script defer src="/js/jquery.flexslider.js"></script>
+          <script type="text/javascript"> 
+            jQuery.noConflict();
+            jQuery(function() {
+              jQuery('.flexslider').flexslider({
+                animation: "slide",
+                animationLoop: false,
+                itemWidth: 120,
+                itemMargin: 5,
+                minItems: 2,
+                maxItems: 4,
+              });
+            });
+
+        </script>
+        @foreach($movies as $movie2)
+            <li>
+            <a href="{{ action("MovieController@show", array($movie2->id)) }}">
+              <img src="../files/{{$movie2->imageRef}}" />
+              <h3 href="{{ action("MovieController@show", array($movie2->id)) }}" style="color: #888;
+                display: block;
+                font-family: 'gandhi_sansregular';
+                font-size: 0.875em;
+                line-height: 1.5em;
+                padding: 10px 0;
+                text-transform: uppercase;
+                text-align:center;
+                margin-top: 0px">{{$movie2->name}}</h3>
+              </a>
+            </li>
+        @endforeach
+
+  </ul>
+</div>
+
+
+
+{{-- <ul class="slider1">
   <script type="text/javascript"> 
     var jq = jQuery.noConflict();
     jq(document).ready(function(){ 
@@ -179,7 +215,7 @@
     </a>
   </div>
   @endforeach
-</ul>
+</ul> --}}
 
 @endsection
 
@@ -188,7 +224,8 @@
 <link href="/css/videojs.ass.css" rel="stylesheet">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
 <link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
-<link href="/css/jquery.bxslider.css" rel="stylesheet" />
+<link href="/css/flexslider.css" rel="stylesheet" />
+{{-- <link href="/css/jquery.bxslider.css" rel="stylesheet" /> --}}
 @stop
 
 @section('page-js-files')

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>CINECLUV</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -30,10 +30,10 @@
             margin-right: 6px;
         }
     </style>
+    
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; position: fixed;
-  z-index: 100;">
+    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; position: fixed; z-index: 100; width:100%">
         <div class="container">
             <div class="navbar-header">
 
@@ -71,8 +71,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
-                            <input  type="text" name="search" value="Buscar" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
-                            {{-- <input type="submit" value="" > --}}
+                        <input  type="text" name="search" value="Buscar" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
+                        {{-- <input type="submit" value="" > --}}
                         {!! Form::close() !!}
                     </li>
                     <!-- Authentication Links -->
@@ -97,7 +97,7 @@
     </nav>
     
     <div id="wrapper">
-        <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
+        <div class="navbar-default sidebar" style="padding-top: 50px;" id="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
@@ -111,71 +111,87 @@
                     {!!Form::close()!!}
                 </li> --}}
             </ul>
-             {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
-             <ul>
+            {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
+            <ul class="nav" id="side-menu">
                 <a>Tipo de Video</a>
-                    <div class="col-md-6 col-md-offset-4">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="largometraje" value="largometraje de ficcion"> Largometraje de Ficción
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="cortometraje" value="cortometraje de ficcion"> Cortometraje de Ficción
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="animacion" value="animacion"> Animación
-                            </label>
-                        </div>
-                            <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="documental" value="documental"> Documental
-                            </label>
+                <div class="col-md-6 col-md-offset-4">
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="largometraje" value="largometraje"> Largometraje
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="mediometraje" value="mediometraje"> Mediometraje
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="cortometraje" value="cortometraje"> Cortometraje
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="experimental" value="experimental"> Experimental
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="ficcion" value="ficcion"> Ficción
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="animacion" value="animacion"> Animación
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="documental" value="documental"> Documental
+                        </label>
                         
-                        </div>
+                    </div>
                 </div>
-                </ul>
-                <ul>
+            </ul>
+            <ul>
                 <a>Formato</a>
                 <div class="col-md-6 col-md-offset-4">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="4K" value="4K"> 4K
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="2K" value="2K"> 2K
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="HD" value="HD"> HD
-                            </label>
-                        <div class="checkbox">
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="4K" value="4K"> 4K
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="2K" value="2K"> 2K
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -70px;">
+                        <label>
+                            <input type="checkbox" name="HD" value="HD"> HD
+                        </label>
+                    </div>   
+                        <div class="checkbox" style="margin-left: -70px;">
                             <label>
                                 <input type="checkbox" name="MiniDV" value="MiniDV"> MiniDV
                             </label>
                         </div>
-                        <div class="checkbox">
+                        <div class="checkbox" style="margin-left: -70px;">
                             <label>
                                 <input type="checkbox" name="16mm" value="16mm"> 16mm
                             </label>
                         </div>
-                        <div class="checkbox">
+                        <div class="checkbox" style="margin-left: -70px;">
                             <label>
                                 <input type="checkbox" name="35mm" value="35mm"> 35mm
                             </label>
                         </div>
                     </div>
                 </div>
-                </ul>
-                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i> Buscar
-                                </button>
+            </ul>
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-btn fa-sign-in"></i> Buscar
+            </button>
             {!! Form::close() !!}
 {{-- 
                 {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search']) !!}
@@ -188,7 +204,23 @@
                      </div>
                  </div>
 
-                 <div id="page-wrapper">
+                 <div id="page-wrapper" style="padding-top: 50px;">
+                    <script type="text/javascript">
+                        var isHidden = false;
+                        function hiddenNavBar(){
+                            if(isHidden == false){
+                                document.getElementById("navbar-default sidebar").style.display="none";
+                                document.getElementById("page-wrapper").style.marginLeft = 0 + "px";
+                                isHidden = true;
+                            }else{
+                                document.getElementById("navbar-default sidebar").style.display="inline";
+                                document.getElementById("page-wrapper").style.marginLeft = 250 + "px";
+                                isHidden = false;
+                            }
+                        }
+                    </script>
+                <a onClick="hiddenNavBar()" style="margin-left: -30px;"> <-
+                </a>
                     @yield('content')
                 </div>
 

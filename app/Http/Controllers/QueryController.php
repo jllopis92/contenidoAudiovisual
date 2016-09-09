@@ -91,7 +91,10 @@ class QueryController extends Controller
         // Sets the parameters from the get request to the variables.
         //First filter
         $largometraje = Request::input('largometraje');
+        $mediometraje = Request::input('mediometraje');
         $cortometraje = Request::input('cortometraje');
+        $experimental = Request::input('experimental');
+        $ficcion = Request::input('ficcion');
         $animacion = Request::input('animacion');
         $documental = Request::input('documental');
 
@@ -109,7 +112,10 @@ class QueryController extends Controller
             ->where(function ($query) use ($largometraje, $cortometraje, $animacion, $documental, $fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
                 $query->where(function ($query) use ($largometraje, $cortometraje, $animacion, $documental) {
                     $query->where('category', '=', $largometraje)
+                        ->orwhere('category', '=', $mediometraje)
                         ->orwhere('category', '=', $cortometraje)
+                        ->orWhere('category', '=', $experimental)
+                        ->orWhere('category', '=', $ficcion)
                         ->orWhere('category', '=', $animacion)
                         ->orWhere('category', '=', $documental);
                     })

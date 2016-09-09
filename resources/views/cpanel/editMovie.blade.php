@@ -1,19 +1,16 @@
 @extends('layouts.panelprofesor')
 
 @section('content')
+<link href='assets/vendor/parsleyjs/src/parsley.css' rel='stylesheet' />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="assets/vendor/parsleyjs/dist/parsley.min.js"></script>
+<script type="text/javascript" src="assets/vendor/parsleyjs/dist/i18n/es.js"></script>
 
-{!!Form::model($movie,['id'="editMovieForm", 'route'=>['upload.update',$movie->id],'method'=>'PUT'])!!}
+{!!Form::model($movie, array('id'=>"editMovieForm"), ['route'=>[ 'upload.update',$movie->id],'method'=>'PUT'])!!}
 	@include('cpanel.forms.mov')
 
-{!!Form::submit('Actualizar',['class'=>'btn btn-primary'])!!}
+{!!Form::submit('Actualizar',['class'=>'btn btn-primary', 'value' =>'validate'])!!}
 {!!Form::close()!!}
 
- <!-- Scripts -->
- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
- <!-- Laravel Javascript Validation -->
- <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js', '#editMovieForm')}}"></script>
- {!! $validator !!}
 
 @stop

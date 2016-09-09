@@ -27,6 +27,7 @@
     23 => 'contenidoAudiovisual\\Providers\\EventServiceProvider',
     24 => 'contenidoAudiovisual\\Providers\\RouteServiceProvider',
     25 => 'Collective\\Html\\HtmlServiceProvider',
+    26 => 'Intervention\\Image\\ImageServiceProvider',
   ),
   'eager' => 
   array (
@@ -43,6 +44,7 @@
     10 => 'contenidoAudiovisual\\Providers\\AuthServiceProvider',
     11 => 'contenidoAudiovisual\\Providers\\EventServiceProvider',
     12 => 'contenidoAudiovisual\\Providers\\RouteServiceProvider',
+    13 => 'Intervention\\Image\\ImageServiceProvider',
   ),
   'deferred' => 
   array (
