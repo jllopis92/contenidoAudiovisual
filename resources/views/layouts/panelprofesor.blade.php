@@ -117,10 +117,10 @@
                                 <a href="#"><i class="fa fa-child fa-fw"></i> Administrar Anuncios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="{!! url('editmovie')!!}"><i class='fa fa-plus fa-fw'></i>Editar Videos</a>
+                                        <a href="{!! url('showadver')!!}"><i class='fa fa-list-ol fa-fw' ></i>Ver Anuncios</a>
                                     </li>
                                     <li>
-                                        <a href="{!! url('approvemovie')!!}"><i class='fa fa-list-ol fa-fw'></i>Aprobar Videos</a>
+                                        <a href="{!! url('createadver')!!}"><i class='fa fa-plus fa-fw'></i>Crear Anuncios</a>
                                     </li>
                                 </ul>
                             </li>

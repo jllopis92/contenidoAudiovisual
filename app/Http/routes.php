@@ -30,6 +30,9 @@ Route::get('/', 'HomeController@index');
 	Route::get('filter','QueryController@filter');
 	Route::resource('cine_tv','CineTvController');
 	Route::get('playplaylist','CineTvController@show');
+	Route::get('showadver','CpanelController@showadvert');
+	Route::get('createadver','CpanelController@createadvert');
+	Route::resource('advertising','AdvertisingController');
 
 Route::group(['middleware' => 'web'], function () {
 	Route::auth();

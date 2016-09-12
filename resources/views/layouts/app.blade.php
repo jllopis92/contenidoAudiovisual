@@ -26,8 +26,73 @@
             font-family: 'Lato';
         }
 
-        .fa-btn {
-            margin-right: 6px;
+        #nav{list-style:none;margin: 0px;
+        padding: 0px;}
+        #nav li {
+            float: left;
+            margin-right: 20px;
+            font-size: 14px;
+            font-weight:bold;
+        }
+        #nav li a{color:#333333;text-decoration:none}
+        #nav li a:hover{color:#006699;text-decoration:none}
+        #notification_li{position:relative}
+
+        #notificationContainer {
+            background-color: #fff;
+            border: 1px solid rgba(100, 100, 100, .4);
+            -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+            overflow: visible;
+            position: absolute;
+            top: 30px;
+            margin-left: -170px;
+            width: 400px;
+            z-index: -1;
+            display: none;
+        }
+        #notificationContainer:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 0;
+            height: 0;
+            color: transparent;
+            border: 10px solid black;
+            border-color: transparent transparent white;
+            margin-top: -20px;
+            margin-left: 188px;
+        }
+        #notificationTitle {
+            z-index: 1000;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 13px;
+            background-color: #ffffff;
+            width: 384px;
+            border-bottom: 1px solid #dddddd;
+        }
+        #notificationsBody {
+            padding: 33px 0px 0px 0px !important;
+            min-height:300px;
+        }
+        #notificationFooter {
+            background-color: #e9eaed;
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 12px;
+            border-top: 1px solid #dddddd;
+        }
+        #notification_count {
+            padding: 3px 7px 3px 7px;
+            background: #cc0000;
+            color: #ffffff;
+            font-weight: bold;
+            margin-left: 77px;
+            border-radius: 9px;
+            position: absolute;
+            margin-top: -11px;
+            font-size: 11px;
         }
     </style>
     
@@ -80,6 +145,43 @@
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
+
+                    <li id="notification_li">
+                        <span id="notification_count" style="margin-top: 0px; ">3</span>
+                        <a href="#" id="notificationLink">Notificaciones</a>
+
+
+                        <div id="notificationContainer" style="margin-top: 15px;">
+                            <div id="notificationTitle">Notificaciones</div>
+                            <div id="notificationsBody" class="notifications">
+                            <ul>
+                                <li>
+                                  <a href="#">
+                                    <div class="imageblock"><img src="https://si0.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png" class="notifimage"  />
+                                    </div> 
+                                    <div class="messageblock">
+                                      <div class="message"><strong>Danny DK12</strong> got a sweet fade!</div>
+
+                                      <div class="messageinfo"><i class="icon-flag"></i>Yesterday</div>
+                                    </div>
+                                  </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="imageblock"><img src="https://si0.twimg.com/profile_images/1091562021/me-small_bigger.png" class="notifimage"  /></div> 
+                                        <div class="messageblock">
+                                        <div class="message"><strong>Roidberg</strong> left you a comment: "<em>Hey buddy! Nice toenails!"</em></div>
+                                        <div class="messageinfo"><i class="icon-comment"></i>2 hours ago</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            </div>
+                            <div id="notificationFooter"><a href="#">See All</a></div>
+                        </div>
+
+
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->email }} <span class="caret"></span>
@@ -235,6 +337,26 @@
 
             @yield('page-js-files')
             @yield('page-js-script')
+
+            <script type="text/javascript" >
+                $(document).ready(function(){
+                    $("#notificationLink").click(function(){
+                        $("#notificationContainer").fadeToggle(300);
+                        $("#notification_count").fadeOut("slow");
+                        return false;
+                    });
+
+                    //Document Click
+                    $(document).click(function(){
+                        $("#notificationContainer").hide();
+                    });
+                    //Popup Click
+                    $("#notificationContainer").click(function(){
+                        return false
+                    });
+
+                });
+            </script>
 
             {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
         </body>

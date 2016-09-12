@@ -21,7 +21,7 @@ class Movie extends Model
         $name = Carbon::now()->second.$imageRef->getClientOriginalName(); 
         \Storage::disk('local')->put($name, \File::get($imageRef));
 
-        $img = Image::make('files/'.$name)->resize(200, 400);
+        $img = Image::make('files/'.$name)->resize(200, 200);
         $img->save();
         echo "resize";
     }

@@ -239,20 +239,105 @@
     font-size: 17px;
     margin-top: 5px;
   }
+  #nav{list-style:none;margin: 0px;
+        padding: 0px;}
+        #nav li {
+            float: left;
+            margin-right: 20px;
+            font-size: 14px;
+            font-weight:bold;
+        }
+        #nav li a{color:#333333;text-decoration:none}
+        #nav li a:hover{color:#006699;text-decoration:none}
+        .slide_li{position:relative}
+
+        .slideContainer {
+            background-color: #fff;
+            border: 1px solid rgba(100, 100, 100, .4);
+            -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+            overflow: visible;
+            position: absolute;
+            top: 30px;
+            margin-left: -170px;
+            width: 400px;
+            z-index: 1000;
+            display: none;
+        }
+        .slideContainer:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 0;
+            height: 0;
+            color: transparent;
+            border: 10px solid black;
+            border-color: transparent transparent white;
+            margin-top: -20px;
+            margin-left: 188px;
+        }
+        .slideTitle {
+            z-index: 1000;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 13px;
+            background-color: #ffffff;
+            width: 384px;
+            border-bottom: 1px solid #dddddd;
+        }
+        .slideBody {
+            padding: 10px 5px 5px 5px !important;
+            min-height:150px;
+        }
+        .slideLink {
+          background: #000 none repeat scroll 0 0;
+          border: medium none;
+          color: #fff;
+          cursor: pointer;
+          display: block;
+          font-family: "gandhi_sansregular";
+          font-size: 0.875em;
+          margin: 10px 0 0;
+          outline: medium none;
+          padding: 10px;
+          text-transform: uppercase;
+          transition: all 0.5s ease 0s;
+        }
     </style>
+
+    <script type="text/javascript" >
+      $(document).ready(function(){
+        $(".slideLink").click(function(){
+          value = $(this).attr('id');
+          //$(".slideContainer").hide(); tiene que borrar todos los popups
+          $("#slideContainer"+value).fadeToggle(300);
+          return false;
+        });
+
+        //Document Click
+        $(document).click(function(){
+          value=$(this).attr('id');
+          $(".slideContainer").hide();
+        });
+        //Popup Click
+        $(".slideContainer").click(function(){
+          return false
+        });
+
+      });
+      </script>
 
 <div class="content-grids">
 
-    <div id="immersive_slider" style="display:none;">
-        @foreach($newMovies as $movie)
-          <div class="slide" data-blurred="files/{{$movie->imageRef}}">
+    <div id="immersive_slider">
+        @foreach($advertisings as $advertising)
+          <div class="slide" data-blurred="files/{{$advertising->image}}">
             <div class="content">
-              <h2><a href="{{ action("MovieController@show", array($movie->id)) }}" target="_blank">{{$movie->name}}</a></h2>
-              <p>{{$movie->description}}</p>
+              <h2><a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">{{$advertising->name}}</a></h2>
+              <p>{{$advertising->description}}</p>
             </div>
             <div class="image">
-              <a href="{{ action("MovieController@show", array($movie->id)) }}" target="_blank">
-                <img src="files/{{$movie->imageRef}}" alt="Slider 1">
+              <a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">
+                <img src="files/{{$advertising->image}}" alt="Slider 1">
               </a>
             </div>
           </div>
@@ -272,11 +357,11 @@
 
     </script>
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
   function showmovieSlide(){
       document.getElementById("slide2").style.display="inline";
   }
-</script>
+</script> --}}
 
 
     <H3 style="margin-top: 0px;">Nuevos</H3>
@@ -315,61 +400,33 @@
                 @elseif ($movie->rating >= 5.0)
                 <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
                 @endif
-            <a class="button" onClick="showmovieSlide()">Ver Ahora</a>
+                <li id="notification_li" class="notification_li">
+                  <a data-id="{{$key}}" id="{{$key}}" class="slideLink" >Mas Información</a>
+
+                  <div id="slideContainer{{$key}}" class="slideContainer">
+                    <div class="slideTitle">{{$movie->name}}</div>
+                    <div class="slideBody" style="text-align: left;">
+                      <ul>
+                        <li>
+                            <div class="messageblock">
+                              <div class="message"><strong>Duración: </strong> {{$movie->duration}}</div>
+                              <div class="message"><strong>Idioma: </strong> {{$movie->language}}</div>
+                              <div class="message"><strong>Categorias: </strong> {{$movie->category}}</div>
+                              <div class="message"><strong>Año de Producción: </strong> {{$movie->production_year}}</div>
+                              <div class="messageinfo"><i class="icon-flag"></i>{{$movie->description}}</div>
+                            </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <a href="{{ action("MovieController@show", array($movie->id)) }}">
+                      <div id="notificationFooter">Ver Ahora</div>
+                    </a>
+                  </div>
+                </li>
+            {{-- <a class="button" onClick="showmovieSlide()">Ver Ahora</a> --}}
         </div>
         @endforeach
 
-        <H3 style="margin-top: 0px; display:none;">slide</H3>
-        <div>
-          <div id="slide2" style= "background: #161923 none repeat scroll 0 0;
-          box-sizing: border-box;
-          height: 300px;
-          max-width: 100%;
-          opacity: 0.9;
-          overflow: hidden;
-          position: relative;">
-            <div class="slide" data-blurred="files/{{$movie->imageRef}}" style="left: 0%;
-            box-sizing: border-box;
-            display: table;
-            height: 100%;
-            padding: 50px 100px;
-            position: absolute;
-            width: 100%;">
-              <div class="content" style="box-sizing: border-box;
-              color: white;
-              display: table-cell;
-              float: none;
-              line-height: 160%;
-              padding-right: 10px;
-              text-align: left;
-              vertical-align: middle;
-              width: 50%;">
-                <h2><a href="{{ action("MovieController@show", array($movie->id)) }}" target="_blank">{{$movie->name}}</a></h2>
-                <p>{{$movie->description}}</p>
-              </div>
-              <div class="image" style="box-sizing: border-box;
-              display: table-cell;
-              float: none;
-              padding: 0 0 0 10px;
-              vertical-align: middle;
-              width: 50%;">
-                <a href="{{ action("MovieController@show", array($movie->id)) }}" target="_blank">
-                  <img src="files/{{$movie->imageRef}}" alt="Slider 2">
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <script type="text/javascript">
-      $(document).ready( function() {
-        $("#immersive_slider2").immersive_slider({
-          container: null,
-          loop: false, // Toggle to false if you don't want the slider to loop. Default is true.
-          /*autoStart: 10000*/ // Define the number of milliseconds before it navigates automatically. Change this to 0 or false to disable autoStart. The default value is 5000.
-        });
-      });
-
-    </script>
           
         <H3>Mas Vistos</H3>
 
@@ -460,4 +517,7 @@
         <link href="css/style.css" rel="stylesheet" type="text/css" /> 
         <link href='css/immersive-slider.css' rel='stylesheet' type='text/css'>
         @stop
+        @section('page-js-script')
+        
+          @stop
 

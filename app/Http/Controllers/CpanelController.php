@@ -8,6 +8,7 @@ use DB;
 use contenidoAudiovisual\User;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\Subject;
+use contenidoAudiovisual\Advertising;
 use contenidoAudiovisual\Http\Requests;
 use Redirect;
 use Session;
@@ -129,5 +130,15 @@ class CpanelController extends Controller
         Session::flash('message','Usuario Eliminado Correctamente');
         return Redirect::to('/cpanel');
 
+    }
+    public function showadvert()
+    {
+        $advertisings = Advertising::paginate(8);
+        return view ('cpanel.showAdvertising',compact('advertisings'));
+    }
+    public function createadvert()
+    {
+        $movies = Movie::paginate(8);
+        return view ('cpanel.createAdvertising',compact('movies'));
     }
 }
