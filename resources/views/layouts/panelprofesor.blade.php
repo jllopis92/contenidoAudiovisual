@@ -13,14 +13,16 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    
     {!!Html::style('css/sb-admin-2.css')!!}
     {!!Html::style('css/bootstrap.min.css')!!}
     {!!Html::style('css/metisMenu.min.css')!!}
     {!!Html::style('css/font-awesome.min.css')!!}
     <style>
         body {
-            font-family: 'Lato';
+            font-family: 'Roboto', sans-serif !important;
         }
 
         .fa-btn {
@@ -42,9 +44,10 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand">
+                <img src="/images/home.png" alt="Escuela de Cine" style="width:120px;height:50px;">
+                {{-- <a class="navbar-brand">
                     Laravel
-                </a>
+                </a> --}}
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -81,8 +84,10 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/cpanel') }}"><i class="fa fa-btn fa-sign-out"></i>Panel de Control</a></li>
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li>
+                                {{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}
+                            </li>
+                            <li><a href="{{ url('/logout') }}">Logout</a></li>
                         </ul>
                     </li>
                     @endif
@@ -99,11 +104,14 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li>
+                                {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}
+                            </li>
+                            <li>
                                 <a href="{{ url('/cpanel') }}"> Administrar Usuarios</a>
                             </li>
 
                             <li>
-                                <a href="#"><i class="fa fa-child fa-fw"></i> Administrar Videos<span class="fa arrow"></span></a>
+                                <a href="#"> Administrar Videos<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="{!! url('editmovie')!!}"><i class='fa fa-plus fa-fw'></i>Editar Videos</a>
@@ -114,7 +122,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-child fa-fw"></i> Administrar Anuncios<span class="fa arrow"></span></a>
+                                <a href="#">Administrar Anuncios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="{!! url('showadver')!!}"><i class='fa fa-list-ol fa-fw' ></i>Ver Anuncios</a>
@@ -124,43 +132,53 @@
                                     </li>
                                 </ul>
                             </li>
+                        </ul>
+                    </div>
+                </div>
+        @else
+            @if (Auth::user()->tipo == "alumno")
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
                             <li>
-                                <a href="{!! url('createplaylist')!!}"> Crear Listas de reproducción</a>
+                                {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
                             </li>
+                        </ul>
+                        <ul class="nav" id="side-menu">
                             <li>
-                            {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
+                                <a href="{!! url('createplaylist')!!}"> Videos en Evaluación</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-
-        @else
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        
-                        <li>
-                        {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
-                            
-                            
-                                <input  type="text" name="search" value="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
-                                    <input type="submit" value="" >
-                                {!! Form::close() !!}
-                            </li>
-                        <li>
-                            <a href="#"><i class="fa fa-child fa-fw"></i> Genero<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+            @else
+                @if (Auth::user()->tipo == "adminParrilla")
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
                                 <li>
-                                    <a href="#"><i class='fa fa-plus fa-fw'></i> Agregar</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class='fa fa-list-ol fa-fw'></i> Generos</a>
+                                    {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                            <ul class="nav" id="side-menu">
+                                <li>
+                                    <a href="{!! url('createplaylist')!!}"> Crear Listas de reproducción</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @else
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+                                <li>
+                                    {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+            @endif
         @endif
         <div id="page-wrapper">
                 @yield('content')

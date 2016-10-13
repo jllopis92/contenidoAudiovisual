@@ -14,6 +14,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
     {!!Html::style('css/sb-admin-2.css')!!}
     {!!Html::style('css/bootstrap.min.css')!!}
     {!!Html::style('css/metisMenu.min.css')!!}
@@ -23,7 +25,7 @@
     
     <style>
         body {
-            font-family: 'Lato';
+            font-family: 'Roboto', sans-serif !important;
         }
 
         #nav{list-style:none;margin: 0px;
@@ -111,9 +113,10 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand">
+                <img src="/images/home.png" alt="Escuela de Cine" style="width:120px;height:50px;">
+                {{-- <a class="navbar-brand">
                     Laravel
-                </a>
+                </a> --}}
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -134,12 +137,17 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
-                        <input  type="text" name="search" value="Buscar" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar...';}" style="margin: 10px;"/>
-                        {{-- <input type="submit" value="" > --}}
+                    <div class="col-sm-3 col-md-3" style="width: 300px;">
+                        {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search', 'class'=>'navbar-form'])  !!}
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar" name="search">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
                         {!! Form::close() !!}
-                    </li>
+                    </div>
+                    
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>
@@ -188,8 +196,10 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/cpanel') }}"><i class="fa fa-btn fa-sign-out"></i>Panel de Control</a></li>
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li>
+                                {{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}
+                            </li>
+                            <li><a href="{{ url('/logout') }}">Logout</a></li>
                         </ul>
                     </li>
                     @endif
@@ -203,7 +213,7 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a> Busqueda por Filtro</a>
+                        <h4 style="margin-left: 20px;"> Busqueda por Filtro</h4>
                     </li>
                     
                     {{-- <li>
@@ -215,39 +225,39 @@
             </ul>
             {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
             <ul class="nav" id="side-menu">
-                <a>Tipo de Video</a>
+                <h5 style="margin-left: 20px; margin-bottom: 0px; margin-top: 20px;">Tipo de Video</h5>
                 <div class="col-md-6 col-md-offset-4">
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="largometraje" value="largometraje"> Largometraje
                         </label>
                     </div>
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="mediometraje" value="mediometraje"> Mediometraje
                         </label>
                     </div>
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="cortometraje" value="cortometraje"> Cortometraje
                         </label>
                     </div>
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="experimental" value="experimental"> Experimental
                         </label>
                     </div>
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="ficcion" value="ficcion"> Ficción
                         </label>
                     </div>
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="animacion" value="animacion"> Animación
                         </label>
                     </div>
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="documental" value="documental"> Documental
                         </label>
@@ -256,42 +266,42 @@
                 </div>
             </ul>
             <ul>
-                <a>Formato</a>
+                <h5 style="margin-left: 20px; margin-bottom: 0px;">Formato</h5>
                 <div class="col-md-6 col-md-offset-4">
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="4K" value="4K"> 4K
                         </label>
                     </div>
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="2K" value="2K"> 2K
                         </label>
                     </div>
-                    <div class="checkbox" style="margin-left: -70px;">
+                    <div class="checkbox" style="margin-left: -50px;">
                         <label>
                             <input type="checkbox" name="HD" value="HD"> HD
                         </label>
                     </div>   
-                        <div class="checkbox" style="margin-left: -70px;">
-                            <label>
-                                <input type="checkbox" name="MiniDV" value="MiniDV"> MiniDV
-                            </label>
-                        </div>
-                        <div class="checkbox" style="margin-left: -70px;">
-                            <label>
-                                <input type="checkbox" name="16mm" value="16mm"> 16mm
-                            </label>
-                        </div>
-                        <div class="checkbox" style="margin-left: -70px;">
-                            <label>
-                                <input type="checkbox" name="35mm" value="35mm"> 35mm
-                            </label>
-                        </div>
+                    <div class="checkbox" style="margin-left: -50px;">
+                        <label>
+                            <input type="checkbox" name="MiniDV" value="MiniDV"> MiniDV
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -50px;">
+                        <label>
+                            <input type="checkbox" name="16mm" value="16mm"> 16mm
+                        </label>
+                    </div>
+                    <div class="checkbox" style="margin-left: -50px;">
+                        <label>
+                            <input type="checkbox" name="35mm" value="35mm"> 35mm
+                        </label>
                     </div>
                 </div>
+            </div>
             </ul>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" style="margin-left: 20px; margin-top: 10px;">
                 <i class="fa fa-btn fa-sign-in"></i> Buscar
             </button>
             {!! Form::close() !!}

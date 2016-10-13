@@ -102,35 +102,9 @@
       font-size: 25px;
       line-height: 140%;
     }
-    
-    /*.reload, .btn{
-      display: inline-block;
-      border: 4px solid #A2261E;
-      border-radius: 5px;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      background: #CC3126;
-      display: inline-block;
-      line-height: 100%;
-      padding: 0.7em;
-      text-decoration: none;
-      color: #fff;
-      width: 100px;
-      line-height: 140%;
-      font-size: 17px;
-      font-family: open sans;
-      font-weight: bold;
-    }*/
     .reload:hover{
       background: #A2261E;
     }
-    /*.btn {
-      width: 200px;
-      color: #fff;
-      border: none;
-      margin-left: 10px;
-      background: black;
-    }*/
     .clear {
       width: auto;
     }

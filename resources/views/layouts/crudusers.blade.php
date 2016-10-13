@@ -13,14 +13,16 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    
     {!!Html::style('css/sb-admin-2.css')!!}
     {!!Html::style('css/bootstrap.min.css')!!}
     {!!Html::style('css/metisMenu.min.css')!!}
     {!!Html::style('css/font-awesome.min.css')!!}
     <style>
         body {
-            font-family: 'Lato';
+            font-family: 'Roboto', sans-serif !important;
         }
 
         .fa-btn {
@@ -42,9 +44,10 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand">
+                <img src="/images/home.png" alt="Escuela de Cine" style="width:120px;height:50px;">
+                {{-- <a class="navbar-brand">
                     Laravel
-                </a>
+                </a> --}}
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -80,8 +83,10 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/cpanel') }}"><i class="fa fa-btn fa-sign-out"></i>Panel de Control</a></li>
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li>
+                                {{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}
+                            </li>
+                            <li><a href="{{ url('/logout') }}">Logout</a></li>
                         </ul>
                     </li>
                     @endif
