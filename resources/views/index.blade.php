@@ -10,6 +10,9 @@
     html {
       height: 100%;
     }
+    body {
+      font-family: 'Roboto', sans-serif !important;
+    }
     
     .wrapper {
         height: auto !important;
@@ -40,10 +43,12 @@
       margin-top: 0;
       margin-bottom: 10px;
     }
+    h3 {
+      font-family: 'Roboto', sans-serif !important;
+    }
     
     .pointer {
       color: #9b59b6;
-      font-family: 'Pacifico', cursive;
       font-size: 30px;
       margin-top: 15px;
     }
@@ -79,7 +84,6 @@
       color: black;
       margin: 0;
       margin-top: 70px;
-      font-family: 'Playfair Display';
       letter-spacing: -1px;
     }
    
@@ -268,7 +272,7 @@
           color: #fff;
           cursor: pointer;
           display: block;
-          font-family: "gandhi_sansregular";
+          font-family: 'Roboto', sans-serif !important;
           font-size: 0.875em;
           margin: 10px 0 0;
           outline: medium none;
@@ -341,7 +345,7 @@
     <H3 style="margin-top: 0px;">Nuevos</H3>
     @foreach($newMovies as $key=>$movie)
 
-    @if ($key % 4 == 0)
+    @if ($key % 4 == 3)
     <div class="content-grid last-grid">
         @else
         <div class="content-grid">
@@ -376,7 +380,6 @@
                 @endif
                 <li id="notification_li" class="notification_li">
                   <a data-id="{{$key}}" id="{{$key}}" class="slideLink" >Mas Información</a>
-
                   <div id="slideContainer{{$key}}" class="slideContainer">
                     <div class="slideTitle">{{$movie->name}}</div>
                     <div class="slideBody" style="text-align: left;">
@@ -406,7 +409,7 @@
 
         @foreach($visitMovies as $key=>$movie)
 
-        @if ($key % 4 == 0)
+        @if ($key % 4 == 3)
         <div class="content-grid last-grid">
             @else
             <div class="content-grid">
@@ -446,7 +449,7 @@
             <H3>Mejor Evaluados</H3>
     @foreach($bestMovies as $key=>$movie)
 
-    @if ($key % 4 == 0)
+    @if ($key % 4 == 3)
     <div class="content-grid last-grid">
         @else
         <div class="content-grid">

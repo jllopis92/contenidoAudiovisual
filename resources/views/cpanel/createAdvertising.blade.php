@@ -8,7 +8,7 @@
 
 {!! Form::open(['id' => 'newAdvertising', 'route' =>'advertising.store', 'method'=>'POST', 'data-parsley-validate'=>'' ]) !!}
 
-<H4 style="margin-top: 20px">Seleccione Video para Anuncio</H4>
+<H4 style="margin-top: 0px">Seleccione Video para Anuncio</H4>
 
 <table class="table">
 	<thead>
@@ -25,7 +25,7 @@
 		<td>{{$movie->duration}}</td>
 		<td>
 		<p style ="display: none;"> {!! Form::label('{{$movie->id}}', 'Seleccionar * :') !!} </p>
-    		<p ><input name="{{$movie->id}}" id="{{$movie->id}}" value="{{$movie->id}}" type='radio'></p>
+    		<p ><input name="id" id="id" value="{{$movie->id}}" type='radio'></p>
 		</td>
 	</tbody>
 	{{-- @endif --}}

@@ -96,6 +96,9 @@
             margin-top: -11px;
             font-size: 11px;
         }
+        .form-control {
+          width: 50%;
+        }
     </style>
     
 </head>
@@ -265,7 +268,7 @@
                     </div>
                 </div>
             </ul>
-            <ul>
+            <ul class="nav">
                 <h5 style="margin-left: 20px; margin-bottom: 0px;">Formato</h5>
                 <div class="col-md-6 col-md-offset-4">
                     <div class="checkbox" style="margin-left: -50px;">

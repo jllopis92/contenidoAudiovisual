@@ -28,6 +28,9 @@
         .fa-btn {
             margin-right: 6px;
         }
+        .form-control {
+          width: 50%;
+        }
     </style>
 </head>
 <body id="app-layout">

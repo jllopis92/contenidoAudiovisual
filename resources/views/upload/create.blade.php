@@ -2,7 +2,11 @@
 
 @section('content')
 <link href='assets/vendor/parsleyjs/src/parsley.css' rel='stylesheet' />
-
+<style>
+    body{
+        font-family: 'Roboto', sans-serif !important;
+    }
+</style>
 @if (Auth::guest())
 <script type="text/javascript">
     window.location = "/";//here double curly bracket
@@ -15,6 +19,7 @@
     </script>
     @endif
 @endif
+
 <H3 style="margin-top: 0">Subir Video</H3>
 
 {!! Form::open(['id' => 'newVideo', 'route' =>'upload.store', 'method'=>'POST', 'files'=> true, 'data-parsley-validate'=>'' ]) !!}
