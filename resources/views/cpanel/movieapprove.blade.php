@@ -1,19 +1,20 @@
 @extends('layouts.panelprofesor')
 @section('content')
+
+{{--   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 <!-- bower-->
 {{-- {{ Html::style('assets/vendor/video.js/dist/video-js.min.css') }}
 {{ Html::style('assets/vendor/libjass/libjass.css') }}
 
 {{ Html::script('assets/vendor/video.js/dist/video.min.js') }}
 {{ Html::script('assets/vendor/libjass/libjass.js') }} --}}
-
+<style>
+.form-control {
+    width: 100%;
+}
+</style>
 <script type="text/javascript">
-	function showWaitAprove(){
-	    document.getElementById("aprove").style.display="none";
-	    document.getElementById("reprove").style.display="none";
-	    document.getElementById("observe").style.display="none";
-	    document.getElementById("waitAprove").style.display="inline";
-	}
 	function showAprove(){
 	    document.getElementById("reprove").style.display="none";
 	    document.getElementById("waitAprove").style.display="none";
@@ -32,46 +33,44 @@
 	    document.getElementById("observe").style.display="none";
 	    document.getElementById("reprove").style.display="inline";
 	}
+	function showWaitAprove(){
+	    document.getElementById("aprove").style.display="none";
+	    document.getElementById("reprove").style.display="none";
+	    document.getElementById("observe").style.display="none";
+	    document.getElementById("waitAprove").style.display="inline";
+	}
+	function showCommentary(id, status) {
+	    var actual = document.getElementById("commentary_"+id);
+	    if (actual.style.display === 'none') {
+	        actual.style.display = 'block';
+	    } else {
+	        actual.style.display = 'none';
+	        document.getElementById("description").value = "";
+	    }
+	    document.getElementById("state_"+id).value = status;
+	    alert("change status to : "+status)
+	}
 </script>
-
-<div class="radiobox">
-	<input type="radio"  name="aorb" onClick="showWaitAprove()" > Videos En Espera de Aprobación
-	<input type="radio"  name="aorb" onClick="showAprove()"> Videos Aprobados 
-	<input type="radio"  name="aorb" onClick="showObs()"> Videos En Observación 
-	<input type="radio"  name="aorb" onClick="showReprove()"> Videos Reprobados 
+  
+<div class="radio">
+	<label class="radio-inline"><input type="radio" name="aorb" onClick="showAprove()" checked="checked"> Videos Aprobados</label> 
+	<label class="radio-inline"><input type="radio" name="aorb" onClick="showObs()"> Videos En Observación</label>
+	<label class="radio-inline"><input type="radio" name="aorb" onClick="showReprove()"> Videos Reprobados</label>
+	<label class="radio-inline"><input type="radio" name="aorb" onClick="showWaitAprove()" > Videos en Espera de Aprobación</label>
 	</div>
 <div>
 	<div id = "aprove">
 	@if (count($aproves) === 0)
-	No se encuentran videos aprobados
+	<h5>No se encuentran videos aprobados</h5>
 	@elseif (count($aproves) >= 1)
 		<h3>Videos Aprobados</h3>
 		<table class="table">
 			@foreach($aproves as $aprove)
 			<tbody>
+				<tr>
 				<td>
 					<h4>{{$aprove->name}}</h4>
 					<img src="files/{{$aprove->imageRef}}" title="allbum-name" style="width: 220px; height: 220px;"/>
-					{{-- <video id={{$aprove->id}} class="video-js vjs-default-skin vjs-big-play-centered" style="width: 260px; height: 220px;">
-				    <source src="/files/convert/{{$aprove->url}}" type="video/mp4">
-					<source src="/files/convert/{{$aprove->url}}" type='video/webm'>
-					<source src="/files/convert/{{$aprove->url}}" type='video/ogg'>
-				    </video>
-				    <script>
-				      videojs('{{$aprove->id}}', {
-				        controls: true,
-				        nativeControlsForTouch: false,
-				        width: 640,
-				        height: 360,
-				        plugins: {
-				          ass: {
-				            'src': ["/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa"]
-				          }
-				        },
-				        playbackRates: [0.5, 1, 1.5, 2]
-				      });
-				    </script> --}}
-
 				</td>
 				<td style="vertical-align: middle;">
 					@foreach($users as $user)
@@ -90,32 +89,31 @@
 			        @endforeach
 				</td>
 				<td style="vertical-align: middle;">
-					{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
-
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('video_id', 'video_id:') !!}
-					    {!! Form::text('video_id', $aprove->id) !!}
+					<div class = "form-group">
+					   <button type="button" id="in-obs" class="btn btn-warning" onClick="showCommentary({{$aprove->id}}, 2)" >En Observación</button>
 					</div>
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('state', 'State:') !!}
-					    {!! Form::text('state', 2) !!}
+					<div class = "form-group">
+					<button type="button" id="reprove" class="btn btn-danger" onClick="showCommentary({{$aprove->id}}, 0)" >Reprobar</button>
 					</div>
-					{!! Form::submit('En Observación',['class' =>'btn btn-warning']) !!}
-		    		{!! Form::close() !!}
-
-					{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
-
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('video_id', 'video_id:') !!}
-					    {!! Form::text('video_id', $aprove->id) !!}
-					</div>
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('state', 'State:') !!}
-					    {!! Form::text('state', 0) !!}
-					</div>
-					{!! Form::submit('Reprobar',['class' =>'btn btn-danger']) !!}
-		    		{!! Form::close() !!}
 				</td>
+				</tr>
+				<tr>
+					<td colspan="3" style ="border-top: 1px solid #ffffff;">
+					{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
+						<div class = "form-group" style ="display: none;">
+							<input id="video_id" type="text" class="form-control" name="video_id" value="{{ $aprove->id }}">
+						</div>
+						<div class = "form-group" style ="display: none;">
+						<input id="state_{{$aprove->id}}" type="text" class="form-control" name="state_{{$aprove->id}}" value="">
+						</div>
+						<div class = "form-group" id = "commentary_{{$aprove->id}}" style ="display: none;">
+								{!! Form::label('description', 'Descripción:') !!}
+		    					{!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+		    					{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
+		    				{!! Form::close() !!}
+	    				</div>
+					</td>
+				</tr>
 			</tbody>
 			@endforeach
 		</table>
@@ -125,35 +123,16 @@
 
 	<div id = "reprove" style="display: none;">
 	@if (count($reproves) === 0)
-	No se encuentran videos aprobados
+	<h5>No se encuentran videos reprobados</h5>
 	@elseif (count($reproves) >= 1)
 		<h3>Aprobar Video</h3>
 		<table class="table">
 			@foreach($reproves as $reprove)
 			<tbody>
+			<tr>
 				<td>
 					<h4>{{$reprove->name}}</h4>
 					<img src="files/{{$reprove->imageRef}}" title="allbum-name" style="width: 220px; height: 220px;"/>
-					{{-- <video id={{$reprove->id}} class="video-js vjs-default-skin vjs-big-play-centered" style="width: 260px; height: 220px;">
-				    <source src="/files/convert/{{$reprove->url}}" type="video/mp4">
-					<source src="/files/convert/{{$reprove->url}}" type='video/webm'>
-					<source src="/files/convert/{{$reprove->url}}" type='video/ogg'>
-				    </video>
-				    <script>
-				      videojs('{{$reprove->id}}', {
-				        controls: true,
-				        nativeControlsForTouch: false,
-				        width: 640,
-				        height: 360,
-				        plugins: {
-				          ass: {
-				            'src': ["/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa"]
-				          }
-				        },
-				        playbackRates: [0.5, 1, 1.5, 2]
-				      });
-				    </script> --}}
-
 				</td>
 				<td style="vertical-align: middle;">
 					@foreach($users as $user)
@@ -176,22 +155,32 @@
 					    {!! Form::label('state', 'State:') !!}
 					    {!! Form::text('state', 1) !!}
 					</div>
+					<div class = "form-group">
 					{!! Form::submit('Aprobar',['class' =>'btn btn-primary']) !!}
 		    		{!! Form::close() !!}
-
-					{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
-
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('video_id', 'video_id:') !!}
-					    {!! Form::text('video_id', $reprove->id) !!}
+		    		</div>
+					<div class = "form-group">
+					   <button type="button" id="in-obs" class="btn btn-warning" onClick="showCommentary({{$reprove->id}}, 2)" >En Observación</button>
 					</div>
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('state', 'State:') !!}
-					    {!! Form::text('state', 2) !!}
-					</div>
-					{!! Form::submit('En Observación',['class' =>'btn btn-warning']) !!}
-		    		{!! Form::close() !!}
 				</td>
+				</tr>
+				<tr>
+					<td colspan="3" style ="border-top: 1px solid #ffffff;">
+					{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
+						<div class = "form-group" style ="display: none;">
+							<input id="video_id" type="text" class="form-control" name="video_id" value="{{ $reprove->id }}">
+						</div>
+						<div class = "form-group" style ="display: none;">
+						<input id="state_{{$reprove->id}}" type="text" class="form-control" name="state_{{$reprove->id}}" value="">
+						</div>
+						<div class = "form-group" id = "commentary_{{$reprove->id}}" style ="display: none;">
+								{!! Form::label('description', 'Descripción:') !!}
+		    					{!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+		    					{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
+		    				{!! Form::close() !!}
+	    				</div>
+					</td>
+				</tr>
 			</tbody>
 			@endforeach
 		</table>
@@ -202,40 +191,21 @@
 
 	<div id = "waitAprove" style="display: none;">
 	@if (count($waits) === 0)
-	No se encuentran videos en espera de aprobación
+	<h5>No se encuentran videos en espera de aprobación</h5>
 	@elseif (count($waits) >= 1)
 		<h3>Videos en Espera de aprobación</h3>
 		<table class="table">
 			@foreach($waits as $wait)
 			<tbody>
+			<tr>
 				<td>
 					<h4>{{$wait->name}}</h4>
 					<img src="files/{{$wait->imageRef}}" title="allbum-name" style="width: 220px; height: 220px;"/>
-					{{-- <video id={{$reprove->id}} class="video-js vjs-default-skin vjs-big-play-centered" style="width: 260px; height: 220px;">
-				    <source src="/files/convert/{{$reprove->url}}" type="video/mp4">
-					<source src="/files/convert/{{$reprove->url}}" type='video/webm'>
-					<source src="/files/convert/{{$reprove->url}}" type='video/ogg'>
-				    </video>
-				    <script>
-				      videojs('{{$reprove->id}}', {
-				        controls: true,
-				        nativeControlsForTouch: false,
-				        width: 640,
-				        height: 360,
-				        plugins: {
-				          ass: {
-				            'src': ["/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa"]
-				          }
-				        },
-				        playbackRates: [0.5, 1, 1.5, 2]
-				      });
-				    </script> --}}
-
 				</td>
 				<td style="vertical-align: middle;">
 					@foreach($users as $user)
 						@if ($wait->usuario_id == $user->id)
-							<p>Estado: Reprobado</p>
+							<p>Estado: En Espera de Aprobación</p>
 							<p>Fecha: {{ date('d-m-y', strtotime($wait->created_at)) }}</p>
 				            <p>Subido por: {{$user->name}}</p>
 				            <p>Descripción: {{$wait->description}}</p>
@@ -253,66 +223,60 @@
 					    {!! Form::label('state', 'State:') !!}
 					    {!! Form::text('state', 1) !!}
 					</div>
-					{!! Form::submit('Aprobar',['class' =>'btn btn-primary']) !!}
-		    		{!! Form::close() !!}
-
-					{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
-
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('video_id', 'video_id:') !!}
-					    {!! Form::text('video_id', $aprove->id) !!}
+					<div class = "form-group">
+						{!! Form::submit('Aprobar',['class' =>'btn btn-primary']) !!}
+			    		{!! Form::close() !!}
+		    		</div>
+		    		<div class = "form-group">
+						<button type="button" id="in-obs" class="btn btn-warning" onClick="showCommentary({{$wait->id}}, 2)" >En Observación</button>
 					</div>
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('state', 'State:') !!}
-					    {!! Form::text('state', 0) !!}
+					<div class = "form-group">
+					<button type="button" id="reprove" class="btn btn-danger" onClick="showCommentary({{$wait->id}}, 0)" >Reprobar</button>
 					</div>
-					{!! Form::submit('Reprobar',['class' =>'btn btn-danger']) !!}
-		    		{!! Form::close() !!}
 				</td>
+				</tr>
+				<tr>
+					<td colspan="3" style ="border-top: 1px solid #ffffff;">
+					{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
+						<div class = "form-group" style ="display: none;">
+							<input id="video_id" type="text" class="form-control" name="video_id" value="{{ $wait->id }}">
+						</div>
+						<div class = "form-group" style ="display: none;">
+						<input id="state_{{$wait->id}}" type="text" class="form-control" name="state_{{$wait->id}}" value="">
+						</div>
+						<div class = "form-group" id = "commentary_{{$wait->id}}" style ="display: none;">
+								{!! Form::label('description', 'Descripción:') !!}
+		    					{!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+		    					{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
+		    				{!! Form::close() !!}
+	    				</div>
+					</td>
+				</tr>
 			</tbody>
 			@endforeach
 		</table>
 
-		{!!$reproves->render()!!}
+		{!!$waits->render()!!}
 	@endif
 	</div>
 
 	<div id = "observe" style="display: none;">
 		@if (count($observations) === 0)
-		No se encuentran videos en observación
+		<h5>No se encuentran videos en observación</h5>
 		@elseif (count($observations) >= 1)
 			<h3>Videos en Observación</h3>
 			<table class="table">
 				@foreach($observations as $observation)
 				<tbody>
+				<tr>
 					<td>
 						<h4>{{$observation->name}}</h4>
 						<img src="files/{{$observation->imageRef}}" title="allbum-name" style="width: 220px; height: 220px;"/>
-						{{-- <video id={{$reprove->id}} class="video-js vjs-default-skin vjs-big-play-centered" style="width: 260px; height: 220px;">
-					    <source src="/files/convert/{{$reprove->url}}" type="video/mp4">
-						<source src="/files/convert/{{$reprove->url}}" type='video/webm'>
-						<source src="/files/convert/{{$reprove->url}}" type='video/ogg'>
-					    </video>
-					    <script>
-					      videojs('{{$reprove->id}}', {
-					        controls: true,
-					        nativeControlsForTouch: false,
-					        width: 640,
-					        height: 360,
-					        plugins: {
-					          ass: {
-					            'src': ["/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa"]
-					          }
-					        },
-					        playbackRates: [0.5, 1, 1.5, 2]
-					      });
-					    </script> --}}
-
 					</td>
 					<td style="vertical-align: middle;">
 						@foreach($users as $user)
 							@if ($observation->usuario_id == $user->id)
-								<p>Estado: Reprobado</p>
+								<p>Estado: En Observación</p>
 								<p>Fecha: {{ date('d-m-y', strtotime($observation->created_at)) }}</p>
 					            <p>Subido por: {{$user->name}}</p>
 					            <p>Descripción: {{$observation->description}}</p>
@@ -330,27 +294,37 @@
 						    {!! Form::label('state', 'State:') !!}
 						    {!! Form::text('state', 1) !!}
 						</div>
-						{!! Form::submit('Aprobar',['class' =>'btn btn-primary']) !!}
-			    		{!! Form::close() !!}
-
-						{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
-
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('video_id', 'video_id:') !!}
-					    {!! Form::text('video_id', $aprove->id) !!}
-					</div>
-					<div class = "form-group" style ="display: none;">
-					    {!! Form::label('state', 'State:') !!}
-					    {!! Form::text('state', 0) !!}
-					</div>
-					{!! Form::submit('Reprobar',['class' =>'btn btn-danger']) !!}
-		    		{!! Form::close() !!}
+						<div class = "form-group">
+							{!! Form::submit('Aprobar',['class' =>'btn btn-primary']) !!}
+				    		{!! Form::close() !!}
+			    		</div>
+						<div class = "form-group">
+							<button type="button" id="reprove" class="btn btn-danger" onClick="showCommentary({{$observation->id}}, 0)" >Reprobar</button>
+						</div>
 					</td>
+					</tr>
+				<tr>
+					<td colspan="3" style ="border-top: 1px solid #ffffff;">
+					{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
+						<div class = "form-group" style ="display: none;">
+							<input id="video_id" type="text" class="form-control" name="video_id" value="{{ $observation->id }}">
+						</div>
+						<div class = "form-group" style ="display: none;">
+						<input id="state_{{$observation->id}}" type="text" class="form-control" name="state_{{$observation->id}}" value="">
+						</div>
+						<div class = "form-group" id = "commentary_{{$observation->id}}" style ="display: none;">
+								{!! Form::label('description', 'Descripción:') !!}
+		    					{!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+		    					{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
+		    				{!! Form::close() !!}
+	    				</div>
+					</td>
+				</tr>
 				</tbody>
 				@endforeach
 			</table>
 
-			{!!$reproves->render()!!}
+			{!!$observations->render()!!}
 		@endif
 	</div>
 </div>

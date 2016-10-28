@@ -34,7 +34,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
+    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; position: fixed; z-index: 100; width:100%">
         <div class="container">
             <div class="navbar-header">
 
@@ -47,7 +47,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <img src="/images/home.png" alt="Escuela de Cine" style="width:120px;height:50px;">
+                <img src="/images/home.png" alt="Escuela de Cine" style="width:120px; height:50px;">
                 {{-- <a class="navbar-brand">
                     Laravel
                 </a> --}}
@@ -100,7 +100,7 @@
     
     <div id="wrapper">
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="padding-top: 50px;">
             @yield('content')
         </div>
 

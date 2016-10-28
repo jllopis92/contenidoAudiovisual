@@ -24,7 +24,6 @@
         body {
             font-family: 'Roboto', sans-serif !important;
         }
-
         .fa-btn {
             margin-right: 6px;
         }
@@ -34,7 +33,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
+    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; position: fixed; z-index: 100; width:100%">
         <div class="container">
             <div class="navbar-header">
 
@@ -103,7 +102,7 @@
     <div id="wrapper">
         @if (Auth::user()->tipo == "profesor")
               
-                <div class="navbar-default sidebar" role="navigation">
+                <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li>
@@ -117,10 +116,10 @@
                                 <a href="#"> Administrar Videos<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="{!! url('editmovie')!!}"><i class='fa fa-plus fa-fw'></i>Editar Videos</a>
+                                        <a href="{!! url('editmovie')!!}"><i class='glyphicon glyphicon-pencil'></i>Editar Videos</a>
                                     </li>
                                     <li>
-                                        <a href="{!! url('approvemovie')!!}"><i class='fa fa-list-ol fa-fw'></i>Aprobar Videos</a>
+                                        <a href="{!! url('approvemovie')!!}"><i class='glyphicon glyphicon-ok'></i>Aprobar Videos</a>
                                     </li>
                                 </ul>
                             </li>
@@ -183,7 +182,7 @@
                 @endif
             @endif
         @endif
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="padding-top: 50px;">
                 @yield('content')
         </div>
     </div>  

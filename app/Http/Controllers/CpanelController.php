@@ -30,7 +30,7 @@ class CpanelController extends Controller
      */
     public function showmovie()
     {
-        $movies = Movie::paginate(4);
+        $movies = Movie::paginate(8);
         return view ('cpanel.movieupdate',compact('movies'));
     }
     public function approvemovie()
@@ -49,8 +49,6 @@ class CpanelController extends Controller
         ->where('state', '=', 2)
         ->paginate(6);
 
-        
-        //$movies = Movie::paginate(4);
         $users = User::all();
         return view ('cpanel.movieapprove',compact('aproves','reproves','waits','observations','users'));
     }
