@@ -22,6 +22,16 @@ class Trailer extends Model
         $file = pathinfo($name,PATHINFO_FILENAME); 
         $extension = pathinfo($name,PATHINFO_EXTENSION);
 
+        //linux
+        /*$ffmpeg = \FFMpeg\FFMpeg::create([
+            'ffmpeg.binaries'  => '/usr/local/bin/ffmpeg/ffmpeg',
+            'ffprobe.binaries' => '/usr/local/bin/ffprobe',
+            'timeout'          => 0, // The timeout for the underlying process
+            'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
+
+        ]);*/
+
+        //mac
         $ffmpeg = \FFMpeg\FFMpeg::create([
             'ffmpeg.binaries'  => '/Applications/MAMP/htdocs/FFmpeg/ffmpeg',
             'ffprobe.binaries' => '/Applications/MAMP/htdocs/FFmpeg/ffprobe',
@@ -44,6 +54,10 @@ class Trailer extends Model
         ->save($format, 'files/convert/trailers/'.$file.'.mp4');
         $this->attributes['url'] = $file.'.mp4';
 
+        //linux
+        //$ffmpeg_path = '/usr/local/bin/ffmpeg/ffmpeg'; //Path to your FFMPEG
+
+        //mac
         $ffmpeg_path = '/Applications/MAMP/htdocs/FFmpeg/ffmpeg'; //Path to your FFMPEG
         $video_path = 'files/convert/trailers/'.$file.'.mp4'; // Path to your Video
  
