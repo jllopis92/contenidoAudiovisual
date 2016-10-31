@@ -3,11 +3,16 @@
 namespace contenidoAudiovisual\Http\Controllers;
 
 use DB;
-use Request;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\User;
 use contenidoAudiovisual\Subject;
-use contenidoAudiovisual\Http\Requests;
+use contenidoAudiovisual\Subtitle;
+use contenidoAudiovisual\Trailer;
+use contenidoAudiovisual\Notification;
+use Illuminate\Http\Request;
+use Redirect;
+use Session;
+use JsValidator;
 
 class MovieController extends Controller
 {
@@ -22,6 +27,7 @@ class MovieController extends Controller
 
         $subject = Subject::lists('name', 'id');
         $user = User::lists('name', 'id');
+
         return view('upload.create', compact('subject','user'));
     }
 
@@ -45,8 +51,90 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        Movie::create($request->all());
-        return "listo";
+        /*$file = Input::file('imageRef');
+        $image = \Image::make(\Input::file('imageRef'));*/
+        //$path = "/files/"//ruta a fotos
+
+        //$image->save($path.$file->getClientOriginalName());
+        //$image->resize(200, 200);
+        //$image->save($path.$file->getClientOriginalName());
+        // create instance
+        
+
+
+        /*$validator = Validator::make($request->all(), [$this->validationRules]);
+
+        if ($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }*/
+
+        $movie = Movie::create([
+            'usuario_id' => $request['usuario_id'],
+            'asignatura_id' => $request['asignatura_id'],
+            'name' => $request['name'],
+            'visit' => $request['visit'],
+            'language' => $request['language'],
+            'creation_date' => $request['creation_date'],
+            'description' => $request['description'],
+            'imageRef' => $request['imageRef'],
+            'url' => $request['url'],
+            'state' => $request['state'],
+            'production_year' => $request['production_year'],
+            'category' => $request['category'],
+            'category2' => $request['category2'],
+            'shooting_format' => $request['shooting_format'],
+            'direction' => $request['direction'],
+            'direction_assistant' => $request['direction_assistant'],
+            'casting' => $request['casting'],
+            'continuista' => $request['continuista'],
+            'script' => $request['script'],
+            'production' => $request['production'],
+            'production_assistant' => $request['production_assistant'],
+            'photografic_direction' => $request['photografic_direction'],
+            'camara' => $request['camara'],
+            'camara_assistant' => $request['camara_assistant'],
+            'art_direction' => $request['art_direction'],
+            'mounting' => $request['mounting'],
+            'image_postproduction' => $request['image_postproduction'],
+            'sound_postproduction' => $request['sound_postproduction'],
+            'catering' => $request['catering'],
+            'music' => $request['music'],
+            'actors' => $request['actors'],
+        ]);
+        $movieId = $movie->id;
+
+        $users = User::all();
+        if ($users){
+           foreach($users as $user){
+                if($user->tipo == "profesor"){
+                    $notif = Notification::create([
+                        'movie_id' => $movieId,
+                        'send_to' => $user->id,
+                    ]);
+                }
+           }
+        }
+        if($request['subtitle'] != null){
+            $sub = Subtitle::create([
+                'video_id' => $movieId,
+                'url' => $request['subtitle'],
+                ]);
+            }
+        if($request['trailer'] != null){
+            $trailer = Trailer::create([
+                'video_id' => $movieId,
+                'url' => $request['trailer'],
+                ]);
+            if($request['trailer_subtitle'] != null){
+                $trailerId = $trailer->id;
+
+                $subTrailer = Subtitle::create([
+                    'trailer_id' => $trailerId,
+                    'url' => $request['trailer_subtitle'],
+                    ]);
+            }
+        }        
+        return "OK";
     }
 
     /**
@@ -56,8 +144,11 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id){
-        $movies = Movie::find($id);
-        return view ('play.borrar',['movie'=>$movies]);
+        $movie = Movie::find($id);
+        $movies = Movie::where('state', 1)->take(6)->get();
+        $trailers = Trailer::all();
+        return view ('play.show',compact('movie','trailers','movies'));
+        //return view ('play.show',['movie'=>$movies],['trailer'=>$trailers]);
     }
 
     /**
@@ -68,9 +159,9 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $movie = Movie::find($id);
+        return view('cpanel.editMovie',['movie'=>$movie]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -80,7 +171,32 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $movie = Movie::find($id);
+        $movie->fill($request->all());
+        $movie->save();
+        Session::flash('message','Video Actualizado Correctamente');
+        return Redirect::to('/cpanel');
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function approveMovie(Request $request)
+    {
+        $id = $request['video_id'];
+        $movie = Movie::find($id);
+        $movie->fill([
+            'state' => $request['state'],
+            ]);
+        $movie->save();
+        $movies = Movie::paginate(4);
+        $users = User::all();
+        return view ('cpanel.movieapprove', compact('movies','users'));
     }
 
     /**
@@ -92,22 +208,5 @@ class MovieController extends Controller
     public function destroy($id)
     {
         //
-    }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request){
-        // Gets the query string from our form submission 
-        $query = Request::input('search');
-
-        $movies = Movie::where('name','like','%'.$query.'%')
-        ->orderBy('name')
-        ->paginate(20);
- 
-        // returns a view and passes the view the list of articles and the original query.
-        return view('search', compact('movies', 'query'));
     }
 }

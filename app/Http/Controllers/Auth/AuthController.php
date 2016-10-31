@@ -3,6 +3,7 @@
 namespace contenidoAudiovisual\Http\Controllers\Auth;
 
 use contenidoAudiovisual\User;
+use contenidoAudiovisual\Notification;
 use Validator;
 use contenidoAudiovisual\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -63,7 +64,24 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        
+        /*$userId = $user->id;
+
+        $users = User::all();
+        if ($users){
+            echo "en if";
+           foreach($users as $profesor){
+                echo "en for".$profesor->tipo;
+                if($profesor->tipo == "profesor"){
+                    $notif = Notification::create([
+                        'user_id' => $userId,
+                        'send_to' => $profesor->id,
+                    ]);
+                }
+           }
+        };*/
+       
+        return $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),

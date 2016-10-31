@@ -15,7 +15,24 @@
 Route::get('reviews','FrontController@reviews');*/
 
 Route::get('/', 'HomeController@index');
+//Route::get('upload','MovieController@index');
+//Route::post('upload.store','MovieController@store');
 
+	Route::resource('cpanel','CpanelController');
+	Route::get('editmovie','CpanelController@showmovie');
+	Route::get('approvemovie','CpanelController@approvemovie');
+	Route::resource('upload','MovieController');
+	Route::post('approve','MovieController@approveMovie');
+	Route::get('createplaylist','PlaylistController@index');
+	Route::get('deleteplaylist','PlaylistController@delete');
+	Route::resource('playlist','PlaylistController');
+	Route::get('search','QueryController@search');
+	Route::get('filter','QueryController@filter');
+	Route::resource('cine_tv','CineTvController');
+	Route::get('playplaylist','CineTvController@show');
+	Route::get('showadver','CpanelController@showadvert');
+	Route::get('createadver','CpanelController@createadvert');
+	Route::resource('advertising','AdvertisingController');
 
 Route::group(['middleware' => 'web'], function () {
 	Route::auth();
@@ -23,8 +40,10 @@ Route::group(['middleware' => 'web'], function () {
 		return view('index');
 	});*/
 	
-	Route::resource('cpanel','CpanelController');
+/*	Route::resource('cpanel','CpanelController');
+	Route::get('editmovie','CpanelController@showmovie');
+	Route::get('approvemovie','CpanelController@approvemovie');
 	Route::resource('upload','MovieController');
-	Route::get('search','MovieController@search');
-
+	Route::get('search','QueryController@search');
+	Route::get('cine_tv','CineTvController@index');*/
 });

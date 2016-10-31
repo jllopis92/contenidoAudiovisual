@@ -8,7 +8,9 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "5.2.*",
-        "php-ffmpeg/php-ffmpeg": "~0.5"
+        "php-ffmpeg/php-ffmpeg": "~0.5",
+        "kartik-v/bootstrap-star-rating": "@dev",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

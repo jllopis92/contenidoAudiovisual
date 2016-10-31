@@ -2,7 +2,9 @@
 
 namespace contenidoAudiovisual\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+use DB;
+use contenidoAudiovisual\Movie;
 
 use contenidoAudiovisual\Http\Requests;
 
@@ -84,6 +86,63 @@ class QueryController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function filter(){
+        // Sets the parameters from the get request to the variables.
+        //First filter
+        $largometraje = Request::input('largometraje');
+        $mediometraje = Request::input('mediometraje');
+        $cortometraje = Request::input('cortometraje');
+        $experimental = Request::input('experimental');
+        $ficcion = Request::input('ficcion');
+        $animacion = Request::input('animacion');
+        $documental = Request::input('documental');
+
+        //Second filter
+        $fourK = Request::input('4K');
+        $twoK = Request::input('2K');
+        $hd = Request::get('HD');
+        $miniDv = Request::get('MiniDV');
+        $sixteenMm = Request::input('16mm');
+        $thirtyFiveMm = Request::input('35mm');
+
+
+        $movies = DB::table('movies')
+            ->where('state', '=', 1)
+            ->where(function ($query) use ($largometraje, $cortometraje, $animacion, $documental, $fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
+                $query->where(function ($query) use ($largometraje, $cortometraje, $animacion, $documental) {
+                    $query->where('category', '=', $largometraje)
+                        ->orwhere('category', '=', $mediometraje)
+                        ->orwhere('category', '=', $cortometraje)
+                        ->orWhere('category', '=', $experimental)
+                        ->orWhere('category', '=', $ficcion)
+                        ->orWhere('category', '=', $animacion)
+                        ->orWhere('category', '=', $documental);
+                    })
+                    ->Where(function ($query2) use ($fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
+                    $query2->where('shooting_format', '=', $fourK)
+                        ->orwhere('shooting_format', '=', $twoK)
+                        ->orWhere('shooting_format', '=', $hd)
+                        ->orWhere('shooting_format', '=', $miniDv)
+                        ->orWhere('shooting_format', '=', $sixteenMm)
+                        ->orWhere('shooting_format', '=', $thirtyFiveMm);
+                        });
+            })
+            ->get();
+        return view('search', compact('movies', 'query', 'query2'));
+    }
+    public function search(Request $request){
+        // Gets the query string from our form submission 
+        $query = Request::input('search');
+
+        $movies = DB::table('movies')
+        ->where('state', '=', 1)
+        ->where('name','like','%'.$query.'%')
+        ->orderBy('name')
+        ->paginate(20);
+ 
+        // returns a view and passes the view the list of articles and the original query.
+        return view('search', compact('movies', 'query'));
     }
 
 }
