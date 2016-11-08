@@ -90,15 +90,36 @@ class QueryController extends Controller
     public function filter(){
         // Sets the parameters from the get request to the variables.
         //First filter
+        $largometraje = "";
+        $mediometraje = "";
+        $cortometraje = "";
+
+        //Second filter
+        $experimental = "";
+        $ficcion = "";
+        $animacion = "";
+        $documental = "";
+
+        //Thrist filter
+        $fourK = "";
+        $twoK = "";
+        $hd = "";
+        $miniDv = "";
+        $sixteenMm = "";
+        $thirtyFiveMm = "";
+
+        //First filter
         $largometraje = Request::input('largometraje');
         $mediometraje = Request::input('mediometraje');
         $cortometraje = Request::input('cortometraje');
         $experimental = Request::input('experimental');
+
+        //Second filter
         $ficcion = Request::input('ficcion');
         $animacion = Request::input('animacion');
         $documental = Request::input('documental');
 
-        //Second filter
+        //Thrist filter
         $fourK = Request::input('4K');
         $twoK = Request::input('2K');
         $hd = Request::get('HD');
@@ -106,21 +127,42 @@ class QueryController extends Controller
         $sixteenMm = Request::input('16mm');
         $thirtyFiveMm = Request::input('35mm');
 
+        if( $largometraje == "" && $mediometraje == "" && $cortometraje == ""){
+            $largometraje = "largometraje";
+            $mediometraje = "mediometraje";
+            $cortometraje = "cortometraje";
+        }
+        if( $experimental == "" && $ficcion == "" && $animacion == "" && $documental == ""){
+            $experimental = "experimental";
+            $ficcion = "ficcion";
+            $animacion = "animacion";
+            $documental = "documental";
+        }
+        if( $fourK == "" && $twoK == "" && $hd == "" && $miniDv == "" && $sixteenMm == "" && $thirtyFiveMm == ""){
+            $fourK = "4K";
+            $twoK = "2K";
+            $hd = "HD";
+            $miniDv = "MiniDV";
+            $sixteenMm = "16mm";
+            $thirtyFiveMm = "35mm";
+        }
 
         $movies = DB::table('movies')
             ->where('state', '=', 1)
-            ->where(function ($query) use ($largometraje, $cortometraje, $animacion, $documental, $fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
-                $query->where(function ($query) use ($largometraje, $cortometraje, $animacion, $documental) {
+            ->where(function ($query) use ($largometraje, $mediometraje, $cortometraje, $experimental, $ficcion, $animacion, $documental, $fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
+                $query->where(function ($query) use ($largometraje, $mediometraje, $cortometraje) {
                     $query->where('category', '=', $largometraje)
                         ->orwhere('category', '=', $mediometraje)
-                        ->orwhere('category', '=', $cortometraje)
-                        ->orWhere('category', '=', $experimental)
-                        ->orWhere('category', '=', $ficcion)
-                        ->orWhere('category', '=', $animacion)
-                        ->orWhere('category', '=', $documental);
+                        ->orwhere('category', '=', $cortometraje);
                     })
-                    ->Where(function ($query2) use ($fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
-                    $query2->where('shooting_format', '=', $fourK)
+                    ->where(function ($query2) use ($experimental, $ficcion, $animacion, $documental) {
+                    $query2->where('category2', '=', $experimental)
+                        ->orWhere('category2', '=', $ficcion)
+                        ->orWhere('category2', '=', $animacion)
+                        ->orWhere('category2', '=', $documental);
+                        })
+                    ->where(function ($query3) use ($fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
+                    $query3->where('shooting_format', '=', $fourK)
                         ->orwhere('shooting_format', '=', $twoK)
                         ->orWhere('shooting_format', '=', $hd)
                         ->orWhere('shooting_format', '=', $miniDv)

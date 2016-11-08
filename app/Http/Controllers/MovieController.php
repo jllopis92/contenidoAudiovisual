@@ -145,9 +145,10 @@ class MovieController extends Controller
      */
     public function show($id){
         $movie = Movie::find($id);
-        $movies = Movie::where('state', 1)->take(6)->get();
+        $movies = Movie::where('state', 1)->take(5)->get();
+        $newMovies = Movie::where('state', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $trailers = Trailer::all();
-        return view ('play.show',compact('movie','trailers','movies'));
+        return view ('play.show',compact('movie','trailers','newMovies','movies'));
         //return view ('play.show',['movie'=>$movies],['trailer'=>$trailers]);
     }
 

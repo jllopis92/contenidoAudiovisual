@@ -11,7 +11,7 @@
 
 <H3 style="margin-top: 0px;">Resultados</H3>
     @foreach($movies as $key=>$movie)
-    @if ($key % 4 == 0)
+    @if ($key % 4 == 3)
     	<div class="content-grid last-grid">
     @else
         <div class="content-grid">

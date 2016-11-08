@@ -1,4 +1,4 @@
-@extends('layouts.crudusers')
+@extends('layouts.log')
 
 @section('content')
 <link href='assets/vendor/parsleyjs/src/parsley.css' rel='stylesheet' />
@@ -6,6 +6,11 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="assets/vendor/parsleyjs/dist/parsley.min.js"></script>
 <script type="text/javascript" src="assets/vendor/parsleyjs/dist/i18n/es.js"></script>
+<style>
+body {
+      font-family: 'Roboto', sans-serif !important;
+    }
+</style>
 <div class="container">
     <div class="row">
     <div class="col-md-8 col-md-offset-2" style="margin-left: 0">

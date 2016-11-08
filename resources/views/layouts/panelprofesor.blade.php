@@ -29,8 +29,8 @@
         }
         .form-control {
           width: 50%;
-        }
-    </style>
+      }
+  </style>
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; position: fixed; z-index: 100; width:100%">
@@ -64,137 +64,143 @@
                     <script type="text/javascript">
                         window.location = "/";//here double curly bracket
                     </script>
-                @endif --}}
-                @if (!Auth::guest())
+                    @endif --}}
+                    @if (!Auth::guest())
                     @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno"))
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{ url('/upload') }}">Subir Video</a></li>
-                        </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/upload') }}">Subir Video</a></li>
+                    </ul>
                     @endif
-                
-                @endif
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->email }} <span class="caret"></span>
-                        </a>
 
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                {{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}
-                            </li>
-                            <li><a href="{{ url('/logout') }}">Logout</a></li>
-                        </ul>
-                    </li>
                     @endif
-                </ul>
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->email }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    {{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}
+                                </li>
+                                <li><a href="{{ url('/logout') }}">Logout</a></li>
+                            </ul>
+                        </li>
+                        @endif
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    @if (!Auth::guest())
-    <div id="wrapper">
-        @if (Auth::user()->tipo == "profesor")
-              
-                <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <li>
-                                {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}
-                            </li>
-                            <li>
-                                <a href="{{ url('/cpanel') }}"> Administrar Usuarios</a>
-                            </li>
+        @if (!Auth::guest())
+        <div id="wrapper">
+            @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
+            <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}
+                        </li>
+                        <li>
+                            <a href="{{ url('/cpanel') }}"> Administrar Usuarios</a>
+                        </li>
 
-                            <li>
-                                <a href="#"> Administrar Videos<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="{!! url('editmovie')!!}"><i class='glyphicon glyphicon-pencil'></i>Editar Videos</a>
-                                    </li>
-                                    <li>
-                                        <a href="{!! url('approvemovie')!!}"><i class='glyphicon glyphicon-ok'></i>Aprobar Videos</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Administrar Anuncios<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="{!! url('showadver')!!}"><i class='fa fa-list-ol fa-fw' ></i>Ver Anuncios</a>
-                                    </li>
-                                    <li>
-                                        <a href="{!! url('createadver')!!}"><i class='fa fa-plus fa-fw'></i>Crear Anuncios</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                        <li>
+                            <a href="#"> Administrar Videos<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{!! url('editmovie')!!}"><i class='glyphicon glyphicon-pencil'></i>Editar Videos</a>
+                                </li>
+                                <li>
+                                    <a href="{!! url('approvemovie')!!}"><i class='glyphicon glyphicon-ok'></i>Aprobar Videos</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Administrar Anuncios<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{!! url('showadver')!!}"><i class='fa fa-list-ol fa-fw' ></i>Ver Anuncios</a>
+                                </li>
+                                <li>
+                                    <a href="{!! url('createadver')!!}"><i class='fa fa-plus fa-fw'></i>Crear Anuncios</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-        @else
-            @if (Auth::user()->tipo == "alumno")
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <li>
-                                {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
-                            </li>
-                        </ul>
-                        <ul class="nav" id="side-menu">
-                            <li>
-                                <a href="{!! url('createplaylist')!!}"> Videos en Evaluación</a>
-                            </li>
-                        </ul>
-                    </div>
+            </div>
+            @elseif (Auth::user()->tipo == "alumno")
+            <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
+                        </li>
+                    </ul>
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="{!! url('createplaylist')!!}"> Videos en Evaluación</a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+            @elseif (Auth::user()->tipo == "adminParrilla")
+            <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
+                        </li>
+                    </ul>
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="{!! url('createplaylist')!!}"> Crear Listas de reproducción</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @elseif (Auth::user()->tipo == "externo")
+            <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
             @else
-                @if (Auth::user()->tipo == "adminParrilla")
-                    <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav navbar-collapse">
-                            <ul class="nav" id="side-menu">
-                                <li>
-                                    {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
-                                </li>
-                            </ul>
-                            <ul class="nav" id="side-menu">
-                                <li>
-                                    <a href="{!! url('createplaylist')!!}"> Crear Listas de reproducción</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                @else
-                    <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav navbar-collapse">
-                            <ul class="nav" id="side-menu">
-                                <li>
-                                    {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                @endif
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             @endif
-        @endif
-        <div id="page-wrapper" style="padding-top: 50px;">
+            <div id="page-wrapper" style="padding-top: 50px;">
                 @yield('content')
-        </div>
-    </div>  
-    @endif       
+            </div>
+        </div>  
+        @endif       
         
 
-    <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    {!!Html::script('js/metisMenu.min.js')!!}
-    {!!Html::script('js/sb-admin-2.js')!!}
+        <!-- JavaScripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        {!!Html::script('js/metisMenu.min.js')!!}
+        {!!Html::script('js/sb-admin-2.js')!!}
 
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-</body>
-</html>
+        {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    </body>
+    </html>
