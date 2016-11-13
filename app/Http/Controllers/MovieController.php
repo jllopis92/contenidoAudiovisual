@@ -114,12 +114,41 @@ class MovieController extends Controller
                 }
            }
         }
-        if($request['subtitle'] != null){
+        if($request['subtitle_1'] != null){
             $sub = Subtitle::create([
                 'video_id' => $movieId,
-                'url' => $request['subtitle'],
-                ]);
-            }
+                'url' => $request['subtitle_1'],
+                'language' => $request['language_1'],
+            ]);
+        }
+        if($request['subtitle_2'] != null){
+            $sub = Subtitle::create([
+                'video_id' => $movieId,
+                'url' => $request['subtitle_2'],
+                'language' => $request['language_2'],
+            ]);
+        }
+        if($request['subtitle_3'] != null){
+            $sub = Subtitle::create([
+                'video_id' => $movieId,
+                'url' => $request['subtitle_3'],
+                'language' => $request['language_3'],
+            ]);
+        }
+        if($request['subtitle_4'] != null){
+            $sub = Subtitle::create([
+                'video_id' => $movieId,
+                'url' => $request['subtitle_4'],
+                'language' => $request['language_4'],
+            ]);
+        }
+        if($request['subtitle_5'] != null){
+            $sub = Subtitle::create([
+                'video_id' => $movieId,
+                'url' => $request['subtitle_5'],
+                'language' => $request['language_5'],
+            ]);
+        }
         if($request['trailer'] != null){
             $trailer = Trailer::create([
                 'video_id' => $movieId,

@@ -332,7 +332,7 @@
 </script> --}}
 
 
-    <H3 style="margin-top: 0px;">Nuevos</H3>
+    <H3>Nuevos</H3>
     @foreach($newMovies as $key=>$movie)
 
     @if ($key % 4 == 3)
