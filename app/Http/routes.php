@@ -33,6 +33,8 @@ Route::get('/', 'HomeController@index');
 	Route::get('showadver','CpanelController@showadvert');
 	Route::get('createadver','CpanelController@createadvert');
 	Route::resource('advertising','AdvertisingController');
+	//Route::post('createtest','TestController@store');
+	Route::resource('test','TestController');
 
 Route::group(['middleware' => 'web'], function () {
 	Route::auth();

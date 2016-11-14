@@ -3270,6 +3270,7 @@ class ComposerStaticInit3cc464111f851a707b2eaba756707ec1
         'contenidoAudiovisual\\Rol' => __DIR__ . '/../..' . '/app/Rol.php',
         'contenidoAudiovisual\\Subject' => __DIR__ . '/../..' . '/app/Subject.php',
         'contenidoAudiovisual\\Subtitle' => __DIR__ . '/../..' . '/app/Subtitle.php',
+        'contenidoAudiovisual\\Test' => __DIR__ . '/../..' . '/app/Test.php',
         'contenidoAudiovisual\\Trailer' => __DIR__ . '/../..' . '/app/Trailer.php',
         'contenidoAudiovisual\\User' => __DIR__ . '/../..' . '/app/User.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',

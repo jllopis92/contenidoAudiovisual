@@ -73,7 +73,7 @@
     <div class="col-md-8">
 
       {{--  --}}
-      <video id="player" class="video-js vjs-default-skin vjs-big-play-centered">
+      <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" autoplay>
         @if (Auth::guest())
         <source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
           @else
@@ -93,8 +93,15 @@
               },
               playbackRates: [0.5, 1, 1.5, 2]
             });
-          </script>
-
+          </script> 
+          {{-- <p>para cinetv</p>
+       <video id="vid1" width="640" height="360"  autoplay controls>
+             <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4" /> 
+             Your browser does not support the video tag.
+         </video>
+         <script>
+             document.getElementById('vid1').currentTime = 5;
+         </script>  --}}
         </div>
         @if (!Auth::guest())
 

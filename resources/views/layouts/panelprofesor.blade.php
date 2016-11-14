@@ -201,6 +201,8 @@
         {!!Html::script('js/metisMenu.min.js')!!}
         {!!Html::script('js/sb-admin-2.js')!!}
 
+        {!! Html::script('js/script.js') !!}
+
         {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     </body>
     </html>

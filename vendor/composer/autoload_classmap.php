@@ -2948,6 +2948,7 @@ return array(
     'contenidoAudiovisual\\Rol' => $baseDir . '/app/Rol.php',
     'contenidoAudiovisual\\Subject' => $baseDir . '/app/Subject.php',
     'contenidoAudiovisual\\Subtitle' => $baseDir . '/app/Subtitle.php',
+    'contenidoAudiovisual\\Test' => $baseDir . '/app/Test.php',
     'contenidoAudiovisual\\Trailer' => $baseDir . '/app/Trailer.php',
     'contenidoAudiovisual\\User' => $baseDir . '/app/User.php',
     'phpDocumentor\\Reflection\\DocBlock' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
