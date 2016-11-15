@@ -139,4 +139,9 @@ class CpanelController extends Controller
         $movies = Movie::paginate(8);
         return view ('cpanel.createAdvertising',compact('movies'));
     }
+    public function createprogram()
+    {
+        $movies = Movie::paginate(8);
+        return view ('cpanel.createPrograming',compact('movies'));
+    }
 }

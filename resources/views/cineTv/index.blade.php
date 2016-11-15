@@ -1,21 +1,161 @@
 @extends('layouts.app')
-  @section('content')
-  <h3>Listas de Reproducción Disponibles</h3>
-  <table class="table">
-    <thead>
-      <th>Lista de Reproducción</th>
-      <th>Duración</th>
-      <th>Operacion</th>
-    </thead>
-    @foreach($playlists as $playlist)
-      <tbody>
-        <td>{{$playlist->name}}</td>
-        <td>{{$playlist->duration}}</td>
-        <td>
-        {!! link_to_route('cine_tv.show', $title = 'Ver', $parameters = $playlist->id, $attributes = ['class'=>'btn btn-primary'])!!}
-        </td>
-      </tbody>
-    @endforeach
-  </table>
-  {!!$playlists->render()!!}
+
+@section('content')
+<script src="{!!url('/js/jquery.min.js')!!}"></script>
+@foreach($programations as $programation)
+<p>{{$programation->url}} {{$programation->play_at}}</p>
+@endforeach
+<h3>Cine TV</h3>
+      <p>{{$difTime}}</p>
+       <video id="video" style="width:680px;height:320px" autoplay controls>
+          <source src="/files/convert/videos/{{$programationsNow->url}}" type="video/mp4" /> 
+          Your browser does not support the video tag.
+        </video>
+        <div id="notNow" style="display:none">El siguiente video esta programado para: {{$programationsNow->play_at}}</div>
+        <button onclick="getCurTime()" type="button">Get current time position</button>
+        <button onclick="setCurTime()" type="button">Set time position to 5 seconds</button><br>
+        <p>A continuacion</p>
+        <p id="demo"></p>
+
+        <script>
+          var vid = document.getElementById("video");
+          var time = {{$difTime}};
+          var isPlaying = {{$playNow}};
+          var movies = [];
+          var j = jQuery.noConflict();
+          j(document).ready(function() {
+            //alert(time);
+            /*Si el video se esta reproduciendo, se adelanta al minuto correspondiente, si aun no empieza se envia aviso, en ambos casos se envian los videos posteriores a un arreglo js
+            */
+            if(time >= 0 && isPlaying == 1){
+                alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$programationsNow->url}}");
+                vid.currentTime = time;
+                @foreach($programations as $key=>$programation)
+                  @if ($key >= 1)
+                    var movie = "{{$programation->url}}";
+                    movies[{{$key}} - 1] = movie;
+                  @endif
+                @endforeach
+                document.getElementById("demo").innerHTML = movies;
+              }else if (isPlaying == 0){
+                alert("Bienvenido a Programación Cine UV, la emision de {{$programationsNow->url}}  comienza a las {{$programationsNow->play_at}}");
+                pauseVid();
+                document.getElementById("notNow").style.display="inline";
+                @foreach($programations as $key=>$programation)
+                  var movie = "{{$programation->url}}";
+                  movies[{{$key}} - 1] = movie;
+                @endforeach
+                document.getElementById("demo").innerHTML = movies;
+              }
+            });
+            var count = movies.length;
+            var actual = 0;
+
+            vid.onended = function() {
+              loadVideo();
+            };
+            function loadVideo(){
+              if(actual < count){
+                vid.src = movies[actual];
+                logger('video cargado correctamente '+ vid.src);
+                logger('Siguiente: '+ movies[(actual+1)]);
+                actual ++;
+              }
+            }
+            function playVid() {
+              vid.play();
+            }
+
+            function pauseVid() {
+              vid.pause();
+            }
+            //vid.currentTime = time;
+            function getCurTime() {
+              alert(time);
+              //alert(vid.currentTime);
+            } 
+            function setCurTime() { 
+              vid.currentTime = time;
+            }
+         </script> 
+
+
+ {{--  <video src="" id="video" style="width:680px;height:320px" autoplay="true" controls></video> --}}
+  <canvas id="preview" style="display: none"></canvas>
+
+  <div id="logger"></div> 
+
+
+
+
+
+  {{-- <script type="text/javascript">
+    var canvas = document.getElementById("preview");
+    var context = canvas.getContext("2d");
+
+    canvas.width = 800;
+    canvas.height = 600;
+
+    context.width = canvas.width;
+    context.height = canvas.height;
+
+    var video = document.getElementById("video");
+    var socket = io();
+
+    var videos = ["test.mp4","011portrait.mp4","1645Video.mp4"];
+    //var videos = ["test.mp4","011portrait.mp4","1645Video.mp4","Warcraft.mp4"];
+    var count = videos.length;
+    var actual = 0;
+
+
+      //var next= document.getElementById("next");
+
+    //funcion cuando el video termina
+    video.onended = function() {
+      loadCam();
+        //alert("Actual: "+ actual);
+    };
+
+    function logger(msg){
+      $("#logger").text(msg);
+    }
+    //carga video o camara
+    function loadCam(){
+      if(actual < count){
+        video.src = videos[actual];
+        //next.value = videos[(actual+1)];
+        //video.src = "test.mp4";
+        //video.src = stream;
+        //video.src = window.URL.createObjectURL(stream);
+        logger('video cargado correctamente '+ video.src);
+        logger('Siguiente: '+ videos[(actual+1)]);
+        actual ++;
+      }
+      
+    }
+    //error al cargar
+    function loadFail(){
+      logger('error en video');
+    }
+    function viewVideo(video, context){
+      context.drawImage(video,0,0,context.width,context.height);
+      //logger('/n video'+ video);
+      //logger('/n contexto'+ context);
+      socket.emit('stream',canvas.toDataURL('image/webp'));
+    }
+    //solicita permisos de camara para todos los navegadores
+    $(function(){
+      navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia);
+
+      if(navigator.getUserMedia){
+        //que usaremos, correcto, fallo
+        loadCam();
+        setInterval(function(){
+          viewVideo(video,context);
+        },400);//1000 = 1 segundo
+        //navigator.getUserMedia({video : true, audio : true},loadCam, loadFail);
+      }
+      
+    });
+  </script> --}}
 @endsection

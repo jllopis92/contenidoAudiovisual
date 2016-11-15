@@ -32,7 +32,9 @@ Route::get('/', 'HomeController@index');
 	Route::get('playplaylist','CineTvController@show');
 	Route::get('showadver','CpanelController@showadvert');
 	Route::get('createadver','CpanelController@createadvert');
+	Route::get('createprogram','CpanelController@createprogram');
 	Route::resource('advertising','AdvertisingController');
+	Route::resource('programing','ProgramingController');
 	//Route::post('createtest','TestController@store');
 	Route::resource('test','TestController');
 

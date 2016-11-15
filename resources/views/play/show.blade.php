@@ -73,7 +73,7 @@
     <div class="col-md-8">
 
       {{--  --}}
-      <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" autoplay>
+      {{-- <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" autoplay>
         @if (Auth::guest())
         <source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
           @else
@@ -93,14 +93,33 @@
               },
               playbackRates: [0.5, 1, 1.5, 2]
             });
-          </script> 
-          {{-- <p>para cinetv</p>
+          </script> --}}
+           <p>para cinetv</p>
        <video id="vid1" width="640" height="360"  autoplay controls>
-             <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4" /> 
+             <source src="/files/convert/videos/Blood Into Wine 2010 BRRip [A Release-Lounge H264].mp4" type="video/mp4" /> 
              Your browser does not support the video tag.
-         </video>
-         <script>
-             document.getElementById('vid1').currentTime = 5;
+         </video> 
+         <button onclick="getCurTime()" type="button">Get current time position</button>
+        <button onclick="setCurTime()" type="button">Set time position to 5 seconds</button><br> 
+        <script>
+             var vid = document.getElementById("vid1");
+
+              function getCurTime() { 
+                  alert(vid.currentTime);
+              } 
+
+              function setCurTime() { 
+                  vid.currentTime=5;
+              } 
+         </script> 
+
+
+      
+
+         <{{-- script>
+             document.getElementById('vid1').addEventListener('loadedmetadata', function() {
+                this.currentTime = 50;
+              }, false);
          </script>  --}}
         </div>
         @if (!Auth::guest())

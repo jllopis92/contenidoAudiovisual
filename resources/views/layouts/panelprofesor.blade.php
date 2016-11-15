@@ -133,6 +133,14 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="#">Administrar Parrilla<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{!! url('createprogram')!!}"><i class='fa fa-plus fa-fw'></i>Programar Parrilla</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -131,11 +131,11 @@
                     <li><a href="{{ url('/cine_tv') }}">Cine TV</a></li>
                 </ul>
                 @if (!Auth::guest())
-                @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno"))
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/upload') }}">Subir Video</a></li>
-                </ul>
-                @endif
+                    @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno"))
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/upload') }}">Subir Video</a></li>
+                    </ul>
+                    @endif
                 @endif
 
                 <!-- Right Side Of Navbar -->
@@ -352,19 +352,20 @@
             @yield('page-js-script')
 
             <script type="text/javascript" >
-                $(document).ready(function(){
-                    $("#notificationLink").click(function(){
-                        $("#notificationContainer").fadeToggle(300);
-                        $("#notification_count").fadeOut("slow");
+                var j = jQuery.noConflict();
+                j(document).ready(function(){
+                    j("#notificationLink").click(function(){
+                        j("#notificationContainer").fadeToggle(300);
+                        j("#notification_count").fadeOut("slow");
                         return false;
                     });
 
                     //Document Click
-                    $(document).click(function(){
-                        $("#notificationContainer").hide();
+                    j(document).click(function(){
+                        j("#notificationContainer").hide();
                     });
                     //Popup Click
-                    $("#notificationContainer").click(function(){
+                    j("#notificationContainer").click(function(){
                         return false
                     });
 
