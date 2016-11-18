@@ -156,7 +156,11 @@
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
+{{-- <a href="#">Inbox <span class="badge">42</span></a>
 
+<button class="btn btn-primary" type="button">
+  Messages <span class="badge">4</span>
+</button> --}}
                     <li id="notification_li">
                         <span id="notification_count" style="margin-top: 0px; ">3</span>
                         <a href="#" id="notificationLink">Notificaciones</a>
