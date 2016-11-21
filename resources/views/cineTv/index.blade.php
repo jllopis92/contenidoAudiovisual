@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($valid == 1)
+  
+
 <script src="{!!url('/js/jquery.min.js')!!}"></script>
-@foreach($programations as $programation)
-<p>{{$programation->url}} {{$programation->play_at}}</p>
+@foreach($movies as $movie)
+<p>{{$movie->url}} {{$movie->play_at}}</p>
 @endforeach
 <h3>Cine TV</h3>
       <p>{{$difTime}}</p>
-       <video id="video" style="width:680px;height:320px" autoplay controls>
-          <source src="/files/convert/videos/{{$programationsNow->url}}" type="video/mp4" /> 
+       <video id="video" style="display:none; width:680px; height:320px;" autoplay controls>
+          <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" /> 
           Your browser does not support the video tag.
         </video>
-        <div id="notNow" style="display:none">El siguiente video esta programado para: {{$programationsNow->play_at}}</div>
+        <div id="notNow" style="display:none">El siguiente video esta programado para: {{$moviesNow->play_at}}</div>
         <button onclick="getCurTime()" type="button">Get current time position</button>
         <button onclick="setCurTime()" type="button">Set time position to 5 seconds</button><br>
         <p>A continuacion</p>
@@ -21,34 +24,35 @@
           var vid = document.getElementById("video");
           var time = {{$difTime}};
           var isPlaying = {{$playNow}};
-          var movies = [];
+          var moviesArr = [];
           var j = jQuery.noConflict();
           j(document).ready(function() {
             //alert(time);
             /*Si el video se esta reproduciendo, se adelanta al minuto correspondiente, si aun no empieza se envia aviso, en ambos casos se envian los videos posteriores a un arreglo js
             */
             if(time >= 0 && isPlaying == 1){
-                alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$programationsNow->url}}");
+                alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$moviesNow->url}}");
                 vid.currentTime = time;
-                @foreach($programations as $key=>$programation)
+                @foreach($movies as $key=>$movie)
                   @if ($key >= 1)
-                    var movie = "{{$programation->url}}";
-                    movies[{{$key}} - 1] = movie;
+                    var movieArr = "{{$movie->url}}";
+                    moviesArr[{{$key}} - 1] = movieArr;
                   @endif
                 @endforeach
+                vid.style.display="inline";
                 document.getElementById("demo").innerHTML = movies;
               }else if (isPlaying == 0){
-                alert("Bienvenido a Programación Cine UV, la emision de {{$programationsNow->url}}  comienza a las {{$programationsNow->play_at}}");
+                alert("Bienvenido a Programación Cine UV, la emision de {{$moviesNow->url}}  comienza a las {{$moviesNow->play_at}}");
                 pauseVid();
                 document.getElementById("notNow").style.display="inline";
-                @foreach($programations as $key=>$programation)
-                  var movie = "{{$programation->url}}";
-                  movies[{{$key}} - 1] = movie;
+                @foreach($movies as $key=>$movie)
+                  var movieArr = "{{$movie->url}}";
+                  moviesArr[{{$key}} - 1] = moviesArr;
                 @endforeach
-                document.getElementById("demo").innerHTML = movies;
+                document.getElementById("demo").innerHTML = moviesArr;
               }
             });
-            var count = movies.length;
+            var count = moviesArr.length;
             var actual = 0;
 
             vid.onended = function() {
@@ -56,9 +60,9 @@
             };
             function loadVideo(){
               if(actual < count){
-                vid.src = movies[actual];
+                vid.src = moviesArr[actual];
                 logger('video cargado correctamente '+ vid.src);
-                logger('Siguiente: '+ movies[(actual+1)]);
+                logger('Siguiente: '+ moviesArr[(actual+1)]);
                 actual ++;
               }
             }
@@ -158,4 +162,7 @@
       
     });
   </script> --}}
+@else
+  <h5 style="margin-top: 30px;">No se encuentran videos programados</h5>
+@endif
 @endsection

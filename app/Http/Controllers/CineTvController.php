@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
 use contenidoAudiovisual\Programation;
+use contenidoAudiovisual\MovieInProgram;
 use contenidoAudiovisual\Playlist;
 use contenidoAudiovisual\Http\Requests;
 
@@ -15,22 +16,44 @@ class CineTvController extends Controller
     {
         $rightNow = Carbon::now();
         $difTime = 0;
-        $playNow = 1;
+        $playNow = 0;
+        $valid = 0;
         //$formatted_date = Carbon::now()->subMinutes(5)->toDateTimeString(); 
         //$tomorrow = Carbon::now()->addDay();
         //$lastWeek = Carbon::now()->subWeek();
         //$nowInLondonTz = Carbon::now(new DateTimeZone('Europe/London'));
         //$q->whereDate('created_at', '=', Carbon::today()->toDateString());
-        $programations = Programation::where('end_at', '>=', $rightNow)->orderBy('play_at', 'asc')->get();
-        $programationsNow = $programations->first();
-        if($rightNow >= $programationsNow->play_at && $rightNow <= $programationsNow->end_at){
-            $playTime = Carbon::parse($programationsNow->play_at);
-            $difTime = $rightNow->diffInSeconds($playTime);
-        }else if ($rightNow <= $programationsNow->play_at){
-            $playNow = 0;
-            $playTime = Carbon::parse($programationsNow->play_at);
-            $difTime = $playTime->diffInSeconds($rightNow);
+         $programationsCount = Programation::where('end_at', '>=', $rightNow)->orderBy('play_at', 'asc')->get()->count();
+         //echo "programations lenght".$programationsCount;
+
+         //Si existe alguna programación
+        if($programationsCount){
+            $playNow = 1;
+            $programations = Programation::where('end_at', '>=', $rightNow)->orderBy('play_at', 'asc')->get();
+            $programationsNow = $programations->first();
+            $movies = MovieInProgram::where('end_at', '>=', $rightNow)->where('programation_id','=', $programationsNow->id)->orderBy('play_at', 'asc')->get();
+            
+            $moviesNow = $movies->first();
+            //Si la programacion ya comenzo y aun se esta transmitiendo
+            if($rightNow >= $programationsNow->play_at && $rightNow <= $programationsNow->end_at){
+                $playTime = Carbon::parse($programationsNow->play_at);
+                $difTime = $rightNow->diffInSeconds($playTime);
+                $valid = 1;
+            //Si la programacion aun no empieza
+            }else if ($rightNow <= $programationsNow->play_at){
+                $playNow = 0;
+                $playTime = Carbon::parse($programationsNow->play_at);
+                $difTime = $playTime->diffInSeconds($rightNow);
+                $valid = 1;
+            }
+        //Si no hay nada programado
+        }else{
+            $programations = null;
+            $programationsNow = null;
+            $movies = null;
+            $moviesNow = null; 
         }
+
         
         //$difTime = gmdate('H:i:s', $dif);
         //$dif = $rightNow->toTimeString() - $playTime->toTimeString();
@@ -42,7 +65,7 @@ class CineTvController extends Controller
         $q->whereYear('created_at', '=', date('Y'));*/
     	//$playlists = Playlist::paginate(5);
     	//return view ('cineTv.index',compact('playlists'));
-        return view('cineTv.index',compact('programations','programationsNow','difTime','playNow'));
+        return view('cineTv.index',compact('programations','programationsNow','movies','moviesNow','difTime','playNow','valid'));
     }
     public function show($id)
     {

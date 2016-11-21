@@ -66,92 +66,61 @@
 <div class="content-grids">
   <div class="row">
     @foreach($trailers as $trailer)
-    @if ($trailer->video_id == $movie->id)
-    <h3 style="margin-top:0px">{{$movie->name}}</h3>
-    @endif
+      @if ($trailer->video_id == $movie->id)
+      <h3 style="margin-top:0px">{{$movie->name}}</h3>
+      @endif
     @endforeach
-    <div class="col-md-8">
+    <div class="col-xs-12 col-md-8">
 
-      {{--  --}}
-      {{-- <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" autoplay>
+      <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" autoplay>
         @if (Auth::guest())
-        <source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
-          @else
+          <source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
+        @else
           <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4">
-            @endif
-          </video>
-          <script>
-            videojs('player', {
-              controls: true,
-              nativeControlsForTouch: false,
-              width: 600,
-              height: 400,
-              plugins: {
-                ass: {
-                  'src': ["/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa"]
-                }
-              },
-              playbackRates: [0.5, 1, 1.5, 2]
-            });
-          </script> --}}
-           <p>para cinetv</p>
-       <video id="vid1" width="640" height="360"  autoplay controls>
-             <source src="/files/convert/videos/Blood Into Wine 2010 BRRip [A Release-Lounge H264].mp4" type="video/mp4" /> 
-             Your browser does not support the video tag.
-         </video> 
-         <button onclick="getCurTime()" type="button">Get current time position</button>
-        <button onclick="setCurTime()" type="button">Set time position to 5 seconds</button><br> 
-        <script>
-             var vid = document.getElementById("vid1");
+        @endif
+      </video>
+      <script>
+        videojs('player', {
+          controls: true,
+          nativeControlsForTouch: false,
+          width: 600,
+          height: 400,
+          /*plugins: {
+            ass: {
+              'src': ["/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa"]
+            }
+          }*/
+        });
+      </script>
+    </div>
 
-              function getCurTime() { 
-                  alert(vid.currentTime);
-              } 
-
-              function setCurTime() { 
-                  vid.currentTime=5;
-              } 
-         </script> 
-
-
-      
-
-         <{{-- script>
-             document.getElementById('vid1').addEventListener('loadedmetadata', function() {
-                this.currentTime = 50;
-              }, false);
-         </script>  --}}
-        </div>
-        @if (!Auth::guest())
+    <div class="col-xs-12 col-md-4">
+      @if (!Auth::guest())
 
         <div id="dv1">
-
-
         </div>
         <br><br><br>
-        <div class="col-md-4">
-          <div class="row">
-           <label>{{$movie->description}}</label> 
-           <br><br><br>  
-           <h5>Evalua este video</h5>
-           <!-- Rating start -->
-           <script>
+             
+        <div class="row">
+          <label>{{$movie->description}}</label> 
+          <br><br><br>  
+          <h5>Evalua este video</h5>
+          <!-- Rating start -->
+          <script>
             var j = jQuery.noConflict();
-            j(document).ready(function () {
+             j(document).ready(function () {
               j("#demo2 .stars").click(function () {
-
                 j.post('../rating.php',{
                   rate:$(this).val(),
                   user:{!! Auth::user()->id !!},
                   movie:{{$movie->id}}
                 },function(d){
-                  if(d>0)
-                  {
-            //alert('You already rated'+d);
-          }else{
-            //alert('Thanks For Rating');
-          }
-        });
+                  if(d>0){
+                    //alert('You already rated'+d);
+                  }else{
+                    //alert('Thanks For Rating');
+                  }
+                });
                 j(this).attr("checked");
               });
             });
@@ -179,101 +148,65 @@
             <label class="half" for="starhalf" title="Muy malo - 0.5 estrellas"></label>
           </fieldset>
           <!-- Demo 2 end -->
-
           <br><br><br>
           <div id='feedback'></div>
-
-          <!-- Demo 3 end -->
-
+                  <!-- Demo 3 end -->
           <div style='clear:both;'></div>
-
         </div>
+      @else
 
-      </div>
-
-    </div>
-    @else
-
-
-    <div id="dv1">
-
-
-    </div>
-    <br><br><br>
-    <div class="col-md-4">
-      <div class="row">
-        <label>{{$movie->description}}</label>
+        <div id="dv1">
+        </div>
         <br><br><br>
-        <label>Para visualizar este video completo debe estar registrado.</label>   
-      </div>   
+        <div class="row">
+          <label>{{$movie->description}}</label>
+          <br><br><br>
+          <label>Para visualizar este video completo debe estar registrado.</label>   
+        </div>
+      @endif
     </div>
   </div>
 
-  @endif
   <br><br><br>
-  <div class="col-md-12">
-  <H4>Videos recomendados</H4>
-  <div class="flexslider">
-    <ul class="slides">
-      <script defer src="/js/jquery.flexslider.js"></script>
-      <script type="text/javascript"> 
-        jQuery.noConflict();
-        jQuery(function() {
-          jQuery('.flexslider').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 120,
-            itemMargin: 5,
-            minItems: 2,
-            maxItems: 4,
+  <div class="col-md-12" style="max-width: 100%">
+    <H4>Videos recomendados</H4>
+    <div class="flexslider">
+      <ul class="slides">
+        <script defer src="/js/jquery.flexslider.js"></script>
+        <script type="text/javascript"> 
+          jQuery.noConflict();
+          jQuery(function() {
+            jQuery('.flexslider').flexslider({
+              animation: "slide",
+              animationLoop: false,
+              itemWidth: 120,
+              itemMargin: 5,
+              minItems: 2,
+              maxItems: 4,
+            });
           });
-        });
 
-      </script>
-      @foreach($newMovies as $movie2)
-      <li>
-        <a href="{{ action("MovieController@show", array($movie2->id)) }}">
-          <img src="../files/{{$movie2->imageRef}}" />
-          <h3 href="{{ action("MovieController@show", array($movie2->id)) }}" style="color: #888;
-            display: block;
-            font-family: 'Roboto';
-            font-size: 0.875em;
-            line-height: 1.5em;
-            padding: 10px 0;
-            text-transform: uppercase;
-            text-align:center;
-            margin-top: 0px">{{$movie2->name}}</h3>
-          </a>
-        </li>
+        </script>
+        @foreach($newMovies as $movie2)
+          <li>
+            <a href="{{ action("MovieController@show", array($movie2->id)) }}">
+              <img src="../files/{{$movie2->imageRef}}" />
+              <h3 href="{{ action("MovieController@show", array($movie2->id)) }}" style="color: #888;
+                display: block;
+                font-family: 'Roboto';
+                font-size: 0.875em;
+                line-height: 1.5em;
+                padding: 10px 0;
+                text-transform: uppercase;
+                text-align:center;
+                margin-top: 0px">{{$movie2->name}}</h3>
+            </a>
+          </li>
         @endforeach
-
       </ul>
     </div>
-    </div>
-
-
-{{-- <ul class="slider1">
-  <script type="text/javascript"> 
-    var jq = jQuery.noConflict();
-    jq(document).ready(function(){ 
-
-      jq('.slider1').bxSlider({
-        captions: true,
-        slideWidth: 200,
-        minSlides: 2,
-        maxSlides: 3,
-        slideMargin: 10
-      }); 
-    });
-  </script>
-  @foreach($movies as $movie2)
-  <div class="slide" >
-    <a href="{{ action("MovieController@show", array($movie2->id)) }}">
-      <img src="../files/{{$movie2->imageRef}}" title="{{$movie2->name}}">
-    </a>
   </div>
-  @endforeach
-</ul> --}}
+</div>
 
 @endsection
 
@@ -283,7 +216,6 @@
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
 <link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 <link href="/css/flexslider.css" rel="stylesheet" />
-{{-- <link href="/css/jquery.bxslider.css" rel="stylesheet" /> --}}
 @stop
 
 @section('page-js-files')

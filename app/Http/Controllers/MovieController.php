@@ -106,10 +106,12 @@ class MovieController extends Controller
         $users = User::all();
         if ($users){
            foreach($users as $user){
-                if($user->tipo == "profesor"){
+                if($user->tipo == "profesor" || $user->tipo == "administrador"){
                     $notif = Notification::create([
                         'movie_id' => $movieId,
                         'send_to' => $user->id,
+                        'user_id' => $request['usuario_id'],
+                        'reason' => 'create',
                     ]);
                 }
            }
@@ -226,6 +228,31 @@ class MovieController extends Controller
         $movie->save();
         $movies = Movie::paginate(4);
         $users = User::all();
+
+        $movieId = $movie->id;
+
+        if ($users){
+           foreach($users as $user){
+                if($user->tipo == "profesor" || $user->tipo == "administrador"){
+                    if($request['state'] == 0){
+                            $state = 'reprove';
+                        }else if($request['state'] == 1){
+                            $state = 'aprove';
+                        }else if($request['state'] == 2){
+                            $state = 'observation';
+                        }else if($request['state'] == 3){
+                            $state = 'wait';
+                        }
+                    $notif = Notification::create([
+                        'movie_id' => $movieId,
+                        'send_to' => $user->id,
+                        'user_id' => $request['usuario_id'],
+                        'reason' => $state,
+                    ]);
+                }
+           }
+        }
+
         return view ('cpanel.movieapprove', compact('movies','users'));
     }
 
