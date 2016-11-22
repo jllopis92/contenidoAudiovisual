@@ -19,6 +19,8 @@ menu responsive
 <script src="http://listjs.com/assets/javascripts/list.min.js"></script>
 <script type="text/javascript" src="/assets/vendor/list.pagination.js/dist/list.pagination.js"></script>
 
+<script type="text/javascript" src="/js/jquery.dynatable.js"></script>
+
 <style type="text/css">
 	.list {
   font-family:sans-serif;
@@ -146,29 +148,18 @@ input:focus {
         <input type="text" name="alertext" id="alertext">
         	<H3 style="margin-top: 0">El Horario se encuentra ocupado</H3>
         </div> --}}
-    </div>
+    	</div>
+	</div>
 
-</div>
-
-<script type="text/javascript">
-            $(function () {
-         		$('#datetimepicker').datetimepicker({
-                    locale: 'es',
-                    format: 'YYYY-MM-DD HH:mm:ss',
-                	sideBySide: true
-                });
-                /*$( "#datetimepicker" ).click(function() {
-                	$("#alertext").val($("#start").val());
-				  //alert( $("#start").val());
-				});*/
-                
-               /* var datetimepicker = $('#datetimepicker').val();
-                $('#start').val(datetimepicker);*/
-                /*var datetimepicker = document.getElementById('datetimepicker');
-                var start = document.getElementById('start');
-                start.value = datetimepicker.value;*/
+	<script type="text/javascript">
+        $(function () {
+         	$('#datetimepicker').datetimepicker({
+                locale: 'es',
+                format: 'YYYY-MM-DD HH:mm:ss',
+                sideBySide: true
             });
-        </script>
+        });
+    </script>
 
 {{-- <div class = "form-group" style ="display: none;">
 {!! Form::label('duration', 'Duración :') !!}
@@ -253,6 +244,8 @@ input:focus {
 			var moviesList = new List('movies', options);
 		});
 		var programation = [];
+		var programationTable = [];
+		programationTable.push(["Nombre", "Inicio"]);
 		
 		function addToList(id, name, url, duration){
 			var actualId = id;
@@ -260,22 +253,76 @@ input:focus {
 			var actualUrl = url;
 			var actualDuration = duration;
 
-			var addMovie = '{"id":"' + actualId + '","name":"' + actualName + ',"url":"' + actualUrl + ' ,"duration":"'+ duration +'" }';
+			/*var addMovie = {
+			    "id": " " + actualId + " ",
+			    "name": " " +actualName + " ",
+			    "url": " " +actualUrl + " ",
+			    "duration": " " +duration + " "
+			};*/
+
+			programationTable.push([actualName, actualDuration]);
+
+			var addMovie = '{"id":"' + actualId + '","name":"' + actualName + ',"url":"' + actualUrl + ' ,"duration":"'+ duration +'"}';
 			programation.push(addMovie);
 
 			document.getElementById('program').innerHTML = programation;
+			GenerateTable();
 		} 
 		function cleanProgramming(){
 		    if (confirm("¿Esta seguro de limpiar la programación? Los datos que no han sido guardados se perderan") == true) {
-		    	while(programation.length > 0) {
+		    	while(programationTable.length > 0) {
+				    programationTable.pop();
+				}
+				programationTable.push(["Nombre", "Inicio"]);
+				while(programation.length > 0) {
 				    programation.pop();
 				}
-			document.getElementById('program').innerHTML = programation;
+				document.getElementById('program').innerHTML = programation;
+				GenerateTable();
 		    }
+		}
+
+		 function GenerateTable() {
+		    //Build an array containing Customer records.
+		    /*var customers = new Array();
+		    customers.push(["Customer Id", "Name", "Country"]);
+		    customers.push([1, "John Hammond", "United States"]);
+		    customers.push([2, "Mudassar Khan", "India"]);
+		    customers.push([3, "Suzanne Mathews", "France"]);
+		    customers.push([4, "Robert Schidner", "Russia"]);
+		 	*/
+		    //Create a HTML Table element.
+		    var table = document.createElement("table");
+		    table.className = "table";
+		    //table.border = "1";
+		 
+		    //Get the count of columns.
+		    var columnCount = programationTable[0].length;
+		 
+		    //Add the header row.
+		    var row = table.insertRow(-1);
+		    for (var i = 0; i < columnCount; i++) {
+		        var headerCell = document.createElement("th");
+		        headerCell.innerHTML = programationTable[0][i];
+		        row.appendChild(headerCell);
+		    }
+		 
+		    //Add the data rows.
+		    for (var i = 1; i < programationTable.length; i++) {
+		        row = table.insertRow(-1);
+		        for (var j = 0; j < columnCount; j++) {
+		            var cell = row.insertCell(-1);
+		            cell.innerHTML = programationTable[i][j];
+		        }
+		    }
+		 
+		    var dvTable = document.getElementById("dvTable");
+		    dvTable.innerHTML = "";
+		    dvTable.appendChild(table);
 		}
 	</script>
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-8 pre-scrollable">
 		<H4 style="margin-top: 20px">Seleccione Videos a agregar</H4>
 
 		<div id="movies">
@@ -301,15 +348,20 @@ input:focus {
   		</div>
 
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 pre-scrollable">
 		<H5 id="start_tittle" style="margin-top: 0">Agregados</H3>
 		<H3 id="end_tittle" style="margin-top: 0">Agregados</H3>
 		<div id="time"></div>
 
 		<div id="program"></div>
 
-		<button onclick="cleanProgramming()">Limpiar Programación</button>
+		<div id="dvTable">
+		</div>
 
+	<div class="col-md-12">
+		<button type="button" class="btn btn-danger" onclick="cleanProgramming()">Limpiar Programación</button>
+		<button type="button" class="btn btn-primary" name="sendProgram">Enviar</button>
+	</div>
 
 	</div>
 </div>

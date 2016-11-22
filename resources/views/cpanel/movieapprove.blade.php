@@ -43,7 +43,7 @@
 			        document.getElementById("description").value = "";
 			    }
 			    document.getElementById("state_"+id).value = status;
-			    alert("change status to : "+status)
+			    alert(id + "change status to : " + status);
 			}
 		</script>
 		  
@@ -96,7 +96,7 @@
 						</tr>
 						<tr>
 							<td colspan="3" style ="border-top: 1px solid #ffffff;">
-							{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
+								{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
 								<div class = "form-group" style ="display: none;">
 									<input id="video_id" type="text" class="form-control" name="video_id" value="{{ $aprove->id }}">
 								</div>
@@ -104,11 +104,11 @@
 								<input id="state_{{$aprove->id}}" type="text" class="form-control" name="state_{{$aprove->id}}" value="">
 								</div>
 								<div class = "form-group" id = "commentary_{{$aprove->id}}" style ="display: none;">
-										{!! Form::label('description', 'Descripción:') !!}
-				    					{!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+										{!! Form::label('observation', 'Descripción:') !!}
+				    					{!! Form::textarea('observation', null, ['class'=> 'form-control', 'required'=> '']) !!}
 				    					{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
-				    				{!! Form::close() !!}
 			    				</div>
+			    				{!! Form::close() !!}
 							</td>
 						</tr>
 					</tbody>
@@ -171,8 +171,8 @@
 								<input id="state_{{$observation->id}}" type="text" class="form-control" name="state_{{$observation->id}}" value="">
 								</div>
 								<div class = "form-group" id = "commentary_{{$observation->id}}" style ="display: none;">
-										{!! Form::label('description', 'Descripción:') !!}
-				    					{!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+										{!! Form::label('observation', 'Descripción:') !!}
+				    					{!! Form::textarea('observation', null, ['class'=> 'form-control', 'required'=> '']) !!}
 				    					{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
 				    				{!! Form::close() !!}
 			    				</div>
@@ -239,8 +239,8 @@
 									<input id="state_{{$reprove->id}}" type="text" class="form-control" name="state_{{$reprove->id}}" value="">
 									</div>
 									<div class = "form-group" id = "commentary_{{$reprove->id}}" style ="display: none;">
-											{!! Form::label('description', 'Descripción:') !!}
-					    					{!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+											{!! Form::label('observation', 'Descripción:') !!}
+					    					{!! Form::textarea('observation', null, ['class'=> 'form-control', 'required'=> '']) !!}
 					    					{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
 					    				{!! Form::close() !!}
 				    				</div>
@@ -309,8 +309,8 @@
 									<input id="state_{{$wait->id}}" type="text" class="form-control" name="state_{{$wait->id}}" value="">
 									</div>
 									<div class = "form-group" id = "commentary_{{$wait->id}}" style ="display: none;">
-											{!! Form::label('description', 'Descripción:') !!}
-					    					{!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+											{!! Form::label('observation', 'Descripción:') !!}
+					    					{!! Form::textarea('observation', null, ['class'=> 'form-control', 'required'=> '']) !!}
 					    					{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
 					    				{!! Form::close() !!}
 				    				</div>

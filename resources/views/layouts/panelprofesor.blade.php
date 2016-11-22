@@ -66,11 +66,11 @@
                     </script>
                     @endif --}}
                     @if (!Auth::guest())
-                    @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno"))
-                    <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/upload') }}">Subir Video</a></li>
-                    </ul>
-                    @endif
+                        @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno") || (Auth::user()->tipo == "administrador"))
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/upload') }}">Subir Video</a></li>
+                        </ul>
+                        @endif
 
                     @endif
                     <!-- Right Side Of Navbar -->
@@ -154,7 +154,8 @@
                     </ul>
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="{!! url('createplaylist')!!}"> Videos en Evaluación</a>
+                        {{-- TODO: crear esta vista --}}
+                            <a href="{!! url('createplaylist')!!}">Mis Videos</a>
                         </li>
                     </ul>
                 </div>

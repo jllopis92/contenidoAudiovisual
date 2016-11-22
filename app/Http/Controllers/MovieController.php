@@ -222,11 +222,16 @@ class MovieController extends Controller
     {
         $id = $request['video_id'];
         $movie = Movie::find($id);
+        $newState = $request['state_'.$id];
         $movie->fill([
-            'state' => $request['state'],
+            'state' => $newState,
+        ]);
+        if($newState == 0 || $newState == 2){
+            $movie->fill([
+                'observation' => $request['observation'],
             ]);
+        }
         $movie->save();
-        $movies = Movie::paginate(4);
         $users = User::all();
 
         $movieId = $movie->id;
@@ -234,13 +239,13 @@ class MovieController extends Controller
         if ($users){
            foreach($users as $user){
                 if($user->tipo == "profesor" || $user->tipo == "administrador"){
-                    if($request['state'] == 0){
+                    if($newState == 0){
                             $state = 'reprove';
-                        }else if($request['state'] == 1){
+                        }else if($newState == 1){
                             $state = 'aprove';
-                        }else if($request['state'] == 2){
+                        }else if($newState == 2){
                             $state = 'observation';
-                        }else if($request['state'] == 3){
+                        }else if($newState== 3){
                             $state = 'wait';
                         }
                     $notif = Notification::create([
@@ -253,7 +258,21 @@ class MovieController extends Controller
            }
         }
 
-        return view ('cpanel.movieapprove', compact('movies','users'));
+        $aproves = DB::table('movies')
+        ->where('state', '=', 1)
+        ->paginate(6);
+        $reproves = DB::table('movies')
+        ->where('state', '=', 0)
+        ->paginate(6);
+        $waits = DB::table('movies')
+        ->where('state', '=', 3)
+        ->paginate(6);
+        $observations = DB::table('movies')
+        ->where('state', '=', 2)
+        ->paginate(6);
+
+        $users = User::all();
+        return view ('cpanel.movieapprove',compact('aproves','reproves','waits','observations','users'));
     }
 
     /**
