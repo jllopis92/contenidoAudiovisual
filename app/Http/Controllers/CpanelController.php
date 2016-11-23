@@ -121,7 +121,7 @@ class CpanelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         $user = User::find($id);
         $user->delete();
@@ -131,8 +131,9 @@ class CpanelController extends Controller
     }
     public function showadvert()
     {
-        $advertisings = Advertising::paginate(8);
-        return view ('cpanel.showAdvertising',compact('advertisings'));
+        $advertisings = Advertising::where('state', 1)->paginate(8);
+        $create = 0;
+        return view ('cpanel.showAdvertising',compact('advertisings','create'));
     }
     public function createadvert()
     {

@@ -47,7 +47,7 @@ class TestController extends Controller
         return response()->json([
             "mensaje" => "creado"
             ]);
-    }
+        }
 /*
         $movie = Movie::create([
             'usuario_id' => $request['usuario_id'],

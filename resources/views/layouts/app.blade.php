@@ -102,6 +102,7 @@
     </style>
     
 </head>
+
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; position: fixed; z-index: 100; width:100%">
         <div class="container">
@@ -140,7 +141,7 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                    <div class="col-sm-3 col-md-3" style="width: 300px;">
+                    <div class="hidden-xs col-sm-3 col-md-3" style="width: 300px;">
                         {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search', 'class'=>'navbar-form'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Buscar" name="search">
@@ -214,12 +215,20 @@
             </div>
         </div>
     </nav>
+
+    {{--  
+menu responsive
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+       --}}
     
     <div id="wrapper">
         <div class="navbar-default sidebar" style="padding-top: 50px;" id="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li>
+                <ul class="sidebar-nav" id="side-menu">
+                    <li class="sidebar-brand">
                         <h4 style="margin-left: 20px;"> Busqueda por Filtro</h4>
                     </li>
                     
@@ -231,7 +240,7 @@
                 </li> --}}
             </ul>
             {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
-            <ul class="nav" id="side-menu">
+            <ul class="sidebar-nav" id="side-menu">
                 <h5 style="margin-left: 20px; margin-bottom: 0px; margin-top: 20px;">Tipo de Video</h5>
                 <div class="col-md-6 col-md-offset-4">
                     <div class="checkbox" style="margin-left: -50px;">
@@ -272,7 +281,7 @@
                     </div>
                 </div>
             </ul>
-            <ul class="nav">
+            <ul class="sidebar-nav">
                 <h5 style="margin-left: 20px; margin-bottom: 0px;">Formato</h5>
                 <div class="col-md-6 col-md-offset-4">
                     <div class="checkbox" style="margin-left: -50px;">

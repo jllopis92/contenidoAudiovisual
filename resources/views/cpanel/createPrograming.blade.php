@@ -1,15 +1,6 @@
 @extends('layouts.panelprofesor')
 @section('content')
 
-
-{{--  
-menu responsive
-<div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
-       --}}
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="/assets/vendor/moment/min/moment.min.js"></script>
 <script type="text/javascript" src="/js/locale/es.js"></script>
@@ -20,6 +11,8 @@ menu responsive
 <script type="text/javascript" src="/assets/vendor/list.pagination.js/dist/list.pagination.js"></script>
 
 <script type="text/javascript" src="/js/jquery.dynatable.js"></script>
+{{-- <script type="text/javascript" src="/js/sendProgramming.js"></script> --}}
+
 
 <style type="text/css">
 	.list {
@@ -121,6 +114,7 @@ input:focus {
 
 {{-- {!! Form::open(['id' => 'newPlaylist', 'route' =>'programing.store', 'method'=>'POST', 'data-parsley-validate'=>'' ]) !!} --}}
 <div class = "form-group">
+
     {{-- <div class='input-group date' id='datetimepicker'>
         <input id='start' type='text' class="form-control" />
         <span class="input-group-addon">
@@ -137,7 +131,7 @@ input:focus {
 		        </span>
 	        </div>
 	        <div class="alert alert-danger">
-				<strong>El horario seleccionado ya se encuentra en uso!</strong> Seleccione otro horario para la programación
+				<strong>El horario seleccionado ya se encuentra en uso.</strong> Seleccione otro horario para la programación.
 			</div>
         {{-- <div id="sandbox-container div"></div> --}}
             {{-- <div id="datetimepicker"></div> --}}
@@ -171,68 +165,9 @@ input:focus {
 </div>
  --}}
 <script type="text/javascript">
-	/*function toSeconds(s) {
-		var p = s.split(':');
-		return parseInt(p[0], 10) * 3600 + parseInt(p[1], 10) * 60 + parseInt(p[2], 10);
-	}
-
-	function fill(s, digits) {
-		s = s.toString();
-		while (s.length < digits) s = '0' + s;
-			return s;
-	}
-	var actualDuration = "00:00:00"
-	function UpdateDuration(check, duration){
-		if(document.getElementById(check).checked == true){
-			var sec = toSeconds(actualDuration) + toSeconds(duration);
-
-		}else{
-			var sec = toSeconds(actualDuration) - toSeconds(duration);
-		}
-		var result = fill(Math.floor(sec / 3600), 2) + ':' + fill(Math.floor(sec / 60) % 60, 2) + ':' + fill(sec % 60, 2);
-		actualDuration = result;
-		document.getElementById('durationView').innerHTML = "Duración: " + actualDuration;
-		document.getElementById('duration').value = actualDuration;
-
-		var start_date = document.getElementById('start').value;
-		document.getElementById('start_tittle').innerHTML = "Hora de Inicio: " + start_time;
-
-		
-		var temp = start_date.split(" ");
-		var start_time = temp[1];
-		var temp2 = start_time.split(":");
-		var hour = temp2[0];
-		var minute = temp2[1];
-		var seconds = temp2[2];
-		var end_program = new Date();
-		end_program.setHours(hour);
-		end_program.setMinutes(minute);
-		end_program.setSeconds(seconds);
-
-		document.getElementById('end_tittle').innerHTML = "Fin: " + end_program;
-		
-		//document.getElementById('duration').value = actualDuration;
-		function checkTime(i) {
-		    if (i < 10) {
-		        i = "0" + i;
-		    }
-		    return i;
-		}
-		function startTime() {
-		    var today = new Date();
-		    var h = today.getHours();
-		    var m = today.getMinutes();
-		    var s = today.getSeconds();
-		    // add a zero in front of numbers<10
-		    m = checkTime(m);
-		    s = checkTime(s);
-		    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
-		    t = setTimeout(function () {
-		        startTime()
-		    }, 500);
-		}
-		startTime();
-		}*/
+		//Tiempo cero
+		var timeDuration = "00:00:00"
+		//Crear lista para seleccion de videos
 		$(document).ready(function(e) {
 			var options = {
 			  valueNames: [ 'name', 'duration' ],
@@ -243,31 +178,151 @@ input:focus {
 			};
 			var moviesList = new List('movies', options);
 		});
+		//Json para envio a servidor
 		var programation = [];
+		//Json para crear tablas
 		var programationTable = [];
+		//Tiempo de inicio de reproduccion de video actual
+		var timeToPlay = "00:00:00";
+		//True si la programacion es vacia
+		var firstTime = true;
+		//Agrega Titulos a tabla
 		programationTable.push(["Nombre", "Inicio"]);
-		
+
+		/**
+		* Función que checkea si la hora de inicio fue asignada (obligatorio)
+		**/
+		function getSelectedHour(){
+			//Toma el valor de variable DateTime
+			var start_date = document.getElementById('start').value;
+			if(start_date == ""){
+				return null;
+			}else{
+				var castDate = new Date(start_date);
+				var hours = castDate.getHours();
+				var minutes = castDate.getMinutes();
+				var seconds = castDate.getSeconds();
+				var timeToStart = hours + ":" + minutes + ":" + seconds;
+				return timeToStart;
+			}
+		}
+		/**
+		* Agrega elementos a tabla y a lista para envío
+		**/
 		function addToList(id, name, url, duration){
-			var actualId = id;
-			var actualName = name;
-			var actualUrl = url;
-			var actualDuration = duration;
 
-			/*var addMovie = {
-			    "id": " " + actualId + " ",
-			    "name": " " +actualName + " ",
-			    "url": " " +actualUrl + " ",
-			    "duration": " " +duration + " "
-			};*/
+			var timeSelected = getSelectedHour();
+			if(timeSelected == null){
+				alert("Debe Ingresar Fecha y hora de comienzo");
+			}else{
+				if(firstTime){
+					timeToPlay = timeSelected;
+				}
+				//Asignaciones de variables recibidas
+				var actualId = id;
+				var actualName = name;
+				var actualUrl = url;
+				var actualDuration = duration;
+				//Agrega nuevos datos a Json para tablas
+				timeToPlay = checkTime(timeToPlay);
+				programationTable.push([actualName, timeToPlay]);
 
-			programationTable.push([actualName, actualDuration]);
+				//Se asigna la fecha seleccionada y luego se separa
+				var start_date = document.getElementById('start').value;
+				var castDate = new Date(start_date);
+				var day = castDate.getUTCDate();
+				var month = castDate.getUTCMonth() + 1; //months from 1-12
+				var year = castDate.getUTCFullYear();
+				if(day <= 9){
+					day = '0' + day;
+				}
+				if(month <= 9){
+					month = '0' + month;
+				}
 
-			var addMovie = '{"id":"' + actualId + '","name":"' + actualName + ',"url":"' + actualUrl + ' ,"duration":"'+ duration +'"}';
-			programation.push(addMovie);
+				//Convierte a segundos y suma el tiempo actual con la duracion del video ingresado
+				var sec = toSeconds(timeToPlay) + toSeconds(actualDuration);
+				//Transforma los segundos a formato HH:mm:ss
+				var result = fill(Math.floor(sec / 3600), 2) + ':' + fill(Math.floor(sec / 60) % 60, 2) + ':' + fill(sec % 60, 2);
+				//Variable temporal
+				var timeToEnd = result;
 
-			document.getElementById('program').innerHTML = programation;
-			GenerateTable();
-		} 
+				//El tiempo de inicio y el tiempo de fin, son separados en horas, minutos y segundos y luego asignados junto con la fecha actual
+				var elemStart = timeToPlay.split(':');
+				var hourStart = elemStart[0];
+				var minuteStart = elemStart[1];
+				var secondStart = elemStart[2];
+
+				if(hourStart <= 9){
+					hourStart = '0' + hourStart;
+				}
+				if(minuteStart <= 9){
+					minuteStart = '0' + minuteStart;
+				}
+				if(secondEnd <= 9){
+					secondEnd = '0' + secondEnd;
+				}
+				var dateToPlay = new Date(year, month, day, hourStart, minuteStart, secondStart);
+
+				var elemEnd = timeToEnd.split(':');
+				var hourEnd = elemEnd[0];
+				var minuteEnd = elemEnd[1];
+				var secondEnd = elemEnd[2];
+
+				if(hourEnd <= 9){
+					hourEnd = '0' + hourEnd;
+				}
+				if(minuteEnd <= 9){
+					minuteEnd = '0' + minuteEnd;
+				}
+				if(secondEnd <= 9){
+					secondEnd = '0' + secondEnd;
+				}
+
+				var dateToEnd = new Date(year, month, day, hourEnd, minuteEnd, secondEnd);
+				//Json creado con datos recibidos
+				var addMovie = '{"id":"' + actualId + '","name":"' + actualName + '","url":"' + actualUrl + '" ,"duration":"'+ duration +'","play_at":"' + dateToPlay +'","end_at":"' + dateToEnd +'"}';
+				//Agrega nuevos datos a Json para envio
+				programation.push(addMovie);
+				//Reasigna el tiempo de inicio para el siguiente video
+				timeToPlay = timeToEnd;
+
+				//Calcula duracion independiente de la hora de inicio y transforma los segundos a formato HH:mm:ss
+				var sec = toSeconds(timeDuration) + toSeconds(actualDuration);
+				var result = fill(Math.floor(sec / 3600), 2) + ':' + fill(Math.floor(sec / 60) % 60, 2) + ':' + fill(sec % 60, 2);
+				//asgina resultado a variable iterativa
+				timeDuration = result;
+				//TODO: Muestra tiempo actual (Borrar)
+				document.getElementById('total_duration').innerHTML = "Duración Total: " + timeDuration;
+				//TODO: Muestra json actual (Borrar)
+				document.getElementById('program').innerHTML = programation;
+				//Finaliza el primer ciclo
+				firstTime = false;
+				//Genera nueva tabla
+				GenerateTable();
+			}
+		}
+		/**
+		* Si la hora es mayor a 23, pasa al dia siguiente
+		**/
+		function checkTime(timeToPlay){
+			var elemStart = timeToPlay.split(':');
+			var hourStart = elemStart[0];
+			var minuteStart = elemStart[1];
+			var secondStart = elemStart[2];
+			if(hourStart == '24'){
+				hourStart = '00';
+			} else if(hourStart == '25'){
+				hourStart = '01';
+			} else if(hourStart == '26'){
+				hourStart = '02';
+			}
+			var newTimeToPlay = hourStart + ":" + minuteStart + ":" + secondStart;
+			return newTimeToPlay;
+		}
+		/**
+		* Borrar toda la programación con sus respectivas tablas y listas
+		**/
 		function cleanProgramming(){
 		    if (confirm("¿Esta seguro de limpiar la programación? Los datos que no han sido guardados se perderan") == true) {
 		    	while(programationTable.length > 0) {
@@ -278,11 +333,17 @@ input:focus {
 				    programation.pop();
 				}
 				document.getElementById('program').innerHTML = programation;
+
+				firstTime = true;
+				timeDuration = "00:00:00"
+				document.getElementById('total_duration').innerHTML = "Duración Total: " + timeDuration;
 				GenerateTable();
 		    }
 		}
-
-		 function GenerateTable() {
+		/**
+		* Genera tabla con Json enviado
+		**/
+		function GenerateTable() {
 		    //Build an array containing Customer records.
 		    /*var customers = new Array();
 		    customers.push(["Customer Id", "Name", "Country"]);
@@ -320,6 +381,46 @@ input:focus {
 		    dvTable.innerHTML = "";
 		    dvTable.appendChild(table);
 		}
+
+		function toSeconds(s) {
+			var p = s.split(':');
+			return parseInt(p[0], 10) * 3600 + parseInt(p[1], 10) * 60 + parseInt(p[2], 10);
+		}
+
+		function fill(s, digits) {
+			s = s.toString();
+			while (s.length < digits) s = '0' + s;
+				return s;
+		}
+		/**
+		* Envia Json a servidor
+		**/
+		function sendProgramming(){
+			if(programationTable.length <= 0){
+				alert ("No se han agregado elementos a la programación");
+			}else{
+				var programToSend = '[' + programation + ']';
+				alert ("A enviar: "+ programToSend);
+				var j = jQuery.noConflict();
+				var token = j("#token").val();
+				var route = "/programing";
+				j.ajax({
+					url: route,
+					headers: {'X-CSRF-TOKEN': token},
+					type: 'POST',
+					dataType: 'json',
+					data:{jsonSend: programToSend},
+					success: function (msg) {
+		                if (msg) {
+		                   /*alert("Somebody" + msg + " was added in list !");
+		                   location.reload(true);*/
+		                } else {
+		                   //alert("Cannot add to list !");
+		                }
+		           }
+				});
+			}
+		}
 	</script>
 <div class="row">
 	<div class="col-md-8 pre-scrollable">
@@ -339,17 +440,13 @@ input:focus {
 		        	<p class="duration">{{$movie->duration}}</p>
 		      </li>
 		    @endforeach
-		      {{-- <li>
-		        <h3 class="name">Jonas Arnklint</h3>
-		        <p class="born">1985</p>
-		      </li> --}}
 		    </ul>
 		    <ul class="pagination"></ul>
   		</div>
 
 	</div>
 	<div class="col-md-4 pre-scrollable">
-		<H5 id="start_tittle" style="margin-top: 0">Agregados</H3>
+		
 		<H3 id="end_tittle" style="margin-top: 0">Agregados</H3>
 		<div id="time"></div>
 
@@ -358,9 +455,14 @@ input:focus {
 		<div id="dvTable">
 		</div>
 
+		<H5 id="total_duration" style="margin-top: 0">Agregados</H3>
+
 	<div class="col-md-12">
 		<button type="button" class="btn btn-danger" onclick="cleanProgramming()">Limpiar Programación</button>
-		<button type="button" class="btn btn-primary" name="sendProgram">Enviar</button>
+		{!!Form::open()!!}
+		<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+		<button type="button" class="btn btn-primary" onclick="sendProgramming()">Enviar</button>
+		{!!Form::close()!!}
 	</div>
 
 	</div>

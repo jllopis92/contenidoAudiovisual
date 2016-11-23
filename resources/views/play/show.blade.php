@@ -70,28 +70,45 @@
       <h3 style="margin-top:0px">{{$movie->name}}</h3>
       @endif
     @endforeach
-    <div class="col-xs-12 col-md-8">
-
-      <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" autoplay>
+    <div class="col-sm-8">
+        <video autoplay controls id="player" class="embed-responsive-item" style="height: 70%; width: 90%">
+            @if (Auth::guest())
+              <source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
+            @else
+              <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4">
+            @endif
+        </video>
+  
+     {{--  <div class="embed-responsive embed-responsive-16by9">
+        <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" autoplay controls>
         @if (Auth::guest())
           <source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
         @else
           <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4">
         @endif
-      </video>
+      </video> --}}
       <script>
-        videojs('player', {
+       /* videojs('player', {
           controls: true,
           nativeControlsForTouch: false,
           width: 600,
-          height: 400,
+          height: 400,*/
           /*plugins: {
             ass: {
               'src': ["/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa"]
             }
           }*/
-        });
+        //});
+        $("#player").bind("ended", function() {
+            alert('Video ended!');
+          });
+        
+        //alert("Actual: "+ actual);
       </script>
+      </div>
+    <div class="col-sm-4">
+
+      
     </div>
 
     <div class="col-xs-12 col-md-4">
@@ -185,7 +202,6 @@
               maxItems: 4,
             });
           });
-
         </script>
         @foreach($newMovies as $movie2)
           <li>

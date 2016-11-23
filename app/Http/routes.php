@@ -33,6 +33,7 @@ Route::get('/', 'HomeController@index');
 	Route::get('showadver','CpanelController@showadvert');
 	Route::get('createadver','CpanelController@createadvert');
 	Route::get('createprogram','CpanelController@createprogram');
+	Route::post('deleteadvertising','AdvertisingController@delete');
 	Route::resource('advertising','AdvertisingController');
 	Route::resource('programing','ProgramingController');
 	//Route::post('createtest','TestController@store');

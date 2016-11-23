@@ -337,13 +337,8 @@
 </div>
 
 
-
-    {{-- <script type="text/javascript">
-  function showmovieSlide(){
-      document.getElementById("slide2").style.display="inline";
-  }
-</script> --}}
-
+<div class="container">
+</div>
  <div class="col-md-12 center-block" style="float: none;">
     <div class="col-xs-12 col-sm-12 col-md-12">
       <H3>Nuevos</H3>
