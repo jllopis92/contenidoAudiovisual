@@ -164,7 +164,11 @@ class MovieController extends Controller
                     'url' => $request['trailer_subtitle'],
                     ]);
             }
-        }        
+        }  
+        $users = User::paginate(4);
+        //para ver archivos eliminados
+        //$users = User::onlyTrashed()->paginate(4);
+        return view ('cpanel.index', compact('users'));      
         return "OK";
     }
 

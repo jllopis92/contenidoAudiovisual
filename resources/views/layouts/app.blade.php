@@ -128,9 +128,9 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/') }}">Inicio</a></li>
                 </ul>
-                <ul class="nav navbar-nav">
+                {{-- <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cine_tv') }}">Cine TV</a></li>
-                </ul>
+                </ul> --}}
                 @if (!Auth::guest())
                     @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno"))
                     <ul class="nav navbar-nav">
@@ -162,7 +162,7 @@
 <button class="btn btn-primary" type="button">
   Messages <span class="badge">4</span>
 </button> --}}
-                    <li id="notification_li">
+                   {{--  <li id="notification_li">
                         <span id="notification_count" style="margin-top: 0px; ">3</span>
                         <a href="#" id="notificationLink">Notificaciones</a>
 
@@ -197,7 +197,7 @@
                         </div>
 
 
-                    </li>
+                    </li> --}}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->email }} <span class="caret"></span>

@@ -26,6 +26,7 @@
           var isPlaying = {{$playNow}};
           var moviesArr = [];
           var j = jQuery.noConflict();
+          alert("cantidad:{{$programationsCount}} hora:{{$rightNow}} tiempo: {{$difTime}} isplay: {{$playNow}}")
           j(document).ready(function() {
             //alert(time);
             /*Si el video se esta reproduciendo, se adelanta al minuto correspondiente, si aun no empieza se envia aviso, en ambos casos se envian los videos posteriores a un arreglo js

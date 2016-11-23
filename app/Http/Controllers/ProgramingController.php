@@ -37,8 +37,7 @@ class ProgramingController extends Controller
                 $duration = $obj->duration;
                 $newDuration = new DateTime($duration);
                 $formatDuration = $newDuration->format('H:i:s');
-                //$date = new DateTime($duration);
-                //$totalDuration = $totalDuration + $duration;
+
                 if($iteration == 0){
                     $inicio = new DateTime($play_at);
                     $totalDuration = $formatDuration;
@@ -63,31 +62,45 @@ class ProgramingController extends Controller
                     }
 
                     $totalDuration = date("H:i:s", strtotime($time1));
-                    /*$newDuration = strtotime($totalDuration)+strtotime($formatDuration);
-                    $totalDuration = date("h:i:s",$newDuration);*/
-                    //$ip = "123.456.789.000"; // some IP address
-                    /*$times = split ("\:", $formatDuration);
-                    $totalTimes = split ("\:", $totalDuration);
-
-                    $totalTimes = $times[0];
-
-                    print "$iparr[0] <br />";
-                    print "$iparr[1] <br />" ;
-                    print "$iparr[2] <br />"  ;
-                    print "$iparr[3] <br />"  ;*/
+                    
                 }
                 $iteration = $iteration + 1;
             }
-            $totalTimes = explode (":", $totalDuration);
-            $fullTime = $totalTimes[0].":".$totalTimes[1].":".$totalTimes[2];
-
             $movies = Movie::all();
             $programation = Programation::create([
                 'duration' => $totalDuration,
                 'play_at' => $inicio,
                 'end_at' => $fin,
             ]);
-            /*$movies = Movie::all();
+            $programationId = $programation->id;
+            foreach($array as $obj){
+                $id = $obj->id;
+                $name = $obj->name;
+                $url = $obj->url;
+                $duration = $obj->duration;
+                $play_at = $obj->play_at;
+                $end_at = $obj->end_at;
+                $inicio = new DateTime($play_at);
+                $fin = new DateTime($end_at);
+                
+                foreach ($movies as $movie){
+                    if($movie->id == $obj->id){
+                        $MovieInProgram = MovieInProgram::create([
+                            'programation_id' => $programationId,
+                            'movie_id' => $id,
+                            'name' => $name,
+                            'url' => $movie->url,
+                            'play_at' => $inicio,
+                            'end_at' => $fin, 
+                        ]);
+                    }
+                }
+            }
+        return "program: ". $programation;
+        }
+    }
+}
+        /*$movies = Movie::all();
             $programation = Programation::create([
                 'duration' => $request['duration'], //calcular
                 'play_at' => $inicio,
@@ -106,30 +119,26 @@ class ProgramingController extends Controller
                     ]);
                 }
             }*/
-        return "program: ". $programation;
         //return $formatDate;
         //return "Objetos: ".sizeof($array);
         //return "Iter: ". $iteration;
-    	/*$timestamp = strtotime($request['start']);
-    	echo "time: ".$request['start'];
+        /*$timestamp = strtotime($request['start']);
+        echo "time: ".$request['start'];
         $movies = Movie::all();
         $programation = Programation::create([
-        	'start_at' => $request['start_at'],
-        	'duration' => $request['duration'],
-        	'play_at' => $timestamp,
-        	]);
+            'start_at' => $request['start_at'],
+            'duration' => $request['duration'],
+            'play_at' => $timestamp,
+            ]);
         $programationId = $programation->id;
         foreach ($movies as $movie){
-        	if($request[$movie->id] != null){
-        		 $MovieInProgram = MovieInProgram::create([
-	        		'programation_id' => $programation->id,
-	        		'movie_id' => $movie->id,
-	        		'name' => $movie->name,
-	        		'url' => $movie->url,
-        		]);
-        	}
+            if($request[$movie->id] != null){
+                 $MovieInProgram = MovieInProgram::create([
+                    'programation_id' => $programation->id,
+                    'movie_id' => $movie->id,
+                    'name' => $movie->name,
+                    'url' => $movie->url,
+                ]);
+            }
         }*/
         //return $programation->id;
-        }
-    }
-}

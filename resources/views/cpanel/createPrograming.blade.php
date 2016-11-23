@@ -130,7 +130,7 @@ input:focus {
 		        <span class="glyphicon glyphicon-calendar"></span>
 		        </span>
 	        </div>
-	        <div class="alert alert-danger">
+	        <div class="alert alert-danger" style="display: none">
 				<strong>El horario seleccionado ya se encuentra en uso.</strong> Seleccione otro horario para la programación.
 			</div>
         {{-- <div id="sandbox-container div"></div> --}}
@@ -448,9 +448,9 @@ input:focus {
 	<div class="col-md-4 pre-scrollable">
 		
 		<H3 id="end_tittle" style="margin-top: 0">Agregados</H3>
-		<div id="time"></div>
+		<div id="time" style="display: none"></div>
 
-		<div id="program"></div>
+		<div id="program" style="display: none"></div>
 
 		<div id="dvTable">
 		</div>
