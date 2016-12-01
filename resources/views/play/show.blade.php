@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appTrue')
 
 @section('content')
 
@@ -76,6 +76,7 @@
               <source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
             @else
               <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4">
+              <track src="/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa" kind="subtitles" srclang="es" label="Spanish">
             @endif
         </video>
   

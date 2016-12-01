@@ -1,24 +1,26 @@
-@extends('layouts.app')
+@extends('layouts.appTrue')
 
 @section('content')
 @if ($valid == 1)
   
 
 <script src="{!!url('/js/jquery.min.js')!!}"></script>
-@foreach($movies as $movie)
+{{-- @foreach($movies as $movie)
 <p>{{$movie->url}} {{$movie->play_at}}</p>
-@endforeach
+@endforeach --}}
 <h3>Cine TV</h3>
-      <p>{{$difTime}}</p>
+      {{-- <p>Diferencia de tiempo: {{$difTime}}</p> --}}
        <video id="video" style="display:none; width:680px; height:320px;" autoplay controls>
-          <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" /> 
-          Your browser does not support the video tag.
+          <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" />
+          Su navegador no soporta el tag video.
         </video>
         <div id="notNow" style="display:none">El siguiente video esta programado para: {{$moviesNow->play_at}}</div>
-        <button onclick="getCurTime()" type="button">Get current time position</button>
-        <button onclick="setCurTime()" type="button">Set time position to 5 seconds</button><br>
+        {{-- <button onclick="getCurTime()" type="button">Get current time position</button>
+        <button onclick="setCurTime()" type="button">Set time position to 5 seconds</button><br> --}}
         <p>A continuacion</p>
-        <p id="demo"></p>
+        <p id="next"></p>
+
+        <div id="time"></div>
 
         <script>
           var vid = document.getElementById("video");
@@ -26,13 +28,13 @@
           var isPlaying = {{$playNow}};
           var moviesArr = [];
           var j = jQuery.noConflict();
-          alert("cantidad:{{$programationsCount}} hora:{{$rightNow}} tiempo: {{$difTime}} isplay: {{$playNow}}")
+          //alert("cantidad:{{$programationsCount}} hora:{{$rightNow}} tiempo: {{$difTime}} isplay: {{$playNow}}")
           j(document).ready(function() {
             //alert(time);
             /*Si el video se esta reproduciendo, se adelanta al minuto correspondiente, si aun no empieza se envia aviso, en ambos casos se envian los videos posteriores a un arreglo js
             */
             if(time >= 0 && isPlaying == 1){
-                alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$moviesNow->url}}");
+                //alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$moviesNow->url}}");
                 vid.currentTime = time;
                 @foreach($movies as $key=>$movie)
                   @if ($key >= 1)
@@ -41,16 +43,24 @@
                   @endif
                 @endforeach
                 vid.style.display="inline";
-                document.getElementById("demo").innerHTML = movies;
+                document.getElementById("next").innerHTML = moviesArr;
+
+                /*startTime();
+                var dataTemp = [{ field1: name, field2: duration}];
+                dt.load(dataTemp, true);*/
               }else if (isPlaying == 0){
-                alert("Bienvenido a Programación Cine UV, la emision de {{$moviesNow->url}}  comienza a las {{$moviesNow->play_at}}");
+                //alert("Bienvenido a Programación Cine UV, la emision de {{$moviesNow->url}}  comienza a las {{$moviesNow->play_at}}");
                 pauseVid();
                 document.getElementById("notNow").style.display="inline";
                 @foreach($movies as $key=>$movie)
                   var movieArr = "{{$movie->url}}";
-                  moviesArr[{{$key}} - 1] = moviesArr;
+                  moviesArr[{{$key}} - 1] = movieArr;
                 @endforeach
-                document.getElementById("demo").innerHTML = moviesArr;
+                document.getElementById("next").innerHTML = moviesArr;
+
+                startTime();
+                /*var dataTemp = [{ field1: name, field2: duration}];
+                dt.load(dataTemp, true);*/
               }
             });
             var count = moviesArr.length;
@@ -63,8 +73,12 @@
               if(actual < count){
                 vid.src = moviesArr[actual];
                 logger('video cargado correctamente '+ vid.src);
-                logger('Siguiente: '+ moviesArr[(actual+1)]);
+                if(actual < count-1){
+                  logger('Siguiente: '+ moviesArr[(actual+1)]);
+                }
                 actual ++;
+              }else{
+                location.reload();
               }
             }
             function playVid() {
@@ -81,6 +95,32 @@
             } 
             function setCurTime() { 
               vid.currentTime = time;
+            }
+            function checkTime(i) {
+              if (i < 10) {
+                i = "0" + i;
+                }
+                return i;
+              }
+            function startTime() {
+              var today = new Date();
+              var h = today.getHours();
+              var m = today.getMinutes();
+              var s = today.getSeconds();
+              // add a zero in front of numbers<10
+              m = checkTime(m);
+              s = checkTime(s);
+              var now = h + ":" + m + ":" + s;
+              var nextProgramStart = "11:55:00";
+              document.getElementById('time').innerHTML = now;
+              if(now == nextProgramStart){
+                location.reload();
+                //alert("nueve veinticinco");
+              }
+              t = setTimeout(function () {
+                startTime()
+              }, 1000);
+              
             }
          </script> 
 

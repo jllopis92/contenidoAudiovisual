@@ -57,9 +57,9 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/') }}">Inicio</a></li>
                 </ul>
-                {{-- <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cine_tv') }}">Cine TV</a></li>
-                </ul> --}}
+                </ul>
                 {{-- @if (Auth::user()->tipo != "profesor")
                     <script type="text/javascript">
                         window.location = "/";//here double curly bracket

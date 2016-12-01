@@ -231,7 +231,7 @@ input:focus {
 				var start_date = document.getElementById('start').value;
 				var castDate = new Date(start_date);
 				var day = castDate.getUTCDate();
-				var month = castDate.getUTCMonth() + 1; //months from 1-12
+				var month = castDate.getUTCMonth(); //months from 1-12
 				var year = castDate.getUTCFullYear();
 				if(day <= 9){
 					day = '0' + day;
@@ -412,8 +412,8 @@ input:focus {
 					data:{jsonSend: programToSend},
 					success: function (msg) {
 		                if (msg) {
-		                   /*alert("Somebody" + msg + " was added in list !");
-		                   location.reload(true);*/
+		                   alert("Somebody" + msg + " was added in list !");
+		                   location.reload(true);
 		                } else {
 		                   //alert("Cannot add to list !");
 		                }

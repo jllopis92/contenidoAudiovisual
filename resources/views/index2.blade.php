@@ -1,4 +1,4 @@
-@extends('layouts.app2')
+@extends('layouts.app')
 
 @section('content')
 
@@ -297,15 +297,14 @@
 
 <div class="content-grids">
 
-  <!-- Wrapper for slides -->
-  <div id="immersive_slider" class="col-md-12">
+    <div id="immersive_slider">
         @foreach($advertisings as $advertising)
           <div class="slide" data-blurred="files/{{$advertising->image}}">
-            <div class="content col-md-6">
+            <div class="content">
               <h2><a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">{{$advertising->name}}</a></h2>
               <p>{{$advertising->description}}</p>
             </div>
-            <div class="image col-md-6">
+            <div class="image">
               <a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">
                 <img src="files/{{$advertising->image}}" alt="Slider 1">
               </a>
@@ -315,7 +314,6 @@
           
           <a href="#" class="is-prev">&laquo;</a>
           <a href="#" class="is-next">&raquo;</a>
-        </div>
         </div>
         <script type="text/javascript">
       $(document).ready( function() {
@@ -327,41 +325,22 @@
       });
     </script>
 
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+    {{-- <script type="text/javascript">
+  function showmovieSlide(){
+      document.getElementById("slide2").style.display="inline";
+  }
+</script> --}}
 
 
-<div class="container">
-</div>
- <div class="col-md-12 center-block" style="float: none;">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-      <H3>Nuevos</H3>
-    </div>
+    <H3>Nuevos</H3>
     @foreach($newMovies as $key=>$movie)
 
-    {{-- @if ($key % 4 == 3)
-    <div class="content-grid last-grid col-xs-12 col-sm-6 col-md-3" style="padding-left: 0px; padding-right: 0px;">
-        @else --}}
-        <div class="content-grid col-xs-12 col-sm-6 col-md-3" 
-            style="padding-left: 0px; 
-                  padding-right: 0px;
-                  width: 200px;">
-           {{--  @endif --}}
-            <a class="col-md-12"  
-                style="padding: 0px;"
-                href="{{ action("MovieController@show", array($movie->id)) }}">
-                <img src="files/{{$movie->imageRef}}" 
-                  title="{{$movie->name}}" 
-                  style="width: 200px;
-                        height: 110px;"/></a>
+    @if ($key % 4 == 3)
+    <div class="content-grid last-grid">
+        @else
+        <div class="content-grid">
+            @endif
+            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="files/{{$movie->imageRef}}" title="{{$movie->name}}" style="width: 220px; height: 220px;"/></a>
                 <a href="{{ action("MovieController@show", array($movie->id)) }}"><h3 href="{{ action("MovieController@show", array($movie->id)) }}" style="margin-top: 0px; margin-bottom: 0px;">{{$movie->name}}</h3></a>
 
                 @if(is_null($movie->rating))
@@ -389,8 +368,7 @@
                 @elseif ($movie->rating >= 5.0)
                 <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
                 @endif
-                <a class="button" href="{{ action("MovieController@show", array($movie->id)) }}">Mas Información</a>
-                {{-- <li id="notification_li" class="notification_li">
+                <li id="notification_li" class="notification_li">
                   <a data-id="{{$key}}" id="{{$key}}" class="slideLink" >Mas Información</a>
                   <div id="slideContainer{{$key}}" class="slideContainer">
                     <div class="slideTitle">{{$movie->name}}</div>
@@ -411,25 +389,23 @@
                       <div id="notificationFooter">Ver Ahora</div>
                     </a>
                   </div>
-                </li> --}}
+                </li>
             {{-- <a class="button" onClick="showmovieSlide()">Ver Ahora</a> --}}
         </div>
         @endforeach
-    </div>
-        <br>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-          <H3>Mas Vistos</H3>
-        </div>
+
+          
+        <H3>Mas Vistos</H3>
 
         @foreach($visitMovies as $key=>$movie)
 
         @if ($key % 4 == 3)
-        <div class="content-grid last-grid col-md-3">
+        <div class="content-grid last-grid">
             @else
-            <div class="content-grid col-md-3">
+            <div class="content-grid">
                 @endif
-                <a class="col-md-12" href="{{ action("MovieController@show", array($movie->id)) }}"><img src="files/{{$movie->imageRef}}" title="{{$movie->name}}" style="width: 220px; height: 220px;"/></a>
-                <a href="{{ action("MovieController@show", array($movie->id)) }}"><h3 href="{{ action("MovieController@show", array($movie->id)) }}" style="min-height: 50px; margin-top: 0px; margin-bottom: 0px;">{{$movie->name}}</h3></a>
+                <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="files/{{$movie->imageRef}}" title="{{$movie->name}}" style="width: 220px; height: 220px;"/></a>
+                <a href="{{ action("MovieController@show", array($movie->id)) }}"><h3 href="{{ action("MovieController@show", array($movie->id)) }}" style="margin-top: 0px; margin-bottom: 0px;">{{$movie->name}}</h3></a>
 
                 @if(is_null($movie->rating))
                 <img src="img/rating/3_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/>
@@ -460,20 +436,16 @@
                 <a class="button" href="{{ action("MovieController@show", array($movie->id)) }}">Ver Ahora</a>
             </div>
             @endforeach
-            <br>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-              <H3>Mejor Evaluados</H3>
-            </div>
-            
+            <H3>Mejor Evaluados</H3>
     @foreach($bestMovies as $key=>$movie)
 
     @if ($key % 4 == 3)
-    <div class="content-grid last-grid col-md-3">
+    <div class="content-grid last-grid">
         @else
-        <div class="content-grid col-md-3">
+        <div class="content-grid">
             @endif
             <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="files/{{$movie->imageRef}}" title="allbum-name" style="width: 220px; height: 220px;"/></a>
-            <h3 href="{{ action("MovieController@show", array($movie->id)) }}" style="min-height: 50px; margin-top: 0px; margin-bottom: 0px;">{{$movie->name}}</h3>
+            <h3 href="{{ action("MovieController@show", array($movie->id)) }}" style="margin-top: 0px; margin-bottom: 0px;">{{$movie->name}}</h3>
             @if(is_null($movie->rating))
                     <img src="img/rating/3_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/>
                 @elseif ($movie->rating <= 0.4)

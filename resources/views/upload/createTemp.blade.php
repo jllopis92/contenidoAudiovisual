@@ -1,6 +1,6 @@
 @if (!Auth::guest())
 @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno") || (Auth::user()->tipo == "administrador"))
-@extends('layouts.appTrue')
+@extends('layouts.app')
 @section('content')
 <style>
     body{
@@ -109,16 +109,6 @@
             </div>
 
             <div class = "form-group">
-            {{-- <input id="url" type="text" class="form-control" style="display:none;">
-	            <div id="filelist">Su navegador no tiene soporte para HTML5.</div>
-				<br />
-
-				<div id="container">
-				    <button class="button" id="pickfiles" href="javascript:;">Seleccionar Video</button> 
-				    <button class="button" id="uploadfiles" href="javascript:;">Subir Video</button>
-				</div>
-				<br />
-				<pre id="console"></pre> --}}
                 {!! Form::label('url', 'Video * :') !!}
                 {!! Form::file('url', ['required'=> '']) !!}
             </div>
@@ -363,8 +353,6 @@
         <script src="assets/vendor/parsleyjs/dist/parsley.min.js"></script>
         <script type="text/javascript" src="assets/vendor/parsleyjs/dist/i18n/es.js"></script>
 
-        <script type="text/javascript" src="js/plupload.full.min.js"></script>
-
 
         <script type="text/javascript">
             var j = jQuery.noConflict();
@@ -379,55 +367,6 @@
             });
           });
       </script>
-
-      {{-- <script type="text/javascript">
-		// Custom example logic
-		var uploader = new plupload.Uploader({
-			runtimes : 'html5',
-		    browse_button: 'pickfiles', // this can be an id of a DOM element or the DOM element itself
-		    url: '/upload.php',
-		    chunk_size: '200kb',
-		    max_retries: 3,
-		    filters : {
-				max_file_size : '10000mb',
-				mime_types: [
-					{title : "Video files", extensions : "mp4,webm"}
-				]
-			},
-
-			init: {
-				PostInit: function() {
-					document.getElementById('filelist').innerHTML = '';
-
-					document.getElementById('uploadfiles').onclick = function() {
-						uploader.start();
-						return false;
-					};
-				},
-
-				FilesAdded: function(up, files) {
-					plupload.each(files, function(file) {
-						document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
-                        document.getElementById('url').value = file.name;
-					});
-				},
-
-				UploadProgress: function(up, file) {
-					document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-					if(file.percent == 100){
-						alert("listo");
-					}
-				},
-
-				Error: function(up, err) {
-					document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
-				}
-			}
-		});
-
-		uploader.init();
-
-		</script> --}}
       @endsection
       @else
       <script type="text/javascript">

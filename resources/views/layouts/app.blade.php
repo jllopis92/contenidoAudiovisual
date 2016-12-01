@@ -2,135 +2,187 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Dashboard Template (Sidebar icons animated) - Bootsnipp.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>CINECLUV</title>
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-
-    {!!Html::style('css/sb-admin-2.css')!!}
-    {!!Html::style('css/bootstrap.min.css')!!}
-    {!!Html::style('css/metisMenu.min.css')!!}
-    {!!Html::style('css/font-awesome.min.css')!!}
-
-    @yield('page-style-files')
-    
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif !important;
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+        @media(min-width:768px) {
+            body {
+                margin-top: 50px;
+            }
+            /*html, body, #wrapper, #page-wrapper {height: 100%; overflow: hidden;}*/
         }
 
-        #nav{list-style:none;margin: 0px;
-        padding: 0px;}
-        #nav li {
-            float: left;
-            margin-right: 20px;
-            font-size: 14px;
-            font-weight:bold;
+        #wrapper {
+            padding-left: 0;    
         }
-        #nav li a{color:#333333;text-decoration:none}
-        #nav li a:hover{color:#006699;text-decoration:none}
-        #notification_li{position:relative}
 
-        #notificationContainer {
+        #page-wrapper {
+            width: 100%;        
+            padding: 0;
             background-color: #fff;
-            border: 1px solid rgba(100, 100, 100, .4);
-            -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
-            overflow: visible;
-            position: absolute;
-            top: 30px;
-            margin-left: -170px;
-            width: 400px;
-            z-index: -1;
-            display: none;
         }
-        #notificationContainer:before {
-            content: '';
+
+        @media(min-width:768px) {
+            #wrapper {
+                padding-left: 225px;
+            }
+
+            #page-wrapper {
+                padding: 22px 10px;
+            }
+        }
+
+        /* Top Navigation */
+
+        .top-nav {
+            padding: 0 15px;
+        }
+
+        .top-nav>li {
+            display: inline-block;
+            float: left;
+        }
+
+        .top-nav>li>a {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            line-height: 20px;
+            color: #777777 !important;
+        }
+
+        .top-nav>.open>.dropdown-menu {
+            float: left;
+            position: absolute;
+            margin-top: 0;
+            /*border: 1px solid rgba(0,0,0,.15);*/
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            background-color: #fff;
+            -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+
+        .top-nav>.open>.dropdown-menu>li>a {
+            white-space: normal;
+        }
+
+        /* Side Navigation */
+
+        @media(min-width:768px) {
+            .side-nav {
+                position: fixed;
+                top: 60px;
+                left: 225px;
+                width: 225px;
+                margin-left: -225px;
+                border: none;
+                border-radius: 0;
+                border-top: 1px rgba(0,0,0,.5) solid;
+                overflow-y: auto;
+                background-color: #E7E7E7 !important;
+                border-top-color: #333333 !important;
+                /*background-color: #5A6B7D;*/
+                bottom: 0;
+                overflow-x: hidden;
+                padding-bottom: 40px;
+            }
+
+            .navbar {
+                background-color: #E7E7E7 !important;
+            }
+
+            .navbar-toggle {
+                 border-color: #333333 !important;
+                 display: block;
+            }
+
+            .side-nav>li>a {
+                width: 225px;
+                border-bottom: #E7E7E7 !important;
+                color: #777777 !important;
+            }
+
+            .side-nav li a:hover,
+            .side-nav li a:focus {
+                outline: none;
+                background-color: #E7E7E7 !important;
+                color: #777777 !important;
+            }
+        }
+
+        .side-nav>li>ul {
+            padding: 0;
+            border-bottom: 1px rgba(0,0,0,.3) solid;
+        }
+
+        .side-nav>li>ul>li>a {
             display: block;
-            position: absolute;
-            width: 0;
-            height: 0;
-            color: transparent;
-            border: 10px solid black;
-            border-color: transparent transparent white;
-            margin-top: -20px;
-            margin-left: 188px;
+            padding: 10px 15px 10px 38px;
+            text-decoration: none;
+            /*color: #999;*/
+            color: #fff;    
         }
-        #notificationTitle {
-            z-index: 1000;
-            font-weight: bold;
-            padding: 8px;
-            font-size: 13px;
-            background-color: #ffffff;
-            width: 384px;
-            border-bottom: 1px solid #dddddd;
+
+        .side-nav>li>ul>li>a:hover {
+            color: #fff;
         }
-        #notificationsBody {
-            padding: 33px 0px 0px 0px !important;
-            min-height:300px;
-        }
-        #notificationFooter {
-            background-color: #e9eaed;
-            text-align: center;
-            font-weight: bold;
-            padding: 8px;
-            font-size: 12px;
-            border-top: 1px solid #dddddd;
-        }
-        #notification_count {
-            padding: 3px 7px 3px 7px;
-            background: #cc0000;
-            color: #ffffff;
-            font-weight: bold;
-            margin-left: 77px;
-            border-radius: 9px;
-            position: absolute;
-            margin-top: -11px;
-            font-size: 11px;
-        }
-        .form-control {
-          width: 50%;
-        }
-    </style>
-    
+
+        .navbar .nav > li > a > .label {
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          border-radius: 50%;
+          position: absolute;
+          top: 14px;
+          right: 6px;
+          font-size: 10px;
+          font-weight: normal;
+          min-width: 15px;
+          min-height: 15px;
+          line-height: 1.0em;
+          text-align: center;
+          padding: 2px;
+      }
+
+      .navbar .nav > li > a:hover > .label {
+          top: 10px;
+      }
+
+      .navbar-brand {
+        padding: 5px 15px;
+    }
+</style>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
-
-<body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; position: fixed; z-index: 100; width:100%">
-        <div class="container">
+<body>
+    <div id="throbber" style="display:none; min-height:120px;"></div>
+    <div id="noty-holder"></div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-fixed-top" style="background-color: #e7e7e7; border-color: #333333;" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="border-color: #ddd;">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-                <!-- Branding Image -->
-                <img src="/images/home.png" alt="Escuela de Cine" style="width:120px;height:50px;">
-                {{-- <a class="navbar-brand">
-                    Laravel
-                </a> --}}
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="/images/home.png" alt="Escuela de Cine" style="max-width:220px; max-height:55px;">
+                </a>
             </div>
+            <!-- Top Menu Items -->
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
+             {{-- <ul class="nav navbar-nav" style="min-height: 100%">
                     <li><a href="{{ url('/') }}">Inicio</a></li>
                 </ul>
-                {{-- <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cine_tv') }}">Cine TV</a></li>
-                </ul> --}}
+                </ul>
                 @if (!Auth::guest())
                     @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno"))
                     <ul class="nav navbar-nav">
@@ -138,253 +190,109 @@
                     </ul>
                     @endif
                 @endif
+ --}}
 
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <div class="hidden-xs col-sm-3 col-md-3" style="width: 300px;">
-                        {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search', 'class'=>'navbar-form'])  !!}
-                        <div class="input-group">
+            <ul class="nav navbar-right top-nav">
+                <li>
+                    {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search', 'class'=>'navbar-form'])  !!}
+                   {{--  <div class="input-group" style="max-width: 180px; margin-top: 5px;"> --}}
+                        <div class="input-group" style="margin-top: 5px;">
                             <input type="text" class="form-control" placeholder="Buscar" name="search">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                             </div>
                         </div>
-                        {!! Form::close() !!}
-                    </div>
-                    
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
+                    {!! Form::close() !!}
+                </li>
+                <li><a href="{{ url('/cine_tv') }}">Cine TV</a></li>
+                @if (!Auth::guest())
+                    @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno") || (Auth::user()->tipo == "administrador"))
+                        <li><a href="{{ url('/upload') }}">Subir Video</a></li>
+                    @endif
+                @endif
+                @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-{{-- <a href="#">Inbox <span class="badge">42</span></a>
-
-<button class="btn btn-primary" type="button">
-  Messages <span class="badge">4</span>
-</button> --}}
-                   {{--  <li id="notification_li">
-                        <span id="notification_count" style="margin-top: 0px; ">3</span>
-                        <a href="#" id="notificationLink">Notificaciones</a>
-
-
-                        <div id="notificationContainer" style="margin-top: 15px;">
-                            <div id="notificationTitle">Notificaciones</div>
-                            <div id="notificationsBody" class="notifications">
-                            <ul>
-                                <li>
-                                  <a href="#">
-                                    <div class="imageblock"><img src="https://si0.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png" class="notifimage"  />
-                                    </div> 
-                                    <div class="messageblock">
-                                      <div class="message"><strong>Danny DK12</strong> got a sweet fade!</div>
-
-                                      <div class="messageinfo"><i class="icon-flag"></i>Yesterday</div>
-                                    </div>
-                                  </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="imageblock"><img src="https://si0.twimg.com/profile_images/1091562021/me-small_bigger.png" class="notifimage"  /></div> 
-                                        <div class="messageblock">
-                                        <div class="message"><strong>Roidberg</strong> left you a comment: "<em>Hey buddy! Nice toenails!"</em></div>
-                                        <div class="messageinfo"><i class="icon-comment"></i>2 hours ago</div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                            </div>
-                            <div id="notificationFooter"><a href="#">See All</a></div>
-                        </div>
-
-
-                    </li> --}}
+                @else
+                    <li><span class="glyphicons glyphicons-bell"></span></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->email }} <span class="caret"></span>
+                            Panel de Control <span class="caret"></span>
                         </a>
-
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 {{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}
                             </li>
-                            <li><a href="{{ url('/logout') }}">Logout</a></li>
+                            <li><a href="{{ url('/logout') }}">Desconectarse</a></li>
                         </ul>
                     </li>
-                    @endif
-                </ul>
-            </div>
+                    {{-- <li><a href="#" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Stats"><i class="fa fa-bar-chart-o"></i>
+                        </a>
+                    </li>            
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b class="fa fa-angle-down"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                        </ul>
+                    </li> --}}
+                @endif
+            </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse" style="border-bottom-color: #777777;">
+            <ul class="nav navbar-nav side-nav">
+               {{--  <li>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-fw fa-search"></i> MENU 1 <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                    <ul id="submenu-1" class="collapse">
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 1.1</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 1.2</a></li>
+                        <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 1.3</a></li>
+                    </ul>
+                </li> --}}
+                <li>
+                    <a>Tipo de Video</a>
+                    <a type="checkbox" name="largometraje" value="largometraje"> Largometraje
+                    </a>
+                </li>
+                <li>
+                    <a href="sugerencias"><i class="fa fa-fw fa-paper-plane-o"></i> MENU 4</a>
+                </li>
+                <li style="border-bottom-color: #777777;">
+                    <a href="faq"><i class="fa fa-fw fa fa-question-circle"></i> MENU 5</a>
+                </li>
+            </ul>
         </div>
+        <!-- /.navbar-collapse -->
     </nav>
 
-    {{--  
-menu responsive
-<div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
-       --}}
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row" id="main" >
+                <div class="col-sm-12 col-md-12 well" id="content">
+                    <h1>Welcome Admin!</h1>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+</div><!-- /#wrapper -->
+<script type="text/javascript">
+    var j = jQuery.noConflict();
+    j(function(){
+        j('[data-toggle="tooltip"]').tooltip();
+        j(".side-nav .collapse").on("hide.bs.collapse", function() {                   
+            j(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
+        });
+        j('.side-nav .collapse').on("show.bs.collapse", function() {                        
+            j(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");        
+        });
+    })    
     
-    <div id="wrapper">
-        <div class="navbar-default sidebar" style="padding-top: 50px;" id="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="sidebar-nav" id="side-menu">
-                    <li class="sidebar-brand">
-                        <h4 style="margin-left: 20px;"> Busqueda por Filtro</h4>
-                    </li>
-                    
-                    {{-- <li>
-                    {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search']) !!}
-                        {!! Form::radio('name', 'value') !!}
-                         {!!Form::submit('Actualizar',['class'=>'btn btn-primary'])!!}
-                    {!!Form::close()!!}
-                </li> --}}
-            </ul>
-            {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
-            <ul class="sidebar-nav" id="side-menu">
-                <h5 style="margin-left: 20px; margin-bottom: 0px; margin-top: 20px;">Tipo de Video</h5>
-                <div class="col-md-6 col-md-offset-4">
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="largometraje" value="largometraje"> Largometraje
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="mediometraje" value="mediometraje"> Mediometraje
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="cortometraje" value="cortometraje"> Cortometraje
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="experimental" value="experimental"> Experimental
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="ficcion" value="ficcion"> Ficción
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="animacion" value="animacion"> Animación
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="documental" value="documental"> Documental
-                        </label>
-                        
-                    </div>
-                </div>
-            </ul>
-            <ul class="sidebar-nav">
-                <h5 style="margin-left: 20px; margin-bottom: 0px;">Formato</h5>
-                <div class="col-md-6 col-md-offset-4">
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="4K" value="4K"> 4K
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="2K" value="2K"> 2K
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="HD" value="HD"> HD
-                        </label>
-                    </div>   
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="MiniDV" value="MiniDV"> MiniDV
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="16mm" value="16mm"> 16mm
-                        </label>
-                    </div>
-                    <div class="checkbox" style="margin-left: -50px;">
-                        <label>
-                            <input type="checkbox" name="35mm" value="35mm"> 35mm
-                        </label>
-                    </div>
-                </div>
-            </div>
-            </ul>
-            <button type="submit" class="btn btn-primary" style="margin-left: 20px; margin-top: 10px;">
-                <i class="fa fa-btn fa-sign-in"></i> Buscar
-            </button>
-            {!! Form::close() !!}
-{{-- 
-                {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search']) !!}
-                <div class="form-group">
-                    {!! Form::radio('name', 'value') !!}
-                </div>
-                        
-                         {!!Form::submit('Actualizar',['class'=>'btn btn-primary'])!!}
-                         {!!Form::close()!!} --}}
-                     </div>
-                 </div>
-
-                 <div id="page-wrapper" style="padding-top: 50px;">
-                    <script type="text/javascript">
-                        var isHidden = false;
-                        function hiddenNavBar(){
-                            if(isHidden == false){
-                                document.getElementById("navbar-default sidebar").style.display="none";
-                                document.getElementById("page-wrapper").style.marginLeft = 0 + "px";
-                                isHidden = true;
-                            }else{
-                                document.getElementById("navbar-default sidebar").style.display="inline";
-                                document.getElementById("page-wrapper").style.marginLeft = 250 + "px";
-                                isHidden = false;
-                            }
-                        }
-                    </script>
-                <a onClick="hiddenNavBar()" style="margin-left: -30px;"> <-
-                </a>
-                    @yield('content')
-                </div>
-
-            </div>
-
-            <!-- JavaScripts -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-            {!!Html::script('js/metisMenu.min.js')!!}
-            {!!Html::script('js/sb-admin-2.js')!!}
-
-            @yield('page-js-files')
-            @yield('page-js-script')
-
-            <script type="text/javascript" >
-                var j = jQuery.noConflict();
-                j(document).ready(function(){
-                    j("#notificationLink").click(function(){
-                        j("#notificationContainer").fadeToggle(300);
-                        j("#notification_count").fadeOut("slow");
-                        return false;
-                    });
-
-                    //Document Click
-                    j(document).click(function(){
-                        j("#notificationContainer").hide();
-                    });
-                    //Popup Click
-                    j("#notificationContainer").click(function(){
-                        return false
-                    });
-
-                });
-            </script>
-
-            {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-        </body>
-        </html>
+</script>
+</body>
+</html>

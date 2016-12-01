@@ -26,26 +26,27 @@ class CineTvController extends Controller
         //$lastWeek = Carbon::now()->subWeek();
         //$nowInLondonTz = Carbon::now(new DateTimeZone('Europe/London'));
         //$q->whereDate('created_at', '=', Carbon::today()->toDateString());
-        $formatted_date = $rightNow->toDateTimeString();
+        //$formatted_date = $rightNow->toDateTimeString();
+        //echo $formatted_date;
         //$formatted_time = $rightNow->format('H:i:s');
-        $programationsCount = Programation::where('end_at', '>=', $formatted_date)->orderBy('play_at', 'asc')->get()->count();
+        $programationsCount = Programation::where('end_at', '>=', $rightNow)->orderBy('play_at', 'asc')->get()->count();
          //echo "programations lenght".$programationsCount;
 
          //Si existe alguna programación
         if($programationsCount > 0){
             $playNow = 1;
-            $programations = Programation::whereDate('end_at', '>=', $rightNow)->orderBy('play_at', 'asc')->get();
+            $programations = Programation::where('end_at', '>=', $rightNow)->orderBy('play_at', 'asc')->get();
             $programationsNow = $programations->first();
-            $movies = MovieInProgram::whereDate('end_at', '>=', $rightNow)->where('programation_id','=', $programationsNow->id)->orderBy('play_at', 'asc')->get();
+            $movies = MovieInProgram::where('end_at', '>=', $rightNow)->where('programation_id','=', $programationsNow->id)->orderBy('play_at', 'asc')->get();
             
             $moviesNow = $movies->first();
             //Si la programacion ya comenzo y aun se esta transmitiendo
-            if($rightNow >= $programationsNow->play_at && $rightNow <= $programationsNow->end_at){
+            if($rightNow >= $programationsNow->play_at && $rightNow < $programationsNow->end_at){
                 $playTime = Carbon::parse($programationsNow->play_at);
                 $difTime = $rightNow->diffInSeconds($playTime);
                 $valid = 1;
             //Si la programacion aun no empieza
-            }else if ($rightNow <= $programationsNow->play_at){
+            }else if ($rightNow < $programationsNow->play_at){
                 $playNow = 0;
                 $playTime = Carbon::parse($programationsNow->play_at);
                 $difTime = $playTime->diffInSeconds($rightNow);

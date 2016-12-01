@@ -297,33 +297,35 @@
 
 <div class="content-grids">
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-  </ol>
-
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="/img_chania.jpg" alt="Chania">
-    </div>
-
-    <div class="item">
-      <img src="/img_chania2.jpg" alt="Chania">
-    </div>
-
-    <div class="item">
-      <img src="/img_flower.jpg" alt="Flower">
-    </div>
-
-    <div class="item">
-      <img src="/img_flower2.jpg" alt="Flower">
-    </div>
-  </div>
+  <div id="immersive_slider" class="col-md-12">
+        @foreach($advertisings as $advertising)
+          <div class="slide" data-blurred="files/{{$advertising->image}}">
+            <div class="content col-md-6">
+              <h2><a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">{{$advertising->name}}</a></h2>
+              <p>{{$advertising->description}}</p>
+            </div>
+            <div class="image col-md-6">
+              <a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">
+                <img src="files/{{$advertising->image}}" alt="Slider 1">
+              </a>
+            </div>
+          </div>
+        @endforeach
+          
+          <a href="#" class="is-prev">&laquo;</a>
+          <a href="#" class="is-next">&raquo;</a>
+        </div>
+        </div>
+        <script type="text/javascript">
+      $(document).ready( function() {
+        $("#immersive_slider").immersive_slider({
+          container: null,
+          loop: false, // Toggle to false if you don't want the slider to loop. Default is true.
+          /*autoStart: 10000*/ // Define the number of milliseconds before it navigates automatically. Change this to 0 or false to disable autoStart. The default value is 5000.
+        });
+      });
+    </script>
 
   <!-- Left and right controls -->
   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
