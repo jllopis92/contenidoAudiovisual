@@ -164,6 +164,26 @@ input:focus {
 	<label id="durationView" class="col-md-4 control-label">Duración: 00:00:00</label>
 </div>
  --}}
+ <script type="text/javascript">
+            //var j = jQuery.noConflict();
+            $('#datetimepicker').on('change',function(e){
+                alert("change text");
+            });
+            /*j('#name').on('input',function(e){
+                
+            });*/
+            /*var j = jQuery.noConflict();
+            j(function () {
+              j('#demo-form').parsley().on('field:validated', function() {
+                var ok = j('.parsley-error').length === 0;
+                j('.bs-callout-info').toggleClass('hidden', !ok);
+                j('.bs-callout-warning').toggleClass('hidden', ok);
+            })
+              .on('form:submit', function() {
+                return false; // Don't submit form for this demo
+            });
+          });*/
+      </script>
 <script type="text/javascript">
 		//Tiempo cero
 		var timeDuration = "00:00:00"
@@ -400,7 +420,7 @@ input:focus {
 				alert ("No se han agregado elementos a la programación");
 			}else{
 				var programToSend = '[' + programation + ']';
-				alert ("A enviar: "+ programToSend);
+				//alert ("A enviar: "+ programToSend);
 				var j = jQuery.noConflict();
 				var token = j("#token").val();
 				var route = "/programing";

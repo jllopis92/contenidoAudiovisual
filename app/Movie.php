@@ -16,7 +16,6 @@ class Movie extends Model
     protected $fillable = ['usuario_id','asignatura_id','name','observation','language','creation_date','description','imageRef','url','state','production_year','category','category2','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors'];
 
     public function setImageRefAttribute($imageRef){
-
         $this->attributes['imageRef'] = Carbon::now()->second.$imageRef->getClientOriginalName();
         $name = Carbon::now()->second.$imageRef->getClientOriginalName(); 
         \Storage::disk('local')->put($name, \File::get($imageRef));
@@ -26,15 +25,16 @@ class Movie extends Model
         echo "resize";
     }
     public function setUrlAttribute($url){
-
-        $this->attributes['url'] = 'old/'.Carbon::now()->second.$url->getClientOriginalName();
+        
+        /*$this->attributes['url'] = 'old/'.Carbon::now()->second.$url->getClientOriginalName();
         $name = Carbon::now()->second.$url->getClientOriginalName();
-        \Storage::disk('local')->put($name, \File::get($url));
+        \Storage::disk('local')->put($name, \File::get($url));*/
+        $firstUrl = $url;
 
-        $file = pathinfo($name,PATHINFO_FILENAME); 
-        $extension = pathinfo($name,PATHINFO_EXTENSION);
+        $file = Carbon::now()->second.pathinfo($url,PATHINFO_FILENAME); 
+        $extension = pathinfo($url,PATHINFO_EXTENSION);
 
-        //linux
+        //Para CentOS
         /*$ffmpeg = \FFMpeg\FFMpeg::create([
             'ffmpeg.binaries'  => '/usr/local/bin/ffmpeg/ffmpeg',
             'ffprobe.binaries' => '/usr/local/bin/ffprobe',
@@ -42,7 +42,7 @@ class Movie extends Model
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
 
         ]);*/
-        //mac
+        //Para OSX
         $ffmpeg = \FFMpeg\FFMpeg::create([
             'ffmpeg.binaries'  => '/Applications/MAMP/htdocs/FFmpeg/ffmpeg',
             'ffprobe.binaries' => '/Applications/MAMP/htdocs/FFmpeg/ffprobe',
@@ -50,7 +50,7 @@ class Movie extends Model
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
 
         ]);
-        $video = $ffmpeg->open($url);
+        $video = $ffmpeg->open('files/temp/'.$url);
         //$format = new CustomVideo();
         $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
         $format->on('progress', function ($video, $format, $percentage) {
@@ -65,11 +65,12 @@ class Movie extends Model
         ->save($format, 'files/convert/videos/'.$file.'.mp4');
         $this->attributes['url'] = $file.'.mp4';
 
-        //linux
+        //Para CentOS
         //$ffmpeg_path = '/usr/local/bin/ffmpeg/ffmpeg'; //Path to your FFMPEG
 
-        //mac
+        //Para OSX
         $ffmpeg_path = '/Applications/MAMP/htdocs/FFmpeg/ffmpeg'; //Path to your FFMPEG
+
         $video_path = 'files/convert/videos/'.$file.'.mp4'; // Path to your Video
  
         $command = $ffmpeg_path . ' -i "' . $video_path . '" -vstats 2>&1';
@@ -84,13 +85,15 @@ class Movie extends Model
             $video_Length = $hours . ":" . $mins . ":" . $secs;
             $this->attributes['duration'] = $video_Length;
         }
+
+        unlink('files/temp/'.$firstUrl);
         
         /*->save(new FFMpeg\Format\Video\X264(), 'export-x264.mp4')
-    ->save(new FFMpeg\Format\Video\WMV(), 'export-wmv.wmv')
-    ->save(new FFMpeg\Format\Video\WebM(), 'export-webm.webm');*/
+        ->save(new FFMpeg\Format\Video\WMV(), 'export-wmv.wmv')
+        ->save(new FFMpeg\Format\Video\WebM(), 'export-webm.webm');*/
 
-//audio
-/*        $ffmpeg = FFMpeg\FFMpeg::create();
+        //audio
+        /*$ffmpeg = FFMpeg\FFMpeg::create();
         $audio = $ffmpeg->open('track.mp3');
 
         $format = new FFMpeg\Format\Audio\Flac();

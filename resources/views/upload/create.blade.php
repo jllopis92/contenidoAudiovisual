@@ -12,6 +12,7 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 
+
 <script>
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
@@ -64,6 +65,8 @@
 
 <h3 style="margin-bottom: 30px;">Subir Video</h3>
 
+<div>
+
 {!! Form::open(['id' => 'newVideo', 'route' =>'upload.store', 'method'=>'POST', 'files'=> true, 'data-parsley-validate'=>'' ]) !!}
 
 <div class = "form-group" style ="display: none;">
@@ -79,11 +82,18 @@
     {!! Form::text('state', 1) !!}
     @endif
 </div>
-<div class = "form-group">
-    {!! Form::label('name', 'Nombre * :') !!}
-    {!! Form::text('name', null, ['class'=> 'form-control', 'required'=> '']) !!}
+<div class = "form-group col-md-12">
+    <div class="colums">
+        {!! Form::label('name', 'Nombre * :') !!}
+        {!! Form::text('name', null, ['class'=> 'form-control', 'required'=> '']) !!}
+        <br>
+        <div class="alert alert-danger col-md-6" id="nameValidation" style="display: none">
+            {{-- <strong id="nameValidationText"></strong>  --}}
+        </div>
+    </div>
+   {{--  <label id="nameValidation" style="display: none;"></label> --}}
 </div>
-<div class = "form-group">
+<div class = "form-group col-md-12">
     {!! Form::label('description', 'Descripción * :') !!}
     {!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
 </div>
@@ -108,8 +118,11 @@
                 {!! Form::file('imageRef', ['required'=> '']) !!}
             </div>
 
+            <div class = "form-group" style="display:none;">
+                {!! Form::label('url', 'Video * :') !!}
+                {!! Form::text('url', null, ['class'=> 'form-control']) !!}
+            </div>
             <div class = "form-group">
-            {{-- <input id="url" type="text" class="form-control" style="display:none;">
 	            <div id="filelist">Su navegador no tiene soporte para HTML5.</div>
 				<br />
 
@@ -117,10 +130,10 @@
 				    <button class="button" id="pickfiles" href="javascript:;">Seleccionar Video</button> 
 				    <button class="button" id="uploadfiles" href="javascript:;">Subir Video</button>
 				</div>
-				<br />
+				{{-- <br />
 				<pre id="console"></pre> --}}
-                {!! Form::label('url', 'Video * :') !!}
-                {!! Form::file('url', ['required'=> '']) !!}
+                {{-- {!! Form::label('url', 'Video * :') !!}
+                {!! Form::file('url', ['required'=> '']) !!} --}}
             </div>
 
             <div class = "form-group">
@@ -356,9 +369,9 @@
             {!! Form::label('actors', 'Actores * :') !!}
             {!! Form::text('actors', null, ['class'=> 'form-control', 'required'=> '']) !!}
         </div>
-        {!! Form::submit('Registrar',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
+        {!! Form::submit('Registrar',['class' =>'btn btn-primary disabled', 'value' =>'validate']) !!}
         {!! Form::close() !!}
-
+</div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="assets/vendor/parsleyjs/dist/parsley.min.js"></script>
         <script type="text/javascript" src="assets/vendor/parsleyjs/dist/i18n/es.js"></script>
@@ -368,6 +381,27 @@
 
         <script type="text/javascript">
             var j = jQuery.noConflict();
+            j('#name').on('input',function(e){
+                var name = j('#name').val();
+                var BLIDRegExpression = /^[a-zA-Z0-9\Ñ\ñ\u00C0-\u017F\-\_\(\)\[\]]+$/;
+                if(name.length == 0){
+                    document.getElementById("nameValidation").style.display = "inline";
+                    document.getElementById("nameValidation").innerHTML = 'Campo Obligatorio';
+                    $(".active").attr('class', 'btn btn-primary disabled');
+                }else if (!BLIDRegExpression.test(name)) {
+                    document.getElementById("nameValidation").style.display = "inline";
+                    document.getElementById("nameValidation").innerHTML = 'El Campo Contiene Caracteres No Validos';
+                    $(".btn-primary").attr('class', 'btn btn-primary disabled');
+                }else{
+                    document.getElementById("nameValidation").style.display = "none";
+                    $(".btn-primary").attr('class', 'btn btn-primary active');
+                }
+
+            });
+            /*j('#name').on('input',function(e){
+                
+            });*/
+            /*var j = jQuery.noConflict();
             j(function () {
               j('#demo-form').parsley().on('field:validated', function() {
                 var ok = j('.parsley-error').length === 0;
@@ -377,11 +411,12 @@
               .on('form:submit', function() {
                 return false; // Don't submit form for this demo
             });
-          });
+          });*/
       </script>
 
-      {{-- <script type="text/javascript">
+      <script type="text/javascript">
 		// Custom example logic
+        var upload = false;
 		var uploader = new plupload.Uploader({
 			runtimes : 'html5',
 		    browse_button: 'pickfiles', // this can be an id of a DOM element or the DOM element itself
@@ -391,7 +426,7 @@
 		    filters : {
 				max_file_size : '10000mb',
 				mime_types: [
-					{title : "Video files", extensions : "mp4,webm"}
+					{title : "Video files", extensions : "mp4,webm,avi,ogv"}
 				]
 			},
 
@@ -406,28 +441,38 @@
 				},
 
 				FilesAdded: function(up, files) {
-					plupload.each(files, function(file) {
-						document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
-                        document.getElementById('url').value = file.name;
-					});
+                    if (upload == false){
+    					plupload.each(files, function(file) {
+                            while (up.files.length > 1) {
+                                up.removeFile(up.files[0]);
+                            }
+    						document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                            document.getElementById('url').value = file.name;
+                            alert("valor: " + document.getElementById('url').value);
+    					});
+                    }else{
+                        alert("No se pueden agregar mas videos");
+                    }
 				},
 
 				UploadProgress: function(up, file) {
 					document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
 					if(file.percent == 100){
-						alert("listo");
+                        upload = true;
 					}
 				},
 
 				Error: function(up, err) {
-					document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
+                    alert("Error: " + err.code + ": " + err.message);
+					//document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
 				}
 			}
 		});
 
 		uploader.init();
 
-		</script> --}}
+		</script>
+        <script type="text/javascript" src="/js/i18n/es.js"></script>
       @endsection
       @else
       <script type="text/javascript">
