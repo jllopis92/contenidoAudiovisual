@@ -16,11 +16,12 @@ class Movie extends Model
     protected $fillable = ['usuario_id','asignatura_id','name','observation','language','creation_date','description','imageRef','url','state','production_year','category','category2','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors'];
 
     public function setImageRefAttribute($imageRef){
-        $this->attributes['imageRef'] = Carbon::now()->second.$imageRef->getClientOriginalName();
-        $name = Carbon::now()->second.$imageRef->getClientOriginalName(); 
-        \Storage::disk('local')->put($name, \File::get($imageRef));
+        //$this->attributes['imageRef'] = Carbon::now()->second.$imageRef;
+        //$newName = $this->attributes['imageRef'];
+       /* $name = Carbon::now()->second.$imageRef->getClientOriginalName(); 
+        \Storage::disk('local')->put($name, \File::get($imageRef));*/
 
-        $img = Image::make('files/'.$name)->resize(200, 200);
+        $img = Image::make('files/temp/images/'.$imageRef)->resize(200, 200);
         $img->save();
         echo "resize";
     }
@@ -50,7 +51,7 @@ class Movie extends Model
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
 
         ]);
-        $video = $ffmpeg->open('files/temp/'.$url);
+        $video = $ffmpeg->open('files/temp/videos/'.$url);
         //$format = new CustomVideo();
         $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
         $format->on('progress', function ($video, $format, $percentage) {
@@ -86,7 +87,7 @@ class Movie extends Model
             $this->attributes['duration'] = $video_Length;
         }
 
-        unlink('files/temp/'.$firstUrl);
+        unlink('files/temp/videos/'.$firstUrl);
         
         /*->save(new FFMpeg\Format\Video\X264(), 'export-x264.mp4')
         ->save(new FFMpeg\Format\Video\WMV(), 'export-wmv.wmv')

@@ -15,11 +15,13 @@ class Trailer extends Model
 
     public function setUrlAttribute($trailer){
 
-        $this->attributes['url'] = Carbon::now()->second.$trailer->getClientOriginalName();
+        /*$this->attributes['url'] = Carbon::now()->second.$trailer->getClientOriginalName();
         $name = Carbon::now()->second.$trailer->getClientOriginalName(); 
-        \Storage::disk('local')->put($name, \File::get($trailer));
+        \Storage::disk('local')->put($name, \File::get($trailer));*/
 
-        $file = pathinfo($name,PATHINFO_FILENAME); 
+        $firstUrl = $url;
+
+        $file = Carbon::now()->second.pathinfo($name,PATHINFO_FILENAME); 
         $extension = pathinfo($name,PATHINFO_EXTENSION);
 
         //linux
@@ -39,7 +41,7 @@ class Trailer extends Model
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
 
         ]);
-        $video = $ffmpeg->open($trailer);
+        $video = $ffmpeg->open('files/temp/videos/'.$trailer);
 
         $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
         $format->on('progress', function ($video, $format, $percentage) {
@@ -69,10 +71,11 @@ class Trailer extends Model
         $hours = $regs [1] ? $regs [1] : null;
         $mins = $regs [2] ? $regs [2] : null;
         $secs = $regs [3] ? $regs [3] : null;
+
+        $video_Length = $hours . ":" . $mins . ":" . $secs;
+        $this->attributes['duration'] = $video_Length;
         }
          
-        $video_Length = $hours . ":" . $mins . ":" . $secs;
-
-        $this->attributes['duration'] = $video_Length;
+        unlink('files/temp/videos/'.$firstUrl);
     }
 }
