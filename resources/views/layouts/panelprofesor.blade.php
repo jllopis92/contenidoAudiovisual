@@ -114,6 +114,9 @@
                         <li>
                             <a href="#"> Administrar Videos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                 <li>
+                                    <a href="{{ url('/upload') }}"><i class='glyphicon glyphicon-film'></i>Subir Video</a>
+                                </li>
                                 <li>
                                     <a href="{!! url('editmovie')!!}"><i class='glyphicon glyphicon-pencil'></i>Editar Videos</a>
                                 </li>

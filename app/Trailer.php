@@ -41,7 +41,7 @@ class Trailer extends Model
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
 
         ]);
-        $video = $ffmpeg->open('files/temp/videos/'.$trailer);
+        $video = $ffmpeg->open('files/temp/trailers/'.$trailer);
 
         $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
         $format->on('progress', function ($video, $format, $percentage) {
@@ -76,6 +76,6 @@ class Trailer extends Model
         $this->attributes['duration'] = $video_Length;
         }
          
-        unlink('files/temp/videos/'.$firstUrl);
+        unlink('files/temp/trailers/'.$firstUrl);
     }
 }

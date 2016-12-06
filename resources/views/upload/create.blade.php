@@ -823,11 +823,11 @@
                         up.removeFile(up.files[0]);
                     }
                     document.getElementById('filelistTrailer').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
-                    document.getElementById('imageRef').value = file.name;
-                    alert("valor: " + document.getElementById('imageRef').value);
+                    document.getElementById('trailer').value = file.name;
+                    alert("valor: " + document.getElementById('trailer').value);
                 });
                }else{
-                alert("No se puede agregar mas imagenes");
+                alert("No se puede agregar mas trailers");
             }
         },
 
