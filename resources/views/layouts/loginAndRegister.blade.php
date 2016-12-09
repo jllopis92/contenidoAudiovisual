@@ -8,7 +8,8 @@
     <title>CINECL UV</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/sidebar.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" /> 
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
     @yield('page-style-files')
 </head>
 <body>
@@ -17,12 +18,7 @@
         <div class="row col-xs-12 col-sm-4">
             <div class="row col-xs-12">
                 <div class="navbar-header fixed-brand">
-                    <ul class="nav navbar-nav" style="padding-left: 20px; margin-top: 7px;"">
-                        <li class="active" style="left: 20px;">
-                            <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle">
-                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                            </button>
-                        </li>
+                    <ul class="nav navbar-nav" style="padding-left: 20px; margin-top: 7px;">
                         <li>
                            <a class="navbar-brand" href="{{ url('/') }}" style="padding-top: 5px;">
                             <img src="/images/home.png" alt="Escuela de Cine" style="max-width:140px; max-height:55px;">
@@ -31,12 +27,7 @@
                     </ul>
                 </div>       
             </div>
-        {{-- <div class="row col-xs-12 col-md-7">
-            <ul class="nav navbar-nav navbar-left col-sm-12" style="display: inline;white-space:nowrap;">
-
-            </ul>
-        </div> --}}
-    </div><!-- bs-example-navbar-collapse-1 -->
+        </div><!-- bs-example-navbar-collapse-1 -->
     <div class="col-xs-12 visible-xs">
         <div class="col-xs-9">
         {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
@@ -79,18 +70,8 @@
                 <a class="hidden-xs" href="{{ url('/cine_tv') }}" role="button">
                     <span class="glyphicon glyphicon-calendar btn-nav"></span>
                 </a>
-           {{--  <span class="glyphicons glyphicons-tv"></span>
-                <a href="{{ url('/cine_tv') }}">Cine TV</a> --}}
             </li>
 
-            {{-- @if (!Auth::guest())
-            @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno"))
-            <li class="col-xs-3" style="display: inline; padding-left: 0px; padding-right: 0px;">
-                <a href="{{ url('/upload') }}">Subir Video</a>
-            </li>
-            @endif
-            @endif --}}
-            
             <!-- Authentication Links -->
             @if (Auth::guest())
             <li class="col-xs-12 col-sm-2" style="margin-top: 10px;"><a href="{{ url('/login') }}">Ingreso</a></li>
@@ -150,51 +131,29 @@
                             @endif
                         @endforeach
                     </ul>
-                    {{-- <ul class="dropdown-menu" role="menu">
-                        @foreach($notifications as $notification)
-                            @if($notification->send_to == Auth::user()->id)
-                               <li>
-                                    {{$notification->id}}
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul> --}}
                 @endif
             </li>
            {{--  Control Panel --}}
             <li class="dropdown col-xs-12 col-sm-3" style="padding-top: 8px;">
-            <span class="glyphicons glyphicons-user"></span>
+                <span class="glyphicons glyphicons-user"></span>
 
-            <a href="#" class="dropdown-toggle visible-xs" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user btn-nav"></span> {{ Auth::user()->email }} <span class="caret"></span>
-            </a>
-            <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user btn-nav"></span><span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-                <li data-alert_id="1" class="alert_li">
-                    <a class="alert_message">{{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}</a>
-                </li>
-                <li data-alert_id="2" class="alert_li">
-                    <a href="{{ url('/logout') }}" class="alert_message">Cerrar Sesión</a>
-                    <div class="clearfix"></div>
-                </li>
-                <li data-alert_id="3" class="alert_li">
-                    <a class="alert_message">{{ Auth::user()->email }}</a>
-                    <div class="clearfix"></div>
-                </li>
-            </ul>
-                {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding-left: 0px; padding-right: 0px;">
-                    {{ Auth::user()->email }} <span class="caret"></span>
-                </a> --}}
-{{-- 
+                <a href="#" class="dropdown-toggle visible-xs" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user btn-nav"></span> {{ Auth::user()->email }} <span class="caret"></span>
+                </a>
+                <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user btn-nav"></span><span class="caret"></span>
+                </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li>
-                        {{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}
+                    <li data-alert_id="1" class="alert_li">
+                        <a class="alert_message">{{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}</a>
                     </li>
-                    <li><a href="{{ url('/logout') }}">Logout</a></li>
-                    <li>
-                        <a>{{ Auth::user()->email }}</a>
+                    <li data-alert_id="2" class="alert_li">
+                        <a href="{{ url('/logout') }}" class="alert_message">Cerrar Sesión</a>
+                        <div class="clearfix"></div>
                     </li>
-                </ul> --}}
+                    <li data-alert_id="3" class="alert_li">
+                        <a class="alert_message">{{ Auth::user()->email }}</a>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
             </li>
             @endif
         </ul>
@@ -203,76 +162,13 @@
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-    {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu" style="align-items: center;">
-            <li style="max-height: 30px; color: #333 !important;">
-                <h4> Busqueda por Filtro</h4>
-            </li>
-            <li style="max-height: 25px;">
-                <a style="margin-left: 20px; color: #333 !important;"> Tipo de Video</a>
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="largometraje" value="largometraje"> Largometraje
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="mediometraje" value="mediometraje"> Mediometraje
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="cortometraje" value="cortometraje"> Cortometraje
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="experimental" value="experimental"> Experimental
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="ficcion" value="ficcion"> Ficción
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="animacion" value="animacion"> Animación
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="documental" value="documental"> Documental
-            </li>
-
-            <li style="max-height: 25px;">
-                <a style="margin-left: 20px; color: #333 !important;"> Formato</a>
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="4K" value="4K"> 4K
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="2K" value="2K"> 2K
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="HD" value="HD"> HD
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="MiniDV" value="MiniDV"> MiniDV
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="16mm" value="16mm"> 16mm
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="35mm" value="35mm"> 35mm
-            </li>
-            <button type="submit" class="btn btn-primary" style="margin-left: 20px; margin-top: 10px;">
-                <i class="fa fa-btn fa-sign-in"></i> Buscar
-            </button>
             
         </ul>
-        {!! Form::close() !!}
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
     <div id="page-content-wrapper">
         @yield('content')
-
-            {{-- <div class="container-fluid xyz">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Simple Sidebar With Bootstrap 3 by <a href="http://seegatesite.com/create-simple-cool-sidebar-menu-with-bootstrap-3/" >Seegatesite.com</a></h1>
-                        <p>This sidebar is adopted from start bootstrap simple sidebar startboostrap.com, which I modified slightly to be more cool. For tutorials and how to create it , you can read from my site here <a href="http://seegatesite.com/create-simple-cool-sidebar-menu-with-bootstrap-3/">create cool simple sidebar menu with boostrap 3</a></p>
-                    </div>
-                </div>
-            </div> --}}
         </div>
         <!-- /#page-content-wrapper -->
     </div>
@@ -280,7 +176,7 @@
     <!-- jQuery -->
     <script src="/js/jquery-1.11.3.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/sidebar_menu.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     @yield('page-js-files')
     @yield('page-js-script')
 

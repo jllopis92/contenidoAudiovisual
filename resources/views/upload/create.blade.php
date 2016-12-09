@@ -303,7 +303,7 @@
         <div class = "form-group col-md-12">
             <div class="colums">
                 {!! Form::label('direction', 'Dirección * :') !!}
-                {!! Form::text('direction', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                {!! Form::text('direction', null, ['class'=> 'form-control']) !!}
                 <br>
                 <div class="alert alert-danger col-md-6" id="directionValidation" style="display: none">
                 </div>

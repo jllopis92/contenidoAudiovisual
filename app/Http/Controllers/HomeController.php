@@ -5,6 +5,7 @@ namespace contenidoAudiovisual\Http\Controllers;
 use contenidoAudiovisual\Http\Requests;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\Advertising;
+use contenidoAudiovisual\Notification;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -30,7 +31,8 @@ class HomeController extends Controller
         $newMovies = Movie::where('state', 1)->orderBy('created_at', 'desc')->take(6)->get();
         $visitMovies = Movie::where('state', 1)->orderBy('visit', 'desc')->take(6)->get();
         $bestMovies = Movie::where('state', 1)->orderBy('rating', 'desc')->take(6)->get();
-        return view ('index',compact('advertisings','newMovies','visitMovies','bestMovies'));
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('index',compact('advertisings','newMovies','visitMovies','bestMovies','notifications'));
         //return view('index');
     }
 }
