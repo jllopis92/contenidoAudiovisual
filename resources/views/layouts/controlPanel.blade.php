@@ -140,10 +140,10 @@
                             @if($notification->send_to == Auth::user()->id)
                                 <li data-alert_id="1" class="alert_li">
                                     @if($notification->reason == "create")
-                                    <a href="#" class="alert_message"> El usuario {{ $notification->user_id }} ha creado un nuevo video</a>
+                                    <a href="{!! url('approvemovie')!!}" class="alert_message"> El usuario {{ $notification->user_id }} ha creado un nuevo video</a>
                                     @endif
                                     @if ($notification->reason == "modify")
-                                        <a href="#" class="alert_message"> EL usuario {{ $notification->user_id }} ha modificado el video {{ $notification->movie_id }}</a>
+                                        <a href="{!! url('approvemovie')!!}" class="alert_message"> EL usuario {{ $notification->user_id }} ha modificado el video {{ $notification->movie_id }}</a>
                                     @endif
                                     <br />
                                     <div class="clearfix"></div>
@@ -163,7 +163,7 @@
             </a>
             <ul class="dropdown-menu" role="menu">
                 <li data-alert_id="1" class="alert_li">
-                    <a class="alert_message">{{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}</a>
+                    <a class="alert_message">{{ link_to_route('cpanel.index', $title = 'Panel de Control') }}</a>
                 </li>
                 <li data-alert_id="2" class="alert_li">
                     <a href="{{ url('/logout') }}" class="alert_message">Cerrar Sesión</a>
@@ -251,6 +251,22 @@
                     </ul>
                 </div>
             </div>
+            @elseif (Auth::user()->tipo == "alumno")
+                <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li>
+                                {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
+                            </li>
+                        </ul>
+                        <ul class="nav" id="side-menu">
+                            <li>
+                            {{-- TODO: crear esta vista --}}
+                                <a href="{!! url('createplaylist')!!}">Mis Videos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             @endif
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->

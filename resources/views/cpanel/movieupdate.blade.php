@@ -1,5 +1,5 @@
 @if (!Auth::guest())
-	@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
+	@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador")  || (Auth::user()->tipo == "alumno"))
 	@extends('layouts.panelprofesor')
 	@section('content')
 		@if (count($movies) === 0)
@@ -15,14 +15,27 @@
 				<th>Estado</th>
 			</thead>
 			@foreach($movies as $movie)
-			<tbody>
-				<td>{{$movie->name}}</td>
-				<td>{{$movie->language}}</td>
-				<td>{{$movie->category}}</td>
-				<td>{{$movie->shooting_format}}</td>
-				<td>{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary'])!!}
-				</td>
-			</tbody>
+			@if  (Auth::user()->tipo == "alumno")
+				@if ($movie->usuario_id == Auth::user()->id)
+					<tbody>
+						<td>{{$movie->name}}</td>
+						<td>{{$movie->language}}</td>
+						<td>{{$movie->category}}</td>
+						<td>{{$movie->shooting_format}}</td>
+						<td>{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary'])!!}
+						</td>
+					</tbody>
+				@endif
+			@else
+				<tbody>
+					<td>{{$movie->name}}</td>
+					<td>{{$movie->language}}</td>
+					<td>{{$movie->category}}</td>
+					<td>{{$movie->shooting_format}}</td>
+					<td>{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary'])!!}
+					</td>
+				</tbody>
+			@endif
 			@endforeach
 		</table>
 		{!!$movies->render()!!}

@@ -2,7 +2,7 @@
 	@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador") || (Auth::user()->id == $user->id))
 		@extends('layouts.panelprofesor')
 		@section('content')
-			{!!Form::model($user,['route'=>['cpanel.update',Auth::user()->id],'method'=>'PUT'])!!}
+			{!!Form::model($user,['route'=>['cpanel.update',$user->id],'method'=>'PUT'])!!}
 				<h3 style="margin-bottom: 30px;">Cambiar Contraseña</h3>
 				<div class="form-group">
 					{!!Form::label('lastPassword','Contraseña Actual:')!!}

@@ -152,13 +152,29 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id))}}
+                            <a href="#"> Mi Usuario</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}
+                                </li>
+                                <li>
+                                    {{-- agregar metodo para cambiar pass --}}
+                                    <a href="{{ url('selectuser') }}"><i class='glyphicon glyphicon-film'></i>Cambiar Contraseña</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <ul class="nav" id="side-menu">
                         <li>
-                        {{-- TODO: crear esta vista --}}
-                            <a href="{!! url('createplaylist')!!}">Mis Videos</a>
+                            <a href="#"> Administrar Videos<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                 <li>
+                                    <a href="{{ url('/upload') }}"><i class='glyphicon glyphicon-film'></i>Subir Video</a>
+                                </li>
+                                <li>
+                                    <a href="{!! url('editmovie')!!}"><i class='glyphicon glyphicon-pencil'></i>Editar Videos</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

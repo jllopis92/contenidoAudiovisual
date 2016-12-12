@@ -8,9 +8,6 @@
 					<th>Nombre</th>
 					<th>Correo Electrónico</th>
 					<th>Tipo</th>
-					<th>País</th>
-					<th>Ciudad</th>
-					<th>Sector</th>
 					<th>Operacion</th>
 				</thead>
 				@foreach($users as $user)
@@ -18,9 +15,6 @@
 						<td>{{$user->name}}</td>
 						<td>{{$user->email}}</td>
 						<td>{{$user->tipo}}</td>
-						<td>{{$user->country}}</td>
-						<td>{{$user->city}}</td>
-						<td>{{$user->sector}}</td>
 						<td>
 						{!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  $user->id, $attributes = ['class'=>'btn btn-primary'])!!}
 						</td>

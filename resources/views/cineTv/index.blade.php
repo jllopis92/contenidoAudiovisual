@@ -1,4 +1,4 @@
-@extends('layouts.appTrue')
+@extends('layouts.mainApp')
 
 @section('content')
 @if ($valid == 1)

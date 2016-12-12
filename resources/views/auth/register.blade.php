@@ -182,6 +182,21 @@
             });
             j('#email').on('input',function(e){
                 checkEmail();
+                 j.post('../emailValid.php',{
+                    email:j('#email').val(),
+
+                },function(d){
+                    if(d>0){
+                        //alert('Respuesta:'+d);
+                    }else{
+                        if(d != ""){
+                            document.getElementById("emailValidation").style.display = "inline";
+                            document.getElementById("emailValidation").innerHTML = 'Este correo ya se encuentra registrado';
+                            validEmail = 0;
+                        }
+                    }
+                });
+                j(this).attr("checked");
             });
             j('#password').on('input',function(e){
                 checkPassword();

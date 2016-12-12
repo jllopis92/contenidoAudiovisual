@@ -142,7 +142,7 @@
                                     <a href="{!! url('approvemovie')!!}" class="alert_message"> El usuario {{ $notification->user_id }} ha creado un nuevo video</a>
                                     @endif
                                     @if ($notification->reason == "modify")
-                                        <a href="#" class="alert_message"> EL usuario {{ $notification->user_id }} ha modificado el video {{ $notification->movie_id }}</a>
+                                        <a href="{!! url('approvemovie')!!}" class="alert_message"> EL usuario {{ $notification->user_id }} ha modificado el video {{ $notification->movie_id }}</a>
                                     @endif
                                     <br />
                                     <div class="clearfix"></div>
@@ -150,51 +150,29 @@
                             @endif
                         @endforeach
                     </ul>
-                    {{-- <ul class="dropdown-menu" role="menu">
-                        @foreach($notifications as $notification)
-                            @if($notification->send_to == Auth::user()->id)
-                               <li>
-                                    {{$notification->id}}
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul> --}}
                 @endif
             </li>
            {{--  Control Panel --}}
             <li class="dropdown col-xs-12 col-sm-3" style="padding-top: 8px;">
-            <span class="glyphicons glyphicons-user"></span>
+                <span class="glyphicons glyphicons-user"></span>
 
-            <a href="#" class="dropdown-toggle visible-xs" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user btn-nav"></span> {{ Auth::user()->email }} <span class="caret"></span>
-            </a>
-            <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user btn-nav"></span><span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-                <li data-alert_id="1" class="alert_li">
-                    <a class="alert_message">{{ link_to_route('cpanel.index', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}</a>
-                </li>
-                <li data-alert_id="2" class="alert_li">
-                    <a href="{{ url('/logout') }}" class="alert_message">Cerrar Sesión</a>
-                    <div class="clearfix"></div>
-                </li>
-                <li data-alert_id="3" class="alert_li">
-                    <a class="alert_message">{{ Auth::user()->email }}</a>
-                    <div class="clearfix"></div>
-                </li>
-            </ul>
-                {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding-left: 0px; padding-right: 0px;">
-                    {{ Auth::user()->email }} <span class="caret"></span>
-                </a> --}}
-{{-- 
+                <a href="#" class="dropdown-toggle visible-xs" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user btn-nav"></span> {{ Auth::user()->email }} <span class="caret"></span>
+                </a>
+                <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user btn-nav"></span><span class="caret"></span>
+                </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li>
-                        {{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}
+                    <li data-alert_id="1" class="alert_li">
+                        <a class="alert_message">{{ link_to_route('cpanel.index', $title = 'Panel de Control') }}</a>
                     </li>
-                    <li><a href="{{ url('/logout') }}">Logout</a></li>
-                    <li>
-                        <a>{{ Auth::user()->email }}</a>
+                    <li data-alert_id="2" class="alert_li">
+                        <a href="{{ url('/logout') }}" class="alert_message">Cerrar Sesión</a>
+                        <div class="clearfix"></div>
                     </li>
-                </ul> --}}
+                    <li data-alert_id="3" class="alert_li">
+                        <a class="alert_message">{{ Auth::user()->email }}</a>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
             </li>
             @endif
         </ul>
