@@ -1,9 +1,5 @@
 <?php
 
-/*
- *  Simple Rating System using CSS, JQuery, AJAX, PHP, MySQL
- *  Downloaded from Devzone.co.in
- */
 $ipaddress = md5($_SERVER['REMOTE_ADDR']); // here I am taking IP as UniqueID but you can have user_id from Database or SESSION
 
 $servername = "localhost"; // Server details

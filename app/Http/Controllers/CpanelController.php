@@ -9,6 +9,7 @@ use contenidoAudiovisual\User;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\Subject;
 use contenidoAudiovisual\Advertising;
+use contenidoAudiovisual\Notification;
 use contenidoAudiovisual\Http\Requests;
 use Redirect;
 use Session;
@@ -17,10 +18,11 @@ class CpanelController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(4);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        //$users = User::paginate(4);
         //para ver archivos eliminados
         //$users = User::onlyTrashed()->paginate(4);
-        return view ('cpanel.index', compact('users'));
+        return view ('cpanel.index', compact('notifications'));
     }
     /**
      * Display the specified resource.
@@ -28,10 +30,29 @@ class CpanelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function selectuser()
+    {
+        $users = User::paginate(8);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.selectUser',compact('users','notifications'));
+    }
+    public function selectpassword()
+    {
+        $users = User::paginate(8);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.selectUserPassword',compact('users','notifications'));
+    }
+    public function selectrange()
+    {
+        $users = User::where('tipo', '!=', 'administrador')->paginate(8);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.selectUserRange',compact('users','notifications'));
+    }
     public function showmovie()
     {
         $movies = Movie::paginate(8);
-        return view ('cpanel.movieupdate',compact('movies'));
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.movieupdate',compact('movies','notifications'));
     }
     public function approvemovie()
     {
@@ -52,6 +73,8 @@ class CpanelController extends Controller
         $users = User::all();
         return view ('cpanel.movieapprove',compact('aproves','reproves','waits','observations','users'));
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -95,6 +118,18 @@ class CpanelController extends Controller
     {
         $user = User::find($id);
         return view('cpanel.edit',['user'=>$user]);
+
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editPassword($id)
+    {
+        $user = User::find($id);
+        return view('cpanel.editPassword',['user'=>$user]);
 
     }
 

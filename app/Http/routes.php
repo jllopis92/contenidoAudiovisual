@@ -20,7 +20,11 @@ Route::get('/', 'HomeController@index');
 
 	Route::resource('cpanel','CpanelController');
 	Route::get('editmovie','CpanelController@showmovie');
+	Route::get('selectuser','CpanelController@selectuser');
+	Route::get('selectpassword','CpanelController@selectpassword');
+	Route::get('selectrange','CpanelController@selectrange');
 	Route::get('approvemovie','CpanelController@approvemovie');
+	Route::resource('user','UserController');
 	Route::resource('upload','MovieController');
 	Route::post('approve','MovieController@approveMovie');
 	Route::get('createplaylist','PlaylistController@index');

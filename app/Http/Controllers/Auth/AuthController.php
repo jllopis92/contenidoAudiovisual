@@ -90,8 +90,8 @@ class AuthController extends Controller
             'region' => $data['city_state'],
             'birthday' => $data['birthday'],
             'tipo' => $data['tipo'],
-            //'city' => $data['city'],
-            //'sector' => $data['sector'],
+            'city' => $data['city'],
+            'sector' => $data['sector'],
         ]);
     }
 }

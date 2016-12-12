@@ -8,6 +8,7 @@
     <title>CINECL UV</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/sidebar.css" rel="stylesheet">
+    {{-- <link href="/css/sb-admin-2.css" rel="stylesheet"> --}}
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
     @yield('page-style-files')
 </head>
@@ -139,7 +140,7 @@
                             @if($notification->send_to == Auth::user()->id)
                                 <li data-alert_id="1" class="alert_li">
                                     @if($notification->reason == "create")
-                                    <a href="{!! url('approvemovie')!!}" class="alert_message"> El usuario {{ $notification->user_id }} ha creado un nuevo video</a>
+                                    <a href="#" class="alert_message"> El usuario {{ $notification->user_id }} ha creado un nuevo video</a>
                                     @endif
                                     @if ($notification->reason == "modify")
                                         <a href="#" class="alert_message"> EL usuario {{ $notification->user_id }} ha modificado el video {{ $notification->movie_id }}</a>
@@ -150,15 +151,6 @@
                             @endif
                         @endforeach
                     </ul>
-                    {{-- <ul class="dropdown-menu" role="menu">
-                        @foreach($notifications as $notification)
-                            @if($notification->send_to == Auth::user()->id)
-                               <li>
-                                    {{$notification->id}}
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul> --}}
                 @endif
             </li>
            {{--  Control Panel --}}
@@ -171,7 +163,7 @@
             </a>
             <ul class="dropdown-menu" role="menu">
                 <li data-alert_id="1" class="alert_li">
-                    <a class="alert_message">{{ link_to_route('cpanel.index', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}</a>
+                    <a class="alert_message">{{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}</a>
                 </li>
                 <li data-alert_id="2" class="alert_li">
                     <a href="{{ url('/logout') }}" class="alert_message">Cerrar Sesión</a>
@@ -182,84 +174,84 @@
                     <div class="clearfix"></div>
                 </li>
             </ul>
-                {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding-left: 0px; padding-right: 0px;">
-                    {{ Auth::user()->email }} <span class="caret"></span>
-                </a> --}}
-{{-- 
-                <ul class="dropdown-menu" role="menu">
-                    <li>
-                        {{ link_to_route('cpanel.edit', $title = 'Panel de Control', $parameters = (Auth::user()->id)) }}
-                    </li>
-                    <li><a href="{{ url('/logout') }}">Logout</a></li>
-                    <li>
-                        <a>{{ Auth::user()->email }}</a>
-                    </li>
-                </ul> --}}
             </li>
             @endif
         </ul>
     </div>
 </nav>
+
+@if (!Auth::guest())
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-    {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
-        <ul class="sidebar-nav nav-pills nav-stacked" id="menu" style="align-items: center;">
-            <li style="max-height: 30px; color: #333 !important;">
-                <h4> Busqueda por Filtro</h4>
-            </li>
-            <li style="max-height: 25px;">
-                <a style="margin-left: 20px; color: #333 !important;"> Tipo de Video</a>
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="largometraje" value="largometraje"> Largometraje
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="mediometraje" value="mediometraje"> Mediometraje
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="cortometraje" value="cortometraje"> Cortometraje
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="experimental" value="experimental"> Experimental
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="ficcion" value="ficcion"> Ficción
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="animacion" value="animacion"> Animación
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="documental" value="documental"> Documental
-            </li>
+        @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
+            <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="#"> Mi Usuario</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}
+                                </li>
+                                <li>
+                                    {{-- agregar metodo para cambiar pass --}}
+                                    <a href="{{ url('selectuser') }}"><i class='glyphicon glyphicon-film'></i>Cambiar Contraseña</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"> Administrar Usuarios</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ url('selectuser') }}"><i class='glyphicon glyphicon-film'></i>Editar Usuarios</a>
+                                </li>
+                                <li>
+                                    <a href="{!! url('selectpassword')!!}"><i class='glyphicon glyphicon-pencil'></i>Cambiar Contraseña</a>
+                                </li>
+                                <li>
+                                    <a href="{!! url('selectrange')!!}"><i class='glyphicon glyphicon-ok'></i>Modificar Tipo de Usuario</a>
+                                </li>
+                            </ul>
+                        </li>
 
-            <li style="max-height: 25px;">
-                <a style="margin-left: 20px; color: #333 !important;"> Formato</a>
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="4K" value="4K"> 4K
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="2K" value="2K"> 2K
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="HD" value="HD"> HD
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="MiniDV" value="MiniDV"> MiniDV
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="16mm" value="16mm"> 16mm
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="35mm" value="35mm"> 35mm
-            </li>
-            <button type="submit" class="btn btn-primary" style="margin-left: 20px; margin-top: 10px;">
-                <i class="fa fa-btn fa-sign-in"></i> Buscar
-            </button>
-            
-        </ul>
-        {!! Form::close() !!}
+                        <li>
+                            <a href="#"> Administrar Videos<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                 <li>
+                                    <a href="{{ url('/upload') }}"><i class='glyphicon glyphicon-film'></i>Subir Video</a>
+                                </li>
+                                <li>
+                                    <a href="{!! url('editmovie')!!}"><i class='glyphicon glyphicon-pencil'></i>Editar Videos</a>
+                                </li>
+                                <li>
+                                    <a href="{!! url('approvemovie')!!}"><i class='glyphicon glyphicon-ok'></i>Aprobar Videos</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Administrar Anuncios<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{!! url('showadver')!!}"><i class='fa fa-list-ol fa-fw' ></i>Ver Anuncios</a>
+                                </li>
+                                <li>
+                                    <a href="{!! url('createadver')!!}"><i class='fa fa-plus fa-fw'></i>Crear Anuncios</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Administrar Parrilla<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{!! url('createprogram')!!}"><i class='fa fa-plus fa-fw'></i>Programar Parrilla</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @endif
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
     <div id="page-content-wrapper">
@@ -276,6 +268,7 @@
         </div>
         <!-- /#page-content-wrapper -->
     </div>
+@endif
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="/js/jquery-1.11.3.min.js"></script>

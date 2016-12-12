@@ -14,6 +14,19 @@ return [
 		'16mm' => "16 mm",
 		'35mm' => "35 mm",
     ],
+    'profesor_types' => [
+        'externo' => "Externo",
+        'alumno' => "Alumno",
+        'profesor' => "Profesor",
+        'adminParrilla' => "Administrador de Parrilla",
+    ],
+    'types' => [
+        'externo' => "Externo",
+        'alumno' => "Alumno",
+        'profesor' => "Profesor",
+        'adminParrilla' => "Administrador de Parrilla",
+        'administrador' => "Administrador",
+    ],
     'languages' => [
         'Español' => "Español",
         'Inglés' => "Inglés",

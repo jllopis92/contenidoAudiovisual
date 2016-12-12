@@ -183,7 +183,8 @@ class MovieController extends Controller
         $movies = Movie::where('state', 1)->take(5)->get();
         $newMovies = Movie::where('state', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $trailers = Trailer::all();
-        return view ('play.show',compact('movie','trailers','newMovies','movies'));
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('play.show',compact('movie','trailers','newMovies','movies','notifications'));
         //return view ('play.show',['movie'=>$movies],['trailer'=>$trailers]);
     }
 
