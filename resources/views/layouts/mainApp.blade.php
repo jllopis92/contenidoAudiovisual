@@ -31,12 +31,7 @@
                     </ul>
                 </div>       
             </div>
-        {{-- <div class="row col-xs-12 col-md-7">
-            <ul class="nav navbar-nav navbar-left col-sm-12" style="display: inline;white-space:nowrap;">
-
-            </ul>
-        </div> --}}
-    </div><!-- bs-example-navbar-collapse-1 -->
+        </div><!-- bs-example-navbar-collapse-1 -->
     <div class="col-xs-12 visible-xs">
         <div class="col-xs-9">
         {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
@@ -79,17 +74,7 @@
                 <a class="hidden-xs" href="{{ url('/cine_tv') }}" role="button">
                     <span class="glyphicon glyphicon-calendar btn-nav"></span>
                 </a>
-           {{--  <span class="glyphicons glyphicons-tv"></span>
-                <a href="{{ url('/cine_tv') }}">Cine TV</a> --}}
             </li>
-
-            {{-- @if (!Auth::guest())
-            @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno"))
-            <li class="col-xs-3" style="display: inline; padding-left: 0px; padding-right: 0px;">
-                <a href="{{ url('/upload') }}">Subir Video</a>
-            </li>
-            @endif
-            @endif --}}
             
             <!-- Authentication Links -->
             @if (Auth::guest())

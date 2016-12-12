@@ -13,7 +13,7 @@
     @yield('page-style-files')
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0px;">
+    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0px; position: fixed; z-index: 100; width:100%">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="row col-xs-12 col-sm-4">
             <div class="row col-xs-12">
@@ -161,13 +161,9 @@
 </nav>
 <div id="wrapper">
     <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav nav-pills nav-stacked" id="menu" style="align-items: center;">
-            
-        </ul>
-    </div><!-- /#sidebar-wrapper -->
+    
     <!-- Page Content -->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" style="margin-top: 65px;">
         @yield('content')
         </div>
         <!-- /#page-content-wrapper -->

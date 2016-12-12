@@ -1,12 +1,7 @@
 @if (!Auth::guest())
 @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno") || (Auth::user()->tipo == "administrador"))
-@extends('layouts.appTrue')
+@extends('layouts.controlPanel')
 @section('content')
-<style>
-    body{
-        font-family: 'Roboto', sans-serif !important;
-    }
-</style>
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>

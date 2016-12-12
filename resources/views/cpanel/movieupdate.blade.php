@@ -1,6 +1,6 @@
 @if (!Auth::guest())
 	@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador")  || (Auth::user()->tipo == "alumno"))
-	@extends('layouts.panelprofesor')
+	@extends('layouts.controlPanel')
 	@section('content')
 		@if (count($movies) === 0)
 		<h3 style="margin-bottom: 30px;">Error: No se encuentran videos en el servidor</h3>

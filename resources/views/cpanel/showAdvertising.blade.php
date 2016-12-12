@@ -1,6 +1,6 @@
 @if (!Auth::guest())
 	@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
-	@extends('layouts.panelprofesor')
+	@extends('layouts.controlPanel')
 	@section('content')
 		<script src="{!!url('/js/jquery.min.js')!!}"></script>
 		<div class="col-md-12" id="createPopup" style="display: none">

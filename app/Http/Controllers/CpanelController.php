@@ -117,7 +117,9 @@ class CpanelController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('cpanel.edit',['user'=>$user]);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.edit',compact('user','notifications'));
+        //return view('cpanel.edit','notifications',['user'=>$user]);
 
     }
     /**
@@ -168,17 +170,20 @@ class CpanelController extends Controller
     {
         $advertisings = Advertising::where('state', 1)->paginate(8);
         $create = 0;
-        return view ('cpanel.showAdvertising',compact('advertisings','create'));
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.showAdvertising',compact('advertisings','create','notifications'));
     }
     public function createadvert()
     {
         $movies = Movie::paginate(8);
-        return view ('cpanel.createAdvertising',compact('movies'));
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.createAdvertising',compact('movies','notifications'));
     }
     public function createprogram()
     {
         $movies = Movie::all();
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         //$movies = Movie::paginate(8);
-        return view ('cpanel.createPrograming',compact('movies'));
+        return view ('cpanel.createPrograming',compact('movies','notifications'));
     }
 }

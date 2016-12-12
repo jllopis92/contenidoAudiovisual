@@ -27,8 +27,9 @@ class MovieController extends Controller
 
         $subject = Subject::lists('name', 'id');
         $user = User::lists('name', 'id');
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
 
-        return view('upload.create', compact('subject','user'));
+        return view('upload.create', compact('subject','user','notifications'));
     }
 
     /**
@@ -197,7 +198,9 @@ class MovieController extends Controller
     public function edit($id)
     {
         $movie = Movie::find($id);
-        return view('cpanel.editMovie',['movie'=>$movie]);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.editMovie',compact('movie','notifications'));
+        //return view('cpanel.editMovie',['movie'=>$movie]);
     }
     /**
      * Update the specified resource in storage.
