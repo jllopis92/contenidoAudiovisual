@@ -8,12 +8,11 @@
     <title>CINECL UV</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/sidebar.css" rel="stylesheet">
-    {{-- <link href="/css/sb-admin-2.css" rel="stylesheet"> --}}
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
     @yield('page-style-files')
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0px;">
+    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0px; position: fixed; z-index: 100; width:100%">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="row col-xs-12 col-sm-4">
             <div class="row col-xs-12">
@@ -183,25 +182,129 @@
 @if (!Auth::guest())
 <div id="wrapper">
     <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
+    <div id="sidebar-wrapper" style="margin-top: 65px; position: fixed; z-index: 100;">
+    @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"> 
+                <h5 class="submenu-title">Mi Usuario</h5>
+            </div>
+            <div class="submenu-body collapse" id="submenu1">
+                <div class="list-group">
+                    <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}</li>
+                    <li>
+                        <a href="{{ url('selectuser') }}" class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>  Cambiar Contraseña </a>
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu2"> 
+                <h5 class="submenu-title">Administrar Usuarios</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu2">
+                <div class="list-group">
+                <li>
+                    <a href="{{ url('selectuser') }}" class="list-group-item"><i class='glyphicon glyphicon-user'></i>  Editar Usuarios</a>
+                </li>
+                <li>
+                    <a href="{!! url('selectpassword')!!}" class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>  Cambiar Contraseña</a>
+                </li>
+                <li>
+                    <a href="{!! url('selectrange')!!}" class="list-group-item"><i class='glyphicon glyphicon-edit'></i>  Modificar Privilegios</a>
+                </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu3"> 
+                <h5 class="submenu-title">Administrar Videos</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu3">
+                <div class="list-group">
+                <li>
+                    <a href="{{ url('/upload') }}" class="list-group-item"><i class='glyphicon glyphicon-cloud-upload'></i>  Subir Video</a>
+                </li>
+                <li>
+                     <a href="{!! url('editmovie')!!}" class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>  Editar Videos</a>
+                </li>
+                <li>
+                    <a href="{!! url('approvemovie')!!}" class="list-group-item"><i class='glyphicon glyphicon-ok'></i>  Aprobar Videos</a>
+                </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu4"> 
+                <h5 class="submenu-title">Administrar Anuncios</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu4">
+                <div class="list-group">
+                    <li>
+                        <a href="{!! url('showadver')!!}" class="list-group-item"><i class='glyphicon glyphicon-list'></i>  Ver Anuncios</a>
+                    </li>
+                    <li>
+                        <a href="{!! url('createadver')!!}" class="list-group-item"><i class='glyphicon glyphicon-plus'></i>  Crear Anuncios</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+        @if (Auth::user()->tipo == "administrador")
+            <div class="submenu">
+                <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu5"> 
+                    <h5 class="submenu-title">Administrar Parrilla</h5> 
+                </div>
+                <div class="submenu-body collapse" id="submenu5">
+                    <div class="list-group">
+                        <li>
+                            <a href="{!! url('createprogram')!!}" class="list-group-item"><i class='glyphicon glyphicon-time'></i>  Programar Parrilla</a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @elseif (Auth::user()->tipo == "alumno")
+    @endif
+        
+    </div><!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper" style="margin-top: 65px;">
+        @yield('content')
+
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+@endif
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/sidebar_menu.js"></script>
+    @yield('page-js-files')
+    @yield('page-js-script')
+
+    
+</body>
+</html>
+
+
+
+{{-- @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
             <div class="navbar-default sidebar" style="padding-top: 50px;" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="#"> Mi Usuario</a>
-                            <ul class="nav nav-second-level">
+                            <a href="#"> Mi Usuario<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level" data-toggle="collapse">
                                 <li>
                                     {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}
                                 </li>
                                 <li>
-                                    {{-- agregar metodo para cambiar pass --}}
                                     <a href="{{ url('selectuser') }}"><i class='glyphicon glyphicon-film'></i>Cambiar Contraseña</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#"> Administrar Usuarios</a>
+                            <a href="#"> Administrar Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{ url('selectuser') }}"><i class='glyphicon glyphicon-film'></i>Editar Usuarios</a>
@@ -261,38 +364,9 @@
                         </ul>
                         <ul class="nav" id="side-menu">
                             <li>
-                            {{-- TODO: crear esta vista --}}
                                 <a href="{!! url('createplaylist')!!}">Mis Videos</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-            @endif
-    </div><!-- /#sidebar-wrapper -->
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        @yield('content')
-
-            {{-- <div class="container-fluid xyz">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Simple Sidebar With Bootstrap 3 by <a href="http://seegatesite.com/create-simple-cool-sidebar-menu-with-bootstrap-3/" >Seegatesite.com</a></h1>
-                        <p>This sidebar is adopted from start bootstrap simple sidebar startboostrap.com, which I modified slightly to be more cool. For tutorials and how to create it , you can read from my site here <a href="http://seegatesite.com/create-simple-cool-sidebar-menu-with-bootstrap-3/">create cool simple sidebar menu with boostrap 3</a></p>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
-        <!-- /#page-content-wrapper -->
-    </div>
-@endif
-    <!-- /#wrapper -->
-    <!-- jQuery -->
-    <script src="/js/jquery-1.11.3.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/sidebar_menu.js"></script>
-    @yield('page-js-files')
-    @yield('page-js-script')
-
-    
-</body>
-</html>
+            @endif --}}

@@ -12,7 +12,7 @@
     @yield('page-style-files')
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0px;">
+    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0px; position: fixed; z-index: 100; width:100%">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="row col-xs-12 col-sm-4">
             <div class="row col-xs-12">
@@ -180,7 +180,7 @@
 </nav>
 <div id="wrapper">
     <!-- Sidebar -->
-    <div id="sidebar-wrapper">
+    <div id="sidebar-wrapper" style="margin-top: 65px; position: fixed; z-index: 100;">
     {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu" style="align-items: center;">
             <li style="max-height: 30px; color: #333 !important;">
@@ -240,17 +240,8 @@
         {!! Form::close() !!}
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" style="margin-top: 65px;">
         @yield('content')
-
-            {{-- <div class="container-fluid xyz">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Simple Sidebar With Bootstrap 3 by <a href="http://seegatesite.com/create-simple-cool-sidebar-menu-with-bootstrap-3/" >Seegatesite.com</a></h1>
-                        <p>This sidebar is adopted from start bootstrap simple sidebar startboostrap.com, which I modified slightly to be more cool. For tutorials and how to create it , you can read from my site here <a href="http://seegatesite.com/create-simple-cool-sidebar-menu-with-bootstrap-3/">create cool simple sidebar menu with boostrap 3</a></p>
-                    </div>
-                </div>
-            </div> --}}
         </div>
         <!-- /#page-content-wrapper -->
     </div>
