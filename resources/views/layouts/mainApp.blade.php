@@ -18,8 +18,8 @@
             <div class="row col-xs-12" style="padding-left: 0px;">
                 <div class="navbar-header fixed-brand">
                     <ul class="nav navbar-nav" style="margin-top: 0px;">
-                        <li class="col-xs-9" style="height: 64px; width: 200px; background-color: #ffffff; border-color: #e7e7e7; padding-left: 10px;">
-                           <a class="navbar-brand" href="{{ url('/') }}" style="padding-top: 5px; padding-left: 0px;">
+                        <li class="col-xs-9" style="height: 64px; background-color: #ffffff; border-color: #e7e7e7; padding-left: 10px;">
+                           <a class="navbar-brand" href="{{ url('/') }}" style="width: 161px; padding-top: 5px; padding-left: 0px;">
                             <img src="/images/home.png" alt="Escuela de Cine" style="max-width:180px; max-height:55px;">
                             </a>
                         </li>
@@ -46,9 +46,9 @@
         <div class="col-xs-3">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                 <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <span class="icon-bar whiteBackground"></span>
+                <span class="icon-bar whiteBackground"></span>
+                <span class="icon-bar whiteBackground"></span>
             </button>
         </div>
     </div>
@@ -102,9 +102,9 @@
                     <a href="#" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <span class="glyphicon glyphicon-bell btn-nav"></span>
                     </a>
-                    <ul class="dropdown-menu" role="menu">
+                    <ul class="dropdown-menu orangeBackground" role="menu">
                         <li data-alert_id="1" class="alert_li">
-                            <a class="alert_message"> Sin notificaciones </a> 
+                            <a class="alert_message whiteText"> Sin notificaciones </a> 
                             <br />
                             <div class="clearfix"></div>
                         </li>
@@ -122,7 +122,7 @@
                     <ul class="dropdown-menu" role="menu">
                         @foreach($notifications as $notification)
                             @if($notification->send_to == Auth::user()->id)
-                                <li data-alert_id="1" class="alert_li">
+                                <li data-alert_id="1" class="alert_li" style="background-color: #F0643C">
                                     @if($notification->reason == "create")
                                     <a href="{!! url('approvemovie')!!}" class="alert_message"> El usuario {{ $notification->user_id }} ha creado un nuevo video</a>
                                     @endif

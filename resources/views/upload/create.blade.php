@@ -7,7 +7,7 @@
         <div class="col-sm-10 col-sm-offset-1" style="overflow: hidden; 
     background-color: #f8f8f8;
     border-color: #e7e7e7;">
-            <h3 style="margin-bottom: 30px;" align="center">Subir Video</h3>
+            <h3 class="orangeAndBoldText" style="margin-bottom: 30px;" align="center">Subir Video</h3>
 
             <div class="col-sm-offset-2 col-md-8">
 
@@ -408,7 +408,7 @@
                 </div>
             </div>
             <div class="colums">
-                {!! Form::submit('Registrar',['class' =>'btn btn-primary disabled sendButton', 'value' =>'validate']) !!}
+                {!! Form::submit('Registrar',['class' =>'btn btn-primary disabled sendButton orangeButton', 'value' =>'validate']) !!}
                 {!! Form::close() !!}
                 <br>
                 <p class="text-danger" id="sendValidation"> Se deben completar todos los campos marcados como obligatorios para enviar el formulario. </p>

@@ -47,7 +47,7 @@
 			}
 		</script>
 		  
-		 <h3 style="margin-bottom: 30px;">Evaluar Videos</h3>
+		 <h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Evaluar Videos</h3>
 		 <label> Selecione estado: </label>
 		<div class="radio">
 			<label class="radio-inline"><input type="radio" name="aorb" onClick="showAprove()" checked="checked"> Videos Aprobados</label> 

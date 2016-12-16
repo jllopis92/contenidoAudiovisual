@@ -7,7 +7,7 @@
     <div class="row">
     <div class="col-sm-8 col-sm-offset-2" style="margin-left: 0">
             <div class="panel panel-default">
-                <div class="panel-heading">Registro de Usuario</div>
+                <div class="panel-heading orangeAndBoldText">Registro de Usuario</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}" data-parsley-validate="">
                         {{ csrf_field() }}
@@ -123,7 +123,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" name="sendButton" class="btn btn-primary disabled sendButton" value="validate">
+                                <button type="submit" name="sendButton" class="btn btn-primary disabled sendButton orangeButton" value="validate">
                                     <i class="fa fa-btn fa-user"></i> Registrar
                                 </button>
                             </div>

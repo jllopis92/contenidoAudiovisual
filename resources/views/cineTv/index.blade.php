@@ -8,7 +8,7 @@
 {{-- @foreach($movies as $movie)
 <p>{{$movie->url}} {{$movie->play_at}}</p>
 @endforeach --}}
-<h3>Cine TV</h3>
+<h3 class="orangeAndBoldText">Cine TV</h3>
       {{-- <p>Diferencia de tiempo: {{$difTime}}</p> --}}
        <video id="video" style="display:none; width:680px; height:320px;" autoplay controls>
           <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" />

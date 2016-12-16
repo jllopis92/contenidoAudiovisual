@@ -4,7 +4,7 @@
 	@extends('layouts.controlPanel')
 	@section('content')
 		@if (count($movies) === 0)
-		<h3 style="margin-bottom: 30px;">Error: No se encuentran videos en el servidor</h3>
+		<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Error: No se encuentran videos en el servidor</h3>
 		@elseif (count($movies) >= 1)
 
 		<h3 style="margin-bottom: 30px;">Seleccione Video para Anuncio</h3>

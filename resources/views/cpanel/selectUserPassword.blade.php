@@ -2,7 +2,7 @@
 @section('content')
 	@if (!Auth::guest())
 		@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
-			<h3 style="margin-bottom: 30px;">Cambiar Contraseña</h3>
+			<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Cambiar Contraseña</h3>
 			<table class="table">
 				<thead>
 					<th>Nombre</th>

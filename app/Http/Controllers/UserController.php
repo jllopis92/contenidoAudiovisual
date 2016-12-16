@@ -51,7 +51,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('cpanel.editPassword',['user'=>$user]);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.editPassword',compact('user','notifications'));
+        //return view('cpanel.editPassword',['user'=>$user]);
 
     }
     
