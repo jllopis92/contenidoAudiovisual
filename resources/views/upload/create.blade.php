@@ -509,22 +509,22 @@
         var validDescription = 0;
         var validCreationDate = 0;
         var validDirection = 0;
-        var validDirectionAsist = 0;
-        var validCasting = 0;
-        var validContinuista = 0;
+        var validDirectionAsist = 1;
+        var validCasting = 1;
+        var validContinuista = 1;
         var validScript = 0;
         var validProduction = 0;
         var validProductionAssistant = 0;
-        var validPhotograficDirection = 0;
+        var validPhotograficDirection = 1;
         var validCamara = 0;
-        var validCamaraAsist = 0;
-        var validArt = 0;
+        var validCamaraAsist = 1;
+        var validArt = 1;
         var validSonorousRegister = 0;
         var validMounting = 0;
         var validImagePostproduction = 0;
         var validSoundPostproduction = 0;
-        var validCatering = 0;
-        var validMusic = 0;
+        var validCatering = 1;
+        var validMusic = 1;
         var validActors = 0;
             
         j('#name').on('input',function(e){
@@ -606,6 +606,7 @@
                 document.getElementById("nameValidation").style.display = "none";
                 validName = 1;
             }
+            checkForm();
         }
 
         function checkDescription(){
@@ -623,6 +624,7 @@
                 document.getElementById("descriptionValidation").style.display = "none";
                 validDescription = 1;
             }
+            checkForm();
         }
         function checkCreationDate(){
             var creation_date = j('#creation_date').val();
@@ -635,6 +637,7 @@
                 document.getElementById("dateValidation").style.display = "none";
                 validCreationDate = 1;
             }
+            checkForm();
         }
         function checkDirection(){
             var direction = j('#direction').val();
@@ -651,6 +654,7 @@
                 document.getElementById("directionValidation").style.display = "none";
                 validDirection = 1;
             }
+            checkForm();
         }
         function checkDirectionAsist(){
             var direction_assistant = j('#direction_assistant').val();
@@ -666,6 +670,7 @@
                 document.getElementById("directionAssistantValidation").style.display = "none";
                 validDirectionAsist = 1;
             }
+            checkForm();
         }
         function checkCasting(){
             var casting = j('#casting').val();
@@ -681,6 +686,7 @@
                 document.getElementById("castingValidation").style.display = "none";
                 validCasting = 1;
             }
+            checkForm();
         }
         function checkContinuista(){
             var continuista = j('#continuista').val();
@@ -696,6 +702,7 @@
                 document.getElementById("continusValidation").style.display = "none";
                 validContinuista = 1;
             }
+            checkForm();
         }
         function checkScript(){
             var script = j('#script').val();
@@ -712,6 +719,7 @@
                 document.getElementById("scriptValidation").style.display = "none";
                 validScript = 1;
             }
+            checkForm();
         }
         function checkProduction(){
             var production = j('#production').val();
@@ -728,6 +736,7 @@
                 document.getElementById("productionValidation").style.display = "none";
                 validProduction = 1;
             }
+            checkForm();
         }
         function checkProductionAssistant(){
             var production_assistant = j('#production_assistant').val();
@@ -744,6 +753,7 @@
                 document.getElementById("AsisProductionValidation").style.display = "none";
                 validProductionAssistant = 1;
             }
+            checkForm();
         }
         function checkPhoto(){
             var photografic_direction = j('#photografic_direction').val();
@@ -759,6 +769,7 @@
                 document.getElementById("photoValidation").style.display = "none";
                 validPhotograficDirection = 1;
             }
+            checkForm();
         }
         function checkCamara(){
             var camara = j('#camara').val();
@@ -775,6 +786,7 @@
                 document.getElementById("camaraValidation").style.display = "none";
                 validCamara = 1;
             }
+            checkForm();
         }
         function checkCamaraAsist(){
             var camara_assistant = j('#camara_assistant').val();
@@ -790,6 +802,7 @@
                 document.getElementById("camaraAsistValidation").style.display = "none";
                 validCamaraAsist = 1;
             }
+            checkForm();
         }
         function checkArtDirection(){
             var art_direction = j('#art_direction').val();
@@ -805,6 +818,7 @@
                 document.getElementById("artValidation").style.display = "none";
                 validArt = 1;
             }
+            checkForm();
         }
         function checkSonorousRegister(){
             var sonorous_register = j('#sonorous_register').val();
@@ -821,6 +835,7 @@
                 document.getElementById("sonorousValidation").style.display = "none";
                 validSonorousRegister = 1;
             }
+            checkForm();
         }
         function checkMounting(){
             var mounting = j('#mounting').val();
@@ -837,6 +852,7 @@
                 document.getElementById("mountingValidation").style.display = "none";
                 validMounting = 1;
             }
+            checkForm();
         }
         function checkImagePostproduction(){
             var image_postproduction = j('#image_postproduction').val();
@@ -853,6 +869,7 @@
                 document.getElementById("imgValidation").style.display = "none";
                 validImagePostproduction = 1;
             }
+            checkForm();
         }
         function checkSoundPostproduction(){
             var sound_postproduction = j('#sound_postproduction').val();
@@ -869,6 +886,7 @@
                 document.getElementById("soundValidation").style.display = "none";
                 validSoundPostproduction = 1;
             }
+            checkForm();
         }
         function checkCatering(){
             var catering = j('#catering').val();
@@ -884,6 +902,7 @@
                 document.getElementById("cateringValidation").style.display = "none";
                 validCatering = 1;
             }
+            checkForm();
         }
         function checkMusic(){
             var music = j('#music').val();
@@ -900,6 +919,7 @@
                 document.getElementById("musicValidation").style.display = "none";
                 validMusic = 1;
             }
+            checkForm();
         }
         function checkActors(){
             var actors = j('#actors').val();
@@ -916,12 +936,12 @@
                 document.getElementById("actorsValidation").style.display = "none";
                 validActors = 1;
             }
+            checkForm();
         }
         function checkForm() {
             if(
                 validName == 0 || 
                 validDescription == 0 || 
-                validCreationDate == 0 || 
                 validDirection == 0 || 
                 validDirectionAsist == 0 || 
                 validCasting == 0 || 
@@ -942,12 +962,11 @@
                 validActors == 0){
                 j(".sendButton").attr('class', 'btn btn-primary disabled sendButton');
                 document.getElementById("sendValidation").style.display = "inline";
-                document.getElementById("sendValidation").innerHTML = 'Se deben completar todos los campos marcados como obligatorios para enviar el formulario'; 
+                document.getElementById("sendValidation").innerHTML = 'Se deben completar todos los campos marcados como obligatorios para enviar el formulario'+" validName "+validName+" validDescription "+ validDescription+" validCreationDate "+validCreationDate+" validDirection "+validDirection+" validDirectionAsist "+validDirectionAsist+" validCasting "+validCasting+" validContinuista "+validContinuista+" validScript "+validScript+" validProduction "+validProduction+" validProductionAssistant "+validProductionAssistant+" validPhotograficDirection "+validPhotograficDirection+" validCamara "+validCamara+" validCamaraAsist "+validCamaraAsist+" validArt "+validArt+" validSonorousRegister "+validSonorousRegister+" validMounting "+validMounting+" validImagePostproduction "+validImagePostproduction+" validSoundPostproduction "+validSoundPostproduction+" validCatering "+validCatering+" validMusic "+validMusic+" validActors "+validActors
             }
             if(
                 validName == 1 && 
-                validDescription == 1 && 
-                validCreationDate == 1 && 
+                validDescription == 1 &&
                 validDirection == 1 && 
                 validDirectionAsist == 1 && 
                 validCasting == 1 && 
@@ -964,8 +983,7 @@
                 validImagePostproduction == 1 && 
                 validSoundPostproduction == 1 &&
                 validCatering == 1 &&
-                validMusic == 1 && 
-                validActors == 1){
+                validMusic == 1){
                 j(".sendButton").attr('class', 'btn btn-primary active sendButton');
                 document.getElementById("sendValidation").style.display = "none";
             }            

@@ -218,6 +218,8 @@ body {
     }
     .li:hover{background-color:#eee}
     .turn_off_alert{float:right;margin-bottom :1px}
+    a.alert_message{color : grey}
+    a.alert_message:hover{color : grey}
 }
 
 
