@@ -14,7 +14,7 @@
 		        @endif
 		    </video>
 		    <div class="col-xs-12">
-	    		<h3>{{$movie->name}}</h3>
+	    		<h3 class="orangeAndBoldText">{{$movie->name}}</h3>
 			</div>
 		</div>
 
@@ -25,9 +25,9 @@
 		        <br><br><br>
 		             
 		        <div class="row">
-		          	<label>{{$movie->description}}</label> 
+		          	<label class="orangeText">{{$movie->description}}</label> 
 			        <br><br><br>  
-			        <h5>Evalua este video</h5>
+			        <h5 class="orangeAndBoldText">Evalua este video</h5>
 			          <!-- Rating start -->
 			        
 			        <fieldset id='demo2' class="rating">
@@ -76,7 +76,7 @@
 	    border-color: #e7e7e7;
 	    margin-top: 20px">
 	    <div class="col-md-12" style="max-width: 100%">
-    <H4>Videos recomendados</H4>
+    <H4 class="orangeText">Videos recomendados</H4>
     <div class="flexslider">
       <ul class="slides">
         
@@ -84,9 +84,8 @@
           <li>
             <a href="{{ action("MovieController@show", array($movie2->id)) }}">
               <img src="../files/{{$movie2->imageRef}}" />
-              <h3 href="{{ action("MovieController@show", array($movie2->id)) }}" style="color: #888;
+              <h3 href="{{ action("MovieController@show", array($movie2->id)) }}" style="color: #F0643C;
                 display: block;
-                font-family: 'Roboto';
                 font-size: 0.875em;
                 line-height: 1.5em;
                 padding: 10px 0;

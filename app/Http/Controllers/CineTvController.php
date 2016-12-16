@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use contenidoAudiovisual\Programation;
 use contenidoAudiovisual\MovieInProgram;
 use contenidoAudiovisual\Playlist;
+use contenidoAudiovisual\Notification;
 use contenidoAudiovisual\Http\Requests;
 
 class CineTvController extends Controller
@@ -60,6 +61,8 @@ class CineTvController extends Controller
             $moviesNow = null; 
         }
 
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+
         
         //$difTime = gmdate('H:i:s', $dif);
         //$dif = $rightNow->toTimeString() - $playTime->toTimeString();
@@ -71,7 +74,7 @@ class CineTvController extends Controller
         $q->whereYear('created_at', '=', date('Y'));*/
     	//$playlists = Playlist::paginate(5);
     	//return view ('cineTv.index',compact('playlists'));
-        return view('cineTv.index',compact('programations','programationsNow','movies','moviesNow','difTime','playNow','valid', 'rightNow','programationsCount'));
+        return view('cineTv.index',compact('programations','programationsNow','movies','moviesNow','difTime','playNow','valid', 'rightNow','programationsCount','notifications'));
     }
     public function show($id)
     {

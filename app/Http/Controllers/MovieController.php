@@ -166,11 +166,12 @@ class MovieController extends Controller
                     ]);
             }
         }  
-        $users = User::paginate(4);
+        //$users = User::paginate(4);
         //para ver archivos eliminados
         //$users = User::onlyTrashed()->paginate(4);
-        //return view ('cpanel.index', compact('users'));      
-        return "OK";
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.index', compact('notifications'));      
+        //return "OK";
     }
 
     /**
@@ -183,9 +184,9 @@ class MovieController extends Controller
         $movie = Movie::find($id);
         $movies = Movie::where('state', 1)->take(5)->get();
         $newMovies = Movie::where('state', 1)->orderBy('created_at', 'desc')->take(5)->get();
-        $trailers = Trailer::all();
+        $trailer = Trailer::where('video_id', $id)->take(1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('play.show',compact('movie','trailers','newMovies','movies','notifications'));
+        return view ('play.show',compact('movie','trailer','newMovies','movies','notifications'));
         //return view ('play.show',['movie'=>$movies],['trailer'=>$trailers]);
     }
 

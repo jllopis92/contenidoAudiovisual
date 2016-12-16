@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2" style="margin-left: 0">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
+                    <div class="panel-heading orangeAndBoldText">Login</div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" data-parsley-validate="">
                             {{ csrf_field() }}
@@ -50,11 +50,11 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary" value="validate">
+                                    <button type="submit" class="btn btn-primary orangeButton" value="validate">
                                         <i class="fa fa-btn fa-sign-in"></i> Ingresar
                                     </button>
 
-                                    <a class="btn btn-link" href="{{ url('/password/reset') }}">¿Olvidó su contraseña?</a>
+                                    <a class="btn btn-link orangeAndBoldText" href="{{ url('/password/reset') }}">¿Olvidó su contraseña?</a>
                                 </div>
                             </div>
                         </form>
