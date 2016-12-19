@@ -10,7 +10,7 @@
 				<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Editar Perfil</h3>
 				@include('cpanel.forms.usrReg')
 
-			{!!Form::submit('Actualizar',['class'=>'btn btn-primary'])!!}
+			{!!Form::submit('Actualizar',['class'=>'btn btn-primary orangeButton'])!!}
 			{!!Form::close()!!}
 		@stop
 

@@ -124,10 +124,12 @@
                             @if($notification->send_to == Auth::user()->id)
                                 <li data-alert_id="1" class="alert_li">
                                     @if($notification->reason == "create")
-                                    <a href="{!! url('approvemovie')!!}" class="alert_message"> El usuario {{ $notification->user_id }} ha creado un nuevo video</a>
+                                     <a href="{{ action("CpanelController@approveMovieToNotif", array($notification->id)) }}" class="alert_message"> El usuario {{ $notification->user_id }} ha subido un nuevo video</a>
                                     @endif
+                                    
                                     @if ($notification->reason == "modify")
-                                        <a href="{!! url('approvemovie')!!}" class="alert_message"> EL usuario {{ $notification->user_id }} ha modificado el video {{ $notification->movie_id }}</a>
+
+                                        <a href="{{ action("CpanelController@editfromnotif", array($notification->id)) }}" class="alert_message"> El usuario {{ $notification->user_id }}  ha modificado el video {{ $notification->movie_id }}</a>
                                     @endif
                                     <br />
                                     <div class="clearfix"></div>
@@ -175,9 +177,10 @@
             </div>
             <div class="submenu-body collapse" id="submenu1">
                 <div class="list-group">
-                    <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}</li>
-                    <li class="list-group-item" style="padding: 0px">
-                        <a href="{{ url('selectuser') }}" class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>  Cambiar Contraseña </a>
+                    <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id), $attributes = ['class'=>'blackText'] ) }}</li>
+                    <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
+                        {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
+                        {{-- <a href="{{ url('selectuser') }}" class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>  Cambiar Contraseña </a> --}}
                     </li>
                 </div>
             </div>
@@ -326,7 +329,13 @@
         </div>
         <!-- /#page-content-wrapper -->
     </div>
+@else
+    <script type="text/javascript">
+        window.location = "/";//here double curly bracket
+    </script>
+
 @endif
+
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="/js/jquery-1.11.3.min.js"></script>

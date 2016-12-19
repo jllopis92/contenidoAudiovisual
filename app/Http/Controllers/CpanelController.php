@@ -54,6 +54,24 @@ class CpanelController extends Controller
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.movieupdate',compact('movies','notifications'));
     }
+    /**
+     * Redirecciona a editar Video y marca la notificacion como vista.
+     *
+     * @param  int  $id = id de la notificacion
+     * @return \Illuminate\Http\Response
+     */
+    public function editfromnotif($id)
+    {
+        $notification = Notification::find($id);
+        $watch = 1;
+        $notification->fill([
+            'watch' => $watch,
+        ]);
+        $notification->save();
+        return Redirect::to('editmovie');
+    }
+
+
     public function approvemovie()
     {
 
@@ -71,7 +89,24 @@ class CpanelController extends Controller
         ->paginate(6);
 
         $users = User::all();
-        return view ('cpanel.movieapprove',compact('aproves','reproves','waits','observations','users'));
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.movieapprove',compact('aproves','reproves','waits','observations','users','notifications'));
+    }
+    /**
+     * Redirecciona a aprobar Video y marca la notificacion como vista.
+     *
+     * @param  int  $id = id de la notificacion
+     * @return \Illuminate\Http\Response
+     */
+    public function approveMovieToNotif($id)
+    {
+        $notification = Notification::find($id);
+        $watch = 1;
+        $notification->fill([
+            'watch' => $watch,
+        ]);
+        $notification->save();
+        return Redirect::to('approvemovie');
     }
 
     
@@ -145,7 +180,12 @@ class CpanelController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $user->fill($request->all());
+
+        $user->fill([
+            'password' => bcrypt($request['password']),
+        ]);
+
+        //$user->fill($request->all());
         $user->save();
         Session::flash('message','Usuario Actualizado Correctamente');
         return Redirect::to('/cpanel');

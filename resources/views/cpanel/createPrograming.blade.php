@@ -152,7 +152,20 @@ input:focus {
                 format: 'YYYY-MM-DD HH:mm:ss',
                 sideBySide: true
             });
+            //checkCreationDate();
         });
+    </script>
+
+    <script type="text/javascript">
+    	$('#datetimepicker').on('dp.change', function(e){
+    		//TODO: Crear funcion cuando cambia la hora y validar si esta disponible ese horario
+    		var jsonArr = e.date;
+    		var dateProgram = new Date(jsonArr);
+    		console.log("dateProgram: ", dateProgram);
+    		console.log("hora: ", dateProgram.getHours());
+    		console.log("minutos: ", dateProgram.getMinutes());
+    		console.log("año: ", dateProgram.getUTCFullYear());
+    	});
     </script>
 
 {{-- <div class = "form-group" style ="display: none;">
@@ -166,9 +179,7 @@ input:focus {
  --}}
  <script type="text/javascript">
             //var j = jQuery.noConflict();
-            $('#datetimepicker').on('change',function(e){
-                alert("change text");
-            });
+            
             /*j('#name').on('input',function(e){
                 
             });*/

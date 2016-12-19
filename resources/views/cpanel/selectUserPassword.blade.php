@@ -16,7 +16,7 @@
 						<td>{{$user->email}}</td>
 						<td>{{$user->tipo}}</td>
 						<td>
-						{!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  $user->id, $attributes = ['class'=>'btn btn-primary'])!!}
+						{!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  $user->id, $attributes = ['class'=>'btn btn-primary orangeButton'])!!}
 						</td>
 					</tbody>
 				@endforeach

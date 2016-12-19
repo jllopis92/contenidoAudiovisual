@@ -23,7 +23,7 @@
 							@endif
 						</td>
 						<td>
-						{!!Form::submit('Actualizar',['class'=>'btn btn-primary'])!!}
+						{!!Form::submit('Actualizar',['class'=>'btn btn-primary orangeButton'])!!}
 						</td>
 						{!!Form::close()!!}
 					</tbody>

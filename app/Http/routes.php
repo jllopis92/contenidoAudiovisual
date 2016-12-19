@@ -10,20 +10,16 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-//Route::get('/','FrontController@index');
-/*Route::get('contacto','FrontController@contacto');
-Route::get('reviews','FrontController@reviews');*/
 
-Route::get('/', 'HomeController@index');
-//Route::get('upload','MovieController@index');
-//Route::post('upload.store','MovieController@store');
-
+	Route::get('/', 'HomeController@index');
 	Route::resource('cpanel','CpanelController');
 	Route::get('editmovie','CpanelController@showmovie');
 	Route::get('selectuser','CpanelController@selectuser');
 	Route::get('selectpassword','CpanelController@selectpassword');
 	Route::get('selectrange','CpanelController@selectrange');
 	Route::get('approvemovie','CpanelController@approvemovie');
+	Route::get('approveMovieToNotif/{id}','CpanelController@approveMovieToNotif');
+	Route::get('editfromnotif/{id}','CpanelController@editfromnotif');
 	Route::resource('user','UserController');
 	Route::resource('upload','MovieController');
 	Route::post('approve','MovieController@approveMovie');
@@ -40,19 +36,8 @@ Route::get('/', 'HomeController@index');
 	Route::post('deleteadvertising','AdvertisingController@delete');
 	Route::resource('advertising','AdvertisingController');
 	Route::resource('programing','ProgramingController');
-	//Route::post('createtest','TestController@store');
 	Route::resource('test','TestController');
 
 Route::group(['middleware' => 'web'], function () {
 	Route::auth();
-	/*Route::get('/', function () {
-		return view('index');
-	});*/
-	
-/*	Route::resource('cpanel','CpanelController');
-	Route::get('editmovie','CpanelController@showmovie');
-	Route::get('approvemovie','CpanelController@approvemovie');
-	Route::resource('upload','MovieController');
-	Route::get('search','QueryController@search');
-	Route::get('cine_tv','CineTvController@index');*/
 });

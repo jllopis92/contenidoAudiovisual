@@ -54,7 +54,7 @@
                                         <i class="fa fa-btn fa-sign-in"></i> Ingresar
                                     </button>
 
-                                    <a class="btn btn-link orangeAndBoldText" href="{{ url('/password/reset') }}">¿Olvidó su contraseña?</a>
+                                   {{--  <a class="btn btn-link orangeAndBoldText" href="{{ url('/password/reset') }}">¿Olvidó su contraseña?</a> --}}
                                 </div>
                             </div>
                         </form>

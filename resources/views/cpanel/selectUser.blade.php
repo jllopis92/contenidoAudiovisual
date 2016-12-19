@@ -22,7 +22,7 @@
 						<td>{{$user->city}}</td>
 						<td>{{$user->sector}}</td>
 						<td>
-						{!! link_to_route('cpanel.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary'])!!}
+						{!! link_to_route('cpanel.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary orangeButton'])!!}
 						</td>
 					</tbody>
 				@endforeach

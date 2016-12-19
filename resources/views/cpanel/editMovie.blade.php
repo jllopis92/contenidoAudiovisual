@@ -7,7 +7,7 @@
 		{!!Form::model($movie, array('id'=>"editMovieForm"), ['route'=>[ 'upload.update',$movie->id],'method'=>'PUT'])!!}
 			@include('cpanel.forms.mov')
 
-		{!!Form::submit('Actualizar',['class'=>'btn btn-primary', 'value' =>'validate'])!!}
+		{!!Form::submit('Actualizar',['class'=>'btn btn-primary orangeButton', 'value' =>'validate'])!!}
 		{!!Form::close()!!}
 	@else
 		<script type="text/javascript">

@@ -1,17 +1,21 @@
 @extends('layouts.mainApp')
 @section('content')
 
+@if (Auth::guest())
+	no login
+@else
+
 	<div class="col-sm-12" id="mainBody" style="overflow: hidden; 
 		background-color: #f8f8f8;
 	    border-color: #e7e7e7;">
 		<div class="col-sm-12 col-md-8" style="margin-top: 10px">
-		    <video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%">
-		        @if (Auth::guest())
-		           <source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
-		        @else
+
+
+		    <video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%">{{-- 
+		           <source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4"> --}}
 		            <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4">
-		            <track src="/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa" kind="subtitles" srclang="es" label="Spanish">
-		        @endif
+		            {{-- <track src="/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa" kind="subtitles" srclang="es" label="Spanish"> --}}
+		       
 		    </video>
 		    <div class="col-xs-12">
 	    		<h3 class="orangeAndBoldText">{{$movie->name}}</h3>
@@ -100,6 +104,8 @@
   </div>
 		
 	</div>
+
+@endif
 @stop
 
 
@@ -116,25 +122,6 @@
 @stop
 
 @section('page-js-script')
-	<script>
-		var j = jQuery.noConflict();
-		j(document).ready(function () {
-			j("#demo2 .stars").click(function () {
-				j.post('../rating.php',{
-					rate:j(this).val(),
-					user:{!! Auth::user()->id !!},
-					movie:{{$movie->id}}
-				},function(d){
-					if(d>0){
-			            //alert('You already rated'+d);
-			        }else{
-			            //alert('Thanks For Rating');
-			        }
-			    });
-				j(this).attr("checked");
-			});
-		});
-	</script>
 	<script>
 		var j = jQuery.noConflict();
 		j(document).ready(function () {

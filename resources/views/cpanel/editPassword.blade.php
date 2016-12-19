@@ -15,7 +15,7 @@
 					{!!Form::password('confimPassword',['class'=>'form-control', 'required'=> ''])!!}
 				</div>
 
-			{!!Form::submit('Actualizar',['class'=>'btn btn-primary'])!!}
+			{!!Form::submit('Actualizar',['class'=>'btn btn-primary orangeButton'])!!}
 			{!!Form::close()!!}
 		@stop
 	@else

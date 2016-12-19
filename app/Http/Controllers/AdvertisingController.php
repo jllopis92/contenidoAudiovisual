@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\Advertising;
+use contenidoAudiovisual\Notification;
 use contenidoAudiovisual\Http\Requests;
 
 class AdvertisingController extends Controller
@@ -28,7 +29,8 @@ class AdvertisingController extends Controller
 
         $advertisings = Advertising::where('state', 1)->paginate(8);
         $create = 1;
-        return view ('cpanel.showAdvertising',compact('advertisings', 'create'));
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.showAdvertising',compact('advertisings', 'create','notifications'));
     }
     public function delete(Request $request){
         $advertising = Advertising::find($request['id']);
@@ -39,7 +41,8 @@ class AdvertisingController extends Controller
         $advertising->save();
         $advertisings = Advertising::where('state', 1)->paginate(8);
         $create = 2;
-        return view ('cpanel.showAdvertising',compact('advertisings', 'create'));
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.showAdvertising',compact('advertisings', 'create','notifications'));
     }
     
 }

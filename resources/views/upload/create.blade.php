@@ -407,11 +407,13 @@
                     </div>
                 </div>
             </div>
-            <div class="colums">
-                {!! Form::submit('Registrar',['class' =>'btn btn-primary disabled sendButton orangeButton', 'value' =>'validate']) !!}
-                {!! Form::close() !!}
-                <br>
-                <p class="text-danger" id="sendValidation"> Se deben completar todos los campos marcados como obligatorios para enviar el formulario. </p>
+            <div class = "form-group col-md-12">
+                <div class="colums">
+                    {!! Form::submit('Registrar',['class' =>'btn btn-primary disabled sendButton orangeButton', 'value' =>'validate']) !!}
+                    {!! Form::close() !!}
+                    <br>
+                    <p class="text-danger" id="sendValidation"> Se deben completar todos los campos marcados como obligatorios para enviar el formulario. </p>
+                </div>
             </div>
         </div>
         </div>
@@ -494,7 +496,13 @@
         };
         j.datepicker.setDefaults(j.datepicker.regional['es']);
         j(function () {
-            j("#creation_date").datepicker();
+            j('#creation_date').datepicker()
+                .on("input change", function (e) {
+                //alert("date change");
+                checkCreationDate();
+            });
+            //j("#creation_date").datepicker();
+
         });
 
     </script>
@@ -507,6 +515,11 @@
 
         var validName = 0;
         var validDescription = 0;
+        var validImageFile = 0;
+        var validTrailerFile = 0;
+        var validVideoFile = 0;
+        var validCategory = 0;
+        var validGenre = 0;
         var validCreationDate = 0;
         var validDirection = 0;
         var validDirectionAsist = 1;
@@ -533,9 +546,31 @@
         j('#description').on('input',function(e){
             checkDescription();
         });
-        j('#creation_date').on('input',function(e){
-            checkCreationDate();
+        j("#largometraje").change(function(e) {
+            checkCategory("largometraje");    
         });
+        j("#mediometraje").change(function(e) {
+            checkCategory("mediometraje");    
+        });
+        j("#cortometraje").change(function(e) {
+            checkCategory("cortometraje");    
+        });
+        j("#experimental").change(function(e) {
+            checkCategory2("experimental");    
+        });
+        j("#ficcion").change(function(e) {
+            checkCategory2("ficcion");    
+        });
+        j("#animacion").change(function(e) {
+            checkCategory2("animacion");    
+        });
+        j("#documental").change(function(e) {
+            checkCategory2("documental");    
+        });
+        
+        /*j('#creation_date').on('click',function(e){
+            checkCreationDate();
+        });*/
         j('#direction').on('input',function(e){
             checkDirection();
         });
@@ -561,7 +596,7 @@
             checkPhoto();
         });
         j('#camara').on('input',function(e){
-            checkCamara();
+            checkCamara();        
         });
         j('#camara_assistant').on('input',function(e){
             checkCamaraAsist();
@@ -626,12 +661,39 @@
             }
             checkForm();
         }
+        function checkCategory(option){
+            var category = j('#' + option).val();
+            if(category.length == 0){
+                document.getElementById("categoryValidation").style.display = "inline";
+                document.getElementById("categoryValidation").innerHTML = 'Campo Obligatorio';
+               validCategory = 0;
+            }else{
+                document.getElementById("categoryValidation").style.display = "none";
+                validCategory = 1;
+            }
+            checkForm();
+        }
+        function checkCategory2(option){
+            var category2 = j('#' + option).val();
+            if(category2.length == 0){
+                document.getElementById("genreValidation").style.display = "inline";
+                document.getElementById("genreValidation").innerHTML = 'Campo Obligatorio';
+               validGenre = 0;
+            }else{
+                document.getElementById("genreValidation").style.display = "none";
+                validGenre = 1;
+            }
+            checkForm();
+        }
+
         function checkCreationDate(){
             var creation_date = j('#creation_date').val();
-            var BLIDRegExpression = /^[0-9\ \/\-\_]+$/;
+            var BLIDRegExpression = /^[0-9\-]+$/;
             if(creation_date.length == 0){
+                validCreationDate = 0;
+            }else if (!BLIDRegExpression.test(creation_date)) {
                 document.getElementById("dateValidation").style.display = "inline";
-                document.getElementById("dateValidation").innerHTML = 'Campo Obligatorio';
+                document.getElementById("dateValidation").innerHTML = 'El Campo Contiene Caracteres Invalidos';
                 validCreationDate = 0;
             }else{
                 document.getElementById("dateValidation").style.display = "none";
@@ -959,14 +1021,20 @@
                 validSoundPostproduction == 0 ||
                 validCatering == 0 ||
                 validMusic == 0 || 
-                validActors == 0){
-                j(".sendButton").attr('class', 'btn btn-primary disabled sendButton');
+                validActors == 0 ||
+                validTrailerFile == 0 ||
+                validVideoFile == 0 ||
+                validImageFile == 0 ||
+                validCategory == 0 ||
+                validGenre == 0){
+                j(".sendButton").attr('class', 'btn btn-primary disabled sendButton orangeButton');
                 document.getElementById("sendValidation").style.display = "inline";
-                document.getElementById("sendValidation").innerHTML = 'Se deben completar todos los campos marcados como obligatorios para enviar el formulario'+" validName "+validName+" validDescription "+ validDescription+" validCreationDate "+validCreationDate+" validDirection "+validDirection+" validDirectionAsist "+validDirectionAsist+" validCasting "+validCasting+" validContinuista "+validContinuista+" validScript "+validScript+" validProduction "+validProduction+" validProductionAssistant "+validProductionAssistant+" validPhotograficDirection "+validPhotograficDirection+" validCamara "+validCamara+" validCamaraAsist "+validCamaraAsist+" validArt "+validArt+" validSonorousRegister "+validSonorousRegister+" validMounting "+validMounting+" validImagePostproduction "+validImagePostproduction+" validSoundPostproduction "+validSoundPostproduction+" validCatering "+validCatering+" validMusic "+validMusic+" validActors "+validActors
+                document.getElementById("sendValidation").innerHTML = 'Se deben completar todos los campos marcados como obligatorios para enviar el formulario'+" validName "+validName+" validDescription "+ validDescription+" validCreationDate "+validCreationDate+" validDirection "+validDirection+" validDirectionAsist "+validDirectionAsist+" validCasting "+validCasting+" validContinuista "+validContinuista+" validScript "+validScript+" validProduction "+validProduction+" validProductionAssistant "+validProductionAssistant+" validPhotograficDirection "+validPhotograficDirection+" validCamara "+validCamara+" validCamaraAsist "+validCamaraAsist+" validArt "+validArt+" validSonorousRegister "+validSonorousRegister+" validMounting "+validMounting+" validImagePostproduction "+validImagePostproduction+" validSoundPostproduction "+validSoundPostproduction+" validCatering "+validCatering+" validMusic "+validMusic+" validActors "+validActors+" validImageFile "+validImageFile+" validVideoFile "+validVideoFile+" validTrailerFile "+validTrailerFile+" validCategory "+validCategory+" validGenre "+validGenre
             }
             if(
                 validName == 1 && 
                 validDescription == 1 &&
+                validCreationDate == 1 &&
                 validDirection == 1 && 
                 validDirectionAsist == 1 && 
                 validCasting == 1 && 
@@ -983,8 +1051,14 @@
                 validImagePostproduction == 1 && 
                 validSoundPostproduction == 1 &&
                 validCatering == 1 &&
-                validMusic == 1){
-                j(".sendButton").attr('class', 'btn btn-primary active sendButton');
+                validMusic == 1 &&
+                validActors == 1 &&
+                validTrailerFile == 1 &&
+                validVideoFile == 1 &&
+                validImageFile == 1 &&
+                validCategory == 1 &&
+                validGenre == 1){
+                j(".sendButton").attr('class', 'btn btn-primary active sendButton orangeButton');
                 document.getElementById("sendValidation").style.display = "none";
             }            
         }
@@ -1024,7 +1098,7 @@
                     }
                     document.getElementById('filelistVideo').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                     document.getElementById('url').value = file.name;
-                    alert("valor: " + document.getElementById('url').value);
+                    //alert("valor: " + document.getElementById('url').value);
                 });
                }else{
                 alert("No se puede agregar mas videos");
@@ -1035,6 +1109,8 @@
            document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
            if(file.percent == 100){
             uploadVideo = true;
+            validVideoFile = 1;
+            checkForm();
         }
     },
 
@@ -1082,7 +1158,7 @@
                     }
                     document.getElementById('filelistImage').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                     document.getElementById('imageRef').value = file.name;
-                    alert("valor: " + document.getElementById('imageRef').value);
+                    //alert("valor: " + document.getElementById('imageRef').value);
                 });
                }else{
                 alert("No se puede agregar mas imagenes");
@@ -1093,11 +1169,15 @@
            document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
            if(file.percent == 100){
             uploadImg = true;
+            validImageFile = 1;
+            checkForm();
+            //alert("Listo");
         }
     },
 
     Error: function(up, err) {
         alert("Error: " + err.code + ": " + err.message);
+        validImageFile = 0;
                     //document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
                 }
             }
@@ -1140,7 +1220,7 @@
                     }
                     document.getElementById('filelistTrailer').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                     document.getElementById('trailer').value = file.name;
-                    alert("valor: " + document.getElementById('trailer').value);
+                    //alert("valor: " + document.getElementById('trailer').value);
                 });
                }else{
                 alert("No se puede agregar mas trailers");
@@ -1151,11 +1231,14 @@
            document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
            if(file.percent == 100){
             uploadTrailer = true;
+            validTrailerFile = 1;
+            checkForm();
         }
     },
 
     Error: function(up, err) {
         alert("Error: " + err.code + ": " + err.message);
+        validTrailerFile = 0;
                     //document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
                 }
             }

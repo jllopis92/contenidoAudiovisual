@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="home_icon" href="/images/home.png">
 
     <title>CINECL UV</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -87,7 +88,7 @@
                     $thisUser = 0 
                 @endphp
                 @foreach($notifications as $notification)
-                    @if($notification->send_to == Auth::user()->id)
+                    @if(($notification->send_to == Auth::user()->id) && ($notification->watch == 0))
                         @php
                             $thisUser++; 
                         @endphp
@@ -124,10 +125,13 @@
                             @if($notification->send_to == Auth::user()->id)
                                 <li data-alert_id="1" class="alert_li" style="background-color: #F0643C">
                                     @if($notification->reason == "create")
-                                    <a href="{!! url('approvemovie')!!}" class="alert_message"> El usuario {{ $notification->user_id }} ha creado un nuevo video</a>
+                                    
+                                     <a href="{{ action("CpanelController@approveMovieToNotif", array($notification->id)) }}" class="alert_message"> El usuario {{ $notification->user_id }} ha subido un nuevo video</a>
                                     @endif
+                                    
                                     @if ($notification->reason == "modify")
-                                        <a href="{!! url('approvemovie')!!}" class="alert_message"> EL usuario {{ $notification->user_id }} ha modificado el video {{ $notification->movie_id }}</a>
+
+                                        <a href="{{ action("CpanelController@editfromnotif", array($notification->id)) }}" class="alert_message"> El usuario {{ $notification->user_id }}  ha modificado el video {{ $notification->movie_id }}</a>
                                     @endif
                                     <br />
                                     <div class="clearfix"></div>
