@@ -16,12 +16,15 @@ class Movie extends Model
     protected $fillable = ['usuario_id','asignatura_id','name','observation','language','creation_date','description','imageRef','url','state','production_year','category','category2','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors'];
 
     public function setImageRefAttribute($imageRef){
+        $this->attributes['imageRef'] = Carbon::now()->second.$imageRef->getClientOriginalName();
+        $name = Carbon::now()->second.$imageRef->getClientOriginalName(); 
+        \Storage::disk('local')->put($name, \File::get($imageRef));
         //$this->attributes['imageRef'] = Carbon::now()->second.$imageRef;
         //$newName = $this->attributes['imageRef'];
        /* $name = Carbon::now()->second.$imageRef->getClientOriginalName(); 
         \Storage::disk('local')->put($name, \File::get($imageRef));*/
 
-        $img = Image::make('files/temp/images/'.$imageRef)->resize(200, 200);
+        $img = Image::make('files/'.$name)->resize(200, 200);
         $img->save();
         echo "resize";
     }

@@ -169,8 +169,12 @@ class MovieController extends Controller
         //$users = User::paginate(4);
         //para ver archivos eliminados
         //$users = User::onlyTrashed()->paginate(4);
+        $create = 1;
+        $what = "movie";
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('cpanel.index', compact('notifications'));      
+
+        return view ('cpanel.index', compact('create','what','notifications'));
+        //return view ('cpanel.index', compact('notifications'));      
         //return "OK";
     }
 
@@ -214,8 +218,13 @@ class MovieController extends Controller
         $movie = Movie::find($id);
         $movie->fill($request->all());
         $movie->save();
-        Session::flash('message','Video Actualizado Correctamente');
-        return Redirect::to('/cpanel');
+        $create = 0;
+        $what = "movie";
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+
+        return view ('cpanel.index', compact('create','what','notifications'));
+       /* Session::flash('message','Video Actualizado Correctamente');
+        return Redirect::to('/cpanel');*/
 
     }
 
@@ -266,7 +275,13 @@ class MovieController extends Controller
            }
         }
 
-        $aproves = DB::table('movies')
+        $create = 0;
+        $what = "movie";
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+
+        return view ('cpanel.index', compact('create','what','notifications'));
+
+        /*$aproves = DB::table('movies')
         ->where('state', '=', 1)
         ->paginate(6);
         $reproves = DB::table('movies')
@@ -280,7 +295,7 @@ class MovieController extends Controller
         ->paginate(6);
 
         $users = User::all();
-        return view ('cpanel.movieapprove',compact('aproves','reproves','waits','observations','users'));
+        return view ('cpanel.movieapprove',compact('aproves','reproves','waits','observations','users'));*/
     }
 
     /**

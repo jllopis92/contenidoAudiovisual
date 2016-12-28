@@ -25,18 +25,15 @@
 	Route::post('approve','MovieController@approveMovie');
 	Route::get('createplaylist','PlaylistController@index');
 	Route::get('deleteplaylist','PlaylistController@delete');
-	Route::resource('playlist','PlaylistController');
 	Route::get('search','QueryController@search');
 	Route::get('filter','QueryController@filter');
 	Route::resource('cine_tv','CineTvController');
-	Route::get('playplaylist','CineTvController@show');
 	Route::get('showadver','CpanelController@showadvert');
 	Route::get('createadver','CpanelController@createadvert');
 	Route::get('createprogram','CpanelController@createprogram');
 	Route::post('deleteadvertising','AdvertisingController@delete');
 	Route::resource('advertising','AdvertisingController');
 	Route::resource('programing','ProgramingController');
-	Route::resource('test','TestController');
 
 Route::group(['middleware' => 'web'], function () {
 	Route::auth();

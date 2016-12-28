@@ -314,4 +314,18 @@ a.list-group-item:hover{
     color: #ffffff !important;
 }
 
+.navbar-toggle:hover {
+    background-color: #F0643C !important;
+}
+.orange_back:hover {
+    background-color: #F0643C !important;
+}
+.dark_orange_back:hover {
+    background-color: #853722 !important;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+    background-color: #853722 !important;
+}
+
 

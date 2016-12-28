@@ -5,6 +5,26 @@
 	background-color: #ffffff;
     border-color: #e7e7e7;">
 
+    <div id="immersive_slider" class="col-xs-12">
+        @foreach($advertisings as $advertising)
+          <div class="slide col-xs-12" data-blurred="files/{{$advertising->image}}">
+            <div class="content col-xs-12 col-md-6">
+              <h2><a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">{{$advertising->name}}</a></h2>
+              <p>{{$advertising->description}}</p>
+            </div>
+            <div class="image col-xs-12 col-md-6">
+              <a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">
+                <img src="files/{{$advertising->image}}" alt="Slider 1">
+              </a>
+            </div>
+          </div>
+        @endforeach
+          
+        <a href="#" class="is-prev">&laquo;</a>
+        <a href="#" class="is-next">&raquo;</a>
+    </div>
+        
+
 	    <div class="col-xs-12 col-sm-12 col-md-12 boldFont orangeText" style="padding-left: 25px;" align="left">
 	    	<H3>Nuevos</H3>
 	    </div> 
@@ -427,11 +447,6 @@
 				    	</div>
 
 				    	<div class="col-md-12" align="middle" onclick="openInfo('view','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
-			    		<a class="button orangeAndBoldText" id="info" >Mas Información</a>
-			    	</div>
-
-
-				    	<div class="col-md-12" align="middle" onclick="openInfo('view','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
 				    		<a class="button orangeAndBoldText" id="info" >Mas Información</a>
 				    	</div>
 				    </div>
@@ -477,7 +492,7 @@
 						    	</video>
 						</div>
 						<div class="col-xs-12">
-							<a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="newWatchNow{{$key}}">
+							<a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="viewWatchNow{{$key}}">
 								<div id="newNotificationFooter">Ver Ahora</div>
 							</a>
 						</div>
@@ -729,9 +744,11 @@
 @endsection
 
 @section('page-style-files')
+<link href='css/immersive-slider.css' rel='stylesheet' type='text/css'>
 @stop
 
 @section('page-js-files')
+<script type="text/javascript" src="js/jquery.immersive-slider.js"></script>
 @stop
 
 @section('page-js-script')
@@ -845,29 +862,35 @@
 	}
 	function closePopups(){
 		for(x = 0; x<=7; x++){
-			var actual = document.getElementById("newShowInfo"+x);
-			if(actual != null){
-				if (actual.style.display === 'block') {
-					actual.style.display = 'none';
-				}
-			}
-		}
-		for(x = 0; x<=7; x++){
-			var actual = document.getElementById("viewShowInfo"+x);
-			if(actual != null){
-				if (actual.style.display === 'block') {
-					actual.style.display = 'none';
-				}
-			}
-		}
-		for(x = 0; x<=7; x++){
-			var actual = document.getElementById("bestShowInfo"+x);
-			if(actual != null){
-				if (actual.style.display === 'block') {
-					actual.style.display = 'none';
-				}
-			}
-		}
+            var newShow = document.getElementById("newShowInfo"+x);
+            if(newShow != null){
+                if (newShow.style.display === 'block') {
+                    newShow.style.display = 'none';
+                }
+            }
+            var viewShow = document.getElementById("viewShowInfo"+x);
+            if(viewShow != null){
+                if (viewShow.style.display === 'block') {
+                    viewShow.style.display = 'none';
+                }
+            }
+            var bestShow = document.getElementById("bestShowInfo"+x);
+            if(bestShow != null){
+                if (bestShow.style.display === 'block') {
+                    bestShow.style.display = 'none';
+                }
+            }
+        }
 	}
 </script>
+<script type="text/javascript">
+	var j = jQuery.noConflict();
+    j(document).ready( function() {
+        j("#immersive_slider").immersive_slider({
+          container: null,
+          loop: false, // Toggle to false if you don't want the slider to loop. Default is true.
+          /*autoStart: 10000*/ // Define the number of milliseconds before it navigates automatically. Change this to 0 or false to disable autoStart. The default value is 5000.
+        });
+      });
+    </script>
 @stop

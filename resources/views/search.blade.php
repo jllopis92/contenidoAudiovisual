@@ -2,18 +2,19 @@
 
 @section('content')
 
-<div class="col-sm-10 col-sm-offset-1" id="mainBody" align="center" style="overflow: hidden; 
-    background-color: #f8f8f8;
+<div class="col-sm-12" id="mainBody" align="center" style="overflow: hidden; 
+    background-color: #ffffff;
     border-color: #e7e7e7;">
 
     @if (count($movies) === 0)
-    <h5 style="margin-top: 30px;">No se encuentran videos que cumplan con el criterio de Busqueda</h5>
+    <h5 class="orangeText" style="margin-top: 30px;">No se encuentran videos que cumplan con el criterio de Busqueda</h5>
     @elseif (count($movies) >= 1)
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 boldFont orangeText" style="padding-left: 25px;" align="left">
             <H3>Resultados</H3>
         </div>
         @foreach($movies as $key=>$movie)
-                <div id="movieContent{{$movie->id}}" class="col-xs-12 col-sm-6 col-md-4">
+            @if($key <= 5)
+                <div id="movieContent{{$movie->id}}" class="col-xs-12 col-sm-4 col-md-3" style="padding-left: 0px;">
                     <div style="padding: 5px; margin: 5px; width: 220px;">
                         <div class="col-md-12">
                             <a href="{{ action("MovieController@show", array($movie->id)) }}">
@@ -23,9 +24,29 @@
                                 height: 110px;"/>
                             </a>
                         </div>
-                        <div class="col-md-12" align="middle" style="margin-top: 5px;">
-                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><h3 href="{{ action("MovieController@show", array($movie->id)) }}" style="color:#337ab7; font-size: 14px; margin-top: 0px; margin-bottom: 0px;">{{$movie->name}}</h3>
-                            </a>
+                        <div class="row col-xs-12" style="margin-top: 5px; height: 40px;">
+                            <div class="col-xs-9" align="left" style="padding-right: 0px;">
+                                <a class="blackAndBoldText" href="{{ action("MovieController@show", array($movie->id)) }}">
+                                    <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->name}}
+                                </a>
+                            </div>
+                            <div class="col-xs-2 col-xs-offset-1" align="right" style="padding-right: 0px; padding-left: 5px;">
+                                <a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
+                                    <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px;">{{$movie->production_year}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row col-xs-12" style="margin-top: 5px;">
+                            <div class="col-xs-7" align="left" style="padding-right: 0px;">
+                                <a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
+                                    <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->category2}}
+                                </a>
+                            </div>
+                            <div class="col-xs-4 col-xs-offset-1" align="right" style="padding-right: 0px; padding-left: 5px;">
+                                <a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
+                                    <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px;">{{$movie->duration}}</p>
+                                </a>
+                            </div>
                         </div>
                         <div class="col-md-12" align="middle" style="width: 100%">
                             @if(is_null($movie->rating))
@@ -55,49 +76,178 @@
                             @endif
                         </div>
                         <div class="col-md-12" align="middle" onclick="openInfo('new','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
-                            <a class="button" id="info" >Mas Información</a>
+                            <a class="button orangeAndBoldText" id="info" >Mas Información</a>
                         </div>
                     </div>
                 </div>
-                <ul class="col-xs-10 col-xs-offset-1 col-sm-12 col-md-12" id="newShowInfo{{$key}}" style="display: none; margin-top: 10px;">
-                    <div id="newSlideContainer" class="slideContainer">
-                        <strong class="slideTitle" id="newSlideTitle{{$key}}"></strong>
-                        <div class="slideBody" style="text-align: left;">
-                            <ul>
-                                <li>
-                                    <div class="messageblock">
-                                        <div class="message">Duración: 
-                                            <strong id="newDuration{{$key}}"></strong>
+                <ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="newShowInfo{{$key}}" style="display: none; margin-top: 10px;">
+                    <div id="newSlideContainer" class="slideContainer" style="margin-top: 10px;">
+                        <div class="col-xs-12 col-sm-5">
+                            <strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="newSlideTitle{{$key}}"></strong>
+                            <div class="slideBody" style="text-align: left;">
+                                <ul>
+                                    <li>
+                                        <div class="messageblock">
+                                            <div class="message">Duración: 
+                                                <strong id="newDuration{{$key}}"></strong>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="message">Idioma: 
-                                        <strong id="newLanguage{{$key}}"></strong>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="message">Categorias: 
-                                        <strong id="newCategories{{$key}}"></strong>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="message">Año de Producción: 
-                                        <strong id="newYear{{$key}}"></strong>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="messageinfo" id="newDescription{{$key}}">
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                    <li>
+                                        <div class="message">Idioma: 
+                                            <strong id="newLanguage{{$key}}"></strong>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="message">Categorias: 
+                                            <strong id="newCategories{{$key}}"></strong>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="message">Año de Producción: 
+                                            <strong id="newYear{{$key}}"></strong>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="messageinfo" id="newDescription{{$key}}">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <a id="newWatchNow{{$key}}">
-                            <div id="newNotificationFooter">Ver Ahora</div>
-                        </a>
+                        <div class="hidden-xs col-sm-7">
+                                <video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%; height: 100%;">
+                                <source src="/files/convert/trailers/011portrait.mp4" type="video/mp4">
+                                </video>
+                        </div>
+                        <div class="col-xs-12">
+                            <a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="newWatchNow{{$key}}">
+                                <div id="newNotificationFooter">Ver Ahora</div>
+                            </a>
+                        </div>
                     </div>
-                </ul>   
-            @endforeach
+                </ul>
+            @else
+                <div id="movieContent{{$movie->id}}" class="col-md-3 hidden-sm hidden-xs" style="padding-left: 0px;">
+                    <div style="padding: 5px; margin: 5px; width: 220px;">
+                        <div class="col-md-12">
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}">
+                                <img src="files/{{$movie->imageRef}}" 
+                                title="{{$movie->name}}" 
+                                style="width: 180px;
+                                height: 110px;"/>
+                            </a>
+                        </div>
+                        <div class="row col-xs-12" style="margin-top: 5px; height: 40px;">
+                            <div class="col-xs-9" align="left" style="padding-right: 0px;">
+                                <a class="blackAndBoldText" href="{{ action("MovieController@show", array($movie->id)) }}">
+                                    <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->name}}
+                                </a>
+                            </div>
+                            <div class="col-xs-2 col-xs-offset-1" align="right" style="padding-right: 0px; padding-left: 5px;">
+                                <a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
+                                    <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px;">{{$movie->production_year}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row col-xs-12" style="margin-top: 5px;">
+                            <div class="col-xs-7" align="left" style="padding-right: 0px;">
+                                <a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
+                                    <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->category2}}
+                                </a>
+                            </div>
+                            <div class="col-xs-4 col-xs-offset-1" align="right" style="padding-right: 0px; padding-left: 5px;">
+                                <a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
+                                    <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px;">{{$movie->duration}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-12" align="middle" style="width: 100%">
+                            @if(is_null($movie->rating))
+                            <img src="img/rating/3_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/>
+                            @elseif ($movie->rating <= 0.4)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/0_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating < 1.0 && $movie->rating >= 0.5)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/0_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating < 1.5 && $movie->rating >= 1.0)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/1_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating < 2.0 && $movie->rating >= 1.5)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/1_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating < 2.5 && $movie->rating >= 2.0)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/2_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating < 3.0 && $movie->rating >= 2.5)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/2_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating < 3.5 && $movie->rating >= 3.0)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/3_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating < 4.0 && $movie->rating >= 3.5)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/3_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating < 4.5 && $movie->rating >= 4.0)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/4_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating < 5.0 && $movie->rating >= 4.5)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/4_5s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @elseif ($movie->rating >= 5.0)
+                            <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
+                            @endif
+                        </div>
+                        <div class="col-md-12" align="middle" onclick="openInfo('new','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
+                            <a class="button orangeAndBoldText" id="info" >Mas Información</a>
+                        </div>
+                    </div>
+                </div>
+                <ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="newShowInfo{{$key}}" style="display: none; margin-top: 10px;">
+                    <div id="newSlideContainer" class="slideContainer" style="margin-top: 10px;">
+                        <div class="col-xs-12 col-sm-5">
+                            <strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="newSlideTitle{{$key}}"></strong>
+                            <div class="slideBody" style="text-align: left;">
+                                <ul>
+                                    <li>
+                                        <div class="messageblock">
+                                            <div class="message">Duración: 
+                                                <strong id="newDuration{{$key}}"></strong>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="message">Idioma: 
+                                            <strong id="newLanguage{{$key}}"></strong>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="message">Categorias: 
+                                            <strong id="newCategories{{$key}}"></strong>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="message">Año de Producción: 
+                                            <strong id="newYear{{$key}}"></strong>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="messageinfo" id="newDescription{{$key}}">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden-xs col-sm-7">
+                            @foreach($trailers as $trailer)
+                                @if($trailer->video_id == $movie->id)
+                                    <video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%; height: 150px;">
+                                        <source src="/files/convert/trailers/011portrait.mp4" type="video/mp4">
+                                    </video>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="col-xs-12">
+                            <a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="newWatchNow{{$key}}">
+                                <div id="newNotificationFooter">Ver Ahora</div>
+                            </a>
+                        </div>
+                    </div>
+                </ul>
+            @endif        
+          
+        @endforeach
     @endif
 </div>
 @endsection
@@ -117,121 +267,80 @@
         var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
         if(width >= 992){
             //Resolución MD
-            if(key <= 2){
-                var actual = document.getElementById(type+"ShowInfo2");
-                if (actual.style.display === 'none') {
-                    //alert("llave: "+key)
-                    var slideTitleText = document.getElementById(type+"SlideTitle2");
-                    var durationText = document.getElementById(type+"Duration2");
-                    var languajeText = document.getElementById(type+"Language2");
-                    var categoriesText = document.getElementById(type+"Categories2");
-                    var yearText = document.getElementById(type+"Year2");
-                    var descriptionText = document.getElementById(type+"Description2");
-                    slideTitleText.innerHTML = name;
-                    durationText.innerHTML = duration;
-                    languajeText.innerHTML = language;
-                    categoriesText.innerHTML = category + ", " + category2;
-                    yearText.innerHTML = production_year;
-                    descriptionText.innerHTML = description;
-
-                    document.getElementById(type+"WatchNow2").href="/upload/"+id;
-                    closePopups();
-                    actual.style.display = 'block';
-
-                }else{
-                    closePopups();
-                }
+            if(key <= 3){
+                var slideToUse = 3;
             }else{
-                var actual = document.getElementById(type+"ShowInfo5");
-                if (actual.style.display === 'none') {
-                    var slideTitleText = document.getElementById(type+"SlideTitle5");
-                    var durationText = document.getElementById(type+"Duration5");
-                    var languajeText = document.getElementById(type+"Language5");
-                    var categoriesText = document.getElementById(type+"Categories5");
-                    var yearText = document.getElementById(type+"Year5");
-                    var descriptionText = document.getElementById(type+"Description5");
-                    slideTitleText.innerHTML = name;
-                    durationText.innerHTML = duration;
-                    languajeText.innerHTML = language;
-                    categoriesText.innerHTML = category + ", " + category2;
-                    yearText.innerHTML = production_year;
-                    descriptionText.innerHTML = description;
-
-                    document.getElementById(type+"WatchNow5").href="/upload/"+id;
-                    closePopups();
-                    actual.style.display = 'block';
+                var slideToUse = 7;
+            }
+            var changeSlide = 0;
+            while(changeSlide <= 3 && slideToUse >= key){
+                var actual = document.getElementById(type+"ShowInfo"+slideToUse);
+                if(actual == null){
+                    slideToUse--;
+                    changeSlide++;
                 }else{
-                    closePopups();
+                    actual = document.getElementById(type+"ShowInfo"+slideToUse);
+                    if (actual.style.display === 'none') {
+                        var slideTitleText = document.getElementById(type+"SlideTitle"+slideToUse);
+                        var durationText = document.getElementById(type+"Duration"+slideToUse);
+                        var languajeText = document.getElementById(type+"Language"+slideToUse);
+                        var categoriesText = document.getElementById(type+"Categories"+slideToUse);
+                        var yearText = document.getElementById(type+"Year"+slideToUse);
+                        var descriptionText = document.getElementById(type+"Description"+slideToUse);
+                        slideTitleText.innerHTML = name;
+                        durationText.innerHTML = duration;
+                        languajeText.innerHTML = language;
+                        categoriesText.innerHTML = category + ", " + category2;
+                        yearText.innerHTML = production_year;
+                        descriptionText.innerHTML = description;
+
+                        document.getElementById(type+"WatchNow"+slideToUse).href="/upload/"+id;
+                        closePopups();
+                        actual.style.display = 'block';
+
+                    }else{
+                        closePopups();
+                    }
+                    changeSlide = 4;
                 }
             }
-
         }else if (width < 992 && width >= 768){
             //Resolución SM
-            if(key <= 1){
-                var actual = document.getElementById(type+"ShowInfo1");
-                if (actual.style.display === 'none') {
-                    var slideTitleText = document.getElementById(type+"SlideTitle1");
-                    var durationText = document.getElementById(type+"Duration1");
-                    var languajeText = document.getElementById(type+"Language1");
-                    var categoriesText = document.getElementById(type+"Categories1");
-                    var yearText = document.getElementById(type+"Year1");
-                    var descriptionText = document.getElementById(type+"Description1");
-                    slideTitleText.innerHTML = name;
-                    durationText.innerHTML = duration;
-                    languajeText.innerHTML = language;
-                    categoriesText.innerHTML = category + ", " + category2;
-                    yearText.innerHTML = production_year;
-                    descriptionText.innerHTML = description;
-
-                    document.getElementById(type+"WatchNow1").href="/upload/"+id;
-                    closePopups();
-                    actual.style.display = 'block';
+            if(key <= 2){
+                var slideToUse = 2;
+            }else{
+                var slideToUse = 5;
+            }
+            var changeSlide = 0;
+            while(changeSlide <= 2 && slideToUse >= key){
+                var actual = document.getElementById(type+"ShowInfo"+slideToUse);
+                if(actual == null){
+                    slideToUse--;
+                    changeSlide++;
                 }else{
-                    closePopups();
-                }
-            }else if(key <= 3 && key > 1){
-                var actual = document.getElementById(type+"ShowInfo3");
-                if (actual.style.display === 'none') {
-                    var slideTitleText = document.getElementById(type+"SlideTitle3");
-                    var durationText = document.getElementById(type+"Duration3");
-                    var languajeText = document.getElementById(type+"Language3");
-                    var categoriesText = document.getElementById(type+"Categories3");
-                    var yearText = document.getElementById(type+"Year3");
-                    var descriptionText = document.getElementById(type+"Description3");
-                    slideTitleText.innerHTML = name;
-                    durationText.innerHTML = duration;
-                    languajeText.innerHTML = language;
-                    categoriesText.innerHTML = category + ", " + category2;
-                    yearText.innerHTML = production_year;
-                    descriptionText.innerHTML = description;
+                    actual = document.getElementById(type+"ShowInfo"+slideToUse);
+                    if (actual.style.display === 'none') {
+                        var slideTitleText = document.getElementById(type+"SlideTitle"+slideToUse);
+                        var durationText = document.getElementById(type+"Duration"+slideToUse);
+                        var languajeText = document.getElementById(type+"Language"+slideToUse);
+                        var categoriesText = document.getElementById(type+"Categories"+slideToUse);
+                        var yearText = document.getElementById(type+"Year"+slideToUse);
+                        var descriptionText = document.getElementById(type+"Description"+slideToUse);
+                        slideTitleText.innerHTML = name;
+                        durationText.innerHTML = duration;
+                        languajeText.innerHTML = language;
+                        categoriesText.innerHTML = category + ", " + category2;
+                        yearText.innerHTML = production_year;
+                        descriptionText.innerHTML = description;
 
-                    document.getElementById(type+"WatchNow3").href="/upload/"+id;
-                    closePopups();
-                    actual.style.display = 'block';
-                }else{
-                    closePopups();
-                }
-            } else{
-                var actual = document.getElementById(type+"ShowInfo5");
-                if (actual.style.display === 'none') {
-                    var slideTitleText = document.getElementById(type+"SlideTitle5");
-                    var durationText = document.getElementById(type+"Duration5");
-                    var languajeText = document.getElementById(type+"Language5");
-                    var categoriesText = document.getElementById(type+"Categories5");
-                    var yearText = document.getElementById(type+"Year5");
-                    var descriptionText = document.getElementById(type+"Description5");
-                    slideTitleText.innerHTML = name;
-                    durationText.innerHTML = duration;
-                    languajeText.innerHTML = language;
-                    categoriesText.innerHTML = category + ", " + category2;
-                    yearText.innerHTML = production_year;
-                    descriptionText.innerHTML = description;
+                        document.getElementById(type+"WatchNow"+slideToUse).href="/upload/"+id;
+                        closePopups();
+                        actual.style.display = 'block';
 
-                    document.getElementById(type+"WatchNow5").href="/upload/"+id;
-                    closePopups();
-                    actual.style.display = 'block';
-                }else{
-                    closePopups();
+                    }else{
+                        closePopups();
+                    }
+                    changeSlide = 3;
                 }
             }
         }else if (width < 768){
@@ -260,10 +369,24 @@
         }
     }
     function closePopups(){
-        for(x = 0; x<=5; x++){
-            var actual = document.getElementById("newShowInfo"+x);
-            if (actual.style.display === 'block') {
-                actual.style.display = 'none';
+        for(x = 0; x<=7; x++){
+            var newShow = document.getElementById("newShowInfo"+x);
+            if(newShow != null){
+                if (newShow.style.display === 'block') {
+                    newShow.style.display = 'none';
+                }
+            }
+            var viewShow = document.getElementById("viewShowInfo"+x);
+            if(viewShow != null){
+                if (viewShow.style.display === 'block') {
+                    viewShow.style.display = 'none';
+                }
+            }
+            var bestShow = document.getElementById("bestShowInfo"+x);
+            if(bestShow != null){
+                if (bestShow.style.display === 'block') {
+                    bestShow.style.display = 'none';
+                }
             }
         }
     }

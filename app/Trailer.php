@@ -13,7 +13,7 @@ class Trailer extends Model
 
     protected $fillable = ['video_id','url','duration'];
 
-    public function setUrlAttribute($trailer){
+    public function setUrlAttribute($url){
 
         /*$this->attributes['url'] = Carbon::now()->second.$trailer->getClientOriginalName();
         $name = Carbon::now()->second.$trailer->getClientOriginalName(); 
@@ -21,8 +21,8 @@ class Trailer extends Model
 
         $firstUrl = $url;
 
-        $file = Carbon::now()->second.pathinfo($name,PATHINFO_FILENAME); 
-        $extension = pathinfo($name,PATHINFO_EXTENSION);
+        $file = Carbon::now()->second.pathinfo($url,PATHINFO_FILENAME); 
+        $extension = pathinfo($url,PATHINFO_EXTENSION);
 
         //linux
         /*$ffmpeg = \FFMpeg\FFMpeg::create([
@@ -41,7 +41,7 @@ class Trailer extends Model
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
 
         ]);
-        $video = $ffmpeg->open('files/temp/trailers/'.$trailer);
+        $video = $ffmpeg->open('files/temp/trailers/'.$url);
 
         $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
         $format->on('progress', function ($video, $format, $percentage) {

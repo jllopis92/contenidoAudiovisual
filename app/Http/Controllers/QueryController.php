@@ -5,8 +5,8 @@ namespace contenidoAudiovisual\Http\Controllers;
 use Request;
 use DB;
 use contenidoAudiovisual\Movie;
+use contenidoAudiovisual\Trailer;
 use contenidoAudiovisual\Notification;
-
 use contenidoAudiovisual\Http\Requests;
 
 class QueryController extends Controller
@@ -171,7 +171,7 @@ class QueryController extends Controller
                         ->orWhere('shooting_format', '=', $thirtyFiveMm);
                         });
             })
-            ->get();
+            ->take(8)->get();
             $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view('search', compact('movies', 'query', 'query2','notifications'));
     }
@@ -183,12 +183,18 @@ class QueryController extends Controller
         ->where('state', '=', 1)
         ->where('name','like','%'.$query.'%')
         ->orderBy('name')
-        ->paginate(20);
+        ->paginate(8);
 
+        /*$movies = DB::table('movies')
+        ->where('state', '=', 1)
+        ->where('name','like','%'.$query.'%')
+        ->orderBy('name')
+        ->paginate(20);*/
+        $trailers = Trailer::all();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
  
         // returns a view and passes the view the list of articles and the original query.
-        return view('search', compact('movies', 'query','notifications'));
+        return view('search', compact('movies', 'query','trailers','notifications'));
     }
 
 }

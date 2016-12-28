@@ -19,10 +19,12 @@ class CpanelController extends Controller
     public function index()
     {
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        $create = 3;
+        $what = "nothing";
         //$users = User::paginate(4);
         //para ver archivos eliminados
         //$users = User::onlyTrashed()->paginate(4);
-        return view ('cpanel.index', compact('notifications'));
+        return view ('cpanel.index', compact('create','what','notifications'));
     }
     /**
      * Display the specified resource.
@@ -75,7 +77,7 @@ class CpanelController extends Controller
     public function approvemovie()
     {
 
-        $aproves = DB::table('movies')
+        /*$aproves = DB::table('movies')
         ->where('state', '=', 1)
         ->paginate(6);
         $reproves = DB::table('movies')
@@ -87,6 +89,15 @@ class CpanelController extends Controller
         $observations = DB::table('movies')
         ->where('state', '=', 2)
         ->paginate(6);
+*/
+        $aproves = DB::table('movies')
+        ->where('state', '=', 1)->get();
+        $reproves = DB::table('movies')
+        ->where('state', '=', 0)->get();
+        $waits = DB::table('movies')
+        ->where('state', '=', 3)->get();
+        $observations = DB::table('movies')
+        ->where('state', '=', 2)->get();
 
         $users = User::all();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
@@ -187,8 +198,13 @@ class CpanelController extends Controller
 
         //$user->fill($request->all());
         $user->save();
-        Session::flash('message','Usuario Actualizado Correctamente');
-        return Redirect::to('/cpanel');
+
+        $create = 0;
+        $what = "user";
+        return view ('cpanel.index', compact('create','what','notifications'));
+
+        /*Session::flash('message','Usuario Actualizado Correctamente');
+        return Redirect::to('/cpanel');*/
 
     }
 
@@ -202,8 +218,11 @@ class CpanelController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        Session::flash('message','Usuario Eliminado Correctamente');
-        return Redirect::to('/cpanel');
+        $create = 2;
+        $what = "user";
+        return view ('cpanel.index', compact('create','what','notifications'));
+       /* Session::flash('message','Usuario Eliminado Correctamente');
+        return Redirect::to('/cpanel');*/
 
     }
     public function showadvert()

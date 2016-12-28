@@ -69,8 +69,12 @@ class UserController extends Controller
         $user = User::find($id);
         $user->fill($request->all());
         $user->save();
-        Session::flash('message','Usuario Actualizado Correctamente');
-        return Redirect::to('/cpanel');
+
+        $create = 0;
+        $what = "user";
+        return view ('cpanel.index', compact('create','what','notifications'));
+        /*Session::flash('message','Usuario Actualizado Correctamente');
+        return Redirect::to('/cpanel');*/
     }
     /**
      * Remove the specified resource from storage.
@@ -82,7 +86,11 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        Session::flash('message','Usuario Eliminado Correctamente');
-        return Redirect::to('/cpanel');
+
+        $create = 0;
+        $what = "user";
+        return view ('cpanel.index', compact('create','what','notifications'));
+        /*Session::flash('message','Usuario Eliminado Correctamente');
+        return Redirect::to('/cpanel');*/
     }
 }

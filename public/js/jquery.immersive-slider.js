@@ -21,13 +21,13 @@
     pagination: true,
     loop: true,
     autoStart: 4000
-	};
+  };
   
   /*------------------------------------------------*/
-	/*  Credit: Eike Send for the awesome swipe event */    
-	/*------------------------------------------------*/
-	
-	$.fn.swipeEvents = function() {
+  /*  Credit: Eike Send for the awesome swipe event */    
+  /*------------------------------------------------*/
+  
+  $.fn.swipeEvents = function() {
       return this.each(function() {
 
         var startX,
@@ -259,5 +259,3 @@
   }
   
 }(window.jQuery);
-
-
