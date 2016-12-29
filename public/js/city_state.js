@@ -282,14 +282,21 @@ citys['RM Santiago'] = '|Santiago|Cerrillos|Cerro Navia|Conchalí|El Bosque|Esta
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-function setRegions()
-{
+function setRegions(){
 	for (region in countries)
 		document.write('<option value="' + region + '">' + region + '</option>');
 }
+function setRegionsInEdit(regionSelected){
+	for (region in countries){
+		if(regionSelected === region){
+			document.write('<option value="' + region + '" selected="selected">' + region + '</option>');
+		}else{
+			document.write('<option value="' + region + '">' + region + '</option>');
+		}
+	}
+}
 
-function set_country(oRegionSel, oCountrySel, oCity_StateSel)
-{
+function set_country(oRegionSel, oCountrySel, oCity_StateSel){
 	var countryArr;
 	oCountrySel.length = 0;
 	oCity_StateSel.length = 0;
@@ -308,6 +315,20 @@ function set_country(oRegionSel, oCountrySel, oCity_StateSel)
 	else oCountrySel.disabled = true;
 }
 
+function setCountriesInEdit(regionSelected, countrySelected){
+	for (region in countries){
+		if(regionSelected === region){
+			var country = countries[region].split('|');
+			for (var i = 0; i < country.length; i++){
+				if(country[i] == countrySelected){
+					document.write('<option value="' + country[i] + '" selected="selected">' + country[i] + '</option>');
+				}else{
+					document.write('<option value="' + country[i] + '">' + country[i] + '</option>');
+				}
+			}
+		}
+	}
+}
 
 function set_city_state(oCountrySel, oCity_StateSel, oCitys_Sel)
 {
@@ -329,6 +350,25 @@ function set_city_state(oCountrySel, oCity_StateSel, oCitys_Sel)
 	}
 	else oCity_StateSel.disabled = true;
 }
+function setCityStateInEdit(regionSelected, countrySelected, stateSelected){
+	for (region in countries){
+		if(regionSelected === region){
+			var country = countries[region].split('|');
+			for (var i = 0; i < country.length; i++){
+				if(country[i] === countrySelected){
+					var city_state = city_states[countrySelected].split('|');
+					for (var j = 0; j < city_state.length; j++){
+						if(city_state[j] === stateSelected){
+							document.write('<option value="' + city_state[j] + '" selected="selected">' + city_state[j] + '</option>');
+						}else{
+							document.write('<option value="' + city_state[j] + '">' + city_state[j] + '</option>');
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
 function set_city(oCountrySel, oCity_StateSel, oCitys_Sel)
 {
@@ -349,16 +389,31 @@ function set_city(oCountrySel, oCity_StateSel, oCitys_Sel)
 	else oCitys_Sel.disabled = true;
 }
 
+function setCityInEdit(regionSelected, countrySelected, stateSelected, citySelected){
+	for (region in countries){
+		if(regionSelected === region){
+			var country = countries[region].split('|');
+			for (var i = 0; i < country.length; i++){
+				if(country[i] === countrySelected){
+					var city_state = city_states[countrySelected].split('|');
+					for (var j = 0; j < city_state.length; j++){
+						if(city_state[j] === stateSelected){
+							var cities = citys[stateSelected].split('|');
+							for (var k = 0; k < cities.length; k++){
+								if(cities[k] === citySelected){
+									document.write('<option value="' + cities[k] + '" selected="selected">' + cities[k] + '</option>');
+								}else{
+									document.write('<option value="' + cities[k] + '">' + cities[k] + '</option>');
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
-
-/*function print_city_state(oCountrySel, oCity_StateSel)
-{
-	var country = oCountrySel.options[oCountrySel.selectedIndex].text;
-	var city_state = oCity_StateSel.options[oCity_StateSel.selectedIndex].text;
-	if (city_state && city_states[country].indexOf(city_state) != -1)
-		document.getElementById('txtplacename').innerHTML = city_state + ', ' + country;
-	else document.getElementById('txtplacename').innerHTML = country;
-}*/
 function print_citys(oCity_StateSel, oCitys_Sel)
 {
 	var city_state = oCity_StateSel.options[oCity_StateSel.selectedIndex].text;

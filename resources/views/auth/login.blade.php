@@ -1,6 +1,7 @@
 @extends('layouts.loginAndRegister')
 
 @section('content')
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2" style="margin-left: 0">
@@ -17,9 +18,9 @@
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required="">
 
                                     @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
                                     @endif
                                 </div>
                             </div>
@@ -31,9 +32,9 @@
                                     <input id="password" type="password" class="form-control" name="password" required="">
 
                                     @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
                                     @endif
                                 </div>
                             </div>
@@ -54,7 +55,7 @@
                                         <i class="fa fa-btn fa-sign-in"></i> Ingresar
                                     </button>
 
-                                   {{--  <a class="btn btn-link orangeAndBoldText" href="{{ url('/password/reset') }}">¿Olvidó su contraseña?</a> --}}
+                                    {{--  <a class="btn btn-link orangeAndBoldText" href="{{ url('/password/reset') }}">¿Olvidó su contraseña?</a> --}}
                                 </div>
                             </div>
                         </form>
@@ -63,15 +64,15 @@
             </div>
         </div>
     </div>
-@stop
+    @stop
 
-@section('page-style-files')
-@stop
+    @section('page-style-files')
+    @stop
 
-@section('page-js-files')
+    @section('page-js-files')
     <script src="assets/vendor/parsleyjs/dist/parsley.min.js"></script>
     <script type="text/javascript" src="assets/vendor/parsleyjs/dist/i18n/es.js"></script>
-@stop
+    @stop
 
-@section('page-js-script')
-@stop
+    @section('page-js-script')
+    @stop

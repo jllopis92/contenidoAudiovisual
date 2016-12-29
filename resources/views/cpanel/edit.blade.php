@@ -6,69 +6,91 @@
 	@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador") || (Auth::user()->id == $user->id))
 		@extends('layouts.controlPanel')
 		@section('content')
-			{!!Form::model($user,['route'=>['cpanel.update',$user->id],'method'=>'PUT'])!!}
+        <script type="text/javascript" src="/js/city_state.js"></script>
+        <div class="col-sm-10 col-sm-offset-1" style="overflow: hidden; 
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;">
+			{!!Form::model($user,['route'=>['user.update',$user->id],'method'=>'PUT'])!!}
 				<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Editar Perfil</h3>
-				<div class="form-group">
-                    {!!Form::label('name','Nombre:')!!}
-                    {!!Form::text('name',null,['class'=>'form-control', 'required'=> ''])!!}
-                    <div class="alert alert-danger col-xs-12" id="nameValidation" style="display: none">
+                <div class="col-xs-12">
+    				<div class="form-group col-xs-12 col-md-6">
+                        {!!Form::label('name','Nombre:')!!}
+                        {!!Form::text('name',null,['class'=>'form-control', 'required'=> ''])!!}
+                        <div class="alert alert-danger col-xs-12" id="nameValidation" style="display: none">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        {!!Form::label('email','Correo:')!!}
+                        {!!Form::text('email',null,['class'=>'form-control', 'required'=> ''])!!}
+                        <div class="alert alert-danger col-xs-12" id="emailValidation" style="display: none">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    {!!Form::label('email','Correo:')!!}
-                    {!!Form::text('email',null,['class'=>'form-control', 'required'=> ''])!!}
-                    <div class="alert alert-danger col-xs-12" id="emailValidation" style="display: none">
+                <div class="col-xs-12">
+                    <div class="form-group col-xs-12 col-md-6">
+                        {!!Form::label('birthday','Fecha Nacimiento:')!!}
+                        {!!Form::text('birthday',null,['class'=>'form-control', 'required'=> ''])!!}
+                        <div class="alert alert-danger col-xs-12" id="dateValidation" style="display: none">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label for="zone" class="col-md-4 control-label">Zona</label>
+                            <select class="form-control" onchange="set_country(this,country,city_state), checkZone();" name="zone">
+                                <option value="">SELECCIONE ZONA</option>
+                                <script>
+                                    var zoneEdit = '{!!$user->zone!!}';
+                                    setRegionsInEdit(zoneEdit);
+                                </script>
+                            </select>
+                        <div class="alert alert-danger col-xs-12" id="zoneValidation" style="display: none">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    {!!Form::label('birthday','Fecha Nacimiento:')!!}
-                    {!!Form::text('birthday',null,['class'=>'form-control', 'required'=> ''])!!}
-                    <div class="alert alert-danger col-xs-12" id="dateValidation" style="display: none">
+                <div class="col-xs-12">
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label for="country" class="col-md-4 control-label">País</label>
+                            <select name="country" class="form-control" onchange="set_city_state(this,city_state, city)" required="">
+                                <option value="">SELECCIONE PAÍS</option>
+                                <script>
+                                    var countryEdit = '{!!$user->country!!}';
+                                    setCountriesInEdit(zoneEdit, countryEdit);
+                                </script>
+                            </select>
+                        <div class="alert alert-danger col-xs-12" id="countryValidation" style="display: none">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label for="city_state" class="col-md-4 control-label">Región</label>
+                            <select name="city_state" class="form-control" onchange="set_city(country, this, city)" required="">
+                                <option value="">SELECCIONE REGIÓN/ESTADO</option>
+                                <script>
+                                    var regionEdit = '{!!$user->region!!}';
+                                    setCityStateInEdit(zoneEdit, countryEdit, regionEdit);
+                                </script>
+                            </select>
+                        <div class="alert alert-danger col-xs-12" id="regionValidation" style="display: none">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    {{-- <label for="zone" class="col-md-4 control-label">Zona</label>
-
-                    <div class="col-md-6">
-                        <select class="form-control" onchange="set_country(this,country,city_state), checkZone();" size="1" id="zone" name="zone">
-                            <option value="" selected="selected">SELECCIONE ZONA</option>
-                            <option value=""></option>
-                            <script type="text/javascript">
-                                setRegions();
-                            </script>
-                        </select>
-                    </div> --}}
-                    <div class="alert alert-danger col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" id="zoneValidation" style="display: none;
-                    margin-top: 10px;">
-                </div>
-
-                {{-- 
-                    {!!Form::label('zone','Zona:')!!}
-                    {!!Form::text('zone',null,['class'=>'form-control','required'=> ''])!!} --}}
-                    <div class="alert alert-danger col-xs-12" id="zoneValidation" style="display: none">
+                <div class="col-xs-12">
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label for="city" class="col-md-4 control-label">Ciudad</label>
+                            <select name="city" class="form-control" onchange="print_citys(city_state,this)">
+                                <option value="">SELECCIONE CIUDAD</option>
+                                <script>
+                                    var cityEdit = '{!!$user->city!!}';
+                                    setCityInEdit(zoneEdit, countryEdit, regionEdit, cityEdit);
+                                </script>
+                            </select>
+                        <div class="alert alert-danger col-xs-12" id="cityValidation" style="display: none">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    {!!Form::label('country','País:')!!}
-                    {!!Form::text('country',null,['class'=>'form-control','required'=> ''])!!}
-                    <div class="alert alert-danger col-xs-12" id="countryValidation" style="display: none">
-                    </div>
+                <div class="col-xs-12">
+    			    {!!Form::submit('Actualizar',['class'=>'btn btn-primary orangeButton sendButton'])!!}
                 </div>
-                <div class="form-group">
-                    {!!Form::label('region','Región:')!!}
-                    {!!Form::text('region',null,['class'=>'form-control','required'=> ''])!!}
-                    <div class="alert alert-danger col-xs-12" id="regionValidation" style="display: none">
-                    </div>
-                </div>
-                <div class="form-group">
-                    {!!Form::label('city','Ciudad:')!!}
-                    {!!Form::text('city',null,['class'=>'form-control','required'=> ''])!!}
-                    <div class="alert alert-danger col-xs-12" id="cityValidation" style="display: none">
-                    </div>
-                </div>
-
-			{!!Form::submit('Actualizar',['class'=>'btn btn-primary orangeButton'])!!}
 			{!!Form::close()!!}
+        </div>
 		@stop
 
         @section('page-style-files')
@@ -77,6 +99,7 @@
 
         @section('page-js-files')
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        
         @stop
 
         @section('page-js-script')
@@ -138,15 +161,14 @@
 */
             function checkForm() {
                 if(validName == 0 || validEmail == 0 || validBirthday == 0 || validZone == 0 || validCountry == 0 || validRegion == 0 || validCity == 0){
-                    j(".sendButton").attr('class', 'btn btn-primary disabled sendButton');
+                    j(".sendButton").attr('class', 'btn btn-primary orangeButton disabled sendButton');
                 }
                 if(validName == 1 && validEmail == 1 && validBirthday == 1 && validZone == 1 && validCountry == 1 && validRegion == 1 && validCity == 1){
-                    j(".sendButton").attr('class', 'btn btn-primary active sendButton');
+                    j(".sendButton").attr('class', 'btn btn-primary orangeButton active sendButton');
                 }               
             }
             function checkName(){
                 var name = j('#name').val();
-                alert("en nombre");
                 var BLIDRegExpression = /^[a-zA-Z0-9\ \Ñ\ñ\u00C0-\u017F]+$/;
                 if(name.length == 0){
                     document.getElementById("nameValidation").style.display = "inline";
@@ -225,7 +247,7 @@
                 }
             }
             function checkRegion(){
-                var region = j('#region').val();
+                var region = j('#city_state').val();
                 if(region == ""){
                     document.getElementById("regionValidation").style.display = "inline";
                     document.getElementById("regionValidation").innerHTML = 'Campo Obligatorio';

@@ -201,6 +201,7 @@ class CpanelController extends Controller
 
         $create = 0;
         $what = "user";
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.index', compact('create','what','notifications'));
 
         /*Session::flash('message','Usuario Actualizado Correctamente');

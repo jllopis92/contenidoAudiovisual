@@ -29,39 +29,33 @@
                     {!! Form::text('state', 1) !!}
                     @endif
                 </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    <div class="colums">
+                <div class="col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
                         {!! Form::label('name', 'Nombre * :') !!}
                         {!! Form::text('name', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                        <br>
                         <div class="alert alert-danger col-xs-12" id="nameValidation" style="display: none">
                         </div>
                     </div>
-                </div>
-                <div class = "form-group col-sm-12 col-md-6">
-                    <div class="colums">
+                    <div class = "form-group col-sm-12 col-md-6">
                         {!! Form::label('creation_date', 'Fecha Creación * :') !!}
                         <input type="text" id="creation_date" name="creation_date" class="form-control">
-
                         <div class="alert alert-danger col-xs-12" id="dateValidation" style="display: none">
                         </div>
                     </div>
                 </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    <div class="colums">
+                <div class="col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
                         {!! Form::label('language', 'Idioma * :') !!}
                         {!! Form::select('language', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
                         <div class="alert alert-danger col-xs-12" id="languageValidation" style="display: none">
                         </div>
                     </div>
-                </div>
 
-                <div class = "form-group col-sm-12 col-md-6">
-                    <div class = "form-group">
-                        {!! Form::label('imageRef', 'Imagen Referencial de Video:') !!}
-                        <input id="imageRef" name="imageRef" type="file" accept=".jpg,.jpeg,.png" />
+                    <div class = "form-group col-sm-12 col-md-6">
+                        <div class = "form-group">
+                            {!! Form::label('imageRef', 'Imagen Referencial de Video:') !!}
+                            <input id="imageRef" name="imageRef" type="file" accept=".jpg,.jpeg,.png" />
+                        </div>
                     </div>
                 </div>
 
@@ -92,69 +86,74 @@
                     </div>
                     <div class="alert alert-danger col-xs-12" id="trailerValidation" style="display: none"></div>
                 </div>
+                <div class="col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('cant_sub', 'Cantidad de Subtitulos:') !!}
+                        <input id="cant_sub" value="0" type="number" min="0" max="5" class="form-control">
+                        <div id="result"></div>
+                    </div>
+                    <div id="subtittle_1" class = "form-group col-sm-12 col-md-6" style ="display: none;">
+                        <label>Subtitulo 1</label>
+                        <div class = "col-xs-12">
+                            {!! Form::label('language_1', 'Idioma * :') !!}
+                            {!! Form::select('language_1', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
+                        </div>
+                        <div class = "form-group col-md-12" >
+                            {!! Form::label('subtitle_1', 'Subtitulos:') !!}
+                            {!! Form::file('subtitle_1') !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div id="subtittle_2" class = "form-group col-sm-12 col-md-6" style ="display: none;">
+                        <label>Subtitulo 2</label>
+                        <div class = "col-xs-12">
+                            {!! Form::label('language_2', 'Idioma * :') !!}
+                            {!! Form::select('language_2', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
+                        </div>
+                        <div class = "form-group col-md-12" >
+                            {!! Form::label('subtitle_2', 'Subtitulos:') !!}
+                            {!! Form::file('subtitle_2') !!}
+                        </div>
+                    </div>
+                    <div id="subtittle_3" class = "form-group col-sm-12 col-md-6" style ="display: none;">
+                        <label>Subtitulo 3</label>
+                        <div class = "col-xs-12">
+                            {!! Form::label('language_3', 'Idioma * :') !!}
+                            {!! Form::select('language_3', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
+                        </div>
+                        <div class = "form-group col-md-12" >
+                            {!! Form::label('subtitle_3', 'Subtitulos:') !!}
+                            {!! Form::file('subtitle_3') !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div id="subtittle_4" class = "form-group col-sm-12 col-md-6" style ="display: none;">
+                        <label>Subtitulo 4</label>
+                        <div class = "col-xs-12">
+                            {!! Form::label('language_4', 'Idioma * :') !!}
+                            {!! Form::select('language_4', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
+                        </div>
+                        <div class = "form-group col-md-12" >
+                            {!! Form::label('subtitle_4', 'Subtitulos:') !!}
+                            {!! Form::file('subtitle_4') !!}
+                        </div>
+                    </div>
+                    <div id="subtittle_5" class = "form-group col-sm-12 col-md-6" style ="display: none;">
+                        <label>Subtitulo 5</label>
+                        <div class = "col-xs-12">
+                            {!! Form::label('language_5', 'Idioma * :') !!}
+                            {!! Form::select('language_5', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
+                        </div>
+                        <div class = "form-group col-md-12" >
+                            {!! Form::label('subtitle_5', 'Subtitulos:') !!}
+                            {!! Form::file('subtitle_5') !!}
+                        </div>
+                    </div>
+                </div>
 
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('cant_sub', 'Cantidad de Subtitulos:') !!}
-                    <input id="cant_sub" value="0" type="number" min="0" max="5" class="form-control">
-                    <div id="result"></div>
-                </div>
-                <div id="subtittle_1" class = "form-group col-sm-12 col-md-6" style ="display: none;">
-                    <label>Subtitulo 1</label>
-                    <div class = "col-xs-12">
-                        {!! Form::label('language_1', 'Idioma * :') !!}
-                        {!! Form::select('language_1', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
-                    </div>
-                    <div class = "form-group col-md-12" >
-                        {!! Form::label('subtitle_1', 'Subtitulos:') !!}
-                        {!! Form::file('subtitle_1') !!}
-                    </div>
-                </div>
-                <div id="subtittle_2" class = "form-group col-sm-12 col-md-6" style ="display: none;">
-                    <label>Subtitulo 2</label>
-                    <div class = "col-xs-12">
-                        {!! Form::label('language_2', 'Idioma * :') !!}
-                        {!! Form::select('language_2', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
-                    </div>
-                    <div class = "form-group col-md-12" >
-                        {!! Form::label('subtitle_2', 'Subtitulos:') !!}
-                        {!! Form::file('subtitle_2') !!}
-                    </div>
-                </div>
-                <div id="subtittle_3" class = "form-group col-sm-12 col-md-6" style ="display: none;">
-                    <label>Subtitulo 3</label>
-                    <div class = "col-xs-12">
-                        {!! Form::label('language_3', 'Idioma * :') !!}
-                        {!! Form::select('language_3', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
-                    </div>
-                    <div class = "form-group col-md-12" >
-                        {!! Form::label('subtitle_3', 'Subtitulos:') !!}
-                        {!! Form::file('subtitle_3') !!}
-                    </div>
-                </div>
-                <div id="subtittle_4" class = "form-group col-sm-12 col-md-6" style ="display: none;">
-                    <label>Subtitulo 4</label>
-                    <div class = "col-xs-12">
-                        {!! Form::label('language_4', 'Idioma * :') !!}
-                        {!! Form::select('language_4', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
-                    </div>
-                    <div class = "form-group col-md-12" >
-                        {!! Form::label('subtitle_4', 'Subtitulos:') !!}
-                        {!! Form::file('subtitle_4') !!}
-                    </div>
-                </div>
-                <div id="subtittle_5" class = "form-group col-sm-12 col-md-6" style ="display: none;">
-                    <label>Subtitulo 5</label>
-                    <div class = "col-xs-12">
-                        {!! Form::label('language_5', 'Idioma * :') !!}
-                        {!! Form::select('language_5', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
-                    </div>
-                    <div class = "form-group col-md-12" >
-                        {!! Form::label('subtitle_5', 'Subtitulos:') !!}
-                        {!! Form::file('subtitle_5') !!}
-                    </div>
-                </div>
-
-                <div class = "form-group col-xs-12">
+                <div class = "col-xs-12">
                     <div class = "form-group col-sm-12 col-md-6">
                         {!! Form::label('trailer_subtitle', 'Subtitulos de Trailer:') !!}
                         {!! Form::file('trailer_subtitle') !!}
@@ -168,193 +167,209 @@
             </div>
 
             <div class="col-xs-12">
-                 <h4 class="blackAndBoldText">Categorias de Video</h4>
+                <hr>
+                <h4 class="blackAndBoldText">Categorias de Video</h4>
                 <div class = "form-group col-xs-12">
-                    <div class="colums col-sm-12 col-md-6">
-                        {!! Form::label('category', 'Categoria * :') !!}
-
-                        <p>
-                            Largometraje <input name="category" id="largometraje" value="largometraje" required="" type="radio">
-                        </p>
-                        <p>
-                            Mediometraje <input name="category" id="mediometraje" value="mediometraje" type="radio">
-                        </p>
-                        <p>
-                            Cortometraje <input name="category" id="cortometraje" value="cortometraje" type="radio">
-                        </p>
-                        <div class="alert alert-danger col-xs-12" id="categoryValidation" style="display: none">
+                    <div class = "col-xs-12">
+                        <div class="colums col-sm-12 col-md-6">
+                            {!! Form::label('category', 'Categoria * :') !!}
+                            <p>
+                                Largometraje <input name="category" id="largometraje" value="largometraje" required="" type="radio">
+                            </p>
+                            <p>
+                                Mediometraje <input name="category" id="mediometraje" value="mediometraje" type="radio">
+                            </p>
+                            <p>
+                                Cortometraje <input name="category" id="cortometraje" value="cortometraje" type="radio">
+                            </p>
+                            <div class="alert alert-danger col-xs-12" id="categoryValidation" style="display: none">
+                            </div>
                         </div>
-                    </div>
-                    <div class="colums col-sm-12 col-md-6">
-                        {!! Form::label('category2', 'Genero * :') !!}
+                        <div class="colums col-sm-12 col-md-6">
+                            {!! Form::label('category2', 'Genero * :') !!}
+                            <p>
+                                Experimental <input name="category2" id="experimental" value="experimental" required="" type="radio">
+                            </p>
+                            <p>
+                                Ficción: <input name="category2" id="ficcion" value="ficcion" type="radio">
+                            </p>
+                            <p>
+                                Animación <input name="category2" id="animacion" value="animacion" type="radio">
+                            </p>
+                            <p>
+                                Documental <input name="category2" id="documental" value="documental" type="radio">
+                            </p>
 
-                        <p>
-                            Experimental <input name="category2" id="experimental" value="experimental" required="" type="radio">
-                        </p>
-                        <p>
-                            Ficción: <input name="category2" id="ficcion" value="ficcion" type="radio">
-                        </p>
-                        <p>
-                            Animación <input name="category2" id="animacion" value="animacion" type="radio">
-                        </p>
-                        <p>
-                            Documental <input name="category2" id="documental" value="documental" type="radio">
-                        </p>
-
-                        <div class="alert alert-danger col-xs-12" id="genreValidation" style="display: none">
+                            <div class="alert alert-danger col-xs-12" id="genreValidation" style="display: none">
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('shooting_format', 'Formato de Rodaje * :') !!}
-                    {!!Form::select('shooting_format', Config::get('enums.shooting_format_types'))!!}
-                    <div class="alert alert-danger col-xs-12" id="genreValidation" style="display: none"></div>
-                </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('production_year', 'Año de Produccion * :') !!}
-                    <select name="production_year">
-                        <?php
-                        $years = range(date("Y"), date("Y", strtotime("now - 100 years")));
-                        foreach($years as $year){
-                            echo'<option value="'.$year.'">'.$year.'</option>';
-                        }
-                        ?>
-                    </select>
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('shooting_format', 'Formato de Rodaje * :') !!}
+                        {!!Form::select('shooting_format', Config::get('enums.shooting_format_types'))!!}
+                        <div class="alert alert-danger col-xs-12" id="genreValidation" style="display: none"></div>
+                    </div>
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('production_year', 'Año de Produccion * :') !!}
+                        <select name="production_year">
+                            <?php
+                            $years = range(date("Y"), date("Y", strtotime("now - 100 years")));
+                            foreach($years as $year){
+                                echo'<option value="'.$year.'">'.$year.'</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
                 </div>
             </div> 
 
             <div class="col-xs-12">
-                 <h4 class="blackAndBoldText">Información Complementaria</h4> 
+                <hr>
+                <h4 class="blackAndBoldText">Información Complementaria</h4>
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('direction', 'Dirección * :') !!}
+                        {!! Form::text('direction', null, ['class'=> 'form-control']) !!}
+                        <br>
+                        <div class="alert alert-danger col-xs-12" id="directionValidation" style="display: none">
+                        </div>
+                    </div>
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('direction_assistant', 'Asistente de Dirección:') !!}
+                        {!! Form::text('direction_assistant', null, ['class'=> 'form-control']) !!}
+                        <div class="alert alert-danger col-xs-12" id="directionAssistantValidation" style="display: none">
+                        </div>
+                    </div>
+                </div>
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('production', 'Producción * :') !!}
+                        {!! Form::text('production', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                        <div class="alert alert-danger col-xs-12" id="productionValidation" style="display: none">
+                        </div>
+                    </div>
 
-                 <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('direction', 'Dirección * :') !!}
-                    {!! Form::text('direction', null, ['class'=> 'form-control']) !!}
-                    <br>
-                    <div class="alert alert-danger col-xs-12" id="directionValidation" style="display: none">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('production_assistant', 'Asistente de Producción * :') !!}
+                        {!! Form::text('production_assistant', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                        <div class="alert alert-danger col-xs-12" id="AsisProductionValidation" style="display: none">
+                        </div>
                     </div>
                 </div>
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('direction_assistant', 'Asistente de Dirección:') !!}
-                    {!! Form::text('direction_assistant', null, ['class'=> 'form-control']) !!}
-                    <div class="alert alert-danger col-xs-12" id="directionAssistantValidation" style="display: none">
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('camara', 'Camara * :') !!}
+                        {!! Form::text('camara', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                        <div class="alert alert-danger col-xs-12" id="camaraValidation" style="display: none">
+                        </div>
+                    </div>
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('camara_assistant', 'Asistente de Camara:') !!}
+                        {!! Form::text('camara_assistant', null, ['class'=> 'form-control']) !!}
+                        <div class="alert alert-danger col-xs-12" id="camaraAsistValidation" style="display: none">
+                        </div>
                     </div>
                 </div>
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('production', 'Producción * :') !!}
-                    {!! Form::text('production', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                    <div class="alert alert-danger col-xs-12" id="productionValidation" style="display: none">
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('continuista', 'Continuista:') !!}
+                        {!! Form::text('continuista', null, ['class'=> 'form-control']) !!}
+                        <div class="alert alert-danger col-xs-12" id="continusValidation" style="display: none">
+                        </div>
+                    </div>
+
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('script', 'Guión * :') !!}
+                        {!! Form::text('script', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                        <div class="alert alert-danger col-xs-12" id="scriptValidation" style="display: none">
+                        </div>
+                    </div>
+                </div>
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('photografic_direction', 'Dirección de Fotografia:') !!}
+                        {!! Form::text('photografic_direction', null, ['class'=> 'form-control']) !!}
+                        <div class="alert alert-danger col-xs-12" id="photoValidation" style="display: none">
+                        </div>
+                    </div>
+
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('art_direction', 'Dirección de Arte:') !!}
+                        {!! Form::text('art_direction', null, ['class'=> 'form-control']) !!}
+                        <div class="alert alert-danger col-xs-12" id="artValidation" style="display: none">
+                        </div>
+                    </div>
+                </div>
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('sonorous_register', 'Registro Sonoro * :') !!}
+                        {!! Form::text('sonorous_register', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                        <div class="alert alert-danger col-xs-12" id="sonorousValidation" style="display: none">
+                        </div>
+                    </div>
+
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('music', 'Música:') !!}
+                        {!! Form::text('music', null, ['class'=> 'form-control']) !!}
+                        <div class="alert alert-danger col-xs-12" id="musicValidation" style="display: none">
+                        </div>
+                    </div>
+                </div>
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('image_postproduction', 'Post-produccion de Imagen * :') !!}
+                        {!! Form::text('image_postproduction', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                        <div class="alert alert-danger col-xs-12" id="imgValidation" style="display: none">
+                        </div>
+                    </div>
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('sound_postproduction', 'Post-produccion de Sonido * :') !!}
+                        {!! Form::text('sound_postproduction', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                        <div class="alert alert-danger col-xs-12" id="soundValidation" style="display: none">
+                        </div>
                     </div>
                 </div>
 
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('production_assistant', 'Asistente de Producción * :') !!}
-                    {!! Form::text('production_assistant', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                    <div class="alert alert-danger col-xs-12" id="AsisProductionValidation" style="display: none">
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('casting', 'Casting:') !!}
+                        {!! Form::text('casting', null, ['class'=> 'form-control']) !!}
+                        <div class="alert alert-danger col-xs-12" id="castingValidation" style="display: none">
+                        </div>
                     </div>
-                </div>
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('camara', 'Camara * :') !!}
-                    {!! Form::text('camara', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                    <div class="alert alert-danger col-xs-12" id="camaraValidation" style="display: none">
-                    </div>
-                </div>
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('camara_assistant', 'Asistente de Camara:') !!}
-                    {!! Form::text('camara_assistant', null, ['class'=> 'form-control']) !!}
-                    <div class="alert alert-danger col-xs-12" id="camaraAsistValidation" style="display: none">
-                    </div>
-                </div>
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('continuista', 'Continuista:') !!}
-                    {!! Form::text('continuista', null, ['class'=> 'form-control']) !!}
-                    <div class="alert alert-danger col-xs-12" id="continusValidation" style="display: none">
-                    </div>
-                </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('script', 'Guión * :') !!}
-                    {!! Form::text('script', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                    <div class="alert alert-danger col-xs-12" id="scriptValidation" style="display: none">
-                    </div>
-                </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('photografic_direction', 'Dirección de Fotografia:') !!}
-                    {!! Form::text('photografic_direction', null, ['class'=> 'form-control']) !!}
-                    <div class="alert alert-danger col-xs-12" id="photoValidation" style="display: none">
-                    </div>
-                </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('art_direction', 'Dirección de Arte:') !!}
-                    {!! Form::text('art_direction', null, ['class'=> 'form-control']) !!}
-                    <div class="alert alert-danger col-xs-12" id="artValidation" style="display: none">
-                    </div>
-                </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('sonorous_register', 'Registro Sonoro * :') !!}
-                    {!! Form::text('sonorous_register', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                    <div class="alert alert-danger col-xs-12" id="sonorousValidation" style="display: none">
-                    </div>
-                </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('music', 'Música:') !!}
-                    {!! Form::text('music', null, ['class'=> 'form-control']) !!}
-                    <div class="alert alert-danger col-xs-12" id="musicValidation" style="display: none">
-                    </div>
-                </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('image_postproduction', 'Post-produccion de Imagen * :') !!}
-                    {!! Form::text('image_postproduction', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                    <div class="alert alert-danger col-xs-12" id="imgValidation" style="display: none">
-                    </div>
-                </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('sound_postproduction', 'Post-produccion de Sonido * :') !!}
-                    {!! Form::text('sound_postproduction', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                    <div class="alert alert-danger col-xs-12" id="soundValidation" style="display: none">
-                    </div>
-                </div>
-
-                 <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('casting', 'Casting:') !!}
-                    {!! Form::text('casting', null, ['class'=> 'form-control']) !!}
-                    <div class="alert alert-danger col-xs-12" id="castingValidation" style="display: none">
-                    </div>
-                </div>
-
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('mounting', 'Montaje * :') !!}
-                    {!! Form::text('mounting', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                    <div class="alert alert-danger col-xs-12" id="mountingValidation" style="display: none">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('mounting', 'Montaje * :') !!}
+                        {!! Form::text('mounting', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                        <div class="alert alert-danger col-xs-12" id="mountingValidation" style="display: none">
+                        </div>
                     </div>
                 </div>
             
-                <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('catering', 'Catering:') !!}
-                    {!! Form::text('catering', null, ['class'=> 'form-control']) !!}
-                    <div class="alert alert-danger col-xs-12" id="cateringValidation" style="display: none">
+                <div class = "col-xs-12">
+                    <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('catering', 'Catering:') !!}
+                        {!! Form::text('catering', null, ['class'=> 'form-control']) !!}
+                        <div class="alert alert-danger col-xs-12" id="cateringValidation" style="display: none">
+                        </div>
+                    </div>
+
+                    <div class = "form-group col-xs-12">
+                            {!! Form::label('description', 'Descripción * :') !!}
+                            {!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                            <br>
+                            <div class="alert alert-danger col-xs-12" id="descriptionValidation" style="display: none">
+                            </div>
                     </div>
                 </div>
 
-                <div class = "form-group col-xs-12">
-                        {!! Form::label('description', 'Descripción * :') !!}
-                        {!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                        <br>
-                        <div class="alert alert-danger col-xs-12" id="descriptionValidation" style="display: none">
+                <div class = "col-xs-12">
+                    <div class = "form-group col-xs-12">
+                        {!! Form::label('actors', 'Actores * :') !!}
+                        {!! Form::textarea('actors', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                        <div class="alert alert-danger col-xs-12" id="actorsValidation" style="display: none">
                         </div>
-                </div>
-
-                <div class = "form-group col-xs-12">
-                    {!! Form::label('actors', 'Actores * :') !!}
-                    {!! Form::textarea('actors', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                    <div class="alert alert-danger col-xs-12" id="actorsValidation" style="display: none">
                     </div>
                 </div>
             </div> 
@@ -449,10 +464,8 @@
         j(function () {
             j('#creation_date').datepicker()
                 .on("input change", function (e) {
-                //alert("date change");
                 checkCreationDate();
             });
-            //j("#creation_date").datepicker();
 
         });
 
@@ -463,7 +476,7 @@
         Script para validacion de campos en formulario
         **/
         var j = jQuery.noConflict();
-        var validName = 1;
+        /*var validName = 1;
         var validDescription = 1;
         var validImageFile = 1;
         var validTrailerFile = 1;
@@ -488,8 +501,9 @@
         var validSoundPostproduction = 1;
         var validCatering = 1;
         var validMusic = 1;
-        var validActors = 1;
-        /*var validName = 0;
+        var validActors = 1;*/
+
+        var validName = 0;
         var validDescription = 0;
         var validImageFile = 1;
         var validTrailerFile = 0;
@@ -514,7 +528,7 @@
         var validSoundPostproduction = 0;
         var validCatering = 1;
         var validMusic = 1;
-        var validActors = 0;*/
+        var validActors = 0;
             
         j('#name').on('input',function(e){
             checkName();
@@ -1004,8 +1018,8 @@
                 validCategory == 0 ||
                 validGenre == 0){
                 j(".sendButton").attr('class', 'btn btn-primary disabled sendButton orangeButton');
-                document.getElementById("sendValidation").style.display = "inline";
-                document.getElementById("sendValidation").innerHTML = "Se deben completar todos los campos marcados como obligatorios para enviar el formulario \n Pendientes: \n "+" validName "+validName+" validDescription "+ validDescription+" validCreationDate "+validCreationDate+" validDirection "+validDirection+" validDirectionAsist "+validDirectionAsist+" validCasting "+validCasting+" validContinuista "+validContinuista+" validScript "+validScript+" validProduction "+validProduction+" validProductionAssistant "+validProductionAssistant+" validPhotograficDirection "+validPhotograficDirection+" validCamara "+validCamara+" validCamaraAsist "+validCamaraAsist+" validArt "+validArt+" validSonorousRegister "+validSonorousRegister+" validMounting "+validMounting+" validImagePostproduction "+validImagePostproduction+" validSoundPostproduction "+validSoundPostproduction+" validCatering "+validCatering+" validMusic "+validMusic+" validActors "+validActors+" validImageFile "+validImageFile+" validVideoFile "+validVideoFile+" validTrailerFile "+validTrailerFile+" validCategory "+validCategory+" validGenre "+validGenre
+                /*document.getElementById("sendValidation").style.display = "inline";
+                document.getElementById("sendValidation").innerHTML = "Se deben completar todos los campos marcados como obligatorios para enviar el formulario Pendientes: <br> "+" validName "+validName+" validDescription "+ validDescription+" validCreationDate "+validCreationDate+" validDirection "+validDirection+" validDirectionAsist "+validDirectionAsist+" validCasting "+validCasting+" validContinuista "+validContinuista+" validScript "+validScript+" validProduction "+validProduction+" validProductionAssistant "+validProductionAssistant+" validPhotograficDirection "+validPhotograficDirection+" validCamara "+validCamara+" validCamaraAsist "+validCamaraAsist+" validArt "+validArt+" validSonorousRegister "+validSonorousRegister+" validMounting "+validMounting+" validImagePostproduction "+validImagePostproduction+" validSoundPostproduction "+validSoundPostproduction+" validCatering "+validCatering+" validMusic "+validMusic+" validActors "+validActors+" validImageFile "+validImageFile+" validVideoFile "+validVideoFile+" validTrailerFile "+validTrailerFile+" validCategory "+validCategory+" validGenre "+validGenre;*/
             }
             if(
                 validName == 1 && 

@@ -15,14 +15,14 @@
 </div>
 
 <div class="col-md-12" id="deleteAdverPopup" style="display: none">
-	<div class="alert alert-danger alert-dismissable fade in" id="normalText">
+	<div class="alert alert-success alert-dismissable fade in" id="normalText">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		<strong id="strongTextDelete">Anuncio Eliminado. </strong>El anuncio ha sido eliminado exitosamente.
 	</div>
 </div>
 
 <div class="col-md-12" id="editUserPopup" style="display: none">
-	<div class="alert alert-warning alert-dismissable fade in" id="normalText">
+	<div class="alert alert-success alert-dismissable fade in" id="normalText">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		<strong id="strongTextEdit">Usuario Editado. </strong> El usuario ha sido editado exitosamente.
 	</div>
@@ -36,14 +36,14 @@
 </div>
 
 <div class="col-md-12" id="deleteUserPopup" style="display: none">
-	<div class="alert alert-danger alert-dismissable fade in" id="normalText">
+	<div class="alert alert-success alert-dismissable fade in" id="normalText">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		<strong id="strongTextDelete">Usuario Eliminado. </strong>El usuario ha sido eliminado exitosamente.
 	</div>
 </div>
 
 <div class="col-md-12" id="editMoviePopup" style="display: none">
-	<div class="alert alert-warning alert-dismissable fade in" id="normalText">
+	<div class="alert alert-success alert-dismissable fade in" id="normalText">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		<strong id="strongTextEdit">Video Editado. </strong> El video ha sido creado exitosamente.
 	</div>
@@ -57,7 +57,7 @@
 </div>
 
 <div class="col-md-12" id="deleteMoviePopup" style="display: none">
-	<div class="alert alert-danger alert-dismissable fade in" id="normalText">
+	<div class="alert alert-success alert-dismissable fade in" id="normalText">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		<strong id="strongTextDelete">Video Eliminado. </strong>El video ha sido eliminado exitosamente.
 	</div>
