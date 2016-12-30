@@ -9,7 +9,7 @@
 <p>{{$movie->url}} {{$movie->play_at}}</p>
 @endforeach --}}
 <h3 class="orangeAndBoldText">Cine TV</h3>
-      {{-- <p>Diferencia de tiempo: {{$difTime}}</p> --}}
+      <p>Diferencia de tiempo: {{$difTime}}</p>
        <video id="video" style="display:none; width:680px; height:320px;" autoplay controls>
           <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" />
           Su navegador no soporta el tag video.
@@ -49,7 +49,7 @@
                 var dataTemp = [{ field1: name, field2: duration}];
                 dt.load(dataTemp, true);*/
               }else if (isPlaying == 0){
-                //alert("Bienvenido a Programación Cine UV, la emision de {{$moviesNow->url}}  comienza a las {{$moviesNow->play_at}}");
+                alert("Bienvenido a Programación Cine UV, la emision de {{$moviesNow->url}}  comienza a las {{$moviesNow->play_at}}");
                 pauseVid();
                 document.getElementById("notNow").style.display="inline";
                 @foreach($movies as $key=>$movie)

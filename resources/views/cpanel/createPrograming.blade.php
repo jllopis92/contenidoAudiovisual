@@ -432,7 +432,32 @@ input:focus {
 			}else{
 				var programToSend = '[' + programation + ']';
 				//alert ("A enviar: "+ programToSend);
-				var j = jQuery.noConflict();
+				/*$array = json_decode($json);
+				foreach($array as $obj){
+				$play_at = $obj->play_at;
+                $end_at = $obj->end_at;
+                }*/
+				/*j.post('../emailValid.php',{
+                    email:j('#email').val(),
+
+                },function(d){
+                    if(d>0){
+                        //alert('Respuesta:'+d);
+                    }else{
+                        if(d != ""){
+                            document.getElementById("emailValidation").style.display = "inline";
+                            document.getElementById("emailValidation").innerHTML = 'Este correo ya se encuentra registrado';
+                            validEmail = 0;
+                        }
+                    }
+                });*/
+
+				sendToDb(programToSend);
+				
+			}
+		}
+		function sendToDb(programToSend){
+			var j = jQuery.noConflict();
 				var token = j("#token").val();
 				var route = "/programing";
 				j.ajax({
@@ -450,7 +475,6 @@ input:focus {
 		                }
 		           }
 				});
-			}
 		}
 	</script>
 <div class="row">

@@ -258,9 +258,9 @@
             </div>
             <div class="submenu-body collapse" id="submenu1">
                 <div class="list-group">
-                    <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}</li>
-                    <li class="list-group-item" style="padding: 0px">
-                        <a href="{{ url('selectuser') }}" class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>  Cambiar Contraseña </a>
+                    <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id), $attributes = ['class'=>'blackText'] ) }}</li>
+                    <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
+                        {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
                     </li>
                 </div>
             </div>
@@ -286,10 +286,11 @@
                 <h5 class="submenu-title orangeAndBoldText">Mi Usuario</h5>
             </div>
             <div class="submenu-body collapse" id="submenu1">
+
                 <div class="list-group">
-                    <li class="list-group-item" style="padding: 0px"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}</li>
-                    <li class="list-group-item" style="padding: 0px">
-                        <a href="{{ url('selectuser') }}" class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>  Cambiar Contraseña </a>
+                    <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id), $attributes = ['class'=>'blackText'] ) }}</li>
+                    <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
+                        {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
                     </li>
                 </div>
             </div>
@@ -313,9 +314,9 @@
             </div>
             <div class="submenu-body collapse" id="submenu1">
                 <div class="list-group">
-                    <li class="list-group-item" style="padding: 0px"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id)) }}</li>
-                    <li class="list-group-item" style="padding: 0px">
-                        <a href="{{ url('selectuser') }}"><i class='glyphicon glyphicon-pencil'></i>  Cambiar Contraseña </a>
+                    <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id), $attributes = ['class'=>'blackText'] ) }}</li>
+                    <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
+                        {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
                     </li>
                 </div>
             </div>
