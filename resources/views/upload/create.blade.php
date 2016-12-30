@@ -10,8 +10,10 @@
             <h3 class="orangeAndBoldText" style="margin-bottom: 30px;" align="center">Subir Video</h3>
 
             {!! Form::open(['id' => 'newVideo', 'route' =>'upload.store', 'method'=>'POST', 'files'=> true, 'data-parsley-validate'=>'' ]) !!}
-
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                {{-- para Mac --}}
+                {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
+                {{-- para centOs --}}
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> --}}
 
             <div class="col-xs-12">
                  <h4 class="blackAndBoldText">Información Importante</h4>

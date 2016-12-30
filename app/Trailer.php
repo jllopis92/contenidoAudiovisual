@@ -44,9 +44,9 @@ class Trailer extends Model
         $video = $ffmpeg->open('files/temp/trailers/'.$url);
 
         $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
-        $format->on('progress', function ($video, $format, $percentage) {
+        /*$format->on('progress', function ($video, $format, $percentage) {
             echo "$percentage % transcoded";
-        });
+        });*/
         $format
         -> setKiloBitrate(1000)
         -> setAudioChannels(2)

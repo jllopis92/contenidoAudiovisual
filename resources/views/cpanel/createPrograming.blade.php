@@ -430,30 +430,39 @@ input:focus {
 			if(programationTable.length <= 0){
 				alert ("No se han agregado elementos a la programación");
 			}else{
+				//alert("qwe");
 				var programToSend = '[' + programation + ']';
+				var json = JSON.parse(programToSend);
+				var inicio = json[0].play_at;
+				var fin = json[(json.length - 1)].end_at;
+
+				//alert("asdasd" + inicio + " " + fin);
+				/*for(var i = 0; i < programToSend.length; i++){
+					alert(programToSend.play_at);
+				}*/
 				//alert ("A enviar: "+ programToSend);
 				/*$array = json_decode($json);
 				foreach($array as $obj){
 				$play_at = $obj->play_at;
                 $end_at = $obj->end_at;
                 }*/
-				/*j.post('../emailValid.php',{
-                    email:j('#email').val(),
+
+
+				/*j.post('../createPrograming.php',{
+                    inicio:inicio,
+                    fin:fin,
 
                 },function(d){
                     if(d>0){
                         //alert('Respuesta:'+d);
                     }else{
                         if(d != ""){
-                            document.getElementById("emailValidation").style.display = "inline";
-                            document.getElementById("emailValidation").innerHTML = 'Este correo ya se encuentra registrado';
-                            validEmail = 0;
+                            alert('Ya existe programación a esa hora, por favor seleccione otro horario');
                         }
                     }
                 });*/
 
 				sendToDb(programToSend);
-				
 			}
 		}
 		function sendToDb(programToSend){

@@ -26,7 +26,7 @@ class Movie extends Model
 
         $img = Image::make('files/'.$name)->resize(200, 200);
         $img->save();
-        echo "resize";
+        //echo "resize";
     }
     public function setUrlAttribute($url){
         
@@ -57,9 +57,9 @@ class Movie extends Model
         $video = $ffmpeg->open('files/temp/videos/'.$url);
         //$format = new CustomVideo();
         $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
-        $format->on('progress', function ($video, $format, $percentage) {
+        /*$format->on('progress', function ($video, $format, $percentage) {
             echo "$percentage % transcoded";
-        });
+        });*/
         $format
         -> setKiloBitrate(1000)
         -> setAudioChannels(2)
