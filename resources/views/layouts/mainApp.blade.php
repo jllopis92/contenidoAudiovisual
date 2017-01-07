@@ -70,11 +70,10 @@
             </li>
             <li class="col-xs-12 col-sm-2" style="padding-top: 8px; padding-left: 0px; padding-right: 0px;">
                 <a class="visible-xs" href="{{ url('/cine_tv') }}" role="button">
-                    <span class="glyphicon glyphicon-calendar btn-nav"></span>
                     Programación
                 </a>
-                <a class="hidden-xs" href="{{ url('/cine_tv') }}" role="button">
-                    <span class="glyphicon glyphicon-calendar btn-nav"></span>
+                <a class="hidden-xs" href="{{ url('/cine_tv') }}" role="button" style="padding-top:10px;">
+                <img class="btn-nav orange_back" src="/img/tv_icon.png" alt="Cine TV" style="width:30px; height:30px;">
                 </a>
             </li>
             
@@ -236,8 +235,35 @@
     <!-- Page Content -->
     <div id="page-content-wrapper" class="contentAfterNavbar">
         @yield('content')
-        </div>
+    </div>
         <!-- /#page-content-wrapper -->
+        <footer>
+            <div class="footer-bottom">
+                <div class="container" style="max-width: 100%;">
+                    <div class="col-md-4">
+                        <p> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#"> al medio </a>
+                    </div>
+                    <div class="col-md-4">
+                        <p>al final </p>
+                    </div>
+                    {{-- <p class="pull-left"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p> --}}
+                    {{-- <p class="pull-right"> Informacion mia </p> --}}
+                    {{-- 
+                    <div class="pull-right">
+                        <ul class="nav nav-pills payments">
+                            <li><i class="fa fa-cc-visa"></i></li>
+                            <li><i class="fa fa-cc-mastercard"></i></li>
+                            <li><i class="fa fa-cc-amex"></i></li>
+                            <li><i class="fa fa-cc-paypal"></i></li>
+                        </ul> 
+                    </div> --}}
+                </div>
+            </div>
+    <!--/.footer-bottom--> 
+        </footer>
     </div>
     <!-- /#wrapper -->
     <!-- jQuery -->

@@ -72,8 +72,8 @@
                     <span class="glyphicon glyphicon-calendar btn-nav"></span>
                     Programación
                 </a>
-                <a class="hidden-xs" href="{{ url('/cine_tv') }}" role="button">
-                    <span class="glyphicon glyphicon-calendar btn-nav"></span>
+                <a class="hidden-xs" href="{{ url('/cine_tv') }}" role="button" style="padding-top:10px;">
+                    <img class="btn-nav orange_back" src="/img/tv_icon.png" alt="Cine TV" style="width:30px; height:30px;">
                 </a>
             </li>
             
@@ -171,7 +171,7 @@
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper" class="contentAfterNavbar" style="position: fixed; z-index: 100;">
-    @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
+    @if (Auth::user()->tipo == "profesor")
         <div class="submenu">
             <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"> 
                 <h5 class="submenu-title orangeAndBoldText">Mi Usuario</h5>
@@ -181,7 +181,53 @@
                     <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id), $attributes = ['class'=>'blackText'] ) }}</li>
                     <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
                         {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
-                        {{-- <a href="{{ url('selectuser') }}" class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>  Cambiar Contraseña </a> --}}
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu2"> 
+                <h5 class="submenu-title orangeAndBoldText">Administrar Videos</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu2">
+                <div class="list-group">
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{{ url('/upload') }}" class="list-group-item"><i class='glyphicon glyphicon-cloud-upload'></i>  Subir Video</a>
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                         <a href="{!! url('editmovie')!!}" class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>  Editar Videos</a>
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('approvemovie')!!}" class="list-group-item"><i class='glyphicon glyphicon-ok'></i>  Aprobar Videos</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu3"> 
+                <h5 class="submenu-title orangeAndBoldText">Administrar Anuncios</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu3">
+                <div class="list-group">
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showadver')!!}" class="list-group-item"><i class='glyphicon glyphicon-list'></i>  Ver Anuncios</a>
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('createadver')!!}" class="list-group-item"><i class='glyphicon glyphicon-plus'></i>  Crear Anuncios</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    @elseif (Auth::user()->tipo == "administrador")
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"> 
+                <h5 class="submenu-title orangeAndBoldText">Mi Usuario</h5>
+            </div>
+            <div class="submenu-body collapse" id="submenu1">
+                <div class="list-group">
+                    <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id), $attributes = ['class'=>'blackText'] ) }}</li>
+                    <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
+                        {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
                     </li>
                 </div>
             </div>
@@ -237,20 +283,93 @@
                 </div>
             </div>
         </div>
-        @if (Auth::user()->tipo == "administrador")
-            <div class="submenu">
-                <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu5"> 
-                    <h5 class="submenu-title orangeAndBoldText">Administrar Parrilla</h5> 
-                </div>
-                <div class="submenu-body collapse" id="submenu5">
-                    <div class="list-group">
-                        <li class="list-group-item" style="padding: 0px">
-                            <a href="{!! url('createprogram')!!}" class="list-group-item"><i class='glyphicon glyphicon-time'></i>  Programar Parrilla</a>
-                        </li>
-                    </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu5"> 
+                <h5 class="submenu-title orangeAndBoldText">Administrar Asignaturas</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu5">
+                <div class="list-group">
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showsubject')!!}" class="list-group-item"><i class='glyphicon glyphicon-list'></i>  Ver Asignaturas</a>
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('createsubject')!!}" class="list-group-item"><i class='glyphicon glyphicon-plus'></i>  Crear Asignaturas</a>
+                    </li>
                 </div>
             </div>
-        @endif
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu6"> 
+                <h5 class="submenu-title orangeAndBoldText">Administrar Genero</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu6">
+                <div class="list-group">
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showgenre')!!}" class="list-group-item"><i class='glyphicon glyphicon-list'></i>  Ver Generos</a>
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('creategenre')!!}" class="list-group-item"><i class='glyphicon glyphicon-plus'></i>  Crear Genero</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu7"> 
+                <h5 class="submenu-title orangeAndBoldText">Administrar Formatos</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu7">
+                <div class="list-group">
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showformat')!!}" class="list-group-item"><i class='glyphicon glyphicon-list'></i>  Ver Formatos</a>
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('createformat')!!}" class="list-group-item"><i class='glyphicon glyphicon-plus'></i>  Crear Formato</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu8"> 
+                <h5 class="submenu-title orangeAndBoldText">Administrar Tipos de Videos</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu8">
+                <div class="list-group">
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showtype')!!}" class="list-group-item"><i class='glyphicon glyphicon-list'></i>  Ver Tipos</a>
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('createtype')!!}" class="list-group-item"><i class='glyphicon glyphicon-plus'></i>  Crear Tipo</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu9"> 
+                <h5 class="submenu-title orangeAndBoldText">Administrar Parrilla</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu9">
+                <div class="list-group">
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('createprogram')!!}" class="list-group-item"><i class='glyphicon glyphicon-time'></i>  Programar Parrilla</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu10"> 
+                <h5 class="submenu-title orangeAndBoldText">Ver Estatisticas</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu10">
+                <div class="list-group">
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('createprogram')!!}" class="list-group-item"><i class='glyphicon glyphicon-user'></i>  Por Usuario</a>
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('createprogram')!!}" class="list-group-item"><i class='glyphicon glyphicon-film'></i>  Por Video</a>
+                    </li>
+                </div>
+            </div>
+        </div>
     @elseif (Auth::user()->tipo == "alumno")
         <div class="submenu">
             <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"> 

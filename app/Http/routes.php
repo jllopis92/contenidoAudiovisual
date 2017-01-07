@@ -32,6 +32,23 @@
 	Route::get('createadver','CpanelController@createadvert');
 	Route::get('createprogram','CpanelController@createprogram');
 	Route::post('deleteadvertising','AdvertisingController@delete');
+	Route::get('showsubject','CpanelController@showsubject');
+	Route::get('createsubject','CpanelController@createsubject');
+	Route::post('deletesubject','SubjectController@delete');
+	Route::resource('subject','SubjectController');
+	Route::get('showgenre','CpanelController@showgenre');
+	Route::get('creategenre','CpanelController@creategenre');
+	Route::post('deletegenre','GenreController@delete');
+	Route::resource('genre','GenreController');
+	Route::get('showformat','CpanelController@showformat');
+	Route::get('createformat','CpanelController@createformat');
+	Route::post('deleteformat','FormatController@delete');
+	Route::resource('format','FormatController');
+	Route::get('showtype','CpanelController@showtype');
+	Route::get('createtype','CpanelController@createtype');
+	Route::post('deletetype','TypeController@delete');
+	Route::resource('type','TypeController');
+
 	Route::resource('advertising','AdvertisingController');
 	Route::resource('programing','ProgramingController');
 

@@ -8,6 +8,9 @@ use DB;
 use contenidoAudiovisual\User;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\Subject;
+use contenidoAudiovisual\Genre;
+use contenidoAudiovisual\Format;
+use contenidoAudiovisual\Type;
 use contenidoAudiovisual\Advertising;
 use contenidoAudiovisual\Notification;
 use contenidoAudiovisual\Http\Requests;
@@ -56,6 +59,37 @@ class CpanelController extends Controller
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.movieupdate',compact('movies','notifications'));
     }
+    public function showsubject()
+    {
+        $subjects = Subject::where('valid', 1)->paginate(8);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.selectSubject',compact('subjects','notifications'));
+    }
+    public function showgenre()
+    {
+        $genres = Genre::where('valid', 1)->paginate(8);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.selectGenre',compact('genres','notifications'));
+    }
+    public function showformat()
+    {
+        $formats = Format::where('valid', 1)->paginate(8);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.selectFormat',compact('formats','notifications'));
+    }
+    public function showtype()
+    {
+        $types = Type::where('valid', 1)->paginate(8);
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.selectType',compact('types','notifications'));
+    }
+    public function showadvert()
+    {
+        $advertisings = Advertising::where('state', 1)->paginate(8);
+        $create = 0;
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.showAdvertising',compact('advertisings','create','notifications'));
+    }
     /**
      * Redirecciona a editar Video y marca la notificacion como vista.
      *
@@ -76,20 +110,6 @@ class CpanelController extends Controller
 
     public function approvemovie()
     {
-
-        /*$aproves = DB::table('movies')
-        ->where('state', '=', 1)
-        ->paginate(6);
-        $reproves = DB::table('movies')
-        ->where('state', '=', 0)
-        ->paginate(6);
-        $waits = DB::table('movies')
-        ->where('state', '=', 3)
-        ->paginate(6);
-        $observations = DB::table('movies')
-        ->where('state', '=', 2)
-        ->paginate(6);
-*/
         $aproves = DB::table('movies')
         ->where('state', '=', 1)->get();
         $reproves = DB::table('movies')
@@ -195,17 +215,12 @@ class CpanelController extends Controller
         $user->fill([
             'password' => bcrypt($request['password']),
         ]);
-
-        //$user->fill($request->all());
         $user->save();
 
         $create = 0;
         $what = "user";
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.index', compact('create','what','notifications'));
-
-        /*Session::flash('message','Usuario Actualizado Correctamente');
-        return Redirect::to('/cpanel');*/
 
     }
 
@@ -222,17 +237,8 @@ class CpanelController extends Controller
         $create = 2;
         $what = "user";
         return view ('cpanel.index', compact('create','what','notifications'));
-       /* Session::flash('message','Usuario Eliminado Correctamente');
-        return Redirect::to('/cpanel');*/
-
     }
-    public function showadvert()
-    {
-        $advertisings = Advertising::where('state', 1)->paginate(8);
-        $create = 0;
-        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('cpanel.showAdvertising',compact('advertisings','create','notifications'));
-    }
+    
     public function createadvert()
     {
         $movies = Movie::paginate(8);
@@ -243,7 +249,29 @@ class CpanelController extends Controller
     {
         $movies = Movie::all();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        //$movies = Movie::paginate(8);
         return view ('cpanel.createPrograming',compact('movies','notifications'));
+    }
+
+    
+    public function createsubject()
+    {   
+        $users = User::where('tipo', 'profesor')->lists('name', 'id');
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.createSubject',compact('users', 'notifications'));
+    }
+    public function creategenre()
+    {
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.createGenre',compact('notifications'));
+    }
+    public function createformat()
+    {
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.createFormat',compact('notifications'));
+    }
+    public function createtype()
+    {
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.createType',compact('notifications'));
     }
 }

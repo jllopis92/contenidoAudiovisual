@@ -1,4 +1,3 @@
-
 @if (!Auth::guest())
 	@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
 	@extends('layouts.controlPanel')
