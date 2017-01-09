@@ -6,6 +6,10 @@ use Request;
 use DB;
 use contenidoAudiovisual\Movie;
 use contenidoAudiovisual\Trailer;
+use contenidoAudiovisual\Subject;
+use contenidoAudiovisual\Genre;
+use contenidoAudiovisual\Format;
+use contenidoAudiovisual\Type;
 use contenidoAudiovisual\Notification;
 use contenidoAudiovisual\Http\Requests;
 
@@ -89,91 +93,54 @@ class QueryController extends Controller
         //
     }
     public function filter(){
-        // Sets the parameters from the get request to the variables.
-        //First filter
-        $largometraje = "";
-        $mediometraje = "";
-        $cortometraje = "";
 
-        //Second filter
-        $experimental = "";
-        $ficcion = "";
-        $animacion = "";
-        $documental = "";
+        $subjects = Subject::where('valid', 1)->get();
+        $genres = Genre::where('valid', 1)->get();
+        $formats = Format::where('valid', 1)->get();
+        $types = Type::where('valid', 1)->get();
 
-        //Thrist filter
-        $fourK = "";
-        $twoK = "";
-        $hd = "";
-        $miniDv = "";
-        $sixteenMm = "";
-        $thirtyFiveMm = "";
+        $firstTrue = 0;
+        $firstTrue2 = 0;
+        $firstTrue3 = 0;
+       
+        $moviesQuery = Movie::query();
+        $moviesQuery->where('state', '=', 1);
 
-        //First filter
-        $largometraje = Request::input('largometraje');
-        $mediometraje = Request::input('mediometraje');
-        $cortometraje = Request::input('cortometraje');
-        $experimental = Request::input('experimental');
-
-        //Second filter
-        $ficcion = Request::input('ficcion');
-        $animacion = Request::input('animacion');
-        $documental = Request::input('documental');
-
-        //Thrist filter
-        $fourK = Request::input('4K');
-        $twoK = Request::input('2K');
-        $hd = Request::get('HD');
-        $miniDv = Request::get('MiniDV');
-        $sixteenMm = Request::input('16mm');
-        $thirtyFiveMm = Request::input('35mm');
-
-        if( $largometraje == "" && $mediometraje == "" && $cortometraje == ""){
-            $largometraje = "largometraje";
-            $mediometraje = "mediometraje";
-            $cortometraje = "cortometraje";
+        foreach ($genres as $key => $genre) {
+            if(Request::input($genre->name) != ""){
+                if($firstTrue == 0){
+                    $moviesQuery->where('genre_id','like','%'.$genre->id.'%');
+                    $firstTrue = 1;
+                }else{
+                    $moviesQuery->orwhere('genre_id','like','%'.$genre->id.'%');
+                }       
+            }
         }
-        if( $experimental == "" && $ficcion == "" && $animacion == "" && $documental == ""){
-            $experimental = "experimental";
-            $ficcion = "ficcion";
-            $animacion = "animacion";
-            $documental = "documental";
+        foreach ($types as $key => $type) {
+            if(Request::input($type->name) != ""){
+                if($firstTrue2 == 0){
+                    $moviesQuery->where('type_id','like','%'.$type->id.'%');
+                    $firstTrue2 = 1;
+                }else{
+                    $moviesQuery->orwhere('type_id','like','%'.$type->id.'%');
+                }
+            }
         }
-        if( $fourK == "" && $twoK == "" && $hd == "" && $miniDv == "" && $sixteenMm == "" && $thirtyFiveMm == ""){
-            $fourK = "4K";
-            $twoK = "2K";
-            $hd = "HD";
-            $miniDv = "MiniDV";
-            $sixteenMm = "16mm";
-            $thirtyFiveMm = "35mm";
+        foreach ($formats as $key => $format) {
+            if(Request::input($format->name) != ""){
+                if($firstTrue3 == 0){
+                    $moviesQuery->where('format_id','like','%'.$format->id.'%');
+                    $firstTrue3 = 1;
+                }else{
+                    $moviesQuery->orwhere('format_id','like','%'.$format->id.'%');
+                }
+            }
         }
+        $movies = $moviesQuery->orderBy('rating', 'desc')->take(8)->get();
 
-        $movies = DB::table('movies')
-            ->where('state', '=', 1)
-            ->where(function ($query) use ($largometraje, $mediometraje, $cortometraje, $experimental, $ficcion, $animacion, $documental, $fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
-                $query->where(function ($query) use ($largometraje, $mediometraje, $cortometraje) {
-                    $query->where('category', '=', $largometraje)
-                        ->orwhere('category', '=', $mediometraje)
-                        ->orwhere('category', '=', $cortometraje);
-                    })
-                    ->where(function ($query2) use ($experimental, $ficcion, $animacion, $documental) {
-                    $query2->where('category2', '=', $experimental)
-                        ->orWhere('category2', '=', $ficcion)
-                        ->orWhere('category2', '=', $animacion)
-                        ->orWhere('category2', '=', $documental);
-                        })
-                    ->where(function ($query3) use ($fourK, $twoK, $hd, $miniDv, $sixteenMm, $thirtyFiveMm) {
-                    $query3->where('shooting_format', '=', $fourK)
-                        ->orwhere('shooting_format', '=', $twoK)
-                        ->orWhere('shooting_format', '=', $hd)
-                        ->orWhere('shooting_format', '=', $miniDv)
-                        ->orWhere('shooting_format', '=', $sixteenMm)
-                        ->orWhere('shooting_format', '=', $thirtyFiveMm);
-                        });
-            })
-            ->take(8)->get();
-            $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view('search', compact('movies', 'query', 'query2','notifications'));
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+
+        return view('search', compact('movies', 'query', 'query2', 'subjects', 'genres', 'formats', 'types','notifications'));
     }
     public function search(Request $request){
         // Gets the query string from our form submission 
@@ -181,20 +148,31 @@ class QueryController extends Controller
 
         $movies = DB::table('movies')
         ->where('state', '=', 1)
-        ->where('name','like','%'.$query.'%')
-        ->orderBy('name')
-        ->paginate(8);
+        ->where(function ($sql) use ($query){
+            $sql->where('name','like','%'.$query.'%')
+            ->orWhere('name','like','%'.$query.'%')
+            ->orWhere('language','like','%'.$query.'%')
+            ->orWhere('description','like','%'.$query.'%')
+            ->orWhere('direction','like','%'.$query.'%')
+            ->orWhere('casting','like','%'.$query.'%')
+            ->orWhere('continuista','like','%'.$query.'%')
+            ->orWhere('script','like','%'.$query.'%')
+            ->orWhere('production','like','%'.$query.'%')
+            ->orWhere('camara','like','%'.$query.'%')
+            ->orWhere('art_direction','like','%'.$query.'%')
+            ->orWhere('actors','like','%'.$query.'%');
+        })->orderBy('rating', 'desc')->take(8)->get();
 
-        /*$movies = DB::table('movies')
-        ->where('state', '=', 1)
-        ->where('name','like','%'.$query.'%')
-        ->orderBy('name')
-        ->paginate(20);*/
-        $trailers = Trailer::all();
+      
+        $subjects = Subject::where('valid', 1)->get();
+        $genres = Genre::where('valid', 1)->get();
+        $formats = Format::where('valid', 1)->get();
+        $types = Type::where('valid', 1)->get();
+
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
  
         // returns a view and passes the view the list of articles and the original query.
-        return view('search', compact('movies', 'query','trailers','notifications'));
+        return view('search', compact('movies', 'query', 'subjects', 'genres', 'formats', 'types','notifications'));
     }
 
 }

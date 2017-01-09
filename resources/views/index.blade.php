@@ -91,14 +91,14 @@
 			    		<a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
 			    		@endif
 			    	</div>
-			    	<div class="col-md-12" align="middle" onclick="openInfo('new','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
+			    	<div class="col-md-12" align="middle" onclick="openInfo('new','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->type_id}}', '{{$movie->genre_id}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
 			    		<a class="button orangeAndBoldText" id="info" >Mas Información</a>
 			    	</div>
 			    </div>
 			</div>
 			<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="newShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 				<div id="newSlideContainer" class="slideContainer" style="margin-top: 10px;">
-					<div class="col-xs-12 col-sm-5">
+					<div class="col-xs-12">
 						<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="newSlideTitle{{$key}}"></strong>
 						<div class="slideBody" style="text-align: left;">
 							<ul>
@@ -130,11 +130,6 @@
 								</li>
 							</ul>
 						</div>
-					</div>
-					<div class="hidden-xs col-sm-7">
-							<video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%; height: 150px;">
-					        <source src="/files/convert/trailers/011portrait.mp4" type="video/mp4">
-					    	</video>
 					</div>
 					<div class="col-xs-12">
 						<a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="newWatchNow{{$key}}">
@@ -212,7 +207,7 @@
 				</div>
 				<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="newShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 					<div id="newSlideContainer" class="slideContainer" style="margin-top: 10px;">
-						<div class="col-xs-12 col-sm-5">
+						<div class="col-xs-12">
 							<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="newSlideTitle{{$key}}"></strong>
 							<div class="slideBody" style="text-align: left;">
 								<ul>
@@ -244,15 +239,6 @@
 									</li>
 								</ul>
 							</div>
-						</div>
-						<div class="hidden-xs col-sm-7">
-							@foreach($trailers as $trailer)
-								@if($trailer->video_id == $movie->id)
-									<video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%; height: 150px;">
-							        	<source src="/files/convert/trailers/011portrait.mp4" type="video/mp4">
-							    	</video>
-						    	@endif
-						    @endforeach
 						</div>
 						<div class="col-xs-12">
 							<a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="newWatchNow{{$key}}">
@@ -331,14 +317,14 @@
 			    		<a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
 			    		@endif
 			    	</div>
-			    	<div class="col-md-12" align="middle" onclick="openInfo('view','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
+			    	<div class="col-md-12" align="middle" onclick="openInfo('view','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->type_id}}', '{{$movie->genre_id}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
 			    		<a class="button orangeAndBoldText" id="info" >Mas Información</a>
 			    	</div>
 			    </div>
 			</div>
 			<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="viewShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 				<div id="viewSlideContainer" class="slideContainer" style="margin-top: 10px;">
-					<div class="col-xs-12 col-sm-5">
+					<div class="col-xs-12">
 						<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="viewSlideTitle{{$key}}"></strong>
 						<div class="slideBody" style="text-align: left;">
 							<ul>
@@ -370,11 +356,6 @@
 								</li>
 							</ul>
 						</div>
-					</div>
-					<div class="hidden-xs col-sm-7">
-							<video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%; height: 150px;">
-					        <source src="/files/convert/trailers/011portrait.mp4" type="video/mp4">
-					    	</video>
 					</div>
 					<div class="col-xs-12">
 						<a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="viewWatchNow{{$key}}">
@@ -446,14 +427,14 @@
 				    		@endif
 				    	</div>
 
-				    	<div class="col-md-12" align="middle" onclick="openInfo('view','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
+				    	<div class="col-md-12" align="middle" onclick="openInfo('view','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->type_id}}', '{{$movie->genre_id}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
 				    		<a class="button orangeAndBoldText" id="info" >Mas Información</a>
 				    	</div>
 				    </div>
 				</div>
 				<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="viewShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 					<div id="viewSlideContainer" class="slideContainer" style="margin-top: 10px;">
-						<div class="col-xs-12 col-sm-5">
+						<div class="col-xs-12">
 							<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="viewSlideTitle{{$key}}"></strong>
 							<div class="slideBody" style="text-align: left;">
 								<ul>
@@ -485,11 +466,6 @@
 									</li>
 								</ul>
 							</div>
-						</div>
-						<div class="hidden-xs col-sm-7">
-								<video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%; height: 150px;">
-						        <source src="/files/convert/trailers/011portrait.mp4" type="video/mp4">
-						    	</video>
 						</div>
 						<div class="col-xs-12">
 							<a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="viewWatchNow{{$key}}">
@@ -567,14 +543,14 @@
 			    		<a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
 			    		@endif
 			    	</div>
-			    	<div class="col-md-12" align="middle" onclick="openInfo('best','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
+			    	<div class="col-md-12" align="middle" onclick="openInfo('best','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->type_id}}', '{{$movie->genre_id}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
 			    		<a class="button orangeAndBoldText" id="info" >Mas Información</a>
 			    	</div>
 			    </div>
 			</div>
 			<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="bestShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 				<div id="bestSlideContainer" class="slideContainer" style="margin-top: 10px;">
-					<div class="col-xs-12 col-sm-8">
+					<div class="col-xs-12">
 						<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="bestSlideTitle{{$key}}"></strong>
 						<div class="slideBody" style="text-align: left;">
 							<ul>
@@ -607,16 +583,6 @@
 							</ul>
 						</div>
 					</div>
-					<div class="hidden-xs col-sm-4">
-							@foreach($trailers as $trailer)
-								@if($trailer->video_id == $movie->id)
-									<video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%; height: 150px;">
-							        	<source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
-							    	</video>
-						    	@endif
-						   @endforeach
-					</div>
-					
 					<div class="col-xs-12">
 						<a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="bestWatchNow{{$key}}">
 							<div id="bestNotificationFooter">Ver Ahora</div>
@@ -686,14 +652,14 @@
 				    		<a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
 				    		@endif
 				    	</div>
-				    	<div class="col-md-12" align="middle" onclick="openInfo('best','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
+				    	<div class="col-md-12" align="middle" onclick="openInfo('best','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->type_id}}', '{{$movie->genre_id}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
 				    		<a class="button orangeAndBoldText" id="info" >Mas Información</a>
 				    	</div>
 				    </div>
 				</div>
 				<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="bestShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 					<div id="bestSlideContainer" class="slideContainer" style="margin-top: 10px;">
-						<div class="col-xs-12 col-sm-5">
+						<div class="col-xs-12">
 							<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="bestSlideTitle{{$key}}"></strong>
 							<div class="slideBody" style="text-align: left;">
 								<ul>
@@ -726,11 +692,6 @@
 								</ul>
 							</div>
 						</div>
-						<div class="hidden-xs col-sm-7">
-								<video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%; height: 150px;">
-						        <source src="/files/convert/trailers/011portrait.mp4" type="video/mp4">
-						    	</video>
-						</div>
 						<div class="col-xs-12">
 							<a class="orangeAndBoldText" style="font-size: 16px; margin-bottom: 10px;" id="bestWatchNow{{$key}}">
 								<div id="bestNotificationFooter">Ver Ahora</div>
@@ -753,10 +714,31 @@
 
 @section('page-js-script')
 
-<script type="text/javascript">
+<script>
 	function openInfo(type, key, id, name, duration, language, category, category2, production_year, description) {
 		var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     	var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+    	var generosName = [];
+    	var generosIds = [];
+    	var tiposName = [];
+    	var tiposIds = [];
+    	@foreach($genres as $key=>$genre)
+    		//alert("{!!$genre->name!!}");
+    		generosIds[{{$key}}] = "{!!$genre->id!!}";
+            generosName[{{$key}}] = "{!!$genre->name!!}";
+        @endforeach
+
+          @foreach($types as $key=>$videoType)
+          	//alert("{!!$videoType->name!!}");
+          	tiposIds[{{$key}}] = "{!!$videoType->id!!}";
+            tiposName[{{$key}}] = "{!!$videoType->name!!}";
+        @endforeach
+
+        //alert("largo tipo id: "+tiposIds.length);
+
+        //alert("Generos "+ generos);
+
     	if(width >= 992){
 			//Resolución MD
 			if(key <= 3){
@@ -782,7 +764,21 @@
 						slideTitleText.innerHTML = name;
 						durationText.innerHTML = duration;
 						languajeText.innerHTML = language;
-						categoriesText.innerHTML = category + ", " + category2;
+
+						var tipo = category;
+						var genero = category2;
+						for(var i = 0; i < tiposIds.length; i++){
+							if(category == tiposIds[i]){
+								tipo = tiposName[i];
+							}
+						}
+						for(var j = 0; j < generosIds.length; j++){
+							if(category2 == generosIds[j]){
+								genero = generosName[j];
+							}
+						}
+
+						categoriesText.innerHTML = tipo + ", " + genero;
 						yearText.innerHTML = production_year;
 						descriptionText.innerHTML = description;
 
@@ -821,7 +817,20 @@
 						slideTitleText.innerHTML = name;
 						durationText.innerHTML = duration;
 						languajeText.innerHTML = language;
-						categoriesText.innerHTML = category + ", " + category2;
+						
+						var tipo = category;
+						var genero = category2;
+						for(var i = 0; i < tiposIds.length; i++){
+							if(category == tiposIds[i]){
+								tipo = tiposName[i];
+							}
+						}
+						for(var j = 0; j < generosIds.length; j++){
+							if(category2 == generosIds[j]){
+								genero = generosName[j];
+							}
+						}
+						categoriesText.innerHTML = tipo + ", " + genero;
 						yearText.innerHTML = production_year;
 						descriptionText.innerHTML = description;
 
@@ -848,7 +857,20 @@
 				slideTitleText.innerHTML = name;
 				durationText.innerHTML = duration;
 				languajeText.innerHTML = language;
-				categoriesText.innerHTML = category + ", " + category2;
+				var tipo = category;
+				var genero = category2;
+				for(var i = 0; i < tiposIds.length; i++){
+					if(category == tiposIds[i]){
+						tipo = tiposName[i];
+					}
+				}
+				for(var j = 0; j < generosIds.length; j++){
+					if(category2 == generosIds[j]){
+						genero = generosName[j];
+					}
+				}
+				categoriesText.innerHTML = tipo + ", " + genero;
+				
 				yearText.innerHTML = production_year;
 				descriptionText.innerHTML = description;
 

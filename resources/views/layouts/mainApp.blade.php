@@ -61,7 +61,7 @@
             <li class="col-xs-12 col-sm-5 hidden-xs" style="padding-right: 0px; padding-left: 0px; ">
                 {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search', 'class'=>'navbar-form navbar-search', 'style'=>'padding: 9px 15px 5px; color: #F0643C;'])  !!}
                 <div class="input-group">
-                    <input type="text" style="border-right-width: 0px;" class="form-control" name="search">
+                    <input type="text" style="border-right-width: 0px;" class="form-control" name="search"  placeholder="Buscar Nombre, Formato, Genero, Tipo">
                     <div class="input-group-btn">
                         <button class="btn btn-default orangeText" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
@@ -178,52 +178,27 @@
             <li style="max-height: 25px;">
                 <a class="boldFont orangeText"> Tipo de Video</a>
             </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="largometraje" value="largometraje"> Largometraje
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="mediometraje" value="mediometraje"> Mediometraje
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="cortometraje" value="cortometraje"> Cortometraje
-            </li>
+            @foreach($types as $type)
+                <li style="max-height: 25px;">
+                    <input type="checkbox" name="{{$type->name}}" value="{{$type->id}}"> {{$type->name}}
+                </li>
+            @endforeach
             <li style="max-height: 25px;">
                 <a class="boldFont orangeText"> Genero</a>
             </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="experimental" value="experimental"> Experimental
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="ficcion" value="ficcion"> Ficción
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="animacion" value="animacion"> Animación
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="documental" value="documental"> Documental
-            </li>
-
+            @foreach($genres as $genre)
+                <li style="max-height: 25px;">
+                    <input type="checkbox" name="{{$genre->name}}" value="{{$genre->id}}"> {{$genre->name}}
+                </li>
+            @endforeach
             <li style="max-height: 25px;">
                 <a class="boldFont orangeText"> Formato</a>
             </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="4K" value="4K"> 4K
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="2K" value="2K"> 2K
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="HD" value="HD"> HD
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="MiniDV" value="MiniDV"> MiniDV
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="16mm" value="16mm"> 16mm
-            </li>
-            <li style="max-height: 25px;">
-                <input type="checkbox" name="35mm" value="35mm"> 35mm
-            </li>
+            @foreach($formats as $format)
+                <li style="max-height: 25px;">
+                    <input type="checkbox" name="{{$format->name}}" value="{{$format->id}}"> {{$format->name}}
+                </li>
+            @endforeach
             </br>
             <button type="submit" class="btn btn-primary orangeButton" style="margin-left: 15px; margin-top: 10px;">
                 <i class="fa fa-btn fa-sign-in"></i> Buscar
