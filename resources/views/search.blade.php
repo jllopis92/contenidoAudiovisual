@@ -39,7 +39,11 @@
                     <div class="row col-xs-12" style="margin-top: 5px;">
                         <div class="col-xs-7" align="left" style="padding-right: 0px;">
                             <a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
-                                <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->category2}}
+                                @foreach($genres as $genre)
+                                    @if($movie->genre_id == $genre->id)
+                                        <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$genre->name}}
+                                    @endif
+                                @endforeach
                             </a>
                         </div>
                         <div class="col-xs-4 col-xs-offset-1" align="right" style="padding-right: 0px; padding-left: 5px;">
@@ -148,7 +152,11 @@
                         <div class="row col-xs-12" style="margin-top: 5px;">
                             <div class="col-xs-7" align="left" style="padding-right: 0px;">
                                 <a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
-                                    <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->category2}}
+                                    @foreach($genres as $genre)
+                                        @if($movie->genre_id == $genre->id)
+                                            <p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$genre->name}}
+                                        @endif
+                                    @endforeach
                                 </a>
                             </div>
                             <div class="col-xs-4 col-xs-offset-1" align="right" style="padding-right: 0px; padding-left: 5px;">
@@ -184,7 +192,7 @@
                             <a href="{{ action("MovieController@show", array($movie->id)) }}"><img src="img/rating/5_0s.jpg" title="{{$movie->name}}" style="display: inline-block;"/></a>
                             @endif
                         </div>
-                        <div class="col-md-12" align="middle" onclick="openInfo('new','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->category}}', '{{$movie->category2}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
+                        <div class="col-md-12" align="middle" onclick="openInfo('new','{{$key}}', '{{$movie->id}}', '{{$movie->name}}', '{{$movie->duration}}', '{{$movie->language}}', '{{$movie->type_id}}', '{{$movie->genre_id}}', '{{$movie->production_year}}', '{{$movie->description}}' );">
                             <a class="button orangeAndBoldText" id="info" >Mas Información</a>
                         </div>
                     </div>

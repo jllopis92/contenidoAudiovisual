@@ -48,6 +48,8 @@
 	Route::get('createtype','CpanelController@createtype');
 	Route::post('deletetype','TypeController@delete');
 	Route::resource('type','TypeController');
+	//Route::get('deletecomment','CommentaryController@delete');
+	Route::resource('commentary','CommentaryController');
 
 	Route::resource('advertising','AdvertisingController');
 	Route::resource('programing','ProgramingController');

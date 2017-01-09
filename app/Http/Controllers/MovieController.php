@@ -8,6 +8,10 @@ use contenidoAudiovisual\User;
 use contenidoAudiovisual\Subject;
 use contenidoAudiovisual\Subtitle;
 use contenidoAudiovisual\Trailer;
+use contenidoAudiovisual\Commentary;
+use contenidoAudiovisual\Genre;
+use contenidoAudiovisual\Format;
+use contenidoAudiovisual\Type;
 use contenidoAudiovisual\Notification;
 use Illuminate\Http\Request;
 use Redirect;
@@ -188,8 +192,17 @@ class MovieController extends Controller
         $movie = Movie::find($id);
         $newMovies = Movie::where('state', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $trailers = Trailer::where('video_id', $id)->take(1)->get();
+
+        $commentaries = Commentary::where('valid', 1)->orderBy('created_at', 'desc')->get();
+        $users = User::all();
+
+        $subjects = Subject::where('valid', 1)->get();
+        $genres = Genre::where('valid', 1)->get();
+        $formats = Format::where('valid', 1)->get();
+        $types = Type::where('valid', 1)->get();
+
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('play.show',compact('movie','newMovies','trailers','notifications'));
+        return view ('play.show',compact('movie','newMovies','trailers','commentaries','users','subjects','genres','formats','types','notifications'));
         //return view ('play.show',['movie'=>$movies],['trailer'=>$trailers]);
     }
 
