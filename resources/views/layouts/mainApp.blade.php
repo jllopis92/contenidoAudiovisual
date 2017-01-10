@@ -34,7 +34,7 @@
                 </div>       
             </div>
         </div><!-- bs-example-navbar-collapse-1 -->
-    <div class="col-xs-12 visible-xs">
+    {{-- <div class="col-xs-12 visible-xs">
         <div class="col-xs-9">
         {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
             <div class="input-group" style="margin-top: 9px;">
@@ -53,8 +53,8 @@
                 <span class="icon-bar whiteBackground"></span>
             </button>
         </div>
-    </div>
-    <div class="collapse navbar-collapse col-xs-12 col-sm-7" id="app-navbar-collapse" style="float: right; background-color: #F0643C;">
+    </div> --}}
+    <div class="col-sm-7 hidden-xs" style="float: right; background-color: #F0643C;">
         <!-- Right Side Of Navbar -->
 
         <ul class="nav navbar-nav navbar-right">
@@ -171,7 +171,16 @@
     <!-- Sidebar -->
     <div id="sidebar-wrapper" class="contentAfterNavbar" style="position: fixed; z-index: 100;">
     {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
-        <ul class="sidebar-nav nav-pills nav-stacked" id="menu" style="align-items: center;">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu" style="align-items: center; margin-top: 0px;">
+            <div class="visible-xs" style="background-color: #F0643C;">
+                <li>
+                    <a href="{{ url('/cpanel') }}" class="alert_message dark_orange_back" style="color: white;">Panel de Control</a>
+                </li>
+                <li>
+                    <a href="{{ url('/logout') }}" class="alert_message dark_orange_back" style="color: white;">Cerrar Sesión</a>
+                    <div class="clearfix"></div>
+                </li>
+            </div>
             <li style="max-height: 30px;">
                 <a class="boldFont" style="color: #333;"> Busqueda por Filtro</a>
             </li>
@@ -210,36 +219,42 @@
     <!-- Page Content -->
     <div id="page-content-wrapper" class="contentAfterNavbar">
         @yield('content')
-    </div>
-        <!-- /#page-content-wrapper -->
-        <footer>
-            <div class="footer-bottom">
-                <div class="container" style="max-width: 100%;">
-                    <div class="col-md-4">
-                        <p> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p>
+{{--         <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px; padding-bottom: 0px;">
+ --}}        
+        <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px; padding-bottom: 0px;">
+            <footer>
+                <div class="footer-bottom">
+                    <div class="container" style="max-width: 100%;">
+                        <div class="col-md-4">
+                            <p> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="#"> al medio </a>
+                        </div>
+                        <div class="col-md-4">
+                            <p>al final </p>
+                        </div>
+                        {{-- <p class="pull-left"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p> --}}
+                        {{-- <p class="pull-right"> Informacion mia </p> --}}
+                            {{-- 
+                            <div class="pull-right">
+                                <ul class="nav nav-pills payments">
+                                    <li><i class="fa fa-cc-visa"></i></li>
+                                    <li><i class="fa fa-cc-mastercard"></i></li>
+                                    <li><i class="fa fa-cc-amex"></i></li>
+                                    <li><i class="fa fa-cc-paypal"></i></li>
+                                </ul> 
+                            </div> --}}
                     </div>
-                    <div class="col-md-4">
-                        <a href="#"> al medio </a>
-                    </div>
-                    <div class="col-md-4">
-                        <p>al final </p>
-                    </div>
-                    {{-- <p class="pull-left"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p> --}}
-                    {{-- <p class="pull-right"> Informacion mia </p> --}}
-                    {{-- 
-                    <div class="pull-right">
-                        <ul class="nav nav-pills payments">
-                            <li><i class="fa fa-cc-visa"></i></li>
-                            <li><i class="fa fa-cc-mastercard"></i></li>
-                            <li><i class="fa fa-cc-amex"></i></li>
-                            <li><i class="fa fa-cc-paypal"></i></li>
-                        </ul> 
-                    </div> --}}
                 </div>
-            </div>
-    <!--/.footer-bottom--> 
-        </footer>
+                <!--/.footer-bottom--> 
+            </footer>
+        </div>
+        
     </div>
+    <!-- /#page-content-wrapper -->        
+</div>
+
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="/js/jquery-1.11.3.min.js"></script>

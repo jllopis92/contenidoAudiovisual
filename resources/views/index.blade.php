@@ -3,7 +3,9 @@
 
 	<div class="col-sm-12" id="mainBody" align="center" style="overflow: hidden; 
 	background-color: #ffffff;
-    border-color: #e7e7e7;">
+    border-color: #e7e7e7;
+    padding-left: 0px;
+	padding-right: 0px;">
 
     <div id="immersive_slider" class="col-xs-12">
         @foreach($advertisings as $advertising)

@@ -134,12 +134,16 @@ body {
 }
 @media(max-width:767px) {
     .contentAfterNavbar{
-        margin-top: 123px;
+        margin-top: 72px;
     }
 }
 @media(min-width:830px) {
     #wrapper {
         padding-left: 200px;
+    }
+    .navbar-fixed-bottom{
+       /*padding-left: 200px;*/
+       padding-right: 0px;
     }
     .fixed-brand{
         width: 300px;
@@ -162,7 +166,7 @@ body {
         width: 250px;
     }
     #page-content-wrapper {
-        padding: 20px;
+        padding: 0px;
         position: relative;
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
@@ -173,7 +177,8 @@ body {
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
-        padding-left: 250px;
+        padding-left: 190px;
+
     }
     #wrapper.toggled-2 #page-content-wrapper {
         position: relative;
@@ -222,6 +227,11 @@ body {
     a.alert_message:hover{color : grey}
 }
 
+@media(max-width:830px) {
+    .navbar-fixed-bottom{
+       padding: 0px; 
+    }
+}
 
 /*nuevos*/
 
