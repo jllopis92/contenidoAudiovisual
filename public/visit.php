@@ -15,6 +15,7 @@ if (isset($_POST['visits']) && !empty($_POST['visits'])) {
 
     $visits = $conn->real_escape_string($_POST['visits']);
     $movie = $conn->real_escape_string($_POST['movie']);
+    $user = $conn->real_escape_string($_POST['user']);
    
 // check if user has already rated
     $sql = "SELECT visit FROM movies WHERE id='".$movie."'";
@@ -26,7 +27,10 @@ if (isset($_POST['visits']) && !empty($_POST['visits'])) {
         $visits = $visits + $row["visit"];
          $insertsql = "UPDATE movies SET visit='$visits' WHERE id='".$movie."'";
         if (mysqli_query($conn, $insertsql)) {
-            echo "Nuevas Visitas: ".$visits;
+            $insertsql2 = " INSERT INTO SeenBy (movie_id, user_id) VALUES (".$movie.",".$user.");";
+            if (mysqli_query($conn, $insertsql2)) { 
+                echo "Correcto";
+            }
         }else{
             echo "Nuevas Visitas: ".$visits;
         }

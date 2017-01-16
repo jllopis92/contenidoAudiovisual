@@ -11,7 +11,7 @@
 			'Reprobar',
 			'En Observación'];
 
-			var statesIds = [1, 0, 3];
+			var statesIds = [1, 0, 2];
 
 			function setSubmits (){
 
@@ -69,12 +69,12 @@
 			<input type="radio" name="aorb" onClick="showWaitAprove()" > Videos en Espera</label>
 		</div>
 		<div>
-			<div id = "aprove">
+			<div id = "aprove" class="col-md-12">
 			@if (count($aproves) === 0)
 			<h5 style="margin-top: 30px;">No se encuentran videos aprobados</h5>
 			@elseif (count($aproves) >= 1)
 				<h4 style="margin-top: 30px;">Videos Aprobados</h4>
-				<table class="table" data-filtering="true" data-paging="true">
+				<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 					<thead>
 						<th class="blackText">Nombre</th>
 						<th class="blackText">Subido Por</th>
@@ -108,13 +108,13 @@
 				@endif
 			</div>
 
-			<div id = "observe" style="display: none;">
+			<div id = "observe" class="col-md-12" style="display: none;">
 				@if (count($observations) === 0)
 				<h5 style="margin-top: 30px;">No se encuentran videos en observación</h5>
 				@elseif (count($observations) >= 1)
 					<h4 style="margin-top: 30px;">Videos en Observación</h4>
 
-					<table class="table" data-filtering="true" data-paging="true">
+					<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 						<thead>
 							<th class="blackText">Nombre</th>
 							<th class="blackText">Subido Por</th>
@@ -148,13 +148,13 @@
 				@endif
 			</div>
 
-			<div id = "reproveMovies" style="display: none;">
+			<div id = "reproveMovies" class="col-md-12" style="display: none;">
 				@if (count($reproves) === 0)
 				<h5 style="margin-top: 30px;">No se encuentran videos reprobados</h5>
 				@elseif (count($reproves) >= 1)
 					<h4 style="margin-top: 30px;">Videos Reprobados</h4>
 
-					<table class="table" data-filtering="true" data-paging="true">
+					<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 						<thead>
 							<th class="blackText">Nombre</th>
 							<th class="blackText">Subido Por</th>
@@ -188,13 +188,13 @@
 				@endif
 			</div>
 
-			<div id = "waitAprove" style="display: none;">
+			<div id = "waitAprove" class="col-md-12" style="display: none;">
 				@if (count($waits) === 0)
 				<h5 style="margin-top: 30px;">No se encuentran videos en espera de aprobación</h5>
 				@elseif (count($waits) >= 1)
 					<h4 style="margin-top: 30px;">Videos en Espera de aprobación</h4>
 
-					<table class="table" data-filtering="true" data-paging="true">
+					<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 						<thead>
 							<th class="blackText">Nombre</th>
 							<th class="blackText">Subido Por</th>
@@ -231,17 +231,20 @@
 
 			<!-- Modal -->
 			<div class="modal fade" id="aproveModal" role="dialog">
-			    <div class="modal-dialog">
+			    <div class="modal-dialog" style="height: 70%; background-color: white;">
 			    
 			      <!-- Modal content-->
-			      <div class="modal-content">
-			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 id="movieTittle" class="modal-title"></h4>
-			        </div>
-			        <div class="modal-body">
-	                    {!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
-	                    	
+			      	<div class="modal-content">
+				        {{-- <div class="modal-header">
+				          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				         	<h4 id="movieTittle" class="modal-title"></h4>
+				        </div> --}}
+			        	{!! Form::open(['url' =>'approve', 'method'=>'POST']) !!}
+			        	<div class="modal-body" style="padding-top: 0px; padding-bottom: 0px;">
+			        		<div class="form-group col-md-12" style="margin-top: 20px;">
+	                        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				         		<h4 id="movieTittle" class="modal-title"></h4>
+	                        </div>
 	                        <div class="form-group col-md-12" style="display: none;">
 	                        	<label class="col-md-6"> ID: </label>
 	                            <input class="col-md-6" type="text" name="id" id="id" value=""/>
@@ -249,7 +252,7 @@
 	                        <div class="form-group col-md-12" style="display: none;">
 	                            <input class="col-md-6" type="text" name="nowState" id="nowState" value=""/>
 	                        </div>
-							<div class="form-group col-md-12">
+							<div class="form-group col-md-12" style="padding-top: 15px;">
 	                            <label for="state" class="col-md-8 control-label">Seleccione Nuevo estado:</label>
 	                            <div class="col-md-4">
 	                                <select class="form-control" size="1" id="state" name="state">
@@ -266,9 +269,9 @@
 					    		{!! Form::textarea('observation', null, ['class'=> 'form-control', 'required'=> '']) !!}
 					    		{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary orangeButton', 'value' =>'validate']) !!}
 				    		</div>
-				    	{!! Form::close() !!}
-			        </div>
-			      </div>
+			        	</div>
+			        	{!! Form::close() !!}
+			      	</div>
 			    </div>
 			</div>
 			

@@ -57,11 +57,11 @@
     <div class="col-sm-7 hidden-xs" style="float: right; background-color: #F0643C;">
         <!-- Right Side Of Navbar -->
 
-        <ul class="nav navbar-nav navbar-right">
-            <li class="col-xs-12 col-sm-5 hidden-xs" style="padding-right: 0px; padding-left: 0px; ">
+        <ul class="nav navbar-nav navbar-right" style="width: 100%;">
+            <li class="col-xs-12 col-sm-5 hidden-xs" style="padding-right: 0px; padding-left: 0px;">
                 {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search', 'class'=>'navbar-form navbar-search', 'style'=>'padding: 9px 15px 5px; color: #F0643C;'])  !!}
                 <div class="input-group">
-                    <input type="text" style="border-right-width: 0px;" class="form-control" name="search"  placeholder="Buscar Nombre, Formato, Genero, Tipo">
+                    <input type="text" style="border-right-width: 0px;" class="form-control" name="search"  placeholder="Nombre, Formato, Genero, Tipo">
                     <div class="input-group-btn">
                         <button class="btn btn-default orangeText" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </div>

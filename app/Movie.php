@@ -13,11 +13,11 @@ class Movie extends Model
 {
     protected $table = "movies";
 
-    protected $fillable = ['usuario_id','asignatura_id','name','observation','language','creation_date','description','imageRef','url','state','production_year','category','category2','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors'];
+    protected $fillable = ['usuario_id','asignatura_id','name','observation','language','creation_date','description','imageRef','advertisingImage','url','state','production_year','category','category2','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors','other1Name','other1Content','other2Name','other2Content','other3Name','other3Content'];
 
     public function setImageRefAttribute($imageRef){
         $this->attributes['imageRef'] = Carbon::now()->second.$imageRef->getClientOriginalName();
-        $name = Carbon::now()->second.$imageRef->getClientOriginalName(); 
+        $name = Carbon::now()->second.$imageRef->getClientOriginalName();
         \Storage::disk('local')->put($name, \File::get($imageRef));
         //$this->attributes['imageRef'] = Carbon::now()->second.$imageRef;
         //$newName = $this->attributes['imageRef'];
@@ -27,6 +27,14 @@ class Movie extends Model
         $img = Image::make('files/'.$name)->resize(200, 200);
         $img->save();
         //echo "resize";
+    }
+    public function setAdvertisingImageAttribute($advertisingImage){
+        $this->attributes['advertisingImage'] = Carbon::now()->second.$advertisingImage->getClientOriginalName();
+        $name = Carbon::now()->second.$advertisingImage->getClientOriginalName();
+        \Storage::disk('local')->put($name, \File::get($advertisingImage));
+        
+        $img = Image::make('files/'.$name)->resize(1080, 600);
+        $img->save();
     }
     public function setUrlAttribute($url){
         

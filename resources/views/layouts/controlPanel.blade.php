@@ -444,10 +444,9 @@
         
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
-    <div id="page-content-wrapper" class="contentAfterNavbar">
+    <div id="page-content-wrapper" class="contentAfterNavbar" style="padding-left: 20px;">
         @yield('content')
-
-        </div>
+    </div>
         <!-- /#page-content-wrapper -->
     </div>
 @else

@@ -7,19 +7,27 @@
     padding-left: 0px;
 	padding-right: 0px;">
 
-    <div id="immersive_slider" class="col-xs-12">
+    <div id="immersive_slider" class="col-xs-12" style="padding-left: 0px; padding-right: 0px; ">
         @foreach($advertisings as $advertising)
-          <div class="slide col-xs-12" data-blurred="files/{{$advertising->image}}">
-            <div class="content col-xs-12 col-md-6">
-              <h2><a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">{{$advertising->name}}</a></h2>
-              <p>{{$advertising->description}}</p>
-            </div>
-            <div class="image col-xs-12 col-md-6">
-              <a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank">
-                <img src="files/{{$advertising->image}}" alt="Slider 1">
-              </a>
-            </div>
-          </div>
+        	@if($advertising->movie_id == 0)
+	          <div class="slide col-xs-12" style="background-image: url('files/{{$advertising->image}}');
+	          background-repeat: no-repeat;
+	          background-size: 100% 100%;">
+	            <div class="content col-xs-12 col-md-9" style="vertical-align: top; background: rgba(25, 25, 25, .4); ">
+	              <h2><a href="{{$advertising->link}}" target="_blank" style="color: white;">{{$advertising->name}}</a></h2>
+	              <p style="color: white;">{{$advertising->description}}</p>
+	            </div>
+	          </div>
+          @else
+          		<div class="slide col-xs-12" style="background-image: url('files/{{$advertising->image}}');
+	          background-repeat: no-repeat;
+	          background-size: 100% 100%;">
+	            <div class="content col-xs-12 col-md-9" style="vertical-align: top; background: rgba(25, 25, 25, .4); ">
+	              <h2><a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank" style="color: white;">{{$advertising->name}}</a></h2>
+	              <p style="color: white;">{{$advertising->description}}</p>
+	            </div>
+	          </div>
+          @endif
         @endforeach
           
         <a href="#" class="is-prev">&laquo;</a>

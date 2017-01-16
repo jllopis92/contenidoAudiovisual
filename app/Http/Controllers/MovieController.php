@@ -105,6 +105,12 @@ class MovieController extends Controller
             'catering' => $request['catering'],
             'music' => $request['music'],
             'actors' => $request['actors'],
+            'other1Name' => $request['other1Name'],
+            'other1Content' => $request['other1Content'],
+            'other2Name' => $request['other2Name'],
+            'other2Content' => $request['other2Content'],
+            'other3Name' => $request['other3Name'],
+            'other3Content' => $request['other3Content'],
         ]);
         $movieId = $movie->id;
 
@@ -250,9 +256,9 @@ class MovieController extends Controller
      */
     public function approveMovie(Request $request)
     {
-        $id = $request['video_id'];
+        $id = $request['id'];
         $movie = Movie::find($id);
-        $newState = $request['state_'.$id];
+        $newState = $request['state'];
         $movie->fill([
             'state' => $newState,
         ]);

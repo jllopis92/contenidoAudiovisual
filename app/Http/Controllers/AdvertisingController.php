@@ -14,18 +14,29 @@ class AdvertisingController extends Controller
     public function store(Request $request){
 
         $movies = Movie::all();
-
-        foreach ($movies as $movie){
-            if($request['id'] == $movie->id){
-                $advertising = Advertising::create([
-                    'movie_id' => $request['id'],
-                    'name' => $movie->name,
-                    'description' => $movie->description,
-                    'image' => $movie->imageRef,
-                    'state' => 1,
-                ]);
-            }
+        if($request['id'] != 0){
+            foreach ($movies as $movie){
+                if($request['id'] == $movie->id){
+                    $advertising = Advertising::create([
+                        'movie_id' => $request['id'],
+                        'name' => $movie->name,
+                        'description' => $movie->description,
+                        'image' => $movie->advertisingImage,
+                        'state' => 1,
+                    ]);
+                }
+            }  
+        }else{
+            $advertising = Advertising::create([
+                'movie_id' => $request['id'],
+                'name' => $request['name'],
+                'description' => $request['description'],
+                'link' => $request['link'],
+                'image' => $request['image'],
+                'state' => 1,
+            ]);
         }
+        
 
         //$advertisings = Advertising::where('state', 1)->paginate(8);
         $create = 1;

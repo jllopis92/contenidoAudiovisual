@@ -13,7 +13,7 @@
                 {{-- para Mac --}}
                 {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
                 {{-- para centOs --}}
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> --}}
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
             <div class="col-xs-12">
                  <h4 class="blackAndBoldText">Información Importante</h4>
@@ -46,17 +46,18 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
+                    
                     <div class = "form-group col-sm-12 col-md-6">
-                        {!! Form::label('language', 'Idioma * :') !!}
-                        {!! Form::select('language', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
-                        <div class="alert alert-danger col-xs-12" id="languageValidation" style="display: none">
+                        <div class = "form-group">
+                            {!! Form::label('imageRef', 'Imagen Referencial de Video: *') !!}
+                            <input id="imageRef" name="imageRef" type="file" accept=".jpg,.jpeg,.png" />
                         </div>
                     </div>
 
                     <div class = "form-group col-sm-12 col-md-6">
                         <div class = "form-group">
-                            {!! Form::label('imageRef', 'Imagen Referencial de Video:') !!}
-                            <input id="imageRef" name="imageRef" type="file" accept=".jpg,.jpeg,.png" />
+                            {!! Form::label('advertisingImage', 'Imagen para Anuncios: *') !!}
+                            <input id="advertisingImage" name="advertisingImage" type="file" accept=".jpg,.jpeg,.png" />
                         </div>
                     </div>
                 </div>
@@ -90,10 +91,19 @@
                 </div>
                 <div class="col-xs-12">
                     <div class = "form-group col-sm-12 col-md-6">
+                        {!! Form::label('language', 'Idioma * :') !!}
+                        {!! Form::select('language', Config::get('enums.languages'), ['required'=> '', 'data-parsley-mincheck'=> 1]) !!}
+                        <div class="alert alert-danger col-xs-12" id="languageValidation" style="display: none">
+                        </div>
+                    </div>
+
+                    <div class = "form-group col-sm-12 col-md-6">
                         {!! Form::label('cant_sub', 'Cantidad de Subtitulos:') !!}
                         <input id="cant_sub" value="0" type="number" min="0" max="5" class="form-control">
                         <div id="result"></div>
                     </div>
+                </div>
+                <div class="col-xs-12">
                     <div id="subtittle_1" class = "form-group col-sm-12 col-md-6" style ="display: none;">
                         <label>Subtitulo 1</label>
                         <div class = "col-xs-12">
@@ -105,8 +115,6 @@
                             {!! Form::file('subtitle_1') !!}
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12">
                     <div id="subtittle_2" class = "form-group col-sm-12 col-md-6" style ="display: none;">
                         <label>Subtitulo 2</label>
                         <div class = "col-xs-12">
@@ -118,6 +126,8 @@
                             {!! Form::file('subtitle_2') !!}
                         </div>
                     </div>
+                </div>
+                <div class="col-xs-12">
                     <div id="subtittle_3" class = "form-group col-sm-12 col-md-6" style ="display: none;">
                         <label>Subtitulo 3</label>
                         <div class = "col-xs-12">
@@ -129,8 +139,6 @@
                             {!! Form::file('subtitle_3') !!}
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12">
                     <div id="subtittle_4" class = "form-group col-sm-12 col-md-6" style ="display: none;">
                         <label>Subtitulo 4</label>
                         <div class = "col-xs-12">
@@ -142,6 +150,8 @@
                             {!! Form::file('subtitle_4') !!}
                         </div>
                     </div>
+                </div>
+                <div class = "col-xs-12">
                     <div id="subtittle_5" class = "form-group col-sm-12 col-md-6" style ="display: none;">
                         <label>Subtitulo 5</label>
                         <div class = "col-xs-12">
@@ -154,7 +164,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class = "col-xs-12">
                     <div class = "form-group col-sm-12 col-md-6">
                         {!! Form::label('trailer_subtitle', 'Subtitulos de Trailer:') !!}
@@ -373,6 +382,43 @@
                         <div class="alert alert-danger col-xs-12" id="actorsValidation" style="display: none">
                         </div>
                     </div>
+                    <div class = "form-group col-xs-12">
+                        <label>¿Desea agregar nuevos Campos?</label>
+                        <br>
+                        {!! Form::label('cant_other', 'Cantidad :') !!}
+                        <input id="cant_other" value="0" type="number" min="0" max="3" class="form-control">
+                    </div>
+                </div>
+
+                <div id="other1" class="col-xs-12" style ="display: none;">
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other1Name', 'Campo:') !!}
+                        {!! Form::text('other1Name', null, ['class'=> 'form-control']) !!}
+                    </div>
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other1Content', 'Valor:') !!}
+                        {!! Form::text('other1Content', null, ['class'=> 'form-control']) !!}
+                    </div>
+                </div>
+                <div id="other2" class="col-xs-12" style ="display: none;">
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other2Name', 'Campo:') !!}
+                        {!! Form::text('other2Name', null, ['class'=> 'form-control']) !!}
+                    </div>
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other2Content', 'Valor:') !!}
+                        {!! Form::text('other2Content', null, ['class'=> 'form-control']) !!}
+                    </div>
+                </div>
+                <div id="other3" class="col-xs-12" style ="display: none;">
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other3Name', 'Campo:') !!}
+                        {!! Form::text('other3Name', null, ['class'=> 'form-control']) !!}
+                    </div>
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other3Content', 'Valor:') !!}
+                        {!! Form::text('other3Content', null, ['class'=> 'form-control']) !!}
+                    </div>
                 </div>
             </div> 
 
@@ -434,6 +480,28 @@
                 }else{
                     for(var y=1; y<=5; y++){
                         document.getElementById("subtittle_" + y).style.display="none";
+                    }
+                }
+            });
+
+            j( "#cant_other" ).on( "change", function() {
+                if(j("#cant_other").val() > 3){
+                    alert("Máximo de 3 nuevas categorias")
+                    j("#cant_other").val(3);
+                }else if(j("#cant_other").val() < 0){
+                    j("#cant_other").val(0);
+                }else if ((j("#cant_other").val() <= 3) && (j("#cant_other").val() > 0)){
+                    var subs = j("#cant_other").val();
+                    for(var x=1; x<=3; x++){
+                        if(x<=subs){
+                            document.getElementById("other" + x).style.display="inline";
+                        }else{
+                            document.getElementById("other" + x).style.display="none";
+                        }
+                    }
+                }else{
+                    for(var y=1; y<=3; y++){
+                        document.getElementById("other" + y).style.display="none";
                     }
                 }
             });

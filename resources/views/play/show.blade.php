@@ -209,7 +209,8 @@
 	        //alert('Video ended!');
 	        j.post('../visit.php',{
 					visits:1,
-					movie:{{$movie->id}}
+					movie:{{$movie->id}},
+					user:{!! Auth::user()->id !!}
 				},function(d){
 					if(d>0){
 			            alert('Respuesta:'+d);
