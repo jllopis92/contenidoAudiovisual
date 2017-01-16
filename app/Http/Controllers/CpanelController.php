@@ -37,55 +37,67 @@ class CpanelController extends Controller
      */
     public function selectuser()
     {
-        $users = User::paginate(8);
+        //$users = User::paginate(8);
+        $users = DB::table('users')->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.selectUser',compact('users','notifications'));
     }
     public function selectpassword()
     {
-        $users = User::paginate(8);
+        $users = DB::table('users')->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.selectUserPassword',compact('users','notifications'));
     }
     public function selectrange()
     {
-        $users = User::where('tipo', '!=', 'administrador')->paginate(8);
+        //$users = User::where('tipo', '!=', 'administrador')->paginate(8);
+        $users = DB::table('users')->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.selectUserRange',compact('users','notifications'));
     }
     public function showmovie()
     {
-        $movies = Movie::paginate(8);
+        //$movies = Movie::paginate(8);
+        $movies = DB::table('movies')->get();
+        $subjects = DB::table('subjects')->get();
+        $genres = DB::table('genres')->get();
+        $formats = DB::table('formats')->get();
+        $types = DB::table('types')->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('cpanel.movieupdate',compact('movies','notifications'));
+        return view ('cpanel.movieupdate',compact('movies','subjects','genres','formats','types','notifications'));
     }
     public function showsubject()
     {
-        $subjects = Subject::where('valid', 1)->paginate(8);
+        //$subjects = Subject::where('valid', 1)->paginate(8);
+        $subjects = DB::table('subjects')->where('valid', '=', 1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.selectSubject',compact('subjects','notifications'));
     }
     public function showgenre()
     {
-        $genres = Genre::where('valid', 1)->paginate(8);
+        //$genres = Genre::where('valid', 1)->paginate(8);
+        $genres = DB::table('genres')->where('valid', '=', 1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.selectGenre',compact('genres','notifications'));
     }
     public function showformat()
     {
-        $formats = Format::where('valid', 1)->paginate(8);
+        //$formats = Format::where('valid', 1)->paginate(8);
+        $formats = DB::table('formats')->where('valid', '=', 1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.selectFormat',compact('formats','notifications'));
     }
     public function showtype()
     {
-        $types = Type::where('valid', 1)->paginate(8);
+        //$types = Type::where('valid', 1)->paginate(8);
+        $types = DB::table('types')->where('valid', '=', 1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.selectType',compact('types','notifications'));
     }
     public function showadvert()
     {
-        $advertisings = Advertising::where('state', 1)->paginate(8);
+        //$advertisings = Advertising::where('state', 1)->paginate(8);
+        $advertisings = DB::table('advertising')->where('state', '=', 1)->get();
         $create = 0;
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.showAdvertising',compact('advertisings','create','notifications'));

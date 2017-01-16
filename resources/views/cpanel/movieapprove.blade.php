@@ -16,23 +16,13 @@
 			function setSubmits (){
 
 			    var select = document.getElementById('state');
-			    //alert(select);
 			    var newstate = document.getElementById('nowState').value;
-				//alert(newstate);
 				for (var i = 0; i < statesIds.length; i++){
 					var opt = document.createElement('option');
 				    opt.value = statesIds[i];
 				    opt.innerHTML = states[i];
 				    select.appendChild(opt);
 				}
-				//alert(state);
-				/*for (var i = 0; i < statesIds.length; i++){
-					if (state == statesIds[i]){
-						document.write('<option value="' + statesIds[i] + '" selected="selected">' + states[i] + '</option>');
-					}else{
-						document.write('<option value="' + statesIds[i] + '">' + states[i] + '</option>');
-					}
-				}*/
 			}
 		</script>
   
@@ -79,28 +69,28 @@
 						<th class="blackText">Nombre</th>
 						<th class="blackText">Subido Por</th>
 						<th class="blackText">Descripción</th>
-						<th class="blackText">Acción</th>
+						<th class="blackText" data-type="html">Acción</th>
 					</thead>
 					<tbody>
 						@foreach($aproves as $aprove)
 							<tr>
-							<td>
-								<h4>{{$aprove->name}}</h4>
-								<img src="files/{{$aprove->imageRef}}" title="allbum-name" style="width: 220px; height: 220px;"/>
-							</td>
-							<td>
-								@foreach($users as $user)
-									@if ($aprove->usuario_id == $user->id)
-								         {{$user->name}}
-						            @endif
-						        @endforeach
-							</td>
-							<td>
-								{{$aprove->description}}
-							</td>
-							<td data-toggle="modal" data-target="#aproveModal" data-name="{!! $aprove->name!!}" data-state="{!!$aprove->state!!}" data-id="{!!$aprove->id!!}" class="openform">
-								Evaluar
-							</td>
+								<td>
+									<h4>{{$aprove->name}}</h4>
+									<img src="files/{{$aprove->imageRef}}" title="allbum-name" style="width: 220px; height: 220px;"/>
+								</td>
+								<td>
+									@foreach($users as $user)
+										@if ($aprove->usuario_id == $user->id)
+									         {{$user->name}}
+							            @endif
+							        @endforeach
+								</td>
+								<td>
+									{{$aprove->description}}
+								</td>
+								<td data-toggle="modal" data-target="#aproveModal" data-name="{!! $aprove->name!!}" data-state="{!!$aprove->state!!}" data-id="{!!$aprove->id!!}" class="openform">
+									<button type="button" class="btn btn-primary orangeButton">Evaluar</button>
+								</td>
 							</tr>
 						@endforeach
 					</tbody>
@@ -119,7 +109,7 @@
 							<th class="blackText">Nombre</th>
 							<th class="blackText">Subido Por</th>
 							<th class="blackText">Descripción</th>
-							<th class="blackText">Acción</th>
+							<th class="blackText" data-type="html">Acción</th>
 						</thead>
 						<tbody>
 							@foreach($observations as $observation)
@@ -139,7 +129,7 @@
 									{{$observation->description}}
 								</td>
 								<td data-toggle="modal" data-target="#aproveModal" data-name="{!! $observation->name!!}" data-state="{!!$observation->state!!}" data-id="{!!$observation->id!!}" class="openform">
-									Evaluar
+									<button type="button" class="btn btn-primary orangeButton">Evaluar</button>
 								</td>
 								</tr>
 							@endforeach
@@ -159,7 +149,7 @@
 							<th class="blackText">Nombre</th>
 							<th class="blackText">Subido Por</th>
 							<th class="blackText">Descripción</th>
-							<th class="blackText">Acción</th>
+							<th class="blackText" data-type="html">Acción</th>
 						</thead>
 						<tbody>
 							@foreach($reproves as $reprove)
@@ -179,7 +169,7 @@
 									{{$reprove->description}}
 								</td>
 								<td data-toggle="modal" data-target="#aproveModal" data-name="{!! $reprove->name!!}" data-state="{!!$reprove->state!!}" data-id="{!!$reprove->id!!}" class="openform">
-									Evaluar
+									<button type="button" class="btn btn-primary orangeButton">Evaluar</button>
 								</td>
 								</tr>
 							@endforeach
@@ -199,7 +189,7 @@
 							<th class="blackText">Nombre</th>
 							<th class="blackText">Subido Por</th>
 							<th class="blackText">Descripción</th>
-							<th class="blackText">Acción</th>
+							<th class="blackText" data-type="html">Acción</th>
 						</thead>
 						<tbody>
 							@foreach($waits as $wait)
@@ -219,7 +209,7 @@
 									{{$wait->description}}
 								</td>
 								<td data-toggle="modal" data-target="#aproveModal" data-name="{!! $wait->name!!}" data-state="{!!$wait->state!!}" data-id="{!!$wait->id!!}" class="openform">
-									Evaluar
+									<button type="button" class="btn btn-primary orangeButton">Evaluar</button>
 								</td>
 								</tr>
 							@endforeach
@@ -327,10 +317,6 @@
 			</script>
 			<script type="text/javascript">
 				var j = jQuery.noConflict();
-				/*jQuery(function(j){
-					j('.table').footable();
-				});*/
-
 				jQuery(function(j){
 					j('.table').footable({
 						"filtering": {

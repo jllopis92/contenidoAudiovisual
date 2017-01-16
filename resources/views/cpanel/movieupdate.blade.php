@@ -5,42 +5,150 @@
 		@if (count($movies) === 0)
 		<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Error: No se encuentran videos en el servidor</h3>
 		@elseif (count($movies) >= 1)
+		@if (Auth::user()->tipo == "alumno")
+			@foreach($movies as $movie)
+				@if ($movie->usuario_id == Auth::user()->id)
+					{{$movie->name}}
+				@endif
+			@endforeach
+		@endif
+
 		<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Editar Videos</h3>
-		<table class="table">
+		<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 			<thead>
 				<th>Nombre</th>
-				<th>Idioma</th>
-				<th>Categoria</th>
+				<th>Asignatura</th>
+				<th>Tipo</th>
+				<th>Genero</th>
 				<th>Formato de Rodaje</th>
-				<th>Estado</th>
+				<th data-type="html"> </th>
 			</thead>
-			@foreach($movies as $movie)
-			@if  (Auth::user()->tipo == "alumno")
-				@if ($movie->usuario_id == Auth::user()->id)
-					<tbody>
-						<td>{{$movie->name}}</td>
-						<td>{{$movie->language}}</td>
-						<td>{{$movie->category}}</td>
-						<td>{{$movie->shooting_format}}</td>
-						<td>{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary orangeButton'])!!}
-						</td>
-					</tbody>
+			<tbody>
+				@if (Auth::user()->tipo == "alumno")
+					@foreach($movies as $movie)
+						@if ($movie->usuario_id == Auth::user()->id)
+							<tr>
+								<td>{{$movie->name}}</td>
+								@foreach($subjects as $subject)
+									@if($subject->id == $movie->asignatura_id)
+										<td>{{$subject->name}}</td>
+									@endif
+								@endforeach
+								@foreach($types as $type)
+									@if($type->id == $movie->type_id)
+										<td>{{$type->name}}</td>
+									@endif
+								@endforeach
+								@foreach($genres as $genre)
+									@if($genre->id == $movie->genre_id)
+										<td>{{$genre->name}}</td>
+									@endif
+								@endforeach
+								@foreach($formats as $format)
+									@if($format->id == $movie->format_id)
+										<td>{{$format->name}}</td>
+									@endif
+								@endforeach
+								<td>{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary orangeButton'])!!}
+								</td>
+							</tr>
+						@endif
+					@endforeach
+				@elseif (Auth::user()->tipo == "profesor")
+					
+					@foreach($movies as $movie)
+						@foreach($subjects as $subject)
+							@if (($subject->profesor_id == Auth::user()->id) && ($subject->id == $movie->asignatura_id))
+								<tr>
+									<td>{{$movie->name}}</td>
+									<td>{{$subject->name}}</td>
+									@foreach($types as $type)
+										@if($type->id == $movie->type_id)
+											<td>{{$type->name}}</td>
+										@endif
+									@endforeach
+									@foreach($genres as $genre)
+										@if($genre->id == $movie->genre_id)
+											<td>{{$genre->name}}</td>
+										@endif
+									@endforeach
+									@foreach($formats as $format)
+										@if($format->id == $movie->format_id)
+											<td>{{$format->name}}</td>
+										@endif
+									@endforeach
+									<td>{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary orangeButton'])!!}
+									</td>
+								</tr>
+							@endif
+						@endforeach
+					@endforeach
+					
+				@else
+					@foreach($movies as $movie)
+						<tr>
+							<td>{{$movie->name}}</td>
+								@foreach($subjects as $subject)
+									@if($subject->id == $movie->asignatura_id)
+										<td>{{$subject->name}}</td>
+									@endif
+								@endforeach
+								@foreach($types as $type)
+									@if($type->id == $movie->type_id)
+										<td>{{$type->name}}</td>
+									@endif
+								@endforeach
+								@foreach($genres as $genre)
+									@if($genre->id == $movie->genre_id)
+										<td>{{$genre->name}}</td>
+									@endif
+								@endforeach
+								@foreach($formats as $format)
+									@if($format->id == $movie->format_id)
+										<td>{{$format->name}}</td>
+									@endif
+								@endforeach
+							<td >{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary orangeButton'])!!}
+							</td>
+						</tr>
+					@endforeach
 				@endif
-			@else
-				<tbody>
-					<td>{{$movie->name}}</td>
-					<td>{{$movie->language}}</td>
-					<td>{{$movie->category}}</td>
-					<td>{{$movie->shooting_format}}</td>
-					<td>{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $movie->id, $attributes = ['class'=>'btn btn-primary orangeButton'])!!}
-					</td>
-				</tbody>
-			@endif
-			@endforeach
+			</tbody>
 		</table>
-		{!!$movies->render()!!}
 		@endif
-		@endsection
+	@stop
+	@section('page-style-files')
+		<link href="/css/footable.bootstrap.css" rel="stylesheet">
+	@stop
+
+	@section('page-js-files')
+		<script src="/js/footable.min.js"></script>
+	@stop
+	@section('page-js-script')
+		<script type="text/javascript">
+			var j = jQuery.noConflict();
+			jQuery(function(j){
+				j('.table').footable({
+					"filtering": {
+						"enabled": true
+					}
+				});
+			});
+		</script>
+		{{-- <script type="text/javascript">
+			var j = jQuery.noConflict();
+			j(document).on("click", ".openform", function () {
+				var id = j(this).data('id');
+				var name = j(this).data('name');
+				j(".modal-body #id").val(id);
+				document.getElementById("movieTittle").innerHTML = "¿Esta seguro de eliminar la Asignatura " + name + "?";
+			});
+
+			j('#subjectModal').on('hidden.bs.modal', function () {
+				j("#state").empty();
+			})
+		</script> --}}
+	@stop
 	@else
 		<script type="text/javascript">
 			window.location = "/";//here double curly bracket
