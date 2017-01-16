@@ -1,7 +1,7 @@
 @extends('layouts.controlPanel')
 @section('content')
 	@if (!Auth::guest())
-		@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
+		@if (Auth::user()->tipo == "administrador")
 			<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Cambio de Privilegios</h3>
 			<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 				<thead>

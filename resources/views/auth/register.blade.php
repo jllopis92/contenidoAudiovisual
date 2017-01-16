@@ -300,7 +300,7 @@
             }
             function checkZone(){
                 var zone = j('#zone').val();
-                alert("in zone" + zone);
+                //alert("in zone" + zone);
                 if(zone == ""){
                     document.getElementById("zoneValidation").style.display = "inline";
                     document.getElementById("zoneValidation").innerHTML = 'Campo Obligatorio';
