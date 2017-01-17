@@ -14,7 +14,11 @@
 						@foreach($subjects as $subject)
 							<tr>
 								<td>{{$subject->name}}</td>
-								<td>{{$subject->profesor_id}}</td>
+								@foreach($users as $user)
+									@if($user->id == $subject->profesor_id)
+										<td>{{$user->name}}</td>
+									@endif
+								@endforeach
 								<td data-toggle="modal" data-target="#subjectModal" data-name="{!! $subject->name!!}" data-id="{!!$subject->id!!}" class="openform">
 									<button type="button" class="btn btn-primary orangeButton">Eliminar</button>
 								</td>

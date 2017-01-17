@@ -69,9 +69,10 @@ class CpanelController extends Controller
     public function showsubject()
     {
         //$subjects = Subject::where('valid', 1)->paginate(8);
+        $users = DB::table('users')->get();
         $subjects = DB::table('subjects')->where('valid', '=', 1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('cpanel.selectSubject',compact('subjects','notifications'));
+        return view ('cpanel.selectSubject',compact('users','subjects','notifications'));
     }
     public function showgenre()
     {
