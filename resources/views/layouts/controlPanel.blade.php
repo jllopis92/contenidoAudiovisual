@@ -125,12 +125,36 @@
                             @if($notification->send_to == Auth::user()->id)
                                 <li data-alert_id="1" class="alert_li dark_orange_back" style="background-color: #F0643C">
                                     @if($notification->reason == "create")
-                                     <a href="{{ action("CpanelController@approveMovieToNotif", array($notification->id)) }}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_id }} ha subido un nuevo video</a>
+                                     <a href="{{ action("CpanelController@approveMovieToNotif", array($notification->id)) }}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_name }} ha subido un nuevo video</a>
                                     @endif
                                     
                                     @if ($notification->reason == "modify")
+                                        <a href="{{ action("CpanelController@editfromnotif", array($notification->id)) }}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_name }}  ha modificado el video {{ $notification->movie_name }}</a>
+                                    @endif
 
-                                        <a href="{{ action("CpanelController@editfromnotif", array($notification->id)) }}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_id }}  ha modificado el video {{ $notification->movie_id }}</a>
+                                    @if($notification->reason == "reprove")
+
+                                     <a href="{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $notification->movie_id)!!}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_name }} ha subido un nuevo video</a>
+                                    @endif
+
+                                    @if($notification->reason == "aprove")
+                                     <a href="{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $notification->movie_id)!!}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_name }} ha subido un nuevo video</a>
+                                    @endif
+
+                                    @if($notification->reason == "observation")
+                                     <a href="{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $notification->movie_id)!!}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_name }} ha subido un nuevo video</a>
+                                    @endif
+
+                                    @if($notification->reason == "wait")
+                                     <a href="{!! link_to_route('upload.edit', $title = 'Editar', $parameters = $notification->movie_id)!!}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_name }} ha subido un nuevo video</a>
+                                    @endif
+
+                                    @if ($notification->reason == "alumno")
+                                        <a href="{!! url('selectrange')!!}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_name }}  ha solicitado cambiar su rango a Alumno</a>
+                                    @endif
+                                    
+                                    @if ($notification->reason == "profesor")
+                                        <a href="{!! url('selectrange')!!}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_name }}  ha solicitado cambiar su rango a Profesor</a>
                                     @endif
                                     <br />
                                     <div class="clearfix"></div>

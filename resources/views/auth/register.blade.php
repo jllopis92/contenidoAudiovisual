@@ -94,7 +94,7 @@
                             <label for="city" class="col-md-4 control-label">Ciudad</label>
 
                             <div class="col-md-6">
-                                <select name="city" class="form-control" size="1" disabled="disabled" onchange="print_citys( city_state,this)"></select>
+                                <select name="city" class="form-control" value="null" size="1" disabled="disabled" onchange="print_citys( city_state,this)"></select>
                             </div>
                             <div class="alert alert-danger col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" id="cityValidation" style="display: none;
                             margin-top: 10px;">
@@ -110,8 +110,34 @@
                             margin-top: 10px;">
                             </div>
                         </div>
-                        <div class="form-group" style="display: none;">
+                        <div class="form-group">
+                            <label for="isFromCine" class="col-md-4 control-label">¿Pertenece a la Escuela de Cine?</label>
 
+                            <div class="col-md-6" style="margin-top: 15px">
+                                <div class="col-xs-4">
+                                    <input name="isFromCine" id="isFromCine" value= 1 type='radio'> Sí
+                                </div>
+                                <div class="col-xs-4">
+                                    <input name="isFromCine" id="isFromCine" value= 0 checked="checked" type='radio'> No
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="selectRange" name="selectRange" class="form-group" style ="display: none;">
+                            <label for="userRol" class="col-md-4 control-label">Rol en Escuela de Cine</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="userRol" id="userRol">
+                                    <option value=" ">SELECCIONE ROL</option>
+                                    <option value="alumno">Alumno</option>
+                                    <option value="profesor">Profesor</option>
+                                </select>
+                            </div>
+                            <div class="alert alert-danger col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" id="rangeValidation" style="display: none; margin-top: 10px;">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display: none;">
                             <div class="col-md-6">
                                 <input id="tipo" type="text" class="form-control" name="tipo" value="externo">
                             </div>
@@ -176,6 +202,22 @@
             var validCountry = 0;
             var validRegion = 0;
             var validCity = 0;
+            var validRange = 1;
+
+            j(document).on("change","input[type=radio]",function(){
+                var isFromCine= j('[name="isFromCine"]:checked').val();
+                if(isFromCine == 1){
+                    document.getElementById("selectRange").style.display="inline";
+                    checkRange(isFromCine);
+                }
+                if(isFromCine == 0){
+                   document.getElementById("selectRange").style.display="none";
+                   checkRange(isFromCine);
+                }
+            });
+            j('#userRol').on('change',function(e){
+                checkRange();
+            });
             
             j('#name').on('input',function(e){
                 checkName();
@@ -210,12 +252,32 @@
             });
 */
             function checkForm() {
-                if(validName == 0 || validEmail == 0 || validPassword == 0 || validPasswordConfirm == 0){
-                    j(".sendButton").attr('class', 'btn btn-primary disabled sendButton');
+                if(validName == 0 || validEmail == 0 || validPassword == 0 || validPasswordConfirm == 0 || validRange == 0){
+                    j(".sendButton").attr('class', 'btn btn-primary disabled sendButton orangeButton');
                 }
-                if(validName == 1 && validEmail == 1 && validPassword == 1 && validPasswordConfirm == 1){
-                    j(".sendButton").attr('class', 'btn btn-primary active sendButton');
+                if(validName == 1 && validEmail == 1 && validPassword == 1 && validPasswordConfirm == 1 && validRange == 1){
+                    j(".sendButton").attr('class', 'btn btn-primary active sendButton orangeButton');
                 }               
+            }
+            function checkRange(){
+                var isFromCine= j('[name="isFromCine"]:checked').val();
+                var userRol = j('#userRol').val();
+                if((userRol == "alumno") || (userRol == "profesor")){
+                    document.getElementById("rangeValidation").style.display = "none";
+                    validRange = 1;
+                    checkForm();
+                }
+
+                if((isFromCine == 1) && (userRol == " ")){
+                    document.getElementById("rangeValidation").style.display = "inline";
+                    document.getElementById("rangeValidation").innerHTML = 'Debe Seleccionar un Rol';
+                    validRange = 0;
+                    checkForm();
+                }else{
+                    document.getElementById("rangeValidation").style.display = "none";
+                    validRange = 1;
+                    checkForm();
+                }
             }
             function checkName(){
                 var name = j('#name').val();

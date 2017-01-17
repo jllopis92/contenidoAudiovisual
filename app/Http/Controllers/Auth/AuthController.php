@@ -64,23 +64,23 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        
-        /*$userId = $user->id;
-
-        $users = User::all();
-        if ($users){
-            echo "en if";
-           foreach($users as $profesor){
-                echo "en for".$profesor->tipo;
-                if($profesor->tipo == "profesor"){
+        if($data['isFromCine'] == 1){
+            $users = User::all();
+           foreach($users as $administrador){
+                if($administrador->tipo == "administrador") {
                     $notif = Notification::create([
-                        'user_id' => $userId,
-                        'send_to' => $profesor->id,
+                        'user_name' => $data['name'],
+                        'send_to' => $administrador->id,
+                        'reason' => $data['userRol'],
                     ]);
                 }
            }
-        };*/
-       
+        }
+        $city = null;
+        if(! empty($data['city'])){
+            $city = $data['city'];
+        }
+        
         return $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -88,10 +88,9 @@ class AuthController extends Controller
             'zone' => $data['zone'],
             'country' => $data['country'],
             'region' => $data['city_state'],
-            'city' => $data['city'],
+            'city' => $city,
             'birthday' => $data['birthday'],
             'tipo' => $data['tipo'],
-            //'sector' => $data['sector'],
         ]);
     }
 }

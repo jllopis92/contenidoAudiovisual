@@ -113,15 +113,24 @@ class MovieController extends Controller
             'other3Content' => $request['other3Content'],
         ]);
         $movieId = $movie->id;
-
+        $movieName = $movie->name;
         $users = User::all();
+        $userName = "NULL";
+
+        foreach($users as $user){
+            if($user->id == $request['usuario_id']){
+                $userName = $user->name;
+            }
+        }
         if ($users){
            foreach($users as $user){
                 if($user->tipo == "profesor" || $user->tipo == "administrador"){
                     $notif = Notification::create([
                         'movie_id' => $movieId,
+                        'movie_name' => $movieName,
                         'send_to' => $user->id,
                         'user_id' => $request['usuario_id'],
+                        'user_name' => $userName,
                         'reason' => 'create',
                     ]);
                 }

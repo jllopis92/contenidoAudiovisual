@@ -145,10 +145,41 @@ class QueryController extends Controller
     public function search(Request $request){
         // Gets the query string from our form submission 
         $query = Request::input('search');
+        $genreId = 0;
+        $formatId = 0;
+        $subjectId = 0;
+        $typeId = 0;
 
+       
+        $subjects = Subject::where('valid', 1)->get();
+        $genres = Genre::where('valid', 1)->get();
+        $formats = Format::where('valid', 1)->get();
+        $types = Type::where('valid', 1)->get();
+
+        foreach ($types as $key => $type) {
+            if($type->name == $query){
+                $typeId = $type->id;
+            }
+        }
+        foreach ($genres as $key => $genre) {
+            if($genre->name == $genre){
+                $genreId = $genre->id;
+            }
+        }
+        foreach ($subjects as $key => $subject) {
+            if($subject->name == $query){
+                $subjectId = $subject->id;
+            }
+        }
+        foreach ($formats as $key => $format) {
+            if($format->name == $query){
+                $formatId = $format->id;
+            }
+        }
+        
         $movies = DB::table('movies')
         ->where('state', '=', 1)
-        ->where(function ($sql) use ($query){
+        ->where(function ($sql) use ($query, $genreId, $formatId, $subjectId, $typeId){
             $sql->where('name','like','%'.$query.'%')
             ->orWhere('name','like','%'.$query.'%')
             ->orWhere('language','like','%'.$query.'%')
@@ -160,7 +191,13 @@ class QueryController extends Controller
             ->orWhere('production','like','%'.$query.'%')
             ->orWhere('camara','like','%'.$query.'%')
             ->orWhere('art_direction','like','%'.$query.'%')
-            ->orWhere('actors','like','%'.$query.'%');
+            ->orWhere('actors','like','%'.$query.'%')
+
+            ->orWhere('type_id','like','%'.$typeId.'%')
+            ->orWhere('genre_id','like','%'.$genreId.'%')
+            ->orWhere('format_id','like','%'.$formatId.'%')
+            ->orWhere('asignatura_id','like','%'.$subjectId.'%')
+            ;
         })->orderBy('rating', 'desc')->take(8)->get();
 
       

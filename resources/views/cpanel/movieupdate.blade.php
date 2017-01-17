@@ -135,19 +135,6 @@
 				});
 			});
 		</script>
-		{{-- <script type="text/javascript">
-			var j = jQuery.noConflict();
-			j(document).on("click", ".openform", function () {
-				var id = j(this).data('id');
-				var name = j(this).data('name');
-				j(".modal-body #id").val(id);
-				document.getElementById("movieTittle").innerHTML = "¿Esta seguro de eliminar la Asignatura " + name + "?";
-			});
-
-			j('#subjectModal').on('hidden.bs.modal', function () {
-				j("#state").empty();
-			})
-		</script> --}}
 	@stop
 	@else
 		<script type="text/javascript">

@@ -20,7 +20,6 @@
 						@endforeach
 					</tbody>
 				</table>
-				{{-- {!!$genres->render()!!} --}}
 			</div>
 			<div class="modal fade" id="genreModal" role="dialog">
 			    <div class="modal-dialog" style="height: 20%; background-color: white;">
