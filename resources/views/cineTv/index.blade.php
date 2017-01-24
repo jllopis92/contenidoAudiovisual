@@ -1,4 +1,4 @@
-@extends('layouts.mainApp')
+
 
 @section('content')
 @if ($valid == 1)
@@ -8,13 +8,14 @@
 {{-- @foreach($movies as $movie)
 <p>{{$movie->url}} {{$movie->play_at}}</p>
 @endforeach --}}
-<h3 class="orangeAndBoldText">Cine TV</h3>
       {{-- <p>Diferencia de tiempo: {{$difTime}}</p> --}}
-       <video id="video" style="display:none; width:680px; height:320px;" autoplay>
+      <div class="col-xs-12">
+       <video id="video" style="display:none; width:100%; height:100%;" autoplay>
           <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" />
           Su navegador no soporta el tag video.
         </video>
         <div id="notNow" style="display:none">El siguiente video esta programado para: {{$moviesNow->play_at}}</div>
+        </div>
         {{-- <button onclick="getCurTime()" type="button">Get current time position</button>
         <button onclick="setCurTime()" type="button">Set time position to 5 seconds</button><br> --}}
         <p>A continuacion</p>

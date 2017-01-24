@@ -33,7 +33,7 @@
                 </div>       
             </div>
         </div><!-- bs-example-navbar-collapse-1 -->
-    <div class="col-xs-12 visible-xs">
+    {{-- <div class="col-xs-12 visible-xs">
         <div class="col-xs-9">
         {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search'])  !!}
             <div class="input-group" style="margin-top: 9px;">
@@ -52,15 +52,15 @@
                 <span class="icon-bar whiteBackground"></span>
             </button>
         </div>
-    </div>
-    <div class="collapse navbar-collapse col-xs-12 col-sm-7" id="app-navbar-collapse" style="float: right; background-color: #F0643C;">
+    </div> --}}
+    <div class="col-sm-7 hidden-xs" style="float: right; background-color: #F0643C;">
         <!-- Right Side Of Navbar -->
 
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" style="width: 100%;">
             <li class="col-xs-12 col-sm-5 hidden-xs" style="padding-right: 0px; padding-left: 0px; ">
                 {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search', 'class'=>'navbar-form navbar-search', 'style'=>'padding: 9px 15px 5px; color: #F0643C;'])  !!}
                 <div class="input-group">
-                    <input type="text" style="border-right-width: 0px;" class="form-control" name="search">
+                    <input type="text" style="border-right-width: 0px;" class="form-control" name="search"  placeholder="Nombre, Formato, Genero, Tipo">
                     <div class="input-group-btn">
                         <button class="btn btn-default orangeText" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
@@ -243,6 +243,19 @@
             </div>
         </div>
     @elseif (Auth::user()->tipo == "administrador")
+
+        <div class="submenu visible-xs">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"  style="background-color: #F0643C;">
+                    {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search', 'class'=>'navbar-form navbar-search', 'style'=>'padding: 9px 15px 5px; color: #F0643C;'])  !!}
+                    <div class="input-group" style="padding-left: 10px; padding-right: 10px;">
+                        <input type="text" style="border-right-width: 0px;" class="form-control" name="search"  placeholder="Nombre, Formato, Genero, Tipo">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default orangeText" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+            </div>
+        </div>
         <div class="submenu">
             <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"> 
                 <h5 class="submenu-title orangeAndBoldText">Mi Usuario</h5>
@@ -394,6 +407,11 @@
                 </div>
             </div>
         </div>
+        <div class="submenu visible-xs">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"> 
+                <a href="{{ url('/logout') }}" class="alert_message dark_orange_back" style="color: white;"><h5 class="submenu-title orangeAndBoldText">Cerrar Sesión</h5> </a>            
+            </div>
+        </div>
     @elseif (Auth::user()->tipo == "alumno")
         <div class="submenu">
             <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"> 
@@ -468,7 +486,7 @@
         
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
-    <div id="page-content-wrapper" class="contentAfterNavbar" style="padding-left: 20px;">
+    <div id="page-content-wrapper" class="contentAfterNavbar">
         @yield('content')
     </div>
         <!-- /#page-content-wrapper -->

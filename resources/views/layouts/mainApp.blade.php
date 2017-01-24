@@ -20,12 +20,12 @@
             <div class="row col-xs-12" style="padding-left: 0px;">
                 <div class="navbar-header fixed-brand">
                     <ul class="nav navbar-nav" style="margin-top: 0px;">
-                        <li class="col-xs-9" style="height: 64px; background-color: #ffffff; border-color: #e7e7e7; padding-left: 10px;">
+                        <li class="col-xs-7 col-sm-9" style="height: 64px; background-color: #ffffff; border-color: #e7e7e7; padding-left: 10px;">
                            <a class="navbar-brand" href="{{ url('/') }}" style="width: 161px; padding-top: 5px; padding-left: 0px;">
                             <img src="/images/home.png" alt="Escuela de Cine" style="max-width:180px; max-height:55px;">
                             </a>
                         </li>
-                        <li class="active col-xs-3" style="left: 20px; margin-top: 7px;" align="right">
+                        <li class="active col-sm-3 offset-xs-4 col-sm-3" style="left: 20px; margin-top: 7px;" align="right">
                             <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="    color: white;"></span>
                             </button>
@@ -69,10 +69,10 @@
                 {!! Form::close() !!}
             </li>
             <li class="col-xs-12 col-sm-2" style="padding-top: 8px; padding-left: 0px; padding-right: 0px;">
-                <a class="visible-xs" href="{{ url('/cine_tv') }}" role="button">
+                <a class="visible-xs" href="{{ url('/cine_tv') }}" target="_blank" role="button">
                     Programación
                 </a>
-                <a class="hidden-xs" href="{{ url('/cine_tv') }}" role="button" style="padding-top:10px;">
+                <a class="hidden-xs" href="{{ url('/cine_tv') }}" target="_blank" role="button" style="padding-top:10px;">
                 <img class="btn-nav orange_back" src="/img/tv_icon.png" alt="Cine TV" style="width:30px; height:30px;">
                 </a>
             </li>
@@ -193,9 +193,19 @@
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper" class="contentAfterNavbar" style="position: fixed; z-index: 100;">
-    {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
+    
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu" style="align-items: center; margin-top: 0px;">
             <div class="visible-xs" style="background-color: #F0643C;">
+                <li>
+                    {!! Form::open(['method'=>'GET','url' =>'search', 'role'=>'search', 'class'=>'navbar-form navbar-search', 'style'=>'padding: 9px 15px 5px; color: #F0643C;'])  !!}
+                    <div class="input-group">
+                        <input type="text" style="width: 110%; border-right-width: 0px;" class="form-control" name="search"  placeholder="Nombre, Formato, Genero, Tipo">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default orangeText" style="margin-bottom: 10px;" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </li>
                 <li>
                     <a href="{{ url('/cpanel') }}" class="alert_message dark_orange_back" style="color: white;">Panel de Control</a>
                 </li>
@@ -204,6 +214,7 @@
                     <div class="clearfix"></div>
                 </li>
             </div>
+            {!! Form::open(['method'=>'GET','url' =>'filter', 'role'=>'filter'])  !!}
             <li style="max-height: 30px;">
                 <a class="boldFont" style="color: #333;"> Busqueda por Filtro</a>
             </li>
@@ -235,9 +246,9 @@
             <button type="submit" class="btn btn-primary orangeButton" style="margin-left: 15px; margin-top: 10px;">
                 <i class="fa fa-btn fa-sign-in"></i> Buscar
             </button>
-            
+            {!! Form::close() !!}
         </ul>
-        {!! Form::close() !!}
+        
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
     <div id="page-content-wrapper" class="contentAfterNavbar">
