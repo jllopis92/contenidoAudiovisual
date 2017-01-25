@@ -39,6 +39,13 @@
                                 </div>
                             </div>
 
+                            {!! Recaptcha::render() !!}
+                            @if ($errors->has('recaptcha'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('recaptcha') }}</strong>
+                                    </span>
+                                    @endif
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <div class="checkbox">

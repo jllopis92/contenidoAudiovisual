@@ -143,8 +143,7 @@
                             </div>
                         </div>
 
-                        <div class="g-recaptcha" data-sitekey="6Le97hIUAAAAADGWHsGBAr3k4D5tN0Xm_xEHFvPD"></div>
-
+                        {!! Recaptcha::render() !!}
 
                         <div id="txtregion" style="display: none;"></div>
                         <div id="txtplacename" style="display: none;"></div>

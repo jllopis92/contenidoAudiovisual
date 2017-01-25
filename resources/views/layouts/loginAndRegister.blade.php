@@ -93,7 +93,6 @@
     <script src="/js/jquery-1.11.3.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
     @yield('page-js-files')
     @yield('page-js-script')
 

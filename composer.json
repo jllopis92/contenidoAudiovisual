@@ -11,7 +11,8 @@
         "php-ffmpeg/php-ffmpeg": "~0.5",
         "kartik-v/bootstrap-star-rating": "@dev",
         "intervention/image": "^2.3",
-        "flowjs/flow-php-server": "^1.0"
+        "flowjs/flow-php-server": "^1.0",
+        "greggilbert/recaptcha": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

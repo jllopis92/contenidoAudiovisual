@@ -105,6 +105,7 @@ class MovieController extends Controller
             'catering' => $request['catering'],
             'music' => $request['music'],
             'actors' => $request['actors'],
+            'cant_other' => $request['cant_other'],
             'other1Name' => $request['other1Name'],
             'other1Content' => $request['other1Content'],
             'other2Name' => $request['other2Name'],

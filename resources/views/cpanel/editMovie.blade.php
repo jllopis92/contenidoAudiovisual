@@ -248,19 +248,58 @@
                 </div>
                 <div class="col-xs-12">
                     <div class = "form-group col-sm-12 col-md-6">
-                    {!! Form::label('catering', 'Catering:') !!}
-                    {!! Form::text('catering', null, ['class'=> 'form-control']) !!}
-                    <div class="alert alert-danger col-xs-12" id="cateringValidation" style="display: none">
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class = "form-group">
-                        {!! Form::label('description', 'Descripcion *:') !!}
-                        {!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
-                        <div class="alert alert-danger col-xs-12" id="descriptionValidation" style="display: none">
+                        {!! Form::label('catering', 'Catering:') !!}
+                        {!! Form::text('catering', null, ['class'=> 'form-control']) !!}
+                        <div class="alert alert-danger col-xs-12" id="cateringValidation" style="display: none">
                         </div>
                     </div>
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('cant_other', 'Campos Agregados :') !!}
+                        <input id="cant_other" value="{!!$movie->cant_other!!}" type="number" min="0" max="3" class="form-control">
+                    </div>
                 </div>
+
+
+                <div id="other1" class="col-xs-12" style ="display: none;">
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other1Name', 'Campo:') !!}
+                        {!! Form::text('other1Name', null, ['class'=> 'form-control']) !!}
+                    </div>
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other1Content', 'Valor:') !!}
+                        {!! Form::text('other1Content', null, ['class'=> 'form-control']) !!}
+                    </div>
+                </div>
+                <div id="other2" class="col-xs-12" style ="display: none;">
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other2Name', 'Campo:') !!}
+                        {!! Form::text('other2Name', null, ['class'=> 'form-control']) !!}
+                    </div>
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other2Content', 'Valor:') !!}
+                        {!! Form::text('other2Content', null, ['class'=> 'form-control']) !!}
+                    </div>
+                </div>
+                <div id="other3" class="col-xs-12" style ="display: none;">
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other3Name', 'Campo:') !!}
+                        {!! Form::text('other3Name', null, ['class'=> 'form-control']) !!}
+                    </div>
+                    <div class = "form-group col-xs-12 col-md-6">
+                        {!! Form::label('other3Content', 'Valor:') !!}
+                        {!! Form::text('other3Content', null, ['class'=> 'form-control']) !!}
+                    </div>
+                </div>
+
+
+                    <div class="col-xs-12">
+                        <div class = "form-group">
+                            {!! Form::label('description', 'Descripcion *:') !!}
+                            {!! Form::textarea('description', null, ['class'=> 'form-control', 'required'=> '']) !!}
+                            <div class="alert alert-danger col-xs-12" id="descriptionValidation" style="display: none">
+                            </div>
+                        </div>
+                    </div>
                 <div class="col-xs-12">
                     <div class = "form-group">
                         {!! Form::label('actors', 'Actores *:') !!}

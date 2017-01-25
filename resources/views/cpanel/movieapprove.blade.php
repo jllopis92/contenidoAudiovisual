@@ -26,9 +26,9 @@
 			}
 		</script>
   
-		<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Evaluar Videos</h3>
+		<h3 class="orangeAndBoldText" style="margin-bottom: 30px; margin-left: 30px;"">Evaluar Videos</h3>
 		<label class=" col-md-12"> Selecione estado: </label>
-		<div class="radio col-md-12">
+		<div class="radio col-md-12" style="margin-left: 30px;"">
 			<label class="radio-inline col-xs-12 col-sm-3" style="
 			    margin-left: 0px;
 			    padding-right: 0px;
@@ -249,7 +249,7 @@
 	                                    <option value="">ESTADO</option>
 	                                </select>
 	                            </div>
-	                            <div class="alert alert-danger col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" id="zoneValidation" style="display: none;
+	                            <div class="alert alert-danger col-md-12 col-xs-12" id="stateValidation" style="display: none;
 	                            margin-top: 10px;">
 	                            </div>
 	                        </div>
@@ -257,7 +257,10 @@
 	                        <div class = "form-group col-md-12" id = "commentary">
 								{!! Form::label('observation', '¿Porque desea cambiar el estado del video?') !!}
 					    		{!! Form::textarea('observation', null, ['class'=> 'form-control', 'required'=> '']) !!}
-					    		{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary orangeButton', 'value' =>'validate']) !!}
+					    		<div class="alert alert-danger col-md-12 col-xs-12" id="commentaryValidation" style="display: none;
+	                            margin-top: 10px;">
+	                            </div>
+					    		{!! Form::submit('Enviar Comentario',['class' =>'btn btn-primary disabled sendButton orangeButton', 'value' =>'validate']) !!}
 				    		</div>
 			        	</div>
 			        	{!! Form::close() !!}
@@ -351,6 +354,62 @@
 					  	select.options[i] = null;
 					}*/
 				})
+			</script>
+			<script type="text/javascript">
+				var j = jQuery.noConflict();
+
+	            var validState = 0;
+	            var validObservation = 1;
+
+
+	            j('#observation').on('input',function(e){
+	                checkObservation();
+	            });
+	            j('#state').change(function() {
+	              checkState();
+	            });
+
+	            function checkObservation(){
+	                var observation = j('#observation').val();
+	                var BLIDRegExpression = /^[a-zA-Z0-9\ \Ñ\ñ\,\.\:\;\u00C0-\u017F\-\_\?\¿\!\(\)\[\]]+$/;
+	                if(observation.length == 0){
+	                    document.getElementById("commentaryValidation").style.display = "inline";
+	                    document.getElementById("commentaryValidation").innerHTML = 'Campo Obligatorio';
+	                    validObservation = 0;
+	                }else if (!BLIDRegExpression.test(observation)) {
+	                    document.getElementById("commentaryValidation").style.display = "inline";
+	                    document.getElementById("commentaryValidation").innerHTML = 'El Campo Contiene Caracteres Invalidos';
+	                    validObservation = 0;
+	                }else{
+	                    document.getElementById("commentaryValidation").style.display = "none";
+	                    validObservation = 1;
+	                }
+	                checkForm();
+	            }
+
+	            function checkState(){
+	                var state = j('#state').val();
+	                if(state == ""){
+	                    document.getElementById("stateValidation").style.display = "inline";
+	                    document.getElementById("stateValidation").innerHTML = 'Campo Obligatorio';
+	                    validState = 0;
+	                    checkForm();
+	                }else{
+	                    document.getElementById("stateValidation").style.display = "none";
+	                    validState = 1;
+	                    checkForm();
+	                }
+	                checkForm();
+	            }
+
+				function checkForm() {
+	                if(validState == 0 || validObservation == 0){
+	                    j(".sendButton").attr('class', 'btn btn-primary disabled sendButton orangeButton');
+	                }
+	                if(validState == 1 && validObservation == 1){
+	                    j(".sendButton").attr('class', 'btn btn-primary active sendButton orangeButton');
+	                }
+            	}
 			</script>
 		@stop
 	@else
