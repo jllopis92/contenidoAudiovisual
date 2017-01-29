@@ -103,15 +103,6 @@ class CpanelController extends Controller
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.showAdvertising',compact('advertisings','create','notifications'));
     }
-    public function showProgram()
-    {
-        //$advertisings = Advertising::where('state', 1)->paginate(8);
-        /*$advertisings = DB::table('advertising')->where('state', '=', 1)->get();
-        $create = 0;*/
-        //$notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('cpanel.showPrograming');
-        //return view ('cpanel.showPrograming',compact('notifications'));
-    }
     /**
      * Redirecciona a editar Video y marca la notificacion como vista.
      *

@@ -194,7 +194,7 @@ input:focus {
                 return false; // Don't submit form for this demo
             });
           });*/
-</script>
+      </script>
 <script type="text/javascript">
 		//Tiempo cero
 		var timeDuration = "00:00:00"
@@ -218,7 +218,7 @@ input:focus {
 		//True si la programacion es vacia
 		var firstTime = true;
 		//Agrega Titulos a tabla
-		programationTable.push(["Video", "Horario Inicio"]);
+		programationTable.push(["Nombre", "Inicio"]);
 
 		/**
 		* Función que checkea si la hora de inicio fue asignada (obligatorio)
@@ -312,7 +312,7 @@ input:focus {
 
 				var dateToEnd = new Date(year, month, day, hourEnd, minuteEnd, secondEnd);
 				//Json creado con datos recibidos
-				var addMovie = '{"id":"' + actualId + '","name":"' + actualName + '","url":"' + actualUrl + '" ,"duration":"'+ duration +'","start_date":"' + dateToPlay +'","end_date":"' + dateToEnd +'"}';
+				var addMovie = '{"id":"' + actualId + '","name":"' + actualName + '","url":"' + actualUrl + '" ,"duration":"'+ duration +'","play_at":"' + dateToPlay +'","end_at":"' + dateToEnd +'"}';
 				//Agrega nuevos datos a Json para envio
 				programation.push(addMovie);
 				//Reasigna el tiempo de inicio para el siguiente video
@@ -433,8 +433,8 @@ input:focus {
 				//alert("qwe");
 				var programToSend = '[' + programation + ']';
 				var json = JSON.parse(programToSend);
-				var inicio = json[0].start_date;
-				var fin = json[(json.length - 1)].end_date;
+				var inicio = json[0].play_at;
+				var fin = json[(json.length - 1)].end_at;
 
 				//alert("asdasd" + inicio + " " + fin);
 				/*for(var i = 0; i < programToSend.length; i++){
@@ -487,7 +487,7 @@ input:focus {
 		}
 	</script>
 <div class="row">
-	<div class="col-md-4 pre-scrollable">
+	<div class="col-md-8 pre-scrollable">
 		<H4 style="margin-top: 20px">Seleccione Videos a agregar</H4>
 
 		<div id="movies">
@@ -509,7 +509,7 @@ input:focus {
   		</div>
 
 	</div>
-	<div class="col-md-8 pre-scrollable">
+	<div class="col-md-4 pre-scrollable">
 		
 		<H3 id="end_tittle" style="margin-top: 0">Agregados</H3>
 		<div id="time" style="display: none"></div>
@@ -519,7 +519,7 @@ input:focus {
 		<div id="dvTable">
 		</div>
 
-		<H5 id="total_duration" style="margin-top: 0"></H3>
+		<H5 id="total_duration" style="margin-top: 0">Agregados</H3>
 
 	<div class="col-md-12">
 		<button type="button" class="btn btn-danger" onclick="cleanProgramming()">Limpiar Programación</button>

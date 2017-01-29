@@ -389,13 +389,9 @@
                     <li class="list-group-item" style="padding: 0px">
                         <a href="{!! url('createprogram')!!}" class="list-group-item"><i class='glyphicon glyphicon-time'></i>  Programar Parrilla</a>
                     </li>
-                    <li class="list-group-item" style="padding: 0px">
-                        <a href="{!! url('showProgram')!!}" class="list-group-item"><i class='glyphicon glyphicon-time'></i>  Ver Parrilla</a>
-                    </li>
-
                 </div>
             </div>
-        </div>{{-- 
+        </div>
         <div class="submenu">
             <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu10"> 
                 <h5 class="submenu-title orangeAndBoldText">Ver Estatisticas</h5> 
@@ -410,7 +406,7 @@
                     </li>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <div class="submenu visible-xs">
             <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"> 
                 <a href="{{ url('/logout') }}" class="alert_message dark_orange_back" style="color: white;"><h5 class="submenu-title orangeAndBoldText">Cerrar Sesión</h5> </a>            
