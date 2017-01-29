@@ -1,6 +1,6 @@
 /**
  * @license
- * Video.js 5.10.7 <http://videojs.com/>
+ * Video.js 5.10.8 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/master/LICENSE>
@@ -2012,8 +2012,9 @@ var has = Object.prototype.hasOwnProperty;
 var toStr = Object.prototype.toString;
 var slice = Array.prototype.slice;
 var isArgs = _dereq_('./isArguments');
-var hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString');
-var hasProtoEnumBug = function () {}.propertyIsEnumerable('prototype');
+var isEnumerable = Object.prototype.propertyIsEnumerable;
+var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
+var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
 var dontEnums = [
 	'toString',
 	'toLocaleString',
@@ -2027,12 +2028,23 @@ var equalsConstructorPrototype = function (o) {
 	var ctor = o.constructor;
 	return ctor && ctor.prototype === o;
 };
-var blacklistedKeys = {
+var excludedKeys = {
 	$console: true,
+	$external: true,
 	$frame: true,
 	$frameElement: true,
 	$frames: true,
+	$innerHeight: true,
+	$innerWidth: true,
+	$outerHeight: true,
+	$outerWidth: true,
+	$pageXOffset: true,
+	$pageYOffset: true,
 	$parent: true,
+	$scrollLeft: true,
+	$scrollTop: true,
+	$scrollX: true,
+	$scrollY: true,
 	$self: true,
 	$webkitIndexedDB: true,
 	$webkitStorageInfo: true,
@@ -2043,7 +2055,7 @@ var hasAutomationEqualityBug = (function () {
 	if (typeof window === 'undefined') { return false; }
 	for (var k in window) {
 		try {
-			if (!blacklistedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
+			if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
 				try {
 					equalsConstructorPrototype(window[k]);
 				} catch (e) {
@@ -21734,7 +21746,7 @@ setup.autoSetupTimeout(1, videojs);
  *
  * @type {String}
  */
-videojs.VERSION = '5.10.7';
+videojs.VERSION = '5.10.8';
 
 /**
  * The global options object. These are the settings that take effect

@@ -14,6 +14,7 @@
       renderer = null,
       AssButton = null,
       AssButtonInstance = null,
+      OverlayComponent = null,
       VjsButton = null;
 
     if (!options.src) {
@@ -21,7 +22,17 @@
     }
 
     overlay.className = 'vjs-ass';
-    player.el().insertBefore(overlay, player.el().firstChild.nextSibling);
+
+    OverlayComponent = {
+      name: function () {
+        return 'AssOverlay';
+      },
+      el: function () {
+        return overlay;
+      }
+    }
+
+    player.addChild(OverlayComponent);
 
     function getCurrentTime() {
       return player.currentTime() - delay;
@@ -44,7 +55,7 @@
     function updateClockRate() {
       clock.setRate(player.playbackRate() * clockRate);
     }
-    
+
     updateClockRate();
     player.on('ratechange', updateClockRate);
 
@@ -65,17 +76,15 @@
         renderer.resize(subsWrapperWidth, subsWrapperHeight, subsWrapperLeft, subsWrapperTop);
       }, 100);
     }
-    
-    if (player.fluid()) {
-      window.addEventListener('resize', updateDisplayArea);
-    }
 
+      window.addEventListener('resize', updateDisplayArea);
     player.on('loadedmetadata', updateDisplayArea);
     player.on('resize', updateDisplayArea);
     player.on('fullscreenchange', updateDisplayArea);
 
     player.on('dispose', function () {
       clock.disable();
+      window.removeEventListener('resize', updateDisplayArea);
     });
 
     libjass.ASS.fromUrl(options.src, libjass.Format.ASS).then(
@@ -102,12 +111,12 @@
         constructor: function (player, options) {
           options.name = options.name || 'assToggleButton';
           VjsButton.call(this, player, options);
-
-          this.addClass('vjs-ass-button');
-
-          this.on('click', this.onClick);
         },
-        onClick: function () {
+        buildCSSClass: function () {
+          var classes = VjsButton.prototype.buildCSSClass.call(this);
+          return 'vjs-ass-button ' + classes;
+        },
+        handleClick: function () {
           if (!this.hasClass('inactive')) {
             this.addClass('inactive');
             overlay.style.display = "none";
