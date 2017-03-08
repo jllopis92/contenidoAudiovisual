@@ -6,18 +6,24 @@ use Illuminate\Http\Request;
 use DB;
 use DateTimeZone;
 use Carbon\Carbon;
-use contenidoAudiovisual\Programation;
-use contenidoAudiovisual\MovieInProgram;
+use contenidoAudiovisual\Calendar;
+//use contenidoAudiovisual\MovieInProgram;
 use contenidoAudiovisual\Playlist;
 use contenidoAudiovisual\Notification;
+use contenidoAudiovisual\Subject;
+use contenidoAudiovisual\Genre;
+use contenidoAudiovisual\Format;
+use contenidoAudiovisual\Type;
 use contenidoAudiovisual\Http\Requests;
 
 class CineTvController extends Controller
 {
     public function index()
     {
+        //echo "entra a index";
         //$rightNow = Carbon::now();
         $rightNow = Carbon::now(new DateTimeZone('America/Santiago'));
+        //echo "hora: ".$rightNow;
         $difTime = 0;
         $playNow = 0;
         $valid = 0;
@@ -30,15 +36,48 @@ class CineTvController extends Controller
         //$formatted_date = $rightNow->toDateTimeString();
         //echo $formatted_date;
         //$formatted_time = $rightNow->format('H:i:s');
-        $programationsCount = Programation::where('end_at', '>=', $rightNow)->orderBy('play_at', 'asc')->get()->count();
+        $programationsCount = Calendar::where('end_at', '>=', $rightNow)->orderBy('start_at', 'asc')->get()->count();
          //echo "programations lenght".$programationsCount;
 
          //Si existe alguna programación
         if($programationsCount > 0){
+            //echo "hay program";
             $playNow = 1;
-            $programations = Programation::where('end_at', '>=', $rightNow)->orderBy('play_at', 'asc')->get();
-            $programationsNow = $programations->first();
-            $movies = MovieInProgram::where('end_at', '>=', $rightNow)->where('programation_id','=', $programationsNow->id)->orderBy('play_at', 'asc')->get();
+            $movies = Calendar::where('end_at', '>=', $rightNow)->orderBy('start_at', 'asc')->get();
+            //echo "movies".$movies;
+            //$programationsNow = $movies->first();
+            $moviesNow = $movies->first();
+            //echo "ahora: ".$moviesNow;
+            if($rightNow >= $moviesNow->start_at && $rightNow < $moviesNow->end_at){
+                $playTime = Carbon::parse($moviesNow->start_at);
+                $difTime = $rightNow->diffInSeconds($playTime);
+                $valid = 1;
+                //echo "ya empeso: ".$difTime;
+            //Si la programacion aun no empieza
+            }else if ($rightNow < $moviesNow->start_at){
+                $playNow = 0;
+                $playTime = Carbon::parse($moviesNow->start_at);
+                $difTime = $playTime->diffInSeconds($rightNow);
+                $valid = 1;
+                //echo "aun no: ".$difTime;
+            }
+        }else{
+            //echo "no hay program";
+            //Si no hay nada programado
+            $programationsNow = null;
+            $movies = null;
+            $moviesNow = null; 
+        }
+
+        $types = Type::where('valid', 1)->get();
+        $subjects = DB::table('subjects')->get();
+        $genres = DB::table('genres')->get();
+        $formats = DB::table('formats')->get();
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+
+        return view('cineTv.index',compact('movies','moviesNow','difTime','playNow','valid', 'rightNow','programationsCount','notifications','types','subjects','genres','formats'));
+            
+            /*$movies = MovieInProgram::where('end_at', '>=', $rightNow)->where('programation_id','=', $programationsNow->id)->orderBy('play_at', 'asc')->get();
             
             $moviesNow = $movies->first();
             //Si la programacion ya comenzo y aun se esta transmitiendo
@@ -52,16 +91,11 @@ class CineTvController extends Controller
                 $playTime = Carbon::parse($programationsNow->play_at);
                 $difTime = $playTime->diffInSeconds($rightNow);
                 $valid = 1;
-            }
-        //Si no hay nada programado
-        }else{
-            $programations = null;
-            $programationsNow = null;
-            $movies = null;
-            $moviesNow = null; 
-        }
+            }*/
+        
+        
 
-        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+       
 
         
         //$difTime = gmdate('H:i:s', $dif);
@@ -74,7 +108,7 @@ class CineTvController extends Controller
         $q->whereYear('created_at', '=', date('Y'));*/
     	//$playlists = Playlist::paginate(5);
     	//return view ('cineTv.index',compact('playlists'));
-        return view('cineTv.index',compact('programations','programationsNow','movies','moviesNow','difTime','playNow','valid', 'rightNow','programationsCount','notifications'));
+       
     }
     public function show($id)
     {

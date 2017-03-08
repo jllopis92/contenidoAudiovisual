@@ -1,5 +1,5 @@
 
-
+@extends('layouts.cinetv')
 @section('content')
 @if ($valid == 1)
   
@@ -14,11 +14,11 @@
           <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" />
           Su navegador no soporta el tag video.
         </video>
-        <div id="notNow" style="display:none">El siguiente video esta programado para: {{$moviesNow->play_at}}</div>
+        <div id="notNow" style="display:none">El siguiente video esta programado para: {{$moviesNow->startdate}}</div>
         </div>
         {{-- <button onclick="getCurTime()" type="button">Get current time position</button>
         <button onclick="setCurTime()" type="button">Set time position to 5 seconds</button><br> --}}
-        <p>A continuacion</p>
+        <p style="display:none">A continuacion</p>
         <p id="next"></p>
 
         <div id="time"></div>
@@ -35,7 +35,9 @@
             /*Si el video se esta reproduciendo, se adelanta al minuto correspondiente, si aun no empieza se envia aviso, en ambos casos se envian los videos posteriores a un arreglo js
             */
             if(time >= 0 && isPlaying == 1){
-                //alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$moviesNow->url}}");
+                //alert("empieza en: "+time);
+                alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$moviesNow->title}}");
+                //vid.play();
                 vid.currentTime = time;
                 @foreach($movies as $key=>$movie)
                   @if ($key >= 1)
@@ -43,6 +45,7 @@
                     moviesArr[{{$key}} - 1] = movieArr;
                   @endif
                 @endforeach
+                //alert("arreglo: "+movieArr);
                 vid.style.display="inline";
                 document.getElementById("next").innerHTML = moviesArr;
 
@@ -50,7 +53,7 @@
                 var dataTemp = [{ field1: name, field2: duration}];
                 dt.load(dataTemp, true);*/
               }else if (isPlaying == 0){
-                alert("Bienvenido a Programación Cine UV, la emision de {{$moviesNow->url}}  comienza a las {{$moviesNow->play_at}}");
+                //alert("Bienvenido a Programación Cine UV, la emision de {{$moviesNow->url}}  comienza a las {{$moviesNow->start_at}}");
                 pauseVid();
                 document.getElementById("notNow").style.display="inline";
                 @foreach($movies as $key=>$movie)

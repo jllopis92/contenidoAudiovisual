@@ -260,13 +260,14 @@
                 <div class="footer-bottom">
                     <div class="container" style="max-width: 100%;">
                         <div class="col-md-4">
-                            <p> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p>
+                            {{-- <p> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p> --}}
+                            <p> Pagina web desarrollada por la Escuela de Ingeniería Civil en Informática de la Universidad de Valparaíso</p>
                         </div>
                         <div class="col-md-4">
-                            <a href="#"> al medio </a>
+                           {{--  <a href="#"> al medio </a> --}}
                         </div>
                         <div class="col-md-4">
-                            <p>al final </p>
+                            {{-- <p>al final </p> --}}
                         </div>
                         {{-- <p class="pull-left"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p> --}}
                         {{-- <p class="pull-right"> Informacion mia </p> --}}
