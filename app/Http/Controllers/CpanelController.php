@@ -153,6 +153,26 @@ class CpanelController extends Controller
         return Redirect::to('approvemovie');
     }
 
+    /**
+     * Redirección a estadisticas de usuario
+     */
+    public function showUserStatistics()
+    {
+        $seenBy = DB::table('seenBy')->get();
+        $users = DB::table('users')->get();
+        $movies = DB::table('movies')->get();
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.showUserStatistics',compact('seenBy','users','movies','notifications'));
+    }
+
+     public function showVideoStatistics()
+    {
+        $seenBy = DB::table('seenBy')->get();
+        $users = DB::table('users')->get();
+        $movies = DB::table('movies')->get();
+        $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
+        return view ('cpanel.showVideoStatistics',compact('seenBy','users','movies','notifications'));
+    }
     
 
     /**
@@ -262,7 +282,7 @@ class CpanelController extends Controller
     {
         $movies = Movie::all();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('cpanel.createPrograming',compact('movies','notifications'));
+        return view ('cpanel.createPrograming2',compact('movies','notifications'));
     }
 
     

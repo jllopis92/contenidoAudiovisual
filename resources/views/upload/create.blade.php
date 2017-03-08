@@ -599,6 +599,8 @@
         var validCatering = 1;
         var validMusic = 1;
         var validActors = 0;
+
+        var cant_other = j('#cant_other').val();
             
         j('#name').on('input',function(e){
             checkName();
@@ -1088,6 +1090,9 @@
                 validCategory == 0 ||
                 validGenre == 0){
                 j(".sendButton").attr('class', 'btn btn-primary disabled sendButton orangeButton');
+                if(cant_other == null){
+                    cant_other = 0;
+                }
                 /*document.getElementById("sendValidation").style.display = "inline";
                 document.getElementById("sendValidation").innerHTML = "Se deben completar todos los campos marcados como obligatorios para enviar el formulario Pendientes: <br> "+" validName "+validName+" validDescription "+ validDescription+" validCreationDate "+validCreationDate+" validDirection "+validDirection+" validDirectionAsist "+validDirectionAsist+" validCasting "+validCasting+" validContinuista "+validContinuista+" validScript "+validScript+" validProduction "+validProduction+" validProductionAssistant "+validProductionAssistant+" validPhotograficDirection "+validPhotograficDirection+" validCamara "+validCamara+" validCamaraAsist "+validCamaraAsist+" validArt "+validArt+" validSonorousRegister "+validSonorousRegister+" validMounting "+validMounting+" validImagePostproduction "+validImagePostproduction+" validSoundPostproduction "+validSoundPostproduction+" validCatering "+validCatering+" validMusic "+validMusic+" validActors "+validActors+" validImageFile "+validImageFile+" validVideoFile "+validVideoFile+" validTrailerFile "+validTrailerFile+" validCategory "+validCategory+" validGenre "+validGenre;*/
             }

@@ -399,10 +399,10 @@
             <div class="submenu-body collapse" id="submenu10">
                 <div class="list-group">
                     <li class="list-group-item" style="padding: 0px">
-                        <a href="{!! url('createprogram')!!}" class="list-group-item"><i class='glyphicon glyphicon-user'></i>  Por Usuario</a>
+                        <a href="{!! url('showUserStatistics')!!}" class="list-group-item"><i class='glyphicon glyphicon-user'></i>  Por Usuario</a>
                     </li>
                     <li class="list-group-item" style="padding: 0px">
-                        <a href="{!! url('createprogram')!!}" class="list-group-item"><i class='glyphicon glyphicon-film'></i>  Por Video</a>
+                        <a href="{!! url('showVideoStatistics')!!}" class="list-group-item"><i class='glyphicon glyphicon-film'></i>  Por Video</a>
                     </li>
                 </div>
             </div>

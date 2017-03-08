@@ -1,14 +1,17 @@
 <?php
-$con = mysqli_connect('localhost','root','root','contenidoAudiovisual');
 
+/*buscar el nombre o id de la pelicula para asignar url*/
+
+$con = mysqli_connect('localhost','root','root','contenidoAudiovisual');
 
 $type = $_POST['type'];
 
 if($type == 'new')
 {
-	$startdate = $_POST['startdate'].'+'.$_POST['zone'];
+	$startdate = $_POST['startdate'];
+	$enddate = $_POST['enddate'];
 	$title = $_POST['title'];
-	$insert = mysqli_query($con,"INSERT INTO calendar(`title`, `startdate`, `enddate`, `allDay`) VALUES('$title','$startdate','$startdate','false')");
+	$insert = mysqli_query($con,"INSERT INTO calendar(`title`, `startdate`, `enddate`, `allDay`) VALUES('$title','$startdate','$enddate','false')");
 	$lastid = mysqli_insert_id($con);
 	echo json_encode(array('status'=>'success','eventid'=>$lastid));
 }

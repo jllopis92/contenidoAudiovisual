@@ -186,6 +186,7 @@
 			var j = jQuery.noConflict();
 			j(document).ready(function () {
 				j("#demo2 .stars").click(function () {
+					alert('Ranking');
 					j.post('../rating.php',{
 						rate:j(this).val(),
 						user:{!! Auth::user()->id !!},
@@ -206,7 +207,7 @@
 		@if(!Auth::guest())
 		var j = jQuery.noConflict();
 		j("#player").bind("ended", function() {
-	        //alert('Video ended!');
+	        alert('Video ended!');
 	        j.post('../visit.php',{
 					visits:1,
 					movie:{{$movie->id}},
