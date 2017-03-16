@@ -394,16 +394,16 @@
         </div>
         <div class="submenu">
             <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu10"> 
-                <h5 class="submenu-title orangeAndBoldText">Ver Estatisticas</h5> 
+                <h5 class="submenu-title orangeAndBoldText">Estadísticas</h5> 
             </div>
             <div class="submenu-body collapse" id="submenu10">
                 <div class="list-group">
                     <li class="list-group-item" style="padding: 0px">
-                        <a href="{!! url('showUserStatistics')!!}" class="list-group-item"><i class='glyphicon glyphicon-user'></i>  Por Usuario</a>
+                        <a href="{!! url('showStatistics')!!}" class="list-group-item"><i class='glyphicon glyphicon-user'></i> Ver Estadísticas</a>
                     </li>
-                    <li class="list-group-item" style="padding: 0px">
+                    {{-- <li class="list-group-item" style="padding: 0px">
                         <a href="{!! url('showVideoStatistics')!!}" class="list-group-item"><i class='glyphicon glyphicon-film'></i>  Por Video</a>
-                    </li>
+                    </li> --}}
                 </div>
             </div>
         </div>

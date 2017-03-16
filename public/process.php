@@ -6,18 +6,17 @@ $con = mysqli_connect('localhost','root','root','contenidoAudiovisual');
 
 $type = $_POST['type'];
 
-if($type == 'new')
-{
+if($type == 'new'){
 	$startdate = $_POST['startdate'];
 	$enddate = $_POST['enddate'];
 	$title = $_POST['title'];
-	$insert = mysqli_query($con,"INSERT INTO calendar(`title`, `startdate`, `enddate`, `allDay`) VALUES('$title','$startdate','$enddate','false')");
+	$url = $_POST['url'];
+	$insert = mysqli_query($con,"INSERT INTO calendar(`title`, `startdate`, `enddate`, `url`, `allDay`) VALUES('$title','$startdate','$enddate','$url','false')");
 	$lastid = mysqli_insert_id($con);
 	echo json_encode(array('status'=>'success','eventid'=>$lastid));
 }
 
-if($type == 'changetitle')
-{
+if($type == 'changetitle'){
 	$eventid = $_POST['eventid'];
 	$title = $_POST['title'];
 	$update = mysqli_query($con,"UPDATE calendar SET title='$title' where id='$eventid'");
@@ -27,8 +26,7 @@ if($type == 'changetitle')
 		echo json_encode(array('status'=>'failed'));
 }
 
-if($type == 'resetdate')
-{
+if($type == 'resetdate'){
 	$title = $_POST['title'];
 	$startdate = $_POST['start'];
 	$enddate = $_POST['end'];
@@ -40,8 +38,7 @@ if($type == 'resetdate')
 		echo json_encode(array('status'=>'failed'));
 }
 
-if($type == 'remove')
-{
+if($type == 'remove'){
 	$eventid = $_POST['eventid'];
 	$delete = mysqli_query($con,"DELETE FROM calendar where id='$eventid'");
 	if($delete)
@@ -50,22 +47,20 @@ if($type == 'remove')
 		echo json_encode(array('status'=>'failed'));
 }
 
-if($type == 'fetch')
-{
+if($type == 'fetch'){
 	$events = array();
 	$query = mysqli_query($con, "SELECT * FROM calendar");
-	while($fetch = mysqli_fetch_array($query,MYSQLI_ASSOC))
-	{
-	$e = array();
-    $e['id'] = $fetch['id'];
-    $e['title'] = $fetch['title'];
-    $e['start'] = $fetch['startdate'];
-    $e['end'] = $fetch['enddate'];
+	while($fetch = mysqli_fetch_array($query,MYSQLI_ASSOC)){
+		$e = array();
+		$e['id'] = $fetch['id'];
+		$e['title'] = $fetch['title'];
+		$e['start'] = $fetch['startdate'];
+		$e['end'] = $fetch['enddate'];
 
-    $allday = ($fetch['allDay'] == "true") ? true : false;
-    $e['allDay'] = $allday;
+		$allday = ($fetch['allDay'] == "true") ? true : false;
+		$e['allDay'] = $allday;
 
-    array_push($events, $e);
+		array_push($events, $e);
 	}
 	echo json_encode($events);
 }

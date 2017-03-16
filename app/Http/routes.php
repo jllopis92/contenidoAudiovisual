@@ -54,8 +54,9 @@
 	Route::resource('advertising','AdvertisingController');
 	Route::resource('programing','ProgramingController');
 
-	Route::get('showUserStatistics','CpanelController@showUserStatistics');
-	Route::get('showVideoStatistics','CpanelController@showVideoStatistics');
+	Route::get('showStatistics','CpanelController@showStatistics');
+	Route::resource('seenby','SeenbyController');
+	//Route::get('showVideoStatistics','CpanelController@showVideoStatistics');
 
 Route::group(['middleware' => 'web'], function () {
 	Route::auth();

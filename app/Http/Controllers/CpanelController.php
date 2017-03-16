@@ -156,13 +156,13 @@ class CpanelController extends Controller
     /**
      * Redirección a estadisticas de usuario
      */
-    public function showUserStatistics()
+    public function showStatistics()
     {
-        $seenBy = DB::table('seenBy')->get();
+        $seensBy = DB::table('seenBy')->get();
         $users = DB::table('users')->get();
         $movies = DB::table('movies')->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('cpanel.showUserStatistics',compact('seenBy','users','movies','notifications'));
+        return view ('cpanel.showStatistics',compact('seensBy','users','movies','notifications'));
     }
 
      public function showVideoStatistics()
