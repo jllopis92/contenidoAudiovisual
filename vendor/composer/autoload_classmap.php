@@ -1411,6 +1411,7 @@ return array(
     'League\\Flysystem\\FileNotFoundException' => $vendorDir . '/league/flysystem/src/FileNotFoundException.php',
     'League\\Flysystem\\Filesystem' => $vendorDir . '/league/flysystem/src/Filesystem.php',
     'League\\Flysystem\\FilesystemInterface' => $vendorDir . '/league/flysystem/src/FilesystemInterface.php',
+    'League\\Flysystem\\FilesystemNotFoundException' => $vendorDir . '/league/flysystem/src/FilesystemNotFoundException.php',
     'League\\Flysystem\\Handler' => $vendorDir . '/league/flysystem/src/Handler.php',
     'League\\Flysystem\\MountManager' => $vendorDir . '/league/flysystem/src/MountManager.php',
     'League\\Flysystem\\NotSupportedException' => $vendorDir . '/league/flysystem/src/NotSupportedException.php',

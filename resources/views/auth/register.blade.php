@@ -137,6 +137,33 @@
                             </div>
                         </div>
 
+                        <div id="selectYear" name="selectYear" class="form-group" style ="display: none;">
+                            <label for="year" class="col-md-4 control-label">Año de Ingreso a Escuela de Cine</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="year" id="year">
+                                    <option value=" ">SELECCIONE AÑO</option>
+                                    <option value="2009">2009</option>
+                                    <option value="2010">2010</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                </select>
+                            </div>
+                            <div class="alert alert-danger col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" id="yearValidation" style="display: none; margin-top: 10px;">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display: none;">
+                            <div class="col-md-6">
+                                <input id="tipo" type="text" class="form-control" name="tipo" value="externo">
+                            </div>
+                        </div>
+
                         <div class="form-group" style="display: none;">
                             <div class="col-md-6">
                                 <input id="tipo" type="text" class="form-control" name="tipo" value="externo">
@@ -148,7 +175,10 @@
                         <div id="txtregion" style="display: none;"></div>
                         <div id="txtplacename" style="display: none;"></div>
 
-                        <div class="form-group">
+                        <div class="orangeAndBoldText" id="information" style="display: none; margin-top: 10px;">
+                        </div>
+
+                        <div class="form-group" style="margin-top: 10px;">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" name="sendButton" class="btn btn-primary disabled sendButton orangeButton" value="validate">
                                     <i class="fa fa-btn fa-user"></i> Registrar
@@ -204,20 +234,29 @@
             var validRegion = 0;
             var validCity = 0;
             var validRange = 1;
+            var validYear = 1;
+            
 
             j(document).on("change","input[type=radio]",function(){
                 var isFromCine= j('[name="isFromCine"]:checked').val();
                 if(isFromCine == 1){
                     document.getElementById("selectRange").style.display="inline";
+                    document.getElementById("information").style.display = "inline";
+                    document.getElementById("information").innerHTML = 'La petición de ser aceptado como miembro de la escuela de cine debe ser aprobada por el administrador, por el momento usted podra navegar como usuario externo.';
                     checkRange(isFromCine);
                 }
                 if(isFromCine == 0){
-                   document.getElementById("selectRange").style.display="none";
-                   checkRange(isFromCine);
+                    document.getElementById("selectRange").style.display="none";
+                    document.getElementById("information").style.display = "none";
+                    checkRange(isFromCine);
                 }
             });
+
             j('#userRol').on('change',function(e){
                 checkRange();
+            });
+            j('#year').on('change',function(e){
+                checkYear();
             });
             
             j('#name').on('input',function(e){
@@ -253,12 +292,12 @@
             });
 */
             function checkForm() {
-                if(validName == 0 || validEmail == 0 || validPassword == 0 || validPasswordConfirm == 0 || validRange == 0){
+                if(validName == 0 || validEmail == 0 || validPassword == 0 || validPasswordConfirm == 0 || validRange == 0 || validYear == 0){
                     j(".sendButton").attr('class', 'btn btn-primary disabled sendButton orangeButton');
                 }
-                if(validName == 1 && validEmail == 1 && validPassword == 1 && validPasswordConfirm == 1 && validRange == 1){
+                if(validName == 1 && validEmail == 1 && validPassword == 1 && validPasswordConfirm == 1 && validRange == 1 && validYear == 1){
                     j(".sendButton").attr('class', 'btn btn-primary active sendButton orangeButton');
-                }               
+                }          
             }
             function checkRange(){
                 var isFromCine= j('[name="isFromCine"]:checked').val();
@@ -266,8 +305,17 @@
                 if((userRol == "alumno") || (userRol == "profesor")){
                     document.getElementById("rangeValidation").style.display = "none";
                     validRange = 1;
+                    checkForm();    
+                }
+                if(userRol == "alumno"){
+                    document.getElementById("selectYear").style.display = "inline";
+                    checkYear();
+                }else{
+                    document.getElementById("selectYear").style.display = "none";
+                    validYear = 1;
                     checkForm();
                 }
+
 
                 if((isFromCine == 1) && (userRol == " ")){
                     document.getElementById("rangeValidation").style.display = "inline";
@@ -277,6 +325,20 @@
                 }else{
                     document.getElementById("rangeValidation").style.display = "none";
                     validRange = 1;
+                    checkForm();
+                }
+            }
+            function checkYear(){
+                var year = j('#year').val();
+                //alert("in zone" + zone);
+                if(year == " "){
+                    document.getElementById("yearValidation").style.display = "inline";
+                    document.getElementById("yearValidation").innerHTML = 'Debe ingresar un año válido';
+                    validYear = 0;
+                    checkForm();
+                }else{
+                    document.getElementById("yearValidation").style.display = "none";
+                    validYear = 1;
                     checkForm();
                 }
             }

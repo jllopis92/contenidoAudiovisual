@@ -92,6 +92,7 @@ class AuthController extends Controller
             'city' => $city,
             'birthday' => $data['birthday'],
             'tipo' => $data['tipo'],
+            'year' => $data['year'],
         ]);
     }
 
