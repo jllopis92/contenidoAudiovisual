@@ -26,7 +26,7 @@
 				@elseif (count($movies) >= 1)
 
 				<h3 style="margin-bottom: 30px;">Seleccione Video para Anuncio</h3>
-				{!! Form::open(['id' => 'newAdvertising', 'route' =>'advertising.store', 'method'=>'POST', 'data-parsley-validate'=>'' ]) !!}
+				{!! Form::open(['id' => 'newAdvertising', 'route' =>'advertising.store', 'method'=>'POST' ]) !!}
 
 				<table class="table">
 					<thead>
@@ -56,7 +56,7 @@
 
 			<div id="personalizado" style="display: none;">
 				<div class="col-xs-12 col-md-6">
-					{!! Form::open(['id' => 'newAdvertising', 'route' =>'advertising.store', 'method'=>'POST', 'files'=> true, 'data-parsley-validate'=>'' ]) !!}
+					{!! Form::open(['id' => 'newAdvertising', 'route' =>'advertising.store', 'method'=>'POST', 'files'=> true ]) !!}
 						<div class = "form-group col-sm-12" style="display: none">
 			                {!! Form::label('id', 'Id * :') !!}
 			                {!! Form::text('id', 0 ) !!}
@@ -75,7 +75,7 @@
                     	</div>
                     	<div class = "form-group col-md-12">
 	                        {!! Form::label('link', 'Enlace (Opcional):') !!}
-	                        {!! Form::text('link', null, ['class'=> 'form-control', 'required'=> '']) !!}
+	                        {!! Form::text('link', null, ['class'=> 'form-control']) !!}
                     	</div>
                     	<div class = "form-group col-md-12">
 	                        <div class = "form-group">
