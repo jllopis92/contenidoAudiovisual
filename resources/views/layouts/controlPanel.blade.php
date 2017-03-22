@@ -234,10 +234,7 @@
             <div class="submenu-body collapse" id="submenu3">
                 <div class="list-group">
                     <li class="list-group-item" style="padding: 0px">
-                        <a href="{!! url('showadver')!!}" class="list-group-item"><i class='glyphicon glyphicon-list'></i>  Ver Anuncios</a>
-                    </li>
-                    <li class="list-group-item" style="padding: 0px">
-                        <a href="{!! url('createadver')!!}" class="list-group-item"><i class='glyphicon glyphicon-plus'></i>  Crear Anuncios</a>
+                        <a href="{!! url('showStatistics')!!}" class="list-group-item"><i class='glyphicon glyphicon-user'></i> Ver Estadísticas</a>
                     </li>
                 </div>
             </div>

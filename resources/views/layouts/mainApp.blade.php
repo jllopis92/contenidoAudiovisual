@@ -69,7 +69,7 @@
                 {!! Form::close() !!}
             </li>
             <li class="col-xs-12 col-sm-2" style="padding-top: 8px; padding-left: 0px; padding-right: 0px;">
-                <a class="visible-xs" href="{{ url('/cine_tv') }}" target="_blank" role="button">
+                <a class="visible-xs" href="{{ action("CineTvController@index") }}" target="_blank" role="button">
                     Programación
                 </a>
                 <a class="hidden-xs" href="{{ url('/cine_tv') }}" target="_blank" role="button" style="padding-top:10px;">
