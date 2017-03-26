@@ -12,7 +12,8 @@
         "kartik-v/bootstrap-star-rating": "@dev",
         "intervention/image": "^2.3",
         "flowjs/flow-php-server": "^1.0",
-        "greggilbert/recaptcha": "dev-master"
+        "greggilbert/recaptcha": "dev-master",
+        "laracasts/utilities": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

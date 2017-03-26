@@ -2,7 +2,7 @@
 @section('content')
 	@if (!Auth::guest())
 		@if (Auth::user()->tipo == "administrador")
-			<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Cambio de Privilegios</h3>
+			<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;">Cambio de Privilegios</h3>
 			<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 				<thead>
 					<th data-type="html">Nombre</th>

@@ -259,16 +259,17 @@
             <footer>
                 <div class="footer-bottom">
                     <div class="container" style="max-width: 100%;">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             {{-- <p> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p> --}}
-                            <p> Pagina web desarrollada por la Escuela de Ingeniería Civil en Informática de la Universidad de Valparaíso</p>
+                            <p> Pagina web desarrollada por la <a style="font-size: 14px; color: #333;" href="http://www.uv.cl/" target="_blank">Universidad de Valparaíso</a> en la <a style="font-size: 14px; color: #333;" href="http://informatica.uv.cl/" target="_blank">Carrera de Ingeniería Civil en Informática</a> en colaboración con la <a style="font-size: 14px; color: #333;" href="http://www.escueladecineuv.cl/" target="_blank">Carrera de Cine</a>. Para mas información sobre este sitio web, se recomienda leer el 
+                            <a style="font-size: 14px; color: #333;" href="manual_usuario.pdf" download>manual de usuario</a>.</p>
                         </div>
-                        <div class="col-md-4">
-                           {{--  <a href="#"> al medio </a> --}}
-                        </div>
-                        <div class="col-md-4">
-                            {{-- <p>al final </p> --}}
-                        </div>
+                        {{-- <div class="col-md-4">
+                            <a href="#"> al medio </a>
+                        </div> --}}
+                        {{-- <div class="col-md-4">
+                            <p>al final </p>
+                        </div> --}}
                         {{-- <p class="pull-left"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p> --}}
                         {{-- <p class="pull-right"> Informacion mia </p> --}}
                             {{-- 

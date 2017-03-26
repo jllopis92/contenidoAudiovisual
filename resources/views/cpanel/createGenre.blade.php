@@ -3,7 +3,7 @@
 		@extends('layouts.controlPanel')
 		@section('content')
 			<div class="col-md-6">
-				<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Crear Genero</h3>
+				<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;">Crear Genero</h3>
 				{!! Form::open(['id' => 'newGenre', 'route' =>'genre.store', 'method'=>'POST']) !!}
 					{!! Form::label('name', 'Nombre * :') !!}
 			        {!! Form::text('name', null, ['class'=> 'form-control', 'required'=> '']) !!}

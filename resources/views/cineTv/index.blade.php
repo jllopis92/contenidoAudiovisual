@@ -3,23 +3,21 @@
 @section('content')
 
 
+
+
 @if ($valid == 1)
   
+
 
 <script src="{!!url('/js/jquery.min.js')!!}"></script>
 {{-- @foreach($movies as $movie)
 <p>{{$movie->url}} {{$movie->play_at}}</p>
 @endforeach --}}
       {{-- <p>Diferencia de tiempo: {{$difTime}}</p> --}}
-      <script type="text/javascript">
-        function restart1() 
-        { var video1 = document.getElementById("video");
-         video1.currentTime = 100; 
-        } 
-      </script>
+      <button onclick="changehour()"> cambiar</button>
       <div class="col-xs-12">
-       <video id="video" style="display:none; width:100%; height:100%;" autoplay>
-          <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" />
+       <video id="video" style="display:none; width:100%; height:100%;" controls>
+         <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" />
           Su navegador no soporta el tag video.
         </video>
         <div id="notNow" style="display:none">El siguiente video esta programado para: {{$moviesNow->startdate}}</div>
@@ -32,12 +30,21 @@
         <div id="time"></div>
 
         <script>
+          console.log("url: "+url); // bar
+          console.log("difTime: "+difTime); // 29
+
           var vid = document.getElementById("video");
           var time = {{$difTime}};
           var isPlaying = {{$playNow}};
           var moviesArr = [];
 
-         
+          
+            
+
+          //vid.currentTime = difTime;
+
+          
+          
   
           /*document.getElementById('video').addEventListener('loadedmetadata', function() {
           this.currentTime = time;
@@ -48,11 +55,38 @@
           //alert("empieza en: "+time);
           //alert("cantidad:{{$programationsCount}} hora:{{$rightNow}} tiempo: {{$difTime}} isplay: {{$playNow}}")
           j(document).ready(function() {
+            /*j("#video").on(
+              "timeupdate", 
+              function(event){
+                alert("cambio de hora");
+                vid.currentTime = difTime;
+              });*/
             //alert(time);
             /*Si el video se esta reproduciendo, se adelanta al minuto correspondiente, si aun no empieza se envia aviso, en ambos casos se envian los videos posteriores a un arreglo js
             */
-            if(time >= 0 && isPlaying == 1){
-                
+            if(difTime >= 0 && isPlaying == 1){
+              console.log("en if");
+              var vid = document.getElementById("video");
+              //var source = document.createElement('source');
+              var isChrome = !!window.chrome; 
+              var isIE = /*@cc_on!@*/false;
+              if( isChrome ) {
+               alert("is chrome");
+              }
+              if( isIE ) {
+               alert("is isIE");
+              }
+              //source.setAttribute('src', '/files/convert/videos/'+url);
+              //vid.appendChild(source);
+              vid.currentTime = difTime;
+              vid.load();
+              vid.play();
+              
+              console.log("asignado en ", difTime);
+               /* vid.addEventListener('loadedmetadata', function() {
+                  document.getElementById("video").currentTime = difTime;
+                  alert("change hour");
+                });*/
                 //alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$moviesNow->title}}");
                 //vid.play();
                 
@@ -65,8 +99,8 @@
                 @endforeach
                 //alert("arreglo: "+movieArr);
                 vid.style.display="inline";
-                //vid.currentTime = time;
-                setCurTime();
+                
+                //setCurTime();
                 //getCurTime();
 
                 document.getElementById("next").innerHTML = moviesArr;
@@ -95,6 +129,7 @@
             vid.onended = function() {
               loadVideo();
             };
+            
             function loadVideo(){
               if(actual < count){
                 vid.src = moviesArr[actual];
@@ -119,9 +154,22 @@
               //alert(time);
               //alert(vid.currentTime);
             } 
-            function setCurTime() { 
-              vid.currentTime = time;
-              alert("asignado en "+time);
+            function changehour() {
+              var vid = document.getElementById("video");
+              console.log(vid.currentTime);
+              vid.currentTime = 1000;
+              //vid.load();
+              vid.play();
+            } 
+            function setCurTime() {
+              /*var vid = document.getElementById("video");
+              var source = document.createElement('source');
+              source.setAttribute('src', '/files/convert/videos/'+url);
+              vid.appendChild(source);
+              
+              vid.play();
+              vid.currentTime = difTime;
+              console.log("asignado en ", difTime);*/
             };
             function checkTime(i) {
               if (i < 10) {

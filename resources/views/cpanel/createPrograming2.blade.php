@@ -11,8 +11,8 @@
 			}
 
 			#trash{
-				width:32px;
-				height:32px;
+				width:50px;
+				height:50px;
 				float:left;
 				padding-bottom: 15px;
 				position: relative;
@@ -24,11 +24,12 @@
 				
 			#external-events {
 				float: left;
-				width: 150px;
 				padding: 0 10px;
 				border: 1px solid #ccc;
 				background: #eee;
 				text-align: left;
+				margin-top: 10px;
+    			margin-bottom: 10px;
 			}
 				
 			#external-events h4 {
@@ -36,10 +37,22 @@
 				margin-top: 0;
 				padding-top: 1em;
 			}
+			
+			.fc h2 {
+			   font-size: 15px;
+			}
+			.btn-primary{
+				background-color: #F0643C !important;
+				border-color:  #F0643C !important;
+			}
 				
 			#external-events .fc-event {
 				margin: 10px 0;
 				cursor: pointer;
+			}
+			.fc-event{
+				background-color: #F0643C !important;
+				border: 1px solid #F0643C !important;
 			}
 				
 			#external-events p {
@@ -55,6 +68,8 @@
 
 		</style>
 
+			<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;">Programación de Parrilla Programática</h3>
+
 			<div id='wrap' class="col-md-12" style=" padding-top: 20px;">
 
 			{{--
@@ -62,7 +77,7 @@
 			modificar header
 			traducir --}}
 
-				<div id='external-events' class="col-xs-12 col-md-4">
+				<div id='external-events' class="col-xs-12 col-sm-12 col-md-3">
 					
 					<table class="table" data-filtering="true">
 						<thead>
@@ -84,7 +99,7 @@
 					</p>
 				</div>
 
-				<div id='calendar' class="col-xs-12 col-md-8"></div>
+				<div id='calendar' class="col-xs-12 col-sm-12 col-md-9"></div>
 
 				<div style='clear:both'></div>
 
@@ -95,16 +110,17 @@
 		@stop
 		@section('page-style-files')
 			<link href="/css/footable.bootstrap.css" rel="stylesheet">
-			<link href='/fullcalendar/css/fullcalendar.css' rel='stylesheet' />
-			<link href='/fullcalendar/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+			<link href='/fullcalendar/fullcalendar.css' rel='stylesheet' />
+			<link href='/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
 	    @stop
 	    @section('page-js-files')
 	    	
 
-	        <script src='/fullcalendar/js/moment.min.js'></script>
-			<script src='/fullcalendar/js/jquery.min.js'></script>
-			<script src='/fullcalendar/js/jquery-ui.min.js'></script>
-			<script src='/fullcalendar/js/fullcalendar.min.js'></script>
+	        <script src='/fullcalendar/lib/moment.min.js'></script>
+			<script src='/fullcalendar/lib/jquery.min.js'></script>
+			<script src='/fullcalendar/lib/jquery-ui.min.js'></script>
+			<script src='/fullcalendar/fullcalendar.min.js'></script>
+			<script src='/fullcalendar/locale/es.js'></script>
 			<script src="/js/footable.min.js"></script>
 	    @stop
 
@@ -175,17 +191,19 @@
 
 					});
 
-
+					//titleFormat: '[Programar Parrilla]',
 					/* initialize the calendar
 					-----------------------------------------------------------------*/
 
 					$('#calendar').fullCalendar({
 						events: JSON.parse(json_events),
-						//events: [{"id":"14","title":"New Event","start":"2015-01-24T16:00:00+04:00","allDay":false}],
 						utc: true,
 						header: {
-							center: 'title'
+							left: 'prev,next today',
+							center: 'title',
+							right: ''
 						},
+						
 						lang: 'es',
 						editable: true,
 						droppable: true, // this allows things to be dropped onto the calendar
@@ -237,7 +255,7 @@
 								},
 								error: function(e){		    			
 									revertFunc();
-									alert('Error processing your request: '+e.responseText);
+									alert('Error al procesar la petición: '+e.responseText);
 								}
 							});
 					    },
@@ -265,9 +283,9 @@
 								}
 							});
 					    },
+					   
 						eventDragStop: function (event, jsEvent, ui, view) {
-						    if (isElemOverDiv()) {
-						    	var con = confirm('Are you sure to delete this event permanently?');
+						    	var con = confirm('¿Esta seguro de eliminar este video de la programación?');
 						    	if(con == true) {
 									$.ajax({
 							    		url: 'process.php',
@@ -286,7 +304,8 @@
 							    		}
 						    		});
 								}   
-							}
+							
+
 						}
 					});
 

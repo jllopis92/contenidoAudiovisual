@@ -3,7 +3,7 @@
 		@extends('layouts.controlPanel')
 		@section('content')
 			<div id = "aprove" class="col-md-10 col-offset-1">
-					<h4 style="margin-top: 30px;">Videos Con Reproducciones</h4>
+					<h3 style="margin-bottom: 30px; padding-left: 15px;">Videos Con Reproducciones</h3>
 					<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 						<thead>
 							<th class="blackText" data-type="html">Nombre</th>

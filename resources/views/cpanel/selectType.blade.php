@@ -2,7 +2,7 @@
 @section('content')
 	@if (!Auth::guest())
 		@if (Auth::user()->tipo == "administrador")
-			<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Administrar Tipos de Video</h3>
+			<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;">Administrar Tipos de Video</h3>
 			<div class="col-md-10">
 				<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 					<thead>

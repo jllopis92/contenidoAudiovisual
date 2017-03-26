@@ -11,7 +11,7 @@
     background-color: #f8f8f8;
     border-color: #e7e7e7;">
 			{!!Form::model($user,['route'=>['user.update',$user->id],'method'=>'PUT'])!!}
-				<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Editar Perfil</h3>
+				<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;">Editar Perfil</h3>
                 <div class="col-xs-12">
     				<div class="form-group col-xs-12 col-md-6">
                         {!!Form::label('name','Nombre:')!!}

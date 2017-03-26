@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8d733c68427b82cf0c72e77d4cd09180
+class ComposerStaticInit9f8251f0a6b4b48789187a5384d5ab54
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -72,6 +72,7 @@ class ComposerStaticInit8d733c68427b82cf0c72e77d4cd09180
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
+            'Laracasts\\Utilities\\JavaScript\\' => 31,
         ),
         'I' => 
         array (
@@ -216,6 +217,10 @@ class ComposerStaticInit8d733c68427b82cf0c72e77d4cd09180
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
+        ),
+        'Laracasts\\Utilities\\JavaScript\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laracasts/utilities/src',
         ),
         'Intervention\\Image\\' => 
         array (
@@ -1718,6 +1723,11 @@ class ComposerStaticInit8d733c68427b82cf0c72e77d4cd09180
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+        'Laracasts\\Utilities\\JavaScript\\JavaScriptFacade' => __DIR__ . '/..' . '/laracasts/utilities/src/JavaScriptFacade.php',
+        'Laracasts\\Utilities\\JavaScript\\JavaScriptServiceProvider' => __DIR__ . '/..' . '/laracasts/utilities/src/JavaScriptServiceProvider.php',
+        'Laracasts\\Utilities\\JavaScript\\LaravelViewBinder' => __DIR__ . '/..' . '/laracasts/utilities/src/LaravelViewBinder.php',
+        'Laracasts\\Utilities\\JavaScript\\PHPToJavaScriptTransformer' => __DIR__ . '/..' . '/laracasts/utilities/src/PHPToJavaScriptTransformer.php',
+        'Laracasts\\Utilities\\JavaScript\\ViewBinder' => __DIR__ . '/..' . '/laracasts/utilities/src/ViewBinder.php',
         'League\\Flysystem\\AdapterInterface' => __DIR__ . '/..' . '/league/flysystem/src/AdapterInterface.php',
         'League\\Flysystem\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractAdapter.php',
         'League\\Flysystem\\Adapter\\AbstractFtpAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractFtpAdapter.php',
@@ -3405,10 +3415,10 @@ class ComposerStaticInit8d733c68427b82cf0c72e77d4cd09180
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8d733c68427b82cf0c72e77d4cd09180::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8d733c68427b82cf0c72e77d4cd09180::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit8d733c68427b82cf0c72e77d4cd09180::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit8d733c68427b82cf0c72e77d4cd09180::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9f8251f0a6b4b48789187a5384d5ab54::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9f8251f0a6b4b48789187a5384d5ab54::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9f8251f0a6b4b48789187a5384d5ab54::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit9f8251f0a6b4b48789187a5384d5ab54::$classMap;
 
         }, null, ClassLoader::class);
     }

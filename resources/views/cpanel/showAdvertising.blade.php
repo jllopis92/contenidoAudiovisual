@@ -3,7 +3,7 @@
 		@extends('layouts.controlPanel')
 		@section('content')
 			
-			<h3 style="margin-bottom: 30px;">Ver Anuncios</h3>
+			<h3 style="margin-bottom: 30px; padding-left: 15px;">Ver Anuncios</h3>
 			<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 				<thead>
 					<th>Imagen Referencial</th>

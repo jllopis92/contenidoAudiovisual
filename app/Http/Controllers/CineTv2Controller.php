@@ -3,10 +3,12 @@
 namespace contenidoAudiovisual\Http\Controllers;
 
 use Illuminate\Http\Request;
+use JavaScript;
 use DB;
 use DateTimeZone;
 use Carbon\Carbon;
 use contenidoAudiovisual\Calendar;
+use contenidoAudiovisual\User;
 //use contenidoAudiovisual\MovieInProgram;
 use contenidoAudiovisual\Playlist;
 use contenidoAudiovisual\Notification;
@@ -68,6 +70,10 @@ class CineTvController extends Controller
                 $valid = 1;
                 //echo "aun no: ".$difTime;
             }
+            JavaScript::put([
+                'url' => $moviesNow->url,
+                'difTime' => $difTime
+            ]);
         }else{
             //echo "no hay program";
             //Si no hay nada programado
@@ -75,6 +81,8 @@ class CineTvController extends Controller
             $movies = null;
             $moviesNow = null; 
         }
+
+         
 
         $types = Type::where('valid', 1)->get();
         $subjects = DB::table('subjects')->get();

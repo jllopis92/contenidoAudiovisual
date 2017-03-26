@@ -3,7 +3,7 @@
 		@extends('layouts.controlPanel')
 		@section('content')
 			{!!Form::model($user,['route'=>['cpanel.update',$user->id],'method'=>'PUT'])!!}
-				<h3 class="orangeAndBoldText" style="margin-bottom: 30px;">Cambiar Contraseña</h3>
+				<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;">Cambiar Contraseña</h3>
 				{{ csrf_field() }}
 				<div class="form-group col-md-12">
 			

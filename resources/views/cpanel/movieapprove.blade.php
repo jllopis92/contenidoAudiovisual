@@ -26,7 +26,7 @@
 			}
 		</script>
   
-		<h3 class="orangeAndBoldText" style="margin-bottom: 30px; margin-left: 30px;"">Evaluar Videos</h3>
+		<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;"">Evaluar Videos</h3>
 		<label class=" col-md-12"> Selecione estado: </label>
 		<div class="radio col-md-12" style="margin-left: 30px;"">
 			<label class="radio-inline col-xs-12 col-sm-3" style="
