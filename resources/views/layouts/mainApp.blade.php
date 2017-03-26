@@ -72,7 +72,7 @@
                 <a class="visible-xs" href="{{ action("CineTvController@index") }}" target="_blank" role="button">
                     Programación
                 </a>
-                <a class="hidden-xs" href="{{ url('/cine_tv') }}" target="_blank" role="button" style="padding-top:10px;">
+                <a class="hidden-xs" href="{{ action("CineTvController@index") }}" target="_blank" role="button" style="padding-top:10px;">
                 <img class="btn-nav orange_back" src="/img/tv_icon.png" alt="Cine TV" style="width:30px; height:30px;">
                 </a>
             </li>

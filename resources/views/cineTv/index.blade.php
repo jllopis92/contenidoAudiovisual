@@ -1,6 +1,8 @@
 
 @extends('layouts.cinetv')
 @section('content')
+
+
 @if ($valid == 1)
   
 
@@ -9,6 +11,12 @@
 <p>{{$movie->url}} {{$movie->play_at}}</p>
 @endforeach --}}
       {{-- <p>Diferencia de tiempo: {{$difTime}}</p> --}}
+      <script type="text/javascript">
+        function restart1() 
+        { var video1 = document.getElementById("video");
+         video1.currentTime = 100; 
+        } 
+      </script>
       <div class="col-xs-12">
        <video id="video" style="display:none; width:100%; height:100%;" autoplay>
           <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" />
@@ -28,17 +36,27 @@
           var time = {{$difTime}};
           var isPlaying = {{$playNow}};
           var moviesArr = [];
+
+         
+  
+          /*document.getElementById('video').addEventListener('loadedmetadata', function() {
+          this.currentTime = time;
+        }, false);*/
+
+          //document.getElementById("video").currentTime = time;
           var j = jQuery.noConflict();
+          //alert("empieza en: "+time);
           //alert("cantidad:{{$programationsCount}} hora:{{$rightNow}} tiempo: {{$difTime}} isplay: {{$playNow}}")
           j(document).ready(function() {
             //alert(time);
             /*Si el video se esta reproduciendo, se adelanta al minuto correspondiente, si aun no empieza se envia aviso, en ambos casos se envian los videos posteriores a un arreglo js
             */
             if(time >= 0 && isPlaying == 1){
-                //alert("empieza en: "+time);
-                alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$moviesNow->title}}");
+                
+                //alert("Bienvenido a Programación Cine UV, en este momento se esta reproduciendo: {{$moviesNow->title}}");
                 //vid.play();
-                vid.currentTime = time;
+                
+                //vid.currentTime = time;
                 @foreach($movies as $key=>$movie)
                   @if ($key >= 1)
                     var movieArr = "{{$movie->url}}";
@@ -47,6 +65,10 @@
                 @endforeach
                 //alert("arreglo: "+movieArr);
                 vid.style.display="inline";
+                //vid.currentTime = time;
+                setCurTime();
+                //getCurTime();
+
                 document.getElementById("next").innerHTML = moviesArr;
 
                 /*startTime();
@@ -94,12 +116,13 @@
             }
             //vid.currentTime = time;
             function getCurTime() {
-              alert(time);
+              //alert(time);
               //alert(vid.currentTime);
             } 
             function setCurTime() { 
               vid.currentTime = time;
-            }
+              alert("asignado en "+time);
+            };
             function checkTime(i) {
               if (i < 10) {
                 i = "0" + i;
