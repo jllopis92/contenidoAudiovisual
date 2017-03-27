@@ -428,11 +428,11 @@
                     {!! Form::close() !!}
                     <br>
                     <p class="text-danger" id="sendValidation"> Se deben completar todos los campos marcados como obligatorios para enviar el formulario. </p>
+                    <p class="text-danger" id="warning"> Es posible que la pagina tarde en subir archivos debido al tamaño de estos, en ese caso, se solicita esperar a que el sistema termine el procesamiento. </p>
                 </div>
             </div>
         </div>
-
-
+        
         @else
             <script type="text/javascript">
                 window.location = "/";//here double curly bracket

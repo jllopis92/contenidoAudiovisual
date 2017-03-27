@@ -32,7 +32,7 @@ class CineTvController extends Controller
         $programationsCount = 0;
 
         $formatted_date = $rightNow->toDateTimeString();
-        echo "hor formato: ".$formatted_date;
+        //echo "hor formato: ".$formatted_date;
         //$formatted_date = Carbon::now()->subMinutes(5)->toDateTimeString(); 
         //$tomorrow = Carbon::now()->addDay();
         //$lastWeek = Carbon::now()->subWeek();
@@ -42,7 +42,7 @@ class CineTvController extends Controller
         //echo $formatted_date;
         //$formatted_time = $rightNow->format('H:i:s');
         $programationsCount = Calendar::where('end_at', '>=', $formatted_date)->orderBy('startdate', 'asc')->get()->count();
-         echo "programations lenght ".$programationsCount;
+         //echo "programations lenght ".$programationsCount;
 
          //Si existe alguna programación
         if($programationsCount > 0){
@@ -51,16 +51,16 @@ class CineTvController extends Controller
             $movies = Calendar::where('end_at', '>=', $formatted_date)->orderBy('startdate', 'asc')->get();
             /*date_timezone_set($date, timezone_open('Pacific/Chatham'));
             echo date_format($date, 'Y-m-d H:i:sP') . "\n";*/
-            echo "movies: ".$movies;
+            //echo "movies: ".$movies;
             //$programationsNow = $movies->first();
             $moviesNow = $movies->first();
             $nowstartdate = Carbon::parse($moviesNow->startdate);
             $nowenddate = Carbon::parse($moviesNow->enddate);
             //echo "ahora: ".$moviesNow;
-            echo "hora actual: ".$rightNow;
-            echo "hora inicio: ".$moviesNow->startdate;
-            echo "hora inicio carbon: ".$nowstartdate;
-            echo "hora fin carbon: ".$nowenddate;
+            //echo "hora actual: ".$rightNow;
+            //echo "hora inicio: ".$moviesNow->startdate;
+            //echo "hora inicio carbon: ".$nowstartdate;
+            //echo "hora fin carbon: ".$nowenddate;
 
             if($rightNow >= $nowstartdate && $rightNow < $nowenddate){
                 //$playTime = Carbon::parse($nowstartdate);
@@ -79,7 +79,7 @@ class CineTvController extends Controller
                 'url' => $moviesNow->url,
                 'difTime' => $difTime
             ]);
-            echo "valid: ".$valid;
+            //echo "valid: ".$valid;
         }else{
             //echo "no hay program";
             //Si no hay nada programado
