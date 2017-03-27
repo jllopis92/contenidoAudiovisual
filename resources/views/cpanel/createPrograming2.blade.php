@@ -94,9 +94,11 @@
 							@endforeach
 						</tbody>
 					</table>
-					<p>
-						<img src="/img/trashcan.png" id="trash" alt="">
-					</p>
+					<div class="col-xs-12" id="divTrash">
+						<p>
+							<img src="/img/trashcan.png" id="trash" alt="">
+						</p>
+					</div>
 				</div>
 
 				<div id='calendar' class="col-xs-12 col-sm-12 col-md-9"></div>
@@ -285,7 +287,8 @@
 					    },
 					   
 						eventDragStop: function (event, jsEvent, ui, view) {
-						    	var con = confirm('¿Esta seguro de eliminar este video de la programación?');
+							if(isElemOverDiv()){
+								var con = confirm('¿Esta seguro de eliminar este video de la programación?');
 						    	if(con == true) {
 									$.ajax({
 							    		url: 'process.php',
@@ -303,9 +306,8 @@
 							    			alert('Error processing your request: '+e.responseText);
 							    		}
 						    		});
-								}   
-							
-
+								} 
+							}
 						}
 					});
 
@@ -324,7 +326,9 @@
 
 
 				function isElemOverDiv() {
-			        var trashEl = jQuery('#trash');
+					
+					var trashEl = jQuery('#divTrash');
+			        //var trashEl = jQuery('#trash');
 
 			        var ofs = trashEl.offset();
 

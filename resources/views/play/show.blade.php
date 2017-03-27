@@ -16,6 +16,11 @@
 		    	<div class="col-xs-12 col-md-8">
 		    		<video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%">
 			            <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4">
+
+			            @foreach($subtitles as $subtitle)
+			            	{{-- <track src="/files/{{$subtitle->url}}" kind="subtitle" srclang="en-US" label="{{$subtitle->language}}" /> --}}
+				            <track label="{{$subtitle->language}}" kind="subtitles" srclang="es" src="/files/{{$subtitle->url}}" default>
+					   @endforeach
 			            {{-- <track src="/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa" kind="subtitles" srclang="es" label="Spanish"> --}}
 			    	</video>
 		    	</div>
@@ -178,6 +183,7 @@
 @section('page-js-files')
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script defer src="/js/jquery.flexslider.js"></script>
+{{-- <script src="/js/videosub-0.9.9.js"></script> --}}
 @stop
 
 @section('page-js-script')

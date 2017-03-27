@@ -1,6 +1,6 @@
 <?php
 
-/*buscar el nombre o id de la pelicula para asignar url*/
+date_default_timezone_set('America/Santiago');
 
 $con = mysqli_connect('localhost','root','root','contenidoAudiovisual');
 
@@ -11,7 +11,14 @@ if($type == 'new'){
 	$enddate = $_POST['enddate'];
 	$title = $_POST['title'];
 	$url = $_POST['url'];
-	$insert = mysqli_query($con,"INSERT INTO calendar(`title`, `startdate`, `enddate`, `url`, `allDay`) VALUES('$title','$startdate','$enddate','$url','false')");
+
+	$date1 = new DateTime($startdate);
+	$start_at = $date1->format('Y-m-d H:i:s');
+	
+	$date2 = new DateTime($enddate);
+	$end_at = $date2->format('Y-m-d H:i:s');
+
+	$insert = mysqli_query($con,"INSERT INTO calendar(`title`, `startdate`, `enddate`, `start_at`, `end_at`, `url`, `allDay`) VALUES('$title','$startdate','$enddate','$start_at','$end_at','$url','false')");
 	$lastid = mysqli_insert_id($con);
 	echo json_encode(array('status'=>'success','eventid'=>$lastid));
 }
@@ -31,7 +38,17 @@ if($type == 'resetdate'){
 	$startdate = $_POST['start'];
 	$enddate = $_POST['end'];
 	$eventid = $_POST['eventid'];
-	$update = mysqli_query($con,"UPDATE calendar SET title='$title', startdate = '$startdate', enddate = '$enddate' where id='$eventid'");
+
+	$date1 = new DateTime($startdate);
+	$start_at = $date1->format('Y-m-d H:i:s');
+	
+	$date2 = new DateTime($enddate);
+	$end_at = $date2->format('Y-m-d H:i:s');
+
+	/*$update = mysqli_query($con,"UPDATE calendar SET title='$title', startdate = '$startdate', enddate = '$enddate', 'start_at' = '$start_at', 'end_at'= '$end_at' where id='$eventid'");*/
+
+	
+	$update = mysqli_query($con,"UPDATE calendar SET title='$title', startdate = '$startdate', enddate = '$enddate', start_at = '$start_at', end_at = '$end_at' where id='$eventid'");
 	if($update)
 		echo json_encode(array('status'=>'success'));
 	else

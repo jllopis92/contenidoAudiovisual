@@ -8,8 +8,6 @@ use DB;
 use DateTimeZone;
 use Carbon\Carbon;
 use contenidoAudiovisual\Calendar;
-use contenidoAudiovisual\User;
-//use contenidoAudiovisual\MovieInProgram;
 use contenidoAudiovisual\Playlist;
 use contenidoAudiovisual\Notification;
 use contenidoAudiovisual\Subject;
@@ -22,6 +20,8 @@ class CineTvController extends Controller
 {
     public function index()
     {
+        //date_default_timezone_set('America/Santiago');
+
         //echo "entra a index";
         //$rightNow = Carbon::now();
         $rightNow = Carbon::now(new DateTimeZone('America/Santiago'));
@@ -30,6 +30,9 @@ class CineTvController extends Controller
         $playNow = 0;
         $valid = 0;
         $programationsCount = 0;
+
+        $formatted_date = $rightNow->toDateTimeString();
+        echo "hor formato: ".$formatted_date;
         //$formatted_date = Carbon::now()->subMinutes(5)->toDateTimeString(); 
         //$tomorrow = Carbon::now()->addDay();
         //$lastWeek = Carbon::now()->subWeek();
@@ -38,15 +41,17 @@ class CineTvController extends Controller
         //$formatted_date = $rightNow->toDateTimeString();
         //echo $formatted_date;
         //$formatted_time = $rightNow->format('H:i:s');
-        $programationsCount = Calendar::where('enddate', '>=', $rightNow)->orderBy('startdate', 'asc')->get()->count();
-         //echo "programations lenght".$programationsCount;
+        $programationsCount = Calendar::where('end_at', '>=', $formatted_date)->orderBy('startdate', 'asc')->get()->count();
+         echo "programations lenght ".$programationsCount;
 
          //Si existe alguna programación
         if($programationsCount > 0){
             //echo "hay program";
             $playNow = 1;
-            $movies = Calendar::where('enddate', '>=', $rightNow)->orderBy('startdate', 'asc')->get();
-            //echo "movies: ".$movies;
+            $movies = Calendar::where('end_at', '>=', $formatted_date)->orderBy('startdate', 'asc')->get();
+            /*date_timezone_set($date, timezone_open('Pacific/Chatham'));
+            echo date_format($date, 'Y-m-d H:i:sP') . "\n";*/
+            echo "movies: ".$movies;
             //$programationsNow = $movies->first();
             $moviesNow = $movies->first();
             $nowstartdate = Carbon::parse($moviesNow->startdate);
@@ -74,6 +79,7 @@ class CineTvController extends Controller
                 'url' => $moviesNow->url,
                 'difTime' => $difTime
             ]);
+            echo "valid: ".$valid;
         }else{
             //echo "no hay program";
             //Si no hay nada programado
@@ -93,7 +99,7 @@ class CineTvController extends Controller
 
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
 
-        return view('cineTv.index',compact('movies','moviesNow','difTime','playNow','valid', 'rightNow','programationsCount','notifications','types','subjects','genres','formats','calendars'));
+        return view('cineTv.index',compact('movies','moviesNow','difTime','playNow','valid','rightNow','programationsCount','notifications','types','subjects','genres','formats','calendars'));
             
             /*$movies = MovieInProgram::where('end_at', '>=', $rightNow)->where('programation_id','=', $programationsNow->id)->orderBy('play_at', 'asc')->get();
             

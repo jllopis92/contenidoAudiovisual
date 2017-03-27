@@ -208,6 +208,8 @@ class MovieController extends Controller
         $movie = Movie::find($id);
         $newMovies = Movie::where('state', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $trailers = Trailer::where('video_id', $id)->take(1)->get();
+        $subtitles = Subtitle::where('video_id', $id)->get();
+        
 
         $commentaries = Commentary::where('valid', 1)->orderBy('created_at', 'desc')->get();
         $users = User::all();
@@ -218,7 +220,7 @@ class MovieController extends Controller
         $types = Type::where('valid', 1)->get();
 
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('play.show',compact('movie','newMovies','trailers','commentaries','users','subjects','genres','formats','types','notifications'));
+        return view ('play.show',compact('movie','newMovies','trailers','subtitles','commentaries','users','subjects','genres','formats','types','notifications'));
         //return view ('play.show',['movie'=>$movies],['trailer'=>$trailers]);
     }
 
