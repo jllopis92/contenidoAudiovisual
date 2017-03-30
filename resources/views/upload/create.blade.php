@@ -1238,12 +1238,12 @@
                    document.getElementById('filelistVideo').innerHTML = '';
 
                    document.getElementById('uploadvideo').onclick = function() {
-                        var videoname =  document.getElementById('url').value;
-                        var BLIDRegExpression = /[Á\É\_\)\(]+$/
+                        /*var videoname =  document.getElementById('url').value;
+                        var BLIDRegExpression = /[Á\É\-\Ñ\ñ]+$/
                         //var BLIDRegExpression = /^[a-zA-Z0-9\ \_\)\(]+$/;
                         
                         var matchesCount = videoname.split(BLIDRegExpression).length - 1;
-                        alert(matchesCount);
+                        alert(matchesCount);*/
                       uploaderVideo.start();
                       return false;
                   };
