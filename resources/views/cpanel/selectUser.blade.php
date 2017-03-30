@@ -2,8 +2,9 @@
 @section('content')
 	@if (!Auth::guest())
 		@if (Auth::user()->tipo == "administrador")
-			<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;">Administrar Usuarios</h3>
-			<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
+			<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 20px;">Administrar Usuarios</h3>
+			<div style="padding-left: 20px; padding-right: 20px;">
+				<table class="table" data-filtering="true" data-paging="true" data-sorting="true" >
 				<thead>
 					<th>Nombre</th>
 					<th>Correo Electrónico</th>
@@ -30,6 +31,8 @@
 					@endforeach
 				</tbody>
 			</table>
+			</div>
+			
 		@else
 		<script type="text/javascript">
 		    window.location = "/";//here double curly bracket

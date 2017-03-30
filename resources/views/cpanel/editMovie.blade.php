@@ -9,7 +9,8 @@
     <div class="col-sm-10 col-sm-offset-1" style="overflow: hidden; 
     background-color: #f8f8f8;
     border-color: #e7e7e7;">
-    <h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;" align="center">Modificar Video</h3>
+    <h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 20px;">Modificar Video</h3>
+    <div style="padding-left: 20px; padding-right: 20px;">
 		{!!Form::model($movie, array('id'=>"editMovieForm"), ['route'=>[ 'upload.update',$movie->id],'method'=>'PUT'])!!}
             <div class="col-xs-12">
                 <h4 class="blackAndBoldText">Información Importante</h4>
@@ -316,6 +317,7 @@
                 </div>
             </div>
 		{!!Form::close()!!}
+         </div>
     </div>
 	@else
 		<script type="text/javascript">

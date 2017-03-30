@@ -1,5 +1,5 @@
 @if (!Auth::guest())
-	@if (Auth::user()->tipo == "administrador")
+	@if ((Auth::user()->tipo == "administrador") || (Auth::user()->tipo == "adminParrilla"))
 		@extends('layouts.controlPanel')
 		@section('content')
 

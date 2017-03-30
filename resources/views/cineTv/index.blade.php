@@ -55,6 +55,7 @@
             hoursArr[{{$key}} - 1] = hourArr;
           @endif
         @endforeach
+        document.getElementById("video").style.display="inline";
         alert("Bienvenido al sistema de programación de la Escuela de Cine, en este momento se esta reproduciendo: {{$moviesNow->title}}");
         vid.currentTime = difTime;
         vid.style.display="inline";

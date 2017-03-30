@@ -1093,8 +1093,96 @@
                 if(cant_other == null){
                     cant_other = 0;
                 }
-                /*document.getElementById("sendValidation").style.display = "inline";
-                document.getElementById("sendValidation").innerHTML = "Se deben completar todos los campos marcados como obligatorios para enviar el formulario Pendientes: <br> "+" validName "+validName+" validDescription "+ validDescription+" validCreationDate "+validCreationDate+" validDirection "+validDirection+" validDirectionAsist "+validDirectionAsist+" validCasting "+validCasting+" validContinuista "+validContinuista+" validScript "+validScript+" validProduction "+validProduction+" validProductionAssistant "+validProductionAssistant+" validPhotograficDirection "+validPhotograficDirection+" validCamara "+validCamara+" validCamaraAsist "+validCamaraAsist+" validArt "+validArt+" validSonorousRegister "+validSonorousRegister+" validMounting "+validMounting+" validImagePostproduction "+validImagePostproduction+" validSoundPostproduction "+validSoundPostproduction+" validCatering "+validCatering+" validMusic "+validMusic+" validActors "+validActors+" validImageFile "+validImageFile+" validVideoFile "+validVideoFile+" validTrailerFile "+validTrailerFile+" validCategory "+validCategory+" validGenre "+validGenre;*/
+                var notComplete = "";
+                if(validName == 0){
+                    notComplete+="<br> Nombre";
+                }
+                if(validDescription == 0){
+                    notComplete+="<br> Descripción";
+                }
+                if(validCreationDate == 0){
+                    notComplete+="<br> Fecha de Creación";
+                }
+                if(validDirection == 0){
+                    notComplete+="<br> Dirección";
+                }
+                if(validDirectionAsist == 0){
+                    notComplete+="<br> Asistente de Dirección";
+                }
+                if(validDescription == 0){
+                    notComplete+="<br> Descripción";
+                }
+                if(validCreationDate == 0){
+                    notComplete+="<br> Fecha de Creación";
+                }
+                if(validCasting == 0){
+                    notComplete+="<br> Casting";
+                }
+                if(validContinuista == 0){
+                    notComplete+="<br> Continuista";
+                }
+                if(validScript == 0){
+                    notComplete+="<br> Guión";
+                }
+                if(validProduction == 0){
+                    notComplete+="<br> Producción";
+                }
+                if(validProductionAssistant == 0){
+                    notComplete+="<br> Asistente de Producción";
+                }
+                if(validPhotograficDirection == 0){
+                    notComplete+="<br> Dirección Fotográfica";
+                }
+                if(validCamara == 0){
+                    notComplete+="<br> Cámara";
+                }
+                if(validCamaraAsist == 0){
+                    notComplete+="<br> Asistente de Cámara";
+                }
+                if(validArt == 0){
+                    notComplete+="<br> Dirección de Arte";
+                }
+                if(validSonorousRegister == 0){
+                    notComplete+="<br> Registro Sonoro";
+                }
+                if(validMounting == 0){
+                    notComplete+="<br> Montaje";
+                }
+                if(validImagePostproduction == 0){
+                    notComplete+="<br> Post-produccion de Imagen";
+                }
+                if(validSoundPostproduction == 0){
+                    notComplete+="<br> Post-produccion de Sonido";
+                }
+                if(validCatering == 0){
+                    notComplete+="<br> Catering";
+                }
+                if(validMusic == 0){
+                    notComplete+="<br> Música";
+                }
+                if(validActors == 0){
+                    notComplete+="<br> Actores";
+                }
+                if(validImageFile == 0){
+                    notComplete+="<br> Imagen Referencial";
+                }
+                if(validVideoFile == 0){
+                    notComplete+="<br> Video";
+                }
+                if(validTrailerFile == 0){
+                    notComplete+="<br> Trailer";
+                }
+
+                if(validCategory == 0){
+                    notComplete+="<br> Categoria";
+                }
+                if(validGenre == 0){
+                    notComplete+="<br> Género";
+                }
+                
+                document.getElementById("sendValidation").style.display = "inline";
+                document.getElementById("sendValidation").innerHTML = "Se deben completar todos los campos marcados como obligatorios para enviar el formulario Pendientes: <br> "+ notComplete;
+               /* document.getElementById("sendValidation").innerHTML = "Se deben completar todos los campos marcados como obligatorios para enviar el formulario Pendientes: <br> "+" validName "+validName+" validDescription "+ validDescription+" validCreationDate "+validCreationDate+" validDirection "+validDirection+" validDirectionAsist "+validDirectionAsist+" validCasting "+validCasting+" validContinuista "+validContinuista+" validScript "+validScript+" validProduction "+validProduction+" validProductionAssistant "+validProductionAssistant+" validPhotograficDirection "+validPhotograficDirection+" validCamara "+validCamara+" validCamaraAsist "+validCamaraAsist+" validArt "+validArt+" validSonorousRegister "+validSonorousRegister+" validMounting "+validMounting+" validImagePostproduction "+validImagePostproduction+" validSoundPostproduction "+validSoundPostproduction+" validCatering "+validCatering+" validMusic "+validMusic+" validActors "+validActors+" validImageFile "+validImageFile+" validVideoFile "+validVideoFile+" validTrailerFile "+validTrailerFile+" validCategory "+validCategory+" validGenre "+validGenre;*/
             }
             if(
                 validName == 1 && 
@@ -1150,6 +1238,12 @@
                    document.getElementById('filelistVideo').innerHTML = '';
 
                    document.getElementById('uploadvideo').onclick = function() {
+                        var videoname =  document.getElementById('url').value;
+                        var BLIDRegExpression = /[Á\É\_\)\(]+$/
+                        //var BLIDRegExpression = /^[a-zA-Z0-9\ \_\)\(]+$/;
+                        
+                        var matchesCount = videoname.split(BLIDRegExpression).length - 1;
+                        alert(matchesCount);
                       uploaderVideo.start();
                       return false;
                   };

@@ -3,7 +3,8 @@
 		@extends('layouts.controlPanel')
 		@section('content')
 			
-			<h3 style="margin-bottom: 30px; padding-left: 15px;">Ver Anuncios</h3>
+			<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 20px;">Ver Anuncios</h3>
+			<div style="padding-left: 20px; padding-right: 20px;">
 			<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 				<thead>
 					<th>Imagen Referencial</th>
@@ -28,6 +29,7 @@
 					@endforeach
 				</tbody>
 			</table>
+			</div>
 			<div class="modal fade" id="adverModal" role="dialog">
 				<div class="modal-dialog" style="height: 20%; background-color: white;">
 					<!-- Modal content-->

@@ -50,7 +50,7 @@
 			    			height: 110px;"/>
 			    		</a>
 			    	</div>
-			    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px;">
+			    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px; padding-right: 10px;">
 			    		<div class="col-xs-9" align="left" style="padding-right: 0px;">
 			    			<a class="blackAndBoldText" href="{{ action("MovieController@show", array($movie->id)) }}">
 			    				<p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->name}}
@@ -63,7 +63,7 @@
 				    		</a>
 			    		</div>
 			    	</div>
-			    	<div class="row col-xs-12" style="margin-top: 5px;">
+			    	<div class="row col-xs-12" style="margin-top: 5px; padding-right: 0px">
 			    		<div class="col-xs-7" align="left" style="padding-right: 0px;">
 			    			<a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
 			    				@foreach($genres as $genre)
@@ -164,7 +164,7 @@
 				    			height: 110px;"/>
 				    		</a>
 				    	</div>
-				    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px;">
+				    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px; padding-right: 10px;">
 				    		<div class="col-xs-9" align="left" style="padding-right: 0px;">
 				    			<a class="blackAndBoldText" href="{{ action("MovieController@show", array($movie->id)) }}">
 				    				<p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->name}}
@@ -285,7 +285,7 @@
 			    			height: 110px;"/>
 			    		</a>
 			    	</div>
-			    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px;">
+			    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px; padding-right: 10px;">
 			    		<div class="col-xs-9" align="left" style="padding-right: 0px;">
 			    			<a class="blackAndBoldText" href="{{ action("MovieController@show", array($movie->id)) }}">
 			    				<p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->name}}
@@ -297,7 +297,7 @@
 				    		</a>
 			    		</div>
 			    	</div>
-			    	<div class="row col-xs-12" style="margin-top: 5px;">
+			    	<div class="row col-xs-12" style="margin-top: 5px; padding-right: 0px">
 			    		<div class="col-xs-7" align="left" style="padding-right: 0px;">
 			    			<a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
 			    				@foreach($genres as $genre)
@@ -398,7 +398,7 @@
 				    			height: 110px;"/>
 				    		</a>
 				    	</div>
-				    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px;">
+				    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px; padding-right: 10px;">
 				    		<div class="col-xs-9" align="left" style="padding-right: 0px;">
 				    			<a class="blackAndBoldText" href="{{ action("MovieController@show", array($movie->id)) }}">
 				    				<p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->name}}
@@ -519,7 +519,7 @@
 			    			height: 110px;"/>
 			    		</a>
 			    	</div>
-			    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px;">
+			    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px; padding-right: 10px;">
 			    		<div class="col-xs-9" align="left" style="padding-right: 0px;">
 			    			<a class="blackAndBoldText" href="{{ action("MovieController@show", array($movie->id)) }}">
 			    				<p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->name}}
@@ -531,7 +531,7 @@
 				    		</a>
 			    		</div>
 			    	</div>
-			    	<div class="row col-xs-12" style="margin-top: 5px;">
+			    	<div class="row col-xs-12" style="margin-top: 5px; padding-right: 0px">
 			    		<div class="col-xs-7" align="left" style="padding-right: 0px;">
 			    			<a class="blackText" href="{{ action("MovieController@show", array($movie->id)) }}">
 			    				@foreach($genres as $genre)
@@ -632,7 +632,7 @@
 				    			height: 110px;"/>
 				    		</a>
 				    	</div>
-				    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px;">
+				    	<div class="row col-xs-12" style="margin-top: 5px; height: 40px; padding-right: 10px;">
 				    		<div class="col-xs-9" align="left" style="padding-right: 0px;">
 				    			<a class="blackAndBoldText" href="{{ action("MovieController@show", array($movie->id)) }}">
 				    				<p href="{{ action("MovieController@show", array($movie->id)) }}" style="font-size: 14px; margin-top: 0px; margin-bottom: 0px; max-width: 120px">{{$movie->name}}

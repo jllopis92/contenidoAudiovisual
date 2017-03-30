@@ -2,7 +2,8 @@
 @section('content')
 	@if (!Auth::guest())
 		@if (Auth::user()->tipo == "administrador")
-			<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 15px;">Cambiar Contraseña</h3>
+			<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 20px;">Cambiar Contraseña</h3>
+			<div style="padding-left: 20px; padding-right: 20px;">
 			<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 				<thead>
 					<th>Nombre</th>
@@ -23,6 +24,7 @@
 					@endforeach
 				</tbody>
 			</table>
+			</div>
 		@else
 		<script type="text/javascript">
 		    window.location = "/";//here double curly bracket

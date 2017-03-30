@@ -5,6 +5,7 @@ namespace contenidoAudiovisual;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use DB;
+use Storage;
 use contenidoAudiovisual\CustomVideo;
 use FFMpeg;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -42,6 +43,12 @@ class Movie extends Model
         $name = Carbon::now()->second.$url->getClientOriginalName();
         \Storage::disk('local')->put($name, \File::get($url));*/
         $firstUrl = $url;
+
+      /*  $charactersToChange = array("-", "?", "!");
+        $newUrl = str_replace($charactersToChange, "", $url);
+
+        Storage::disk('local')->move('/files/temp/videos/'.$url, '/files/temp/videos/'.$newUrl); // keep the same folder to just rename*/
+        
 
         $file = Carbon::now()->second.pathinfo($url,PATHINFO_FILENAME); 
         $extension = pathinfo($url,PATHINFO_EXTENSION);

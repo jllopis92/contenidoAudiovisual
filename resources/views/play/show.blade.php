@@ -18,8 +18,8 @@
 			            <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4">
 
 			            @foreach($subtitles as $subtitle)
-			            	{{-- <track src="/files/{{$subtitle->url}}" kind="subtitle" srclang="en-US" label="{{$subtitle->language}}" /> --}}
-				            <track label="{{$subtitle->language}}" kind="subtitles" srclang="es" src="/files/{{$subtitle->url}}" default>
+			            	<track src="/files/{{$subtitle->url}}" kind="subtitle" srclang="en-US" label="{{$subtitle->language}}" />
+				            {{-- <track label="{{$subtitle->language}}" kind="subtitles" srclang="es" src="/files/{{$subtitle->url}}" default> --}}
 					   @endforeach
 			            {{-- <track src="/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa" kind="subtitles" srclang="es" label="Spanish"> --}}
 			    	</video>
@@ -192,7 +192,7 @@
 			var j = jQuery.noConflict();
 			j(document).ready(function () {
 				j("#demo2 .stars").click(function () {
-					alert('Ranking');
+					//alert('Ranking');
 					j.post('../rating.php',{
 						rate:j(this).val(),
 						user:{!! Auth::user()->id !!},
@@ -213,7 +213,7 @@
 		@if(!Auth::guest())
 		var j = jQuery.noConflict();
 		j("#player").bind("ended", function() {
-	        alert('Video ended!');
+	        //alert('Video ended!');
 	        j.post('../visit.php',{
 					visits:1,
 					movie:{{$movie->id}},
