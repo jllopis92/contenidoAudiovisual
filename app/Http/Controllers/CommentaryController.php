@@ -50,6 +50,7 @@ class CommentaryController extends Controller
         $movie = Movie::find($request['movie_id']);
         $newMovies = Movie::where('state', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $trailers = Trailer::where('video_id', $request['movie_id'])->take(1)->get();
+        $subtitles = Subtitle::where('video_id', $request['movie_id'])->get();
         $commentaries = Commentary::where('valid', 1)->orderBy('created_at', 'desc')->get();
         $users = User::all();
 
@@ -62,7 +63,7 @@ class CommentaryController extends Controller
 
         //return Redirect::to('show');
 
-        return view ('play.show',compact('movie','newMovies','trailers','commentaries','users','subjects','genres','formats','types','notifications'));
+        return view ('play.show',compact('movie','newMovies','trailers','subtitles','commentaries','users','subjects','genres','formats','types','notifications'));
     }
     public function destroy($id){
         $commentary = Commentary::find($id);

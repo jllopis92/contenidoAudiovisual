@@ -26,8 +26,8 @@
                             </a>
                         </li>
                         <li class="active col-sm-3 offset-xs-4 col-sm-3" style="left: 20px; margin-top: 7px;" align="right">
-                            <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle">
-                                <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="    color: white;"></span>
+                            <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle" style="background-color: #F0643C !important; ">
+                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" style="    color: white;"></span>
                             </button>
                         </li>
                     </ul>

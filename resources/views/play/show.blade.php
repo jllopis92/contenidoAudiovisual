@@ -3,18 +3,23 @@
 
 	<div class="col-sm-12" id="mainBody" style="overflow: hidden; 
 		background-color: #f8f8f8;
-	    border-color: #e7e7e7;">
+	    border-color: #e7e7e7;
+	    padding-top: 10px;">
+
+	    <div class="col-xs-12" style="padding-left: 0px;">
+	    	<h3 class="orangeAndBoldText">{{$movie->name}}</h3>
+		</div>
 		<div class="col-xs-12" style="margin-top: 10px padding-right: 0px;padding-left: 0px;">
 			@if (Auth::guest())
 		    	@foreach($trailers as $trailer)
-				    <video class="col-xs-12 col-md-8" controls id="player" class="embed-responsive-item" style="width: 100%">
+				    <video class="col-xs-12 col-md-8" controls id="player" class="embed-responsive-item" style="width: 100%; padding-left: 0px;">
 						<source src="/files/convert/trailers/{{$trailer->url}}" type="video/mp4">
 				            {{-- <track src="/files/subs/Warcraft 2016 HDTC x264 AC3 TiTAN-fondonegro.ssa" kind="subtitles" srclang="es" label="Spanish"> --}}
 				    </video>
 				@endforeach
 		    @else
-		    	<div class="col-xs-12 col-md-8">
-		    		<video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%">
+		    	<div class="col-xs-12 col-md-8" style=" padding-left: 0px;">
+		    		<video class="col-md-12" controls id="player" class="embed-responsive-item" style="width: 100%; padding-left: 0px;">
 			            <source src="/files/convert/videos/{{$movie->url}}" type="video/mp4">
 
 			            @foreach($subtitles as $subtitle)
@@ -25,7 +30,7 @@
 			    	</video>
 		    	</div>
 		    	
-		    	<div class="col-xs-12 col-md-4" style="padding-left: 0px; padding-right: 0px;">
+		    	<div class="col-xs-12 col-md-4" style="padding-left: 0px; padding-right: 0px; padding-left: 0px;">
 		    		<div class="col-xs-12 pre-scrollable">
 		    			@foreach($commentaries as $commentary)
 		    				@if($commentary->movie_id == $movie->id)
@@ -86,16 +91,14 @@
 		    		</div>
 		    	</div>
 		    @endif
-		    <div class="col-xs-12">
-	    		<h3 class="orangeAndBoldText">{{$movie->name}}</h3>
-			</div>
-			<div class="col-xs-12">
+		   
+			<div class="col-xs-12" style="padding-left: 0px;">
 				@if (!Auth::guest())
 			        <div id="dv1">
 			        </div>
 			        <br><br><br>
 			             
-			        <div class="row">
+			        <div class="row" style="margin-left: 0px; margin-right: 0px;">
 			          	<label class="blackText">{{$movie->description}}</label> 
 				        <br><br><br>  
 				        <h5 class="orangeAndBoldText">Evalua este video</h5>
@@ -132,7 +135,7 @@
 			        <div id="dv1">
 			        </div>
 			        <br><br><br>
-			        <div class="row">
+			        <div class="row" style="margin-left: 0px; margin-right: 0px;">
 			          	<label class="blackText">{{$movie->description}}</label>
 			          	<br><br><br>
 			          	<label class="blackText">Para visualizar este video completo debe estar registrado.</label>   
@@ -144,8 +147,9 @@
 	<div class="col-sm-12" style="overflow: hidden; 
 		background-color: #f8f8f8;
 	    border-color: #e7e7e7;
-	    margin-top: 20px">
-	    <div class="col-md-12" style="max-width: 100%">
+	    margin-top: 20px;
+	    padding-left: 15px;">
+	    <div class="col-md-12" style="max-width: 100%; padding-left: 0px;">
     <H4 class="orangeText">Videos recomendados</H4>
     <div class="flexslider">
       <ul class="slides">

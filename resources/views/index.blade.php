@@ -14,8 +14,12 @@
 	          background-repeat: no-repeat;
 	          background-size: 100% 100%;">
 	            <div class="content col-xs-12 col-md-9" style="vertical-align: top; background: rgba(25, 25, 25, .4); ">
-	              <h2><a href="{{$advertising->link}}" target="_blank" style="color: white;">{{$advertising->name}}</a></h2>
-	              <p style="color: white;">{{$advertising->description}}</p>
+	              <h2><a href="{{$advertising->link}}" target="_blank" 
+	              		style="color: white;">{{$advertising->name}}</a></h2>
+	              <p style="color: white; 
+	              		font-family: 'Montserrat';
+	              		font-size: 20px;
+	              		font-weight: normal; ">{{$advertising->description}}</p>
 	            </div>
 	          </div>
           @else
@@ -24,7 +28,10 @@
 	          background-size: 100% 100%;">
 	            <div class="content col-xs-12 col-md-9" style="vertical-align: top; background: rgba(25, 25, 25, .4); ">
 	              <h2><a href="{{ action("MovieController@show", array($advertising->movie_id)) }}" target="_blank" style="color: white;">{{$advertising->name}}</a></h2>
-	              <p style="color: white;">{{$advertising->description}}</p>
+	              <p style="color: white;
+	              		font-family: 'Montserrat';
+	              		font-size: 20px;
+	              		font-weight: normal; ">{{$advertising->description}}</p>
 	            </div>
 	          </div>
           @endif

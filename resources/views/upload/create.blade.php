@@ -5,7 +5,7 @@
     @if (!Auth::guest())
         @if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "alumno") || (Auth::user()->tipo == "administrador"))
         <div class="col-sm-10 col-sm-offset-1" style="overflow: hidden; 
-    background-color: #f8f8f8;
+        background-color: #f8f8f8;
     border-color: #e7e7e7;">
             <h3 class="orangeAndBoldText" style="margin-bottom: 30px;" align="center">Subir Video</h3>
 
@@ -427,8 +427,15 @@
                     {!! Form::submit('Registrar',['class' =>'btn btn-primary disabled sendButton orangeButton', 'value' =>'validate']) !!}
                     {!! Form::close() !!}
                     <br>
+                    <div class="col-md-12">
+                        <img src="images/loading.gif" title="loading" style="width: 70px; height: 70px;"/>
+                        <p class="orangeAndBoldText"> Cargando</p>
+                    </div>
+                    <br>
                     <p class="text-danger" id="sendValidation"> Se deben completar todos los campos marcados como obligatorios para enviar el formulario. </p>
-                    <p class="text-danger" id="warning"> Es posible que la pagina tarde en subir archivos debido al tamaño de estos, en ese caso, se solicita esperar a que el sistema termine el procesamiento. </p>
+                    <p class="text-danger" id="warning"> Es posible que la página tarde en subir archivos debido al tamaño de estos, en ese caso, se solicita esperar a que el sistema termine el procesamiento. </p>
+
+                    
                 </div>
             </div>
         </div>
@@ -686,6 +693,9 @@
         });
         j('#actors').on('input',function(e){
             checkActors();
+        });
+        j('.sendButton').on('click',function(e){
+            alert("onclick");
         });
 
         function checkName(){
@@ -1034,7 +1044,7 @@
             if (music.length == 0){
                 document.getElementById("musicValidation").style.display = "none";
                 validMusic = 1;
-            }else 
+            }else {
             if (!BLIDRegExpression.test(music)) {
                 document.getElementById("musicValidation").style.display = "inline";
                 document.getElementById("musicValidation").innerHTML = 'El Campo Contiene Caracteres Invalidos';
@@ -1108,12 +1118,6 @@
                 }
                 if(validDirectionAsist == 0){
                     notComplete+="<br> Asistente de Dirección";
-                }
-                if(validDescription == 0){
-                    notComplete+="<br> Descripción";
-                }
-                if(validCreationDate == 0){
-                    notComplete+="<br> Fecha de Creación";
                 }
                 if(validCasting == 0){
                     notComplete+="<br> Casting";
@@ -1229,7 +1233,7 @@
             filters : {
                 max_file_size : '10000mb',
                 mime_types: [
-                {title : "Video files", extensions : "mp4,webm,avi,ogv,mkv"}
+                {title : "Video files", extensions : "mp4,webm,avi,ogv,mkv,mov"}
                 ]
             },
 
@@ -1238,13 +1242,21 @@
                    document.getElementById('filelistVideo').innerHTML = '';
 
                    document.getElementById('uploadvideo').onclick = function() {
-                        /*var videoname =  document.getElementById('url').value;
-                        var BLIDRegExpression = /[Á\É\-\Ñ\ñ]+$/
-                        //var BLIDRegExpression = /^[a-zA-Z0-9\ \_\)\(]+$/;
+
+                        var videoname =  document.getElementById('url').value;
+                        var hasAccentChars = /[À-ÿ\-\:\;\ñ\¿\?\!\¡\,\)\(\=\&\%\$]/;
+                        var hasAccentChars2 = /^[A-z0-9 \_\.\u00E0-\u00FC]+$/i;
+                        //var str = "el_nino123.mp4";
+                        //alert("segundo valid "+videoname+": "+hasAccentChars2.test(videoname));
+                        var accentinName = hasAccentChars.test(videoname);
+                        var accentinName2 = hasAccentChars2.test(videoname);
+
+                        if (accentinName == true || accentinName2 == false){
+                            alert("El nombre del archivo no permite tildes, solo puede contener caracteres alfanuméricos y guiones bajos (_). Por favor, renombre el archivo a un formato valido");
+                        }else{
+                           uploaderVideo.start(); 
+                        }
                         
-                        var matchesCount = videoname.split(BLIDRegExpression).length - 1;
-                        alert(matchesCount);*/
-                      uploaderVideo.start();
                       return false;
                   };
               },
@@ -1293,9 +1305,9 @@
             chunk_size: '200kb',
             max_retries: 3,
             filters : {
-                max_file_size : '100mb',
+                max_file_size : '1000mb',
                 mime_types: [
-                {title : "Video files", extensions : "mp4,webm,avi,ogv,mkv"}
+                {title : "Video files", extensions : "mp4,webm,avi,ogv,mkv,mov"}
                 ]
             },
 
@@ -1304,8 +1316,22 @@
                    document.getElementById('filelistTrailer').innerHTML = '';
 
                    document.getElementById('uploadtrailer').onclick = function() {
-                      uploaderTrailer.start();
-                      return false;
+
+                        var videoname =  document.getElementById('trailer').value;
+                        var hasAccentChars = /[À-ÿ\-\:\;\ñ\¿\?\!\¡\,\)\(\=\&\%\$]/;
+                        var hasAccentChars2 = /^[A-z0-9 \_\.\u00E0-\u00FC]+$/i;
+                        //var str = "el_nino123.mp4";
+                        //alert("segundo valid "+videoname+": "+hasAccentChars2.test(videoname));
+                        var accentinName = hasAccentChars.test(videoname);
+                        var accentinName2 = hasAccentChars2.test(videoname);
+
+                        if (accentinName == true || accentinName2 == false){
+                            alert("El nombre del archivo no permite tildes, solo puede contener caracteres alfanuméricos y guiones bajos (_). Por favor, renombre el archivo a un formato valido");
+                        }else{
+                           uploaderTrailer.start(); 
+                        }
+                        
+                        return false;
                   };
               },
 

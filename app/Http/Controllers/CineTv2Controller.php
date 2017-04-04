@@ -25,7 +25,8 @@ class CineTvController extends Controller
         //echo "entra a index";
         //$rightNow = Carbon::now();
         $rightNow = Carbon::now(new DateTimeZone('America/Santiago'));
-        //echo "hora: ".$rightNow;
+
+        echo "hora: ".$rightNow;
         $difTime = 0;
         $playNow = 0;
         $valid = 0;
