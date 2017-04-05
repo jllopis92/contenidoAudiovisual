@@ -31,9 +31,12 @@ class MovieController extends Controller
 
         $subject = Subject::lists('name', 'id');
         $user = User::lists('name', 'id');
+        $genres = DB::table('genres')->get();
+        $formats = DB::table('formats')->get();
+        $types = DB::table('types')->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
 
-        return view('upload.create', compact('subject','user','notifications'));
+        return view('upload.create', compact('subject','user','notifications','genres','formats','types'));
     }
 
     /**

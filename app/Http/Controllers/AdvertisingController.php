@@ -21,7 +21,7 @@ class AdvertisingController extends Controller
                         'movie_id' => $request['id'],
                         'name' => $movie->name,
                         'description' => $movie->description,
-                        'image' => $movie->advertisingImage,
+                        'imageMovie' => $movie->advertisingImage,
                         'state' => 1,
                     ]);
                 }

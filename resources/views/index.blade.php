@@ -14,7 +14,8 @@
 	          background-repeat: no-repeat;
 	          background-size: 100% 100%;">
 	            <div class="content col-xs-12 col-md-9" style="vertical-align: top; background: rgba(25, 25, 25, .4); ">
-	              <h2><a href="{{$advertising->link}}" target="_blank" 
+	              <h2>
+	              <a href="http://{{$advertising->link}}" target="_blank" 
 	              		style="color: white;">{{$advertising->name}}</a></h2>
 	              <p style="color: white; 
 	              		font-family: 'Montserrat';
@@ -23,7 +24,7 @@
 	            </div>
 	          </div>
           @else
-          		<div class="slide col-xs-12" style="background-image: url('files/{{$advertising->image}}');
+          		<div class="slide col-xs-12" style="background-image: url('files/{{$advertising->imageMovie}}');
 	          background-repeat: no-repeat;
 	          background-size: 100% 100%;">
 	            <div class="content col-xs-12 col-md-9" style="vertical-align: top; background: rgba(25, 25, 25, .4); ">

@@ -98,10 +98,12 @@
                     </div>
 
                     <div class = "form-group col-sm-12 col-md-6">
+
                         {!! Form::label('cant_sub', 'Cantidad de Subtitulos:') !!}
                         <input id="cant_sub" value="0" type="number" min="0" max="5" class="form-control">
                         <div id="result"></div>
                     </div>
+                    <p> El formato de subtítulos aceptado es .vtt, para adaptar un subtítulo a este formato, se recomenda utilizar <a style="font-size: 14px; color: #333;" href="https://atelier.u-sub.net/srt2vtt/" target="_blank"> este enlace web.</a></p>
                 </div>
                 <div class="col-xs-12">
                     <div id="subtittle_1" class = "form-group col-sm-12 col-md-6" style ="display: none;">
@@ -112,7 +114,8 @@
                         </div>
                         <div class = "form-group col-md-12" >
                             {!! Form::label('subtitle_1', 'Subtitulos:') !!}
-                            {!! Form::file('subtitle_1') !!}
+                            <input id="subtitle_1" name="subtitle_1" type="file" accept=".vtt" />
+                        
                         </div>
                     </div>
                     <div id="subtittle_2" class = "form-group col-sm-12 col-md-6" style ="display: none;">
@@ -123,7 +126,7 @@
                         </div>
                         <div class = "form-group col-md-12" >
                             {!! Form::label('subtitle_2', 'Subtitulos:') !!}
-                            {!! Form::file('subtitle_2') !!}
+                            <input id="subtitle_2" name="subtitle_2" type="file" accept=".vtt" />
                         </div>
                     </div>
                 </div>
@@ -136,7 +139,7 @@
                         </div>
                         <div class = "form-group col-md-12" >
                             {!! Form::label('subtitle_3', 'Subtitulos:') !!}
-                            {!! Form::file('subtitle_3') !!}
+                            <input id="subtitle_3" name="subtitle_3" type="file" accept=".vtt" />
                         </div>
                     </div>
                     <div id="subtittle_4" class = "form-group col-sm-12 col-md-6" style ="display: none;">
@@ -147,7 +150,7 @@
                         </div>
                         <div class = "form-group col-md-12" >
                             {!! Form::label('subtitle_4', 'Subtitulos:') !!}
-                            {!! Form::file('subtitle_4') !!}
+                            <input id="subtitle_4" name="subtitle_4" type="file" accept=".vtt" />
                         </div>
                     </div>
                 </div>
@@ -160,14 +163,14 @@
                         </div>
                         <div class = "form-group col-md-12" >
                             {!! Form::label('subtitle_5', 'Subtitulos:') !!}
-                            {!! Form::file('subtitle_5') !!}
+                            <input id="subtitle_5" name="subtitle_5" type="file" accept=".vtt" />
                         </div>
                     </div>
                 </div>
                 <div class = "col-xs-12">
                     <div class = "form-group col-sm-12 col-md-6">
                         {!! Form::label('trailer_subtitle', 'Subtitulos de Trailer:') !!}
-                        {!! Form::file('trailer_subtitle') !!}
+                        <input id="trailer_subtitle" name="trailer_subtitle" type="file" accept=".vtt" />
                     </div>
 
                     <div class = "form-group col-sm-12 col-md-6">
@@ -184,7 +187,12 @@
                     <div class = "col-xs-12">
                         <div class="colums col-sm-12 col-md-6">
                             {!! Form::label('category', 'Categoria * :') !!}
+                            @foreach($types as $type)
                             <p>
+                            {{$type->name}}<input name="category" id="{{$type->id}}" value="{{$type->id}}" required="" type="radio">
+                            </p>
+                            @endforeach
+                            {{-- <p>
                                 Largometraje <input name="category" id="largometraje" value="largometraje" required="" type="radio">
                             </p>
                             <p>
@@ -192,13 +200,18 @@
                             </p>
                             <p>
                                 Cortometraje <input name="category" id="cortometraje" value="cortometraje" type="radio">
-                            </p>
+                            </p> --}}
                             <div class="alert alert-danger col-xs-12" id="categoryValidation" style="display: none">
                             </div>
                         </div>
                         <div class="colums col-sm-12 col-md-6">
                             {!! Form::label('category2', 'Genero * :') !!}
-                            <p>
+                            @foreach($genres as $genre)
+                                <p>
+                                {{$genre->name}}<input name="category" id="{{$genre->id}}" value="{{$genre->id}}" required="" type="radio">
+                                </p>
+                            @endforeach
+                            {{-- <p>
                                 Experimental <input name="category2" id="experimental" value="experimental" required="" type="radio">
                             </p>
                             <p>
@@ -209,7 +222,7 @@
                             </p>
                             <p>
                                 Documental <input name="category2" id="documental" value="documental" type="radio">
-                            </p>
+                            </p> --}}
 
                             <div class="alert alert-danger col-xs-12" id="genreValidation" style="display: none">
                             </div>
@@ -427,7 +440,7 @@
                     {!! Form::submit('Registrar',['class' =>'btn btn-primary disabled sendButton orangeButton', 'value' =>'validate']) !!}
                     {!! Form::close() !!}
                     <br>
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="load_bar" style="display: none">
                         <img src="images/loading.gif" title="loading" style="width: 70px; height: 70px;"/>
                         <p class="orangeAndBoldText"> Cargando</p>
                     </div>
@@ -553,32 +566,6 @@
         Script para validacion de campos en formulario
         **/
         var j = jQuery.noConflict();
-        /*var validName = 1;
-        var validDescription = 1;
-        var validImageFile = 1;
-        var validTrailerFile = 1;
-        var validVideoFile = 1;
-        var validCategory = 1;
-        var validGenre = 1;
-        var validCreationDate = 1;
-        var validDirection = 1;
-        var validDirectionAsist = 1;
-        var validCasting = 1;
-        var validContinuista = 1;
-        var validScript = 1;
-        var validProduction = 1;
-        var validProductionAssistant = 1;
-        var validPhotograficDirection = 1;
-        var validCamara = 1;
-        var validCamaraAsist = 1;
-        var validArt = 1;
-        var validSonorousRegister = 1;
-        var validMounting = 1;
-        var validImagePostproduction = 1;
-        var validSoundPostproduction = 1;
-        var validCatering = 1;
-        var validMusic = 1;
-        var validActors = 1;*/
 
         var validName = 0;
         var validDescription = 0;
@@ -695,7 +682,7 @@
             checkActors();
         });
         j('.sendButton').on('click',function(e){
-            alert("onclick");
+            document.getElementById("load_bar").style.display="inline";
         });
 
         function checkName(){
@@ -1045,13 +1032,14 @@
                 document.getElementById("musicValidation").style.display = "none";
                 validMusic = 1;
             }else {
-            if (!BLIDRegExpression.test(music)) {
-                document.getElementById("musicValidation").style.display = "inline";
-                document.getElementById("musicValidation").innerHTML = 'El Campo Contiene Caracteres Invalidos';
-                validMusic = 0;
-            }else{
-                document.getElementById("musicValidation").style.display = "none";
-                validMusic = 1;
+                if (!BLIDRegExpression.test(music)) {
+                    document.getElementById("musicValidation").style.display = "inline";
+                    document.getElementById("musicValidation").innerHTML = 'El Campo Contiene Caracteres Invalidos';
+                    validMusic = 0;
+                }else{
+                    document.getElementById("musicValidation").style.display = "none";
+                    validMusic = 1;
+                }
             }
             checkForm();
         }

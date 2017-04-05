@@ -10,7 +10,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 class Advertising extends Model
 {
     protected $table = "advertising";
-    protected $fillable = ['movie_id','name','description','image', 'link', 'state'];
+    protected $fillable = ['movie_id','name','description','image', 'imageMovie', 'link', 'state'];
 
     public function setImageAttribute($image){
       if (isset($image)) {
@@ -28,9 +28,5 @@ class Advertising extends Model
       }else{
 
       }
-
-            
-   
-
-}
+    }
 }
