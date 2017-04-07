@@ -41,10 +41,10 @@
 
                             {!! Recaptcha::render() !!}
                             @if ($errors->has('recaptcha'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('recaptcha') }}</strong>
-                                    </span>
-                                    @endif
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('recaptcha') }}</strong>
+                                </span>
+                            @endif
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
@@ -58,10 +58,9 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary orangeButton" value="validate">
-                                        <i class="fa fa-btn fa-sign-in"></i> Ingresar
-                                    </button>
-
+                                        <button type="submit" class="btn btn-primary orangeButton" value="validate">
+                                            <i class="fa fa-btn fa-sign-in"></i> Ingresar
+                                        </button>
                                     {{--  <a class="btn btn-link orangeAndBoldText" href="{{ url('/password/reset') }}">¿Olvidó su contraseña?</a> --}}
                                 </div>
                             </div>
@@ -74,6 +73,7 @@
     @stop
 
     @section('page-style-files')
+      
     @stop
 
     @section('page-js-files')
@@ -82,4 +82,5 @@
     @stop
 
     @section('page-js-script')
+
     @stop

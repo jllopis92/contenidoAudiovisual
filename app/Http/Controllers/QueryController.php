@@ -181,7 +181,6 @@ class QueryController extends Controller
         ->where('state', '=', 1)
         ->where(function ($sql) use ($query, $genreId, $formatId, $subjectId, $typeId){
             $sql->where('name','like','%'.$query.'%')
-            ->orWhere('name','like','%'.$query.'%')
             ->orWhere('language','like','%'.$query.'%')
             ->orWhere('description','like','%'.$query.'%')
             ->orWhere('direction','like','%'.$query.'%')
@@ -193,10 +192,10 @@ class QueryController extends Controller
             ->orWhere('art_direction','like','%'.$query.'%')
             ->orWhere('actors','like','%'.$query.'%')
 
-            ->orWhere('type_id','like','%'.$typeId.'%')
+           /* ->orWhere('type_id','like','%'.$typeId.'%')
             ->orWhere('genre_id','like','%'.$genreId.'%')
             ->orWhere('format_id','like','%'.$formatId.'%')
-            ->orWhere('asignatura_id','like','%'.$subjectId.'%')
+            ->orWhere('asignatura_id','like','%'.$subjectId.'%')*/
             ;
         })->orderBy('rating', 'desc')->take(8)->get();
 

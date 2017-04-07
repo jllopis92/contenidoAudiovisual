@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='/images/cineicon.png' rel='shortcut icon' type='image/png'>
 
     <title>CINECL UV</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -11,6 +12,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" /> 
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
     @yield('page-style-files')
+
+    <style type="text/css">
+        /*screen-xs*/
+        @media (max-width: 768px) { 
+          .navbar{
+            background-color: #FFFFFF !important;
+          },
+          .navbar-brand{
+            padding-left: 50% !important;
+          }
+          .navbar-toggle{
+            margin-right: 15px !important;
+            left: 30px;
+          }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top boldFont" style="margin-bottom: 0px; position: fixed; z-index: 100; width:100%; background-color: #F0643C;">

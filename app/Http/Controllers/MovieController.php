@@ -76,6 +76,9 @@ class MovieController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }*/
 
+        /*'type_id' => $request['category'],
+            'genre_id' => $request['category2'],*/
+
         $movie = Movie::create([
             'usuario_id' => $request['usuario_id'],
             'asignatura_id' => $request['asignatura_id'],

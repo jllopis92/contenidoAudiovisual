@@ -14,7 +14,7 @@ class Movie extends Model
 {
     protected $table = "movies";
 
-    protected $fillable = ['usuario_id','asignatura_id','name','observation','language','creation_date','description','imageRef','advertisingImage','url','state','production_year','category','category2','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors','cant_other','other1Name','other1Content','other2Name','other2Content','other3Name','other3Content'];
+    protected $fillable = ['usuario_id','asignatura_id','name','observation','language','creation_date','description','imageRef','advertisingImage','url','state','production_year','type_id','category','genre_id','category2','shooting_format','direction','direction_assistant','casting','continuista','script','production','production_assistant','photografic_direction','camara','camara_assistant','art_direction','sonorous_register','mounting','image_postproduction','sound_postproduction','catering','music','actors','cant_other','other1Name','other1Content','other2Name','other2Content','other3Name','other3Content'];
 
     public function setImageRefAttribute($imageRef){
         $this->attributes['imageRef'] = Carbon::now()->second.$imageRef->getClientOriginalName();
@@ -72,6 +72,7 @@ class Movie extends Model
         $video = $ffmpeg->open('files/temp/videos/'.$url);
         //$format = new CustomVideo();
         $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
+        //$format = new FFMpeg\Format\Video\Ogg('libvorbis', 'libtheora');
         /*$format->on('progress', function ($video, $format, $percentage) {
             echo "$percentage % transcoded";
         });*/
@@ -82,6 +83,7 @@ class Movie extends Model
 
         $video
         ->save($format, 'files/convert/videos/'.$file.'.mp4');
+        //->save($format, 'files/convert/videos/'.$file.'.ogg');
         $this->attributes['url'] = $file.'.mp4';
 
         //Para CentOS

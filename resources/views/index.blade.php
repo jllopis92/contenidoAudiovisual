@@ -7,7 +7,7 @@
     padding-left: 0px;
 	padding-right: 0px;">
 
-    <div id="immersive_slider" class="col-xs-12" style="padding-left: 0px; padding-right: 0px; ">
+    <div id="immersive_slider" class="col-xs-12 hidden-xs" style="padding-left: 0px; padding-right: 0px; ">
         @foreach($advertisings as $advertising)
         	@if($advertising->movie_id == 0)
 	          <div class="slide col-xs-12" style="background-image: url('files/{{$advertising->image}}');
@@ -43,16 +43,17 @@
     </div>
         
 
-	    <div class="col-xs-12 col-sm-12 col-md-12 boldFont orangeText" style="padding-left: 25px;" align="left">
+	    <div class="col-xs-12 col-sm-12 col-md-12 boldFont orangeText title" style="padding-left: 25px;" align="left">
 	    	<H3>Nuevos</H3>
 	    </div> 
     	@foreach($newMovies as $key=>$movie)
     		@if($key <= 5)
 		    <div id="movieContent{{$movie->id}}" class="col-xs-12 col-sm-4 col-md-3" style="padding-left: 0px;">
-			    <div style="padding: 5px; margin: 5px; width: 220px;">
+			    <div class="videodiv" style="padding: 5px; margin: 5px; width: 220px;">
 			    	<div class="col-md-12">
 			    		<a href="{{ action("MovieController@show", array($movie->id)) }}">
-			    			<img src="files/{{$movie->imageRef}}" 
+			    			<img class="videoimg" 
+			    			src="files/{{$movie->imageRef}}" 
 			    			title="{{$movie->name}}" 
 			    			style="width: 180px;
 			    			height: 110px;"/>
@@ -119,7 +120,7 @@
 			    	</div>
 			    </div>
 			</div>
-			<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="newShowInfo{{$key}}" style="display: none; margin-top: 10px;">
+			<ul class="col-xs-12 orangeBorder" id="newShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 				<div id="newSlideContainer" class="slideContainer" style="margin-top: 10px;">
 					<div class="col-xs-12">
 						<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="newSlideTitle{{$key}}"></strong>
@@ -163,10 +164,11 @@
 			</ul>
 			@else
 				<div id="movieContent{{$movie->id}}" class="col-md-3 hidden-sm hidden-xs" style="padding-left: 0px;">
-				    <div style="padding: 5px; margin: 5px; width: 220px;">
+				    <div class="videodiv" style="padding: 5px; margin: 5px; width: 220px;">
 				    	<div class="col-md-12">
 				    		<a href="{{ action("MovieController@show", array($movie->id)) }}">
-				    			<img src="files/{{$movie->imageRef}}" 
+				    			<img class="videoimg" 
+				    			src="files/{{$movie->imageRef}}" 
 				    			title="{{$movie->name}}" 
 				    			style="width: 180px;
 				    			height: 110px;"/>
@@ -232,7 +234,7 @@
 				    	</div>
 				    </div>
 				</div>
-				<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="newShowInfo{{$key}}" style="display: none; margin-top: 10px;">
+				<ul class="col-xs-12 orangeBorder" id="newShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 					<div id="newSlideContainer" class="slideContainer" style="margin-top: 10px;">
 						<div class="col-xs-12">
 							<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="newSlideTitle{{$key}}"></strong>
@@ -278,16 +280,17 @@
 		@endforeach
 				
 
-    	<div class="col-xs-12 col-sm-12 col-md-12 boldFont orangeText" style="padding-left: 25px;" align="left">
+    	<div class="col-xs-12 col-sm-12 col-md-12 boldFont orangeText title" style="padding-left: 25px;" align="left">
           <H3>Mas Vistos</H3>
         </div>
         @foreach($visitMovies as $key=>$movie)
 		    @if($key <= 5)
 		    <div id="movieContent{{$movie->id}}" class="col-xs-12 col-sm-4 col-md-3" style="padding-left: 0px;">
-			    <div style="padding: 5px; margin: 5px; width: 220px;">
+			    <div class="videodiv" style="padding: 5px; margin: 5px; width: 220px;">
 			    	<div class="col-md-12">
 			    		<a href="{{ action("MovieController@show", array($movie->id)) }}">
-			    			<img src="files/{{$movie->imageRef}}" 
+			    			<img class="videoimg"
+			    			src="files/{{$movie->imageRef}}" 
 			    			title="{{$movie->name}}" 
 			    			style="width: 180px;
 			    			height: 110px;"/>
@@ -353,7 +356,7 @@
 			    	</div>
 			    </div>
 			</div>
-			<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="viewShowInfo{{$key}}" style="display: none; margin-top: 10px;">
+			<ul class="col-xs-12 orangeBorder" id="viewShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 				<div id="viewSlideContainer" class="slideContainer" style="margin-top: 10px;">
 					<div class="col-xs-12">
 						<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="viewSlideTitle{{$key}}"></strong>
@@ -397,10 +400,11 @@
 			</ul>
 			@else
 				<div id="movieContent{{$movie->id}}" class="col-md-3 hidden-sm hidden-xs" style="padding-left: 0px;">
-				    <div style="padding: 5px; margin: 5px; width: 220px;">
+				    <div class="videodiv" style="padding: 5px; margin: 5px; width: 220px;">
 				    	<div class="col-md-12">
 				    		<a href="{{ action("MovieController@show", array($movie->id)) }}">
-				    			<img src="files/{{$movie->imageRef}}" 
+				    			<img class="videoimg"
+				    			src="files/{{$movie->imageRef}}" 
 				    			title="{{$movie->name}}" 
 				    			style="width: 180px;
 				    			height: 110px;"/>
@@ -467,7 +471,7 @@
 				    	</div>
 				    </div>
 				</div>
-				<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="viewShowInfo{{$key}}" style="display: none; margin-top: 10px;">
+				<ul class="col-xs-12 orangeBorder" id="viewShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 					<div id="viewSlideContainer" class="slideContainer" style="margin-top: 10px;">
 						<div class="col-xs-12">
 							<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="viewSlideTitle{{$key}}"></strong>
@@ -512,16 +516,17 @@
 			@endif
 		@endforeach
         <br>
-        <div class="col-xs-12 col-sm-12 col-md-12 boldFont orangeText" style="padding-left: 25px;" align="left">
+        <div class="col-xs-12 col-sm-12 col-md-12 boldFont orangeText title" style="padding-left: 25px;" align="left">
             <H3>Mejor Evaluados</H3>
         </div>
         @foreach($bestMovies as $key=>$movie)
 		    @if($key <= 5)
 		    <div id="movieContent{{$movie->id}}" class="col-xs-12 col-sm-4 col-md-3" style="padding-left: 0px;">
-			    <div style="padding: 5px; margin: 5px; width: 220px;">
+			    <div class="videodiv" style="padding: 5px; margin: 5px; width: 220px;">
 			    	<div class="col-md-12">
 			    		<a href="{{ action("MovieController@show", array($movie->id)) }}">
-			    			<img src="files/{{$movie->imageRef}}" 
+			    			<img class="videoimg"
+			    			src="files/{{$movie->imageRef}}" 
 			    			title="{{$movie->name}}" 
 			    			style="width: 180px;
 			    			height: 110px;"/>
@@ -587,7 +592,7 @@
 			    	</div>
 			    </div>
 			</div>
-			<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="bestShowInfo{{$key}}" style="display: none; margin-top: 10px;">
+			<ul class="col-xs-12 orangeBorder" id="bestShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 				<div id="bestSlideContainer" class="slideContainer" style="margin-top: 10px;">
 					<div class="col-xs-12">
 						<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="bestSlideTitle{{$key}}"></strong>
@@ -631,10 +636,11 @@
 			</ul>
 			@else
 				<div id="movieContent{{$movie->id}}" class="col-md-3 hidden-sm hidden-xs" style="padding-left: 0px;">
-				    <div style="padding: 5px; margin: 5px; width: 220px;">
+				    <div class="videodiv" style="padding: 5px; margin: 5px; width: 220px;">
 				    	<div class="col-md-12">
 				    		<a href="{{ action("MovieController@show", array($movie->id)) }}">
-				    			<img src="files/{{$movie->imageRef}}" 
+				    			<img class="videoimg"
+				    			src="files/{{$movie->imageRef}}" 
 				    			title="{{$movie->name}}" 
 				    			style="width: 180px;
 				    			height: 110px;"/>
@@ -700,7 +706,7 @@
 				    	</div>
 				    </div>
 				</div>
-				<ul class="col-xs-10 col-xs-offset-1 col-sm-10 orangeBorder" id="bestShowInfo{{$key}}" style="display: none; margin-top: 10px;">
+				<ul class="col-xs-12 orangeBorder" id="bestShowInfo{{$key}}" style="display: none; margin-top: 10px;">
 					<div id="bestSlideContainer" class="slideContainer" style="margin-top: 10px;">
 						<div class="col-xs-12">
 							<strong class="slideTitle orangeAndBoldText" style="font-size: 16px;" id="bestSlideTitle{{$key}}"></strong>
@@ -749,6 +755,20 @@
 
 @section('page-style-files')
 <link href='css/immersive-slider.css' rel='stylesheet' type='text/css'>
+<style type="text/css">
+	@media (max-width: 768px) { 
+		.videoimg{
+			width: 280px !important;
+	    	height: 210px !important;
+		}
+		.videodiv{
+			width: 330px !important;
+		}
+		.title{
+			left: 25% !important;
+		}
+	}
+</style>
 @stop
 
 @section('page-js-files')

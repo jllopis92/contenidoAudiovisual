@@ -119,7 +119,7 @@
 	</div>
 </div>
 
-<div class="col-md-12 orangeAndBoldText" style="padding-left: 15px;"> Bienvenido al panel de control, seleccione una opción en el menú lateral.</div>
+<div class="col-md-12 orangeAndBoldText" style="margin-top: 10px; padding-left: 15px;"> Bienvenido al panel de control, seleccione una opción en el menú lateral.</div>
 
 @endsection
 

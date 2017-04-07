@@ -28,7 +28,34 @@
 				<h3 style="margin-bottom: 30px; padding-left: 15px;">Seleccione Video para Anuncio</h3>
 				{!! Form::open(['id' => 'newAdvertising', 'route' =>'advertising.store', 'method'=>'POST' ]) !!}
 
-				<table class="table">
+				<div class="col-md-10">
+					<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
+						<thead>
+							<th data-type="html">Nombre</th>
+							<th data-type="html">Categoria</th>
+							<th data-type="html">Duración</th>
+							<th data-type="html">Agregar</th>
+						</thead>
+						<tbody>
+							@foreach($movies as $movie)
+								<tr>
+									<td data-type="html">{{$movie->name}}</td>
+									<td data-type="html">{{$movie->category}} {{$movie->category2}}</td>
+									<td data-type="html">{{$movie->duration}}</td>
+									<td data-type="html">
+									<p style ="display: none;"> {!! Form::label('{{$movie->id}}', 'Seleccionar * :') !!} </p>
+							    		<p ><input name="id" id="id" value="{{$movie->id}}" type='radio'></p>
+									</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+					{!! Form::submit('Agregar',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
+					{!! Form::close() !!}
+					@endif
+					{{-- {!!$formats->render()!!} --}}
+				</div>
+				{{-- <table class="table">
 					<thead>
 						<th>Nombre</th>
 						<th>Categoria</th>
@@ -45,13 +72,10 @@
 				    		<p ><input name="id" id="id" value="{{$movie->id}}" type='radio'></p>
 						</td>
 					</tbody>
-					{{-- @endif --}}
 					@endforeach
-				</table>
-				{!!$movies->render()!!}
-				{!! Form::submit('Agregar',['class' =>'btn btn-primary', 'value' =>'validate']) !!}
-				{!! Form::close() !!}
-				@endif
+				</table> --}}
+				{{-- {!!$movies->render()!!} --}}
+				
 			</div>
 
 			<div id="personalizado" style="display: none;">
@@ -92,8 +116,24 @@
 			</div>
 		</div>
 		@stop
+		@section('page-style-files')
+			<link href="/css/footable.bootstrap.css" rel="stylesheet">
+		@stop
+		@section('page-js-files')
+			<script src="/js/footable.min.js"></script>
+		@stop
 
 		@section('page-js-script')
+			<script type="text/javascript">
+				var j = jQuery.noConflict();
+				jQuery(function(j){
+					j('.table').footable({
+						"filtering": {
+							"enabled": true
+						}
+					});
+				});
+			</script>
 			<script type="text/javascript">
 				function showVideo(){
 				    document.getElementById("personalizado").style.display="none";   

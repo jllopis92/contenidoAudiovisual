@@ -74,6 +74,8 @@
                         <button class="button" id="uploadvideo" href="javascript:;">Subir Video</button>
                     </div>
                     <div class="alert alert-danger col-xs-12" id="videoValidation" style="display: none"></div>
+                    
+                     <p> Formatos de video soportados: mp4,webm,avi,ogv,mkv</p>
                 </div>
 
                 <div class = "form-group col-xs-12">
@@ -88,6 +90,7 @@
                         <button class="button" id="uploadtrailer" href="javascript:;">Subir Trailer</button>
                     </div>
                     <div class="alert alert-danger col-xs-12" id="trailerValidation" style="display: none"></div>
+                    <p> Formatos de trailer soportados: mp4,webm,avi,ogv,mkv</p>
                 </div>
                 <div class="col-xs-12">
                     <div class = "form-group col-sm-12 col-md-6">
@@ -187,12 +190,18 @@
                     <div class = "col-xs-12">
                         <div class="colums col-sm-12 col-md-6">
                             {!! Form::label('category', 'Categoria * :') !!}
-                            @foreach($types as $type)
+                            {{-- @foreach($types as $key=>$type)
+                                @if($key == 0)
+                                    <p>
+                                        {{$type->name}}<input name="category" id="{{$type->id}}" value="{{$type->id}}" required="" type="radio">
+                                    </p>
+                                @else
+                                     <p>
+                                        {{$type->name}}<input name="category" id="{{$type->id}}" value="{{$type->id}}" type="radio">
+                                    </p>
+                                @endif
+                            @endforeach --}}
                             <p>
-                            {{$type->name}}<input name="category" id="{{$type->id}}" value="{{$type->id}}" required="" type="radio">
-                            </p>
-                            @endforeach
-                            {{-- <p>
                                 Largometraje <input name="category" id="largometraje" value="largometraje" required="" type="radio">
                             </p>
                             <p>
@@ -200,18 +209,24 @@
                             </p>
                             <p>
                                 Cortometraje <input name="category" id="cortometraje" value="cortometraje" type="radio">
-                            </p> --}}
+                            </p>
                             <div class="alert alert-danger col-xs-12" id="categoryValidation" style="display: none">
                             </div>
                         </div>
                         <div class="colums col-sm-12 col-md-6">
                             {!! Form::label('category2', 'Genero * :') !!}
-                            @foreach($genres as $genre)
-                                <p>
-                                {{$genre->name}}<input name="category" id="{{$genre->id}}" value="{{$genre->id}}" required="" type="radio">
-                                </p>
-                            @endforeach
-                            {{-- <p>
+                            {{-- @foreach($genres as $genre)
+                                @if($key == 0)
+                                    <p>
+                                    {{$genre->name}}<input name="category" id="{{$genre->id}}" value="{{$genre->id}}" required="" type="radio">
+                                    </p>
+                                @else
+                                    <p>
+                                    {{$genre->name}}<input name="category" id="{{$genre->id}}" value="{{$genre->id}}" type="radio">
+                                    </p>
+                                @endif
+                            @endforeach --}}
+                            <p>
                                 Experimental <input name="category2" id="experimental" value="experimental" required="" type="radio">
                             </p>
                             <p>
@@ -222,7 +237,7 @@
                             </p>
                             <p>
                                 Documental <input name="category2" id="documental" value="documental" type="radio">
-                            </p> --}}
+                            </p>
 
                             <div class="alert alert-danger col-xs-12" id="genreValidation" style="display: none">
                             </div>
@@ -447,8 +462,6 @@
                     <br>
                     <p class="text-danger" id="sendValidation"> Se deben completar todos los campos marcados como obligatorios para enviar el formulario. </p>
                     <p class="text-danger" id="warning"> Es posible que la página tarde en subir archivos debido al tamaño de estos, en ese caso, se solicita esperar a que el sistema termine el procesamiento. </p>
-
-                    
                 </div>
             </div>
         </div>
@@ -556,7 +569,6 @@
                 .on("input change", function (e) {
                 checkCreationDate();
             });
-
         });
 
     </script>
@@ -1221,7 +1233,7 @@
             filters : {
                 max_file_size : '10000mb',
                 mime_types: [
-                {title : "Video files", extensions : "mp4,webm,avi,ogv,mkv,mov"}
+                {title : "Video files", extensions : "mp4,webm,avi,ogv,mkv"}
                 ]
             },
 
@@ -1295,7 +1307,7 @@
             filters : {
                 max_file_size : '1000mb',
                 mime_types: [
-                {title : "Video files", extensions : "mp4,webm,avi,ogv,mkv,mov"}
+                {title : "Video files", extensions : "mp4,webm,avi,ogv,mkv"}
                 ]
             },
 

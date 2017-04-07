@@ -6,12 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="home_icon" href="/images/home.png">
+    <link href='/images/cineicon.png' rel='shortcut icon' type='image/png'>
 
     <title>CINECL UV</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/sidebar.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
+
+    
     @yield('page-style-files')
+    <style type="text/css">
+        /*screen-xs*/
+        @media (max-width: 768px) { 
+          .navbar{
+            background-color: #FFFFFF !important;
+          },
+          .navbar-brand{
+            padding-left: 40% !important;
+          }
+          .navbar-toggle{
+            margin-right: 0px !important;
+            left: 30px;
+          }
+        }
+    </style>
 </head>
 <body>
     <nav class="col-xs-12 navbar navbar-default navbar-static-top boldFont" style="margin-bottom: 0px; position: fixed; z-index: 100; width:100%; background-color: #F0643C;">
@@ -20,14 +38,15 @@
             <div class="row col-xs-12" style="padding-left: 0px;">
                 <div class="navbar-header fixed-brand">
                     <ul class="nav navbar-nav" style="margin-top: 0px;">
-                        <li class="col-xs-7 col-sm-9" style="height: 64px; background-color: #ffffff; border-color: #e7e7e7; padding-left: 10px;">
-                           <a class="navbar-brand" href="{{ url('/') }}" style="width: 161px; padding-top: 5px; padding-left: 0px;">
+                        <li class="col-xs-7 col-sm-9 liImage" style="height: 64px; background-color: #ffffff; border-color: #e7e7e7; padding-left: 10px;">
+                           <a class="navbar-brand" href="{{ url('/') }}" style="width: 161px; padding-top: 5px; padding-left: 0px;
+                           ">
                             <img src="/images/home.png" alt="Escuela de Cine" style="max-width:180px; max-height:55px;">
                             </a>
                         </li>
                         <li class="active col-sm-3 offset-xs-4 col-sm-3" style="left: 20px; margin-top: 7px;" align="right">
                             <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle" style="background-color: #F0643C !important; ">
-                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" style="    color: white;"></span>
+                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" style="color: white;"></span>
                             </button>
                         </li>
                     </ul>

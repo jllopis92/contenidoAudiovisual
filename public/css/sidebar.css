@@ -136,6 +136,9 @@ body {
     .contentAfterNavbar{
         margin-top: 72px;
     }
+    .navbar-brand{
+        padding-left: 50% !important;
+    }
 }
 @media(min-width:830px) {
     #wrapper {

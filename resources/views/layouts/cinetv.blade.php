@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="home_icon" href="/images/home.png">
+    <link href='/images/cineicon.png' rel='shortcut icon' type='image/png'>
 
     <title>CINECL UV</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
