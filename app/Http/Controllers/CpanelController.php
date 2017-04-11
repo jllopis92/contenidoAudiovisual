@@ -274,7 +274,7 @@ class CpanelController extends Controller
     
     public function createadvert()
     {
-        $movies = Movie::paginate(8);
+        $movies = Movie::all();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.createAdvertising',compact('movies','notifications'));
     }

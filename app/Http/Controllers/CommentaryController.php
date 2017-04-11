@@ -78,6 +78,7 @@ class CommentaryController extends Controller
         $movie = Movie::find($movieId);
         $newMovies = Movie::where('state', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $trailers = Trailer::where('video_id', $movieId)->take(1)->get();
+        $subtitles = Subtitle::where('video_id', $movieId)->get();
         $commentaries = Commentary::where('valid', 1)->orderBy('created_at', 'desc')->get();
         $users = User::all();
 
@@ -88,6 +89,6 @@ class CommentaryController extends Controller
 
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
 
-        return view ('play.show',compact('movie','newMovies','trailers','commentaries','users','subjects','genres','formats','types','notifications'));
+        return view ('play.show',compact('movie','newMovies','trailers','subtitles','commentaries','users','subjects','genres','formats','types','notifications'));
     }
 }

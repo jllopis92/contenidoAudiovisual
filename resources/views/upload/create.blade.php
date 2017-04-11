@@ -190,7 +190,7 @@
                     <div class = "col-xs-12">
                         <div class="colums col-sm-12 col-md-6">
                             {!! Form::label('category', 'Categoria * :') !!}
-                            {{-- @foreach($types as $key=>$type)
+                            @foreach($types as $key=>$type)
                                 @if($key == 0)
                                     <p>
                                         {{$type->name}}<input name="category" id="{{$type->id}}" value="{{$type->id}}" required="" type="radio">
@@ -200,7 +200,8 @@
                                         {{$type->name}}<input name="category" id="{{$type->id}}" value="{{$type->id}}" type="radio">
                                     </p>
                                 @endif
-                            @endforeach --}}
+                            @endforeach
+                          {{--   
                             <p>
                                 Largometraje <input name="category" id="largometraje" value="largometraje" required="" type="radio">
                             </p>
@@ -209,24 +210,24 @@
                             </p>
                             <p>
                                 Cortometraje <input name="category" id="cortometraje" value="cortometraje" type="radio">
-                            </p>
+                            </p> --}}
                             <div class="alert alert-danger col-xs-12" id="categoryValidation" style="display: none">
                             </div>
                         </div>
                         <div class="colums col-sm-12 col-md-6">
                             {!! Form::label('category2', 'Genero * :') !!}
-                            {{-- @foreach($genres as $genre)
+                            @foreach($genres as $genre)
                                 @if($key == 0)
                                     <p>
-                                    {{$genre->name}}<input name="category" id="{{$genre->id}}" value="{{$genre->id}}" required="" type="radio">
+                                    {{$genre->name}}<input name="category2" id="{{$genre->id}}" value="{{$genre->id}}" required="" type="radio">
                                     </p>
                                 @else
                                     <p>
-                                    {{$genre->name}}<input name="category" id="{{$genre->id}}" value="{{$genre->id}}" type="radio">
+                                    {{$genre->name}}<input name="category2" id="{{$genre->id}}" value="{{$genre->id}}" type="radio">
                                     </p>
                                 @endif
-                            @endforeach --}}
-                            <p>
+                            @endforeach
+                           {{--  <p>
                                 Experimental <input name="category2" id="experimental" value="experimental" required="" type="radio">
                             </p>
                             <p>
@@ -237,7 +238,7 @@
                             </p>
                             <p>
                                 Documental <input name="category2" id="documental" value="documental" type="radio">
-                            </p>
+                            </p> --}}
 
                             <div class="alert alert-danger col-xs-12" id="genreValidation" style="display: none">
                             </div>
@@ -247,8 +248,20 @@
                 <div class = "col-xs-12">
                     <div class = "form-group col-sm-12 col-md-6">
                         {!! Form::label('shooting_format', 'Formato de Rodaje * :') !!}
-                        {!!Form::select('shooting_format', Config::get('enums.shooting_format_types'))!!}
-                        <div class="alert alert-danger col-xs-12" id="genreValidation" style="display: none"></div>
+                        @foreach($formats as $key=>$format)
+                            @if($key == 0)
+                                <p>
+                                    {{$format->name}}<input name="shooting_format" id="{{$format->id}}" value="{{$format->id}}" required="" type="radio">
+                                </p>
+                            @else
+                                <p>
+                                    {{$format->name}}<input name="shooting_format" id="{{$format->id}}" value="{{$format->id}}" type="radio">
+                                </p>
+                            @endif
+                        @endforeach
+                      {{--   {!! Form::label('shooting_format', 'Formato de Rodaje * :') !!}
+                        {!!Form::select('shooting_format', Config::get('enums.shooting_format_types'))!!} --}}
+                        <div class="alert alert-danger col-xs-12" id="formatValidation" style="display: none"></div>
                     </div>
                     <div class = "form-group col-sm-12 col-md-6">
                         {!! Form::label('production_year', 'Año de Produccion * :') !!}
@@ -586,6 +599,7 @@
         var validVideoFile = 0;
         var validCategory = 0;
         var validGenre = 0;
+        var validFormat = 0;
         var validCreationDate = 0;
         var validDirection = 0;
         var validDirectionAsist = 1;
@@ -614,7 +628,59 @@
         j('#description').on('input',function(e){
             checkDescription();
         });
-        j("#largometraje").change(function(e) {
+        
+        j('input[name=category]').click(function(){
+            if (j(this).is(':checked')){
+                if(j(this).val() > 0){
+                    alert(j(this).val());
+                    document.getElementById("categoryValidation").style.display = "none";
+                    validCategory = 1;
+                }else{
+                    document.getElementById("categoryValidation").style.display = "inline";
+                    document.getElementById("categoryValidation").innerHTML = 'Campo Obligatorio';
+                    validCategory = 0;
+                }
+              //alert(j(this).val());
+            }
+        });
+
+        j('input[name=category2]').click(function(){
+            if (j(this).is(':checked')){
+                alert(j(this).val());
+                if(j(this).val() > 0){
+                    document.getElementById("genreValidation").style.display = "none";
+                    validGenre = 1;
+                }else{
+                    document.getElementById("genreValidation").style.display = "inline";
+                    document.getElementById("genreValidation").innerHTML = 'Campo Obligatorio';
+                    validGenre = 0;
+                }
+              //alert(j(this).val());
+            }
+        });
+
+        j('input[name=shooting_format]').click(function(){
+            if (j(this).is(':checked')){
+                alert(j(this).val());
+                if(j(this).val() > 0){
+                    document.getElementById("formatValidation").style.display = "none";
+                    validFormat = 1;
+                }else{
+                    document.getElementById("formatValidation").style.display = "inline";
+                    document.getElementById("formatValidation").innerHTML = 'Campo Obligatorio';
+                    validFormat = 0;
+                }
+              //alert(j(this).val());
+            }
+          });
+      /*  $('input[name=category]:checked').val();
+
+        $('#newVideo category').on('change', function() {
+           alert($('input[name=radioName]:checked', '#myForm').val()); 
+        });*/
+
+
+        /*j("#largometraje").change(function(e) {
             checkCategory("largometraje");    
         });
         j("#mediometraje").change(function(e) {
@@ -622,7 +688,7 @@
         });
         j("#cortometraje").change(function(e) {
             checkCategory("cortometraje");    
-        });
+        });*/
         j("#experimental").change(function(e) {
             checkCategory2("experimental");    
         });
@@ -732,7 +798,7 @@
             }
             checkForm();
         }
-        function checkCategory(option){
+        /*function checkCategory(option){
             var category = j('#' + option).val();
             if(category.length == 0){
                 document.getElementById("categoryValidation").style.display = "inline";
@@ -743,8 +809,8 @@
                 validCategory = 1;
             }
             checkForm();
-        }
-        function checkCategory2(option){
+        }*/
+       /* function checkCategory2(option){
             var category2 = j('#' + option).val();
             if(category2.length == 0){
                 document.getElementById("genreValidation").style.display = "inline";
@@ -755,7 +821,7 @@
                 validGenre = 1;
             }
             checkForm();
-        }
+        }*/
 
         function checkCreationDate(){
             var creation_date = j('#creation_date').val();
@@ -1098,7 +1164,8 @@
                 validVideoFile == 0 ||
                 validImageFile == 0 ||
                 validCategory == 0 ||
-                validGenre == 0){
+                validGenre == 0 ||
+                validFormat == 0){
                 j(".sendButton").attr('class', 'btn btn-primary disabled sendButton orangeButton');
                 if(cant_other == null){
                     cant_other = 0;
@@ -1183,6 +1250,9 @@
                 if(validGenre == 0){
                     notComplete+="<br> Género";
                 }
+                 if(validFormat == 0){
+                    notComplete+="<br> Formato de Rodaje";
+                }
                 
                 document.getElementById("sendValidation").style.display = "inline";
                 document.getElementById("sendValidation").innerHTML = "Se deben completar todos los campos marcados como obligatorios para enviar el formulario Pendientes: <br> "+ notComplete;
@@ -1214,7 +1284,8 @@
                 validVideoFile == 1 &&
                 validImageFile == 1 &&
                 validCategory == 1 &&
-                validGenre == 1){
+                validGenre == 1 &&
+                validFormat == 1){
                 j(".sendButton").attr('class', 'btn btn-primary active sendButton orangeButton');
                 document.getElementById("sendValidation").style.display = "none";
             }            

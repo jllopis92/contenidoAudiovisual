@@ -32,7 +32,6 @@
 					<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
 						<thead>
 							<th data-type="html">Nombre</th>
-							<th data-type="html">Categoria</th>
 							<th data-type="html">Duración</th>
 							<th data-type="html">Agregar</th>
 						</thead>
@@ -40,7 +39,6 @@
 							@foreach($movies as $movie)
 								<tr>
 									<td data-type="html">{{$movie->name}}</td>
-									<td data-type="html">{{$movie->category}} {{$movie->category2}}</td>
 									<td data-type="html">{{$movie->duration}}</td>
 									<td data-type="html">
 									<p style ="display: none;"> {!! Form::label('{{$movie->id}}', 'Seleccionar * :') !!} </p>
