@@ -5,30 +5,30 @@
 			
 			<h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 20px;">Ver Anuncios</h3>
 			<div style="padding-left: 20px; padding-right: 20px;">
-			<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
-				<thead>
-					<th>Imagen Referencial</th>
-					<th>Video</th>
-					<th>Descripción</th>
-					<th>Creada</th>
-					<th data-type="html"> </th>
-				</thead>
-				<tbody>
-					@foreach($advertisings as $advertising)
-						<tr>
-							<td>
-								<img src="files/{{$advertising->image}}" title="allbum-name" style="width: 75px; height: 75px;"/>
-							</td>
-							<td>{{$advertising->name}}</td>
-							<td>{{$advertising->description}}</td>
-							<td>{{$advertising->created_at}}</td>
-							<td data-toggle="modal" data-target="#adverModal" data-name="{!! $advertising->name!!}" data-id="{!!$advertising->id!!}" class="openform">
-								<button type="button" class="btn btn-primary orangeButton">Eliminar</button>
-							</td>
-						</tr>
-					@endforeach
-				</tbody>
-			</table>
+				<table class="table" data-filtering="true" data-paging="true" data-sorting="true">
+					<thead>
+						<th>Imagen Referencial</th>
+						<th>Video</th>
+						<th>Descripción</th>
+						<th>Creada</th>
+						<th data-type="html"> </th>
+					</thead>
+					<tbody>
+						@foreach($advertisings as $advertising)
+							<tr>
+								<td>
+									<img src="files/{{$advertising->image}}" title="allbum-name" style="width: 75px; height: 75px;"/>
+								</td>
+								<td>{{$advertising->name}}</td>
+								<td>{{$advertising->description}}</td>
+								<td>{{$advertising->created_at}}</td>
+								<td data-toggle="modal" data-target="#adverModal" data-name="{!! $advertising->name!!}" data-id="{!!$advertising->id!!}" class="openform">
+									<button type="button" class="btn btn-primary orangeButton">Eliminar</button>
+								</td>
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
 			</div>
 			<div class="modal fade" id="adverModal" role="dialog">
 				<div class="modal-dialog" style="height: 20%; background-color: white;">

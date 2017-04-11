@@ -223,6 +223,9 @@
                     <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
                         {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
                     </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showNotifications')!!}" class="list-group-item"><i class='glyphicon glyphicon-alert'></i> Mis Notificaciones</a>
+                    </li>
                 </div>
             </div>
         </div>
@@ -249,6 +252,21 @@
                 <h5 class="submenu-title orangeAndBoldText">Administrar Anuncios</h5> 
             </div>
             <div class="submenu-body collapse" id="submenu3">
+                <div class="list-group">
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showadver')!!}" class="list-group-item"><i class='glyphicon glyphicon-list'></i>  Ver Anuncios</a>
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('createadver')!!}" class="list-group-item"><i class='glyphicon glyphicon-plus'></i>  Crear Anuncios</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="submenu">
+            <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu4"> 
+                <h5 class="submenu-title orangeAndBoldText">Estadísticas</h5> 
+            </div>
+            <div class="submenu-body collapse" id="submenu4">
                 <div class="list-group">
                     <li class="list-group-item" style="padding: 0px">
                         <a href="{!! url('showStatistics')!!}" class="list-group-item"><i class='glyphicon glyphicon-user'></i> Ver Estadísticas</a>
@@ -279,6 +297,9 @@
                     <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id), $attributes = ['class'=>'blackText'] ) }}</li>
                     <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
                         {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showNotifications')!!}" class="list-group-item"><i class='glyphicon glyphicon-alert'></i> Mis Notificaciones</a>
                     </li>
                 </div>
             </div>
@@ -421,6 +442,7 @@
                 </div>
             </div>
         </div>
+
         <div class="submenu visible-xs">
             <div class="submenu-heading" data-parent="#nav-menu" data-toggle="collapse" data-target="#submenu1"> 
                 <a href="{{ url('/logout') }}" class="alert_message dark_orange_back" style="color: white;"><h5 class="submenu-title orangeAndBoldText">Cerrar Sesión</h5> </a>            
@@ -436,6 +458,9 @@
                     <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id), $attributes = ['class'=>'blackText'] ) }}</li>
                     <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
                         {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showNotifications')!!}" class="list-group-item"><i class='glyphicon glyphicon-alert'></i> Mis Notificaciones</a>
                     </li>
                 </div>
             </div>
@@ -467,6 +492,9 @@
                     <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
                         {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
                     </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showNotifications')!!}" class="list-group-item"><i class='glyphicon glyphicon-alert'></i> Mis Notificaciones</a>
+                    </li>
                 </div>
             </div>
         </div>
@@ -492,6 +520,9 @@
                     <li class="list-group-item"><i class='glyphicon glyphicon-edit'></i> {{ link_to_route('cpanel.edit', $title = 'Editar Perfil', $parameters = (Auth::user()->id), $attributes = ['class'=>'blackText'] ) }}</li>
                     <li class="list-group-item"><i class='glyphicon glyphicon-pencil'></i>
                         {!! link_to_route('user.edit', $title = 'Cambiar Contraseña', $parameters =  (Auth::user()->id), $attributes = ['class'=>'blackText'])!!}
+                    </li>
+                    <li class="list-group-item" style="padding: 0px">
+                        <a href="{!! url('showNotifications')!!}" class="list-group-item"><i class='glyphicon glyphicon-alert'></i> Mis Notificaciones</a>
                     </li>
                 </div>
             </div>

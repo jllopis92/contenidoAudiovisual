@@ -56,6 +56,9 @@
 
 	Route::get('showStatistics','CpanelController@showStatistics');
 	Route::resource('seenby','SeenbyController');
+
+	Route::get('showNotifications','NotificationController@index');
+	
 	//Route::get('showVideoStatistics','CpanelController@showVideoStatistics');
 
 Route::group(['middleware' => 'web'], function () {
