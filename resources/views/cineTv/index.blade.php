@@ -12,7 +12,7 @@
     <div id="time"></div>
   </div>
   <div class="col-xs-12">
-    <video id="video" style="display:none; width: 100%; height: 100%;" autoplay controls>
+    <video id="video" style="display:none; width: 100%; height: 100%;" autoplay>
     <source src="/files/convert/videos/{{$moviesNow->url}}" type="video/mp4" />
     Su navegador no soporta el tag video.
     </video>
