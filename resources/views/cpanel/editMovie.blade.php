@@ -2,7 +2,195 @@
 
 @section('content')
 
-<script type="text/javascript" src="/js/editMovie.js"></script>
+<script type="text/javascript">
+    var languages = [
+            'Español',
+            'Inglés',
+            'Portugués', 
+            'Francés', 
+            'Italiano',
+            'Alemán',
+            'Mapudungun',
+            'Aimara',
+            'Quechua',
+            'Rapanui',
+            'Afrikáans',
+            'Akan',
+            'Albanés',
+            'Amhárico',
+            'Árabe',
+            'Armenio',
+            'Azerbaiyano',
+            'Bengalí',
+            'Bielorruso',
+            'Birmano',
+            'Bosnio',
+            'Búlgaro',
+            'Canarés',
+            'Cantonés',
+            'Catalán',
+            'Checo',
+            'Chichewa',
+            'Chino',
+            'Chuukés',
+            'Cingalés',
+            'Coreano',
+            'Criollo haitiano',
+            'Croata',
+            'Danés',
+            'Dzongkha',
+            'Eslovaco',
+            'Esloveno',
+            'Estonio',
+            'Farsi',
+            'Finés',
+            'Flamenco',
+            'Fujianés',
+            'Galés',
+            'Georgiano',
+            'Griego',
+            'Gujarati',
+            'Hebreo',
+            'Hindi',
+            'Hmong',
+            'Holandés',
+            'Húngaro',
+            'Indonesio',
+            'Islandés',
+            'Japonés',
+            'Javanés',
+            'Jemer',
+            'Kazajo',
+            'Kurdo',
+            'Lao',
+            'Latín',
+            'Letón',
+            'Lingala',
+            'Lituano',
+            'Macedonio',
+            'Malayo',
+            'Malgache',
+            'Maltés',
+            'Mandarín',
+            'Maratí',
+            'Marshalés',
+            'Mongol Khalkha',
+            'Nepalí',
+            'Noruego',
+            'Nuer',
+            'Panyabí',
+            'Pashto',
+            'Polaco',
+            'Quechua',
+            'Romanche',
+            'Romaní',
+            'Rumano',
+            'Rundi',
+            'Ruso',
+            'Samoano',
+            'Serbio',
+            'Sesotho',
+            'Setsuana',
+            'Shangainés',
+            'Somalí',
+            'Suajili',
+            'Sueco',
+            'Tagalo',
+            'Tailandés',
+            'Tamil',
+            'Tayiko',
+            'Telugú',
+            'Tibetano',
+            'Tigriña',
+            'Turco',
+            'Turcomano',
+            'Ucraniano',
+            'Urdú',
+            'Uzbeco',
+            'Vietnamita',
+            'Yao',
+            'Yidis',
+            'Zulú'];
+
+            var subjects = [];
+            var subjectsIds = [];
+            var categories = [];
+            var categoriesInDb = [];
+            var genres = [];
+            var genresInDb = [];
+            var shootingFormats = [];
+            var shootingFormatsInDb = [];
+
+        @foreach($subjects as $key=>$subject)
+            subjects[{{$key}}] = "{{$subject->name}}";
+            subjectsIds[{{$key}}] = {{$subject->id}};
+        @endforeach
+
+        @foreach($types as $key=>$type)
+            categories[{{$key}}] = "{{$type->name}}";
+            categoriesInDb[{{$key}}] = {{$type->id}};
+        @endforeach
+
+        @foreach($genres as $key=>$genre)
+            genres[{{$key}}] = "{{$genre->name}}";
+            genresInDb[{{$key}}] = {{$genre->id}};
+        @endforeach
+
+        @foreach($formats as $key=>$format)
+            shootingFormats[{{$key}}] = "{{$format->name}}";
+            shootingFormatsInDb[{{$key}}] = {{$format->id}};
+        @endforeach
+
+        //var shootingFormats = ['4K', '2K', 'HD', 'MiniDV', '16mm', '35mm'];
+
+        function setLanguages (language){
+            for (var i = 0; i < languages.length; i++){
+                if (language == languages[i]){
+                    document.write('<option value="' + languages[i] + '" selected="selected">' + languages[i] + '</option>');
+                }else{
+                    document.write('<option value="' + languages[i] + '">' + languages[i] + '</option>');
+                }
+            }
+        }
+
+        function setSubmits (subject){
+            for (var i = 0; i < subjectsIds.length; i++){
+                if (subject == subjectsIds[i]){
+                    document.write('<option value="' + subjectsIds[i] + '" selected="selected">' + subjects[i] + '</option>');
+                }else{
+                    document.write('<option value="' + subjectsIds[i] + '">' + subjects[i] + '</option>');
+                }
+            }
+        }
+        function setCategories (category){
+            for (var i = 0; i < categoriesInDb.length; i++){
+                if (category == categoriesInDb[i]){
+                    document.write('<option value="' + categoriesInDb[i] + '" selected="selected">' + categories[i] + '</option>');
+                }else{
+                    document.write('<option value="' + categoriesInDb[i] + '">' + categories[i] + '</option>');
+                }
+            }
+        }
+        function setGenres (genre){
+            for (var i = 0; i < genresInDb.length; i++){
+                if (genre == genresInDb[i]){
+                    document.write('<option value="' + genresInDb[i] + '" selected="selected">' + genres[i] + '</option>');
+                }else{
+                    document.write('<option value="' + genresInDb[i] + '">' + genres[i] + '</option>');
+                }
+            }
+        }
+        function setShoting (shoting){
+            for (var i = 0; i < shootingFormatsInDb.length; i++){
+                if (shoting == shootingFormats[i]){
+                    document.write('<option value="' + shootingFormatsInDb[i] + '" selected="selected">' + shootingFormats[i] + '</option>');
+                }else{
+                    document.write('<option value="' + shootingFormatsInDb[i] + '">' + shootingFormats[i] + '</option>');
+                }
+            }
+        }
+</script>
+
 
 @if (!Auth::guest())
 	@if ((Auth::user()->tipo == "profesor") || (Auth::user()->tipo == "administrador"))
@@ -11,7 +199,7 @@
     border-color: #e7e7e7;">
     <h3 class="orangeAndBoldText" style="margin-bottom: 30px; padding-left: 20px;">Modificar Video</h3>
     <div style="padding-left: 20px; padding-right: 20px;">
-		{!!Form::model($movie, array('id'=>"editMovieForm"), ['route'=>[ 'upload.update',$movie->id],'method'=>'PUT'])!!}
+        {!!Form::model($movie,['route'=>['upload.update',$movie->id],'method'=>'PUT'])!!}
             <div class="col-xs-12">
                 <h4 class="blackAndBoldText">Información Importante</h4>
                 <div class="col-xs-12">
@@ -66,7 +254,7 @@
                         <select class="form-control" name="category" id="category">
                             <option value="">SELECCIONE CATEGORIA</option>
                             <script>
-                                var categoryEdit = '{!!$movie->category!!}';
+                                var categoryEdit = '{!!$movie->type_id!!}';
                                 setCategories(categoryEdit);
                             </script>
                         </select>
@@ -78,7 +266,7 @@
                         <select class="form-control" name="category2" id="category2">
                             <option value="">SELECCIONE GENERO</option>
                             <script>
-                                var genreEdit = '{!!$movie->category2!!}';
+                                var genreEdit = '{!!$movie->genre_id!!}';
                                 setGenres(genreEdit);
                             </script>
                         </select>
@@ -94,7 +282,7 @@
                         <select class="form-control" name="shooting_format" id="shooting_format">
                             <option value="">SELECCIONE FORMATO DE RODAJE</option>
                             <script>
-                                var shotingEdit = '{!!$movie->shooting_format!!}';
+                                var shotingEdit = '{!!$movie->format_id!!}';
                                 setShoting(shotingEdit);
                             </script>
                         </select>
@@ -374,7 +562,7 @@
            
         </script>
         <script>
-            
+
             var j = jQuery.noConflict();
 
             var validName = 1;

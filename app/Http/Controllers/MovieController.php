@@ -239,8 +239,13 @@ class MovieController extends Controller
     public function edit($id)
     {
         $movie = Movie::find($id);
+        $subjects = Subject::where('valid', 1)->get();
+        $genres = Genre::where('valid', 1)->get();
+        $formats = Format::where('valid', 1)->get();
+        $types = Type::where('valid', 1)->get();
+
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
-        return view ('cpanel.editMovie',compact('movie','notifications'));
+        return view ('cpanel.editMovie',compact('movie','notifications','subjects','genres','formats','types'));
         //return view('cpanel.editMovie',['movie'=>$movie]);
     }
     /**
@@ -252,6 +257,7 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
+        echo "en controller";
         $movie = Movie::find($id);
         $movie->fill($request->all());
         $movie->save();
@@ -273,7 +279,8 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function approveMovie(Request $request)
-    {
+    {   
+
         $id = $request['id'];
         $movie = Movie::find($id);
         $newState = $request['state'];

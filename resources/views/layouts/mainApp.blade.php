@@ -142,7 +142,7 @@
                     <ul class="dropdown-menu" role="menu">
                         @foreach($notifications as $notification)
                             @if($notification->send_to == Auth::user()->id)
-                                <li data-alert_id="1" class="alert_li dark_orange_back" style="background-color: #F0643C">
+                                <li data-alert_id="1" class="alert_li dark_orange_back" style="background-color: #F0643C;">
                                     @if($notification->reason == "create")
                                      <a href="{{ action("CpanelController@approveMovieToNotif", array($notification->id)) }}" class="alert_message dark_orange_back" style="color: white;"> El usuario {{ $notification->user_name }} ha subido un nuevo video</a>
                                     @endif

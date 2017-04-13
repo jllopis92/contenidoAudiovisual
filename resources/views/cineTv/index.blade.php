@@ -2,6 +2,32 @@
 @extends('layouts.cinetv')
 @section('content')
 
+<style>
+#dialogoverlay{
+    display: none;
+    opacity: .8;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #FFF;
+    width: 100%;
+    z-index: 10;
+}
+#dialogbox{
+    display: none;
+    position: fixed;
+    background: #F0643C;
+    border-radius:7px; 
+    width:550px;
+    z-index: 10;
+}
+#dialogbox > div{ background:#FFF; margin:3px; }
+#dialogbox > div > #dialogboxhead{ font-size:19px; padding:10px; color:#F0643C; }
+#dialogbox > div > #dialogboxbody{ padding:20px; color:#F0643C; }
+#dialogbox > div > #dialogboxfoot{ padding:10px; text-align:right; }
+#dialogbox > div > #imgAlert{ width: 100px; }
+</style>
+
 @if ($valid == 1)
 
   <script src="{!!url('/js/jquery.min.js')!!}"></script>
@@ -22,6 +48,33 @@
   </div>
 
   <script>
+
+    function CustomAlert(){
+      this.render = function(dialog){
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var dialogoverlay = document.getElementById('dialogoverlay');
+        var dialogbox = document.getElementById('dialogbox');
+        dialogoverlay.style.display = "block";
+        dialogoverlay.style.height = winH+"px";
+        dialogbox.style.left = (winW/2) - (550 * .5)+"px";
+        dialogbox.style.top = "100px";
+        dialogbox.style.display = "block";
+        
+        var dialogboxbody = document.getElementById('dialogboxbody');
+        dialogboxbody.style.padding = "10px";
+
+        document.getElementById('dialogboxhead').innerHTML = "<img id='imgAlert' src=\'images/home.png\' style='width:200px;'> <br>Bienvenido al sistema de programación de la Escuela de Cine";
+        document.getElementById('dialogboxbody').innerHTML = "En este momento se esta reproduciendo: {{$moviesNow->title}}";
+        document.getElementById('dialogboxfoot').innerHTML = '<button onclick="Alert.ok()">OK</button>';
+      }
+      this.ok = function(){
+        document.getElementById('dialogbox').style.display = "none";
+        document.getElementById('dialogoverlay').style.display = "none";
+      }
+    }
+    var Alert = new CustomAlert();
+
     console.log("url: "+url); 
     console.log("difTime: "+difTime);
 
@@ -141,56 +194,6 @@
 
 @else
 
-
-<style>
-#dialogoverlay{
-    display: none;
-    opacity: .8;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    background: #FFF;
-    width: 100%;
-    z-index: 10;
-}
-#dialogbox{
-    display: none;
-    position: fixed;
-    background: #000;
-    border-radius:7px; 
-    width:550px;
-    z-index: 10;
-}
-#dialogbox > div{ background:#FFF; margin:8px; }
-#dialogbox > div > #dialogboxhead{ font-size:19px; padding:10px; color:#F0643C; }
-#dialogbox > div > #dialogboxbody{ padding:20px; color:#F0643C; }
-#dialogbox > div > #dialogboxfoot{ padding:10px; text-align:right; }
-#dialogbox > div > #imgAlert{ width: 100px; }
-</style>
-<script>
-function CustomAlert(){
-    this.render = function(dialog){
-        var winW = window.innerWidth;
-        var winH = window.innerHeight;
-        var dialogoverlay = document.getElementById('dialogoverlay');
-        var dialogbox = document.getElementById('dialogbox');
-        dialogoverlay.style.display = "block";
-        dialogoverlay.style.height = winH+"px";
-        dialogbox.style.left = (winW/2) - (550 * .5)+"px";
-        dialogbox.style.top = "100px";
-        dialogbox.style.display = "block";
-        document.getElementById('dialogboxhead').innerHTML = "<img id='imgAlert' src=\'images/home.png\'> Bienvenido al sistema de programación de la Escuela de Cine";
-        document.getElementById('dialogboxbody').innerHTML = "En este momento no se encuentran videos programados";
-        document.getElementById('dialogboxfoot').innerHTML = '<button onclick="Alert.ok()">OK</button>';
-    }
-    this.ok = function(){
-        document.getElementById('dialogbox').style.display = "none";
-        document.getElementById('dialogoverlay').style.display = "none";
-    }
-}
-var Alert = new CustomAlert();
-</script>
-
 <div id="dialogoverlay"></div>
 <div id="dialogbox">
   <div>
@@ -203,17 +206,40 @@ var Alert = new CustomAlert();
 <h2>My web document content ...</h2>
 <button onclick="alert('You look very pretty today.')">Default Alert</button>
 <button onclick="Alert.render('You look very pretty today.')">Custom Alert</button>
-<button onclick="Alert.render('And you also smell very nice.')">Custom Alert 2</button>
+<button onclick="Alert.render()">Custom Alert 2</button>
 <h3>My web document content ...</h3>
-
-
-
-
-
 
   <h5 style="margin-top: 30px;">No se encuentran videos programados</h5>
 
   <div id="time2"></div>
+  <script>
+  CustomAlert();
+    function CustomAlert(){
+      this.render = function(dialog){
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var dialogoverlay = document.getElementById('dialogoverlay');
+        var dialogbox = document.getElementById('dialogbox');
+        dialogoverlay.style.display = "block";
+        dialogoverlay.style.height = winH+"px";
+        dialogbox.style.left = (winW/2) - (550 * .5)+"px";
+        dialogbox.style.top = "100px";
+        dialogbox.style.display = "block";
+
+        var dialogboxbody = document.getElementById('dialogboxbody');
+        dialogboxbody.style.padding = "10px";
+
+        document.getElementById('dialogboxhead').innerHTML = "<img id='imgAlert' src=\'images/home.png\' style='width:200px;'> <br>Bienvenido al sistema de programación de la Escuela de Cine";
+        document.getElementById('dialogboxbody').innerHTML = "En este momento no se encuentran videos programados";
+        document.getElementById('dialogboxfoot').innerHTML = '<button onclick="Alert.ok()">OK</button>';
+      }
+      this.ok = function(){
+        document.getElementById('dialogbox').style.display = "none";
+        document.getElementById('dialogoverlay').style.display = "none";
+      }
+    }
+    var Alert = new CustomAlert();
+  </script>
   <script type="text/javascript">
     startTime();
 

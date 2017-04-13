@@ -22,6 +22,8 @@
 	Route::get('editfromnotif/{id}','CpanelController@editfromnotif');
 	Route::resource('user','UserController');
 	Route::resource('upload','MovieController');
+	Route::post('updateMovie','MovieController@upload');
+	
 	Route::post('approve','MovieController@approveMovie');
 	Route::get('createplaylist','PlaylistController@index');
 	Route::get('deleteplaylist','PlaylistController@delete');

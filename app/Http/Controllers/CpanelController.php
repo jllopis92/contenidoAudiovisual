@@ -58,7 +58,7 @@ class CpanelController extends Controller
     public function showmovie()
     {
         //$movies = Movie::paginate(8);
-        $movies = DB::table('movies')->get();
+        $movies = Movie::where('state', '=', 1)->get();
         $subjects = DB::table('subjects')->get();
         $genres = DB::table('genres')->get();
         $formats = DB::table('formats')->get();
@@ -160,7 +160,7 @@ class CpanelController extends Controller
     {
         $seensBy = DB::table('seenBy')->get();
         $users = DB::table('users')->get();
-        $movies = DB::table('movies')->get();
+        $movies = Movie::where('state', '=', 1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.showStatistics',compact('seensBy','users','movies','notifications'));
     }
@@ -169,7 +169,7 @@ class CpanelController extends Controller
     {
         $seenBy = DB::table('seenBy')->get();
         $users = DB::table('users')->get();
-        $movies = DB::table('movies')->get();
+        $movies = Movie::where('state', '=', 1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.showVideoStatistics',compact('seenBy','users','movies','notifications'));
     }
@@ -274,13 +274,13 @@ class CpanelController extends Controller
     
     public function createadvert()
     {
-        $movies = Movie::all();
+        $movies = Movie::where('state', '=', 1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.createAdvertising',compact('movies','notifications'));
     }
     public function createprogram()
     {
-        $movies = Movie::all();
+        $movies = Movie::where('state', '=', 1)->get();
         $notifications = Notification::where('display', 1)->orderBy('send_to', 'desc')->get();
         return view ('cpanel.createPrograming2',compact('movies','notifications'));
     }
